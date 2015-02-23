@@ -1,0 +1,20 @@
+.titlebar {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.titlebar h1, .titlebar h2 {
+  font-size: 16pt;
+  font-weight: 300;
+}
+
+.titlebar h1 {
+  flex: 100%;
+  margin-right: 10px;
+}
+
+.titlebar h2 {
+  text-align: right;
+  color: #739CD2;
+  flex: none;
+}

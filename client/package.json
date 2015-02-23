@@ -1,0 +1,31 @@
+{
+  "name": "cspace",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/defaults/main.jsx",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build:dev": "webpack --devtool eval",
+    "deploy:dev": "cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
+    "predeploy:dev": "cp src/defaults/index.html dist/core && npm run build:dev",
+    "clean": "rm -r dist/core/*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ray Lee <rhlee@berkeley.edu>",
+  "license": "ECL-2.0",
+  "private": true,
+  "devDependencies": {
+    "css-loader": "^0.9.0",
+    "file-loader": "^0.8.1",
+    "jsx-loader": "^0.12.2",
+    "style-loader": "^0.8.2",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.4.14",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "dependencies": {
+    "collectionspace": "0.0.1",
+    "react": "^0.12.2",
+    "react-router": "^0.11.6"
+  }
+}

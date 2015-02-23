@@ -1,0 +1,18 @@
+.footer {
+  border-top: 1px solid #DDDDDD;
+  padding-top: 5px;
+  font-size: 8pt;
+  text-align: center;
+}
+
+.footer ul {
+  list-style-type: none;
+}
+
+.footer li {
+  display: inline-block;
+}
+
+.footer li:not(:last-of-type)::after {
+  content: " | ";
+}

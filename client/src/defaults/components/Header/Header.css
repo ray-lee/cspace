@@ -1,0 +1,38 @@
+.header .controls {
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.header .controls > div {
+  flex: 50%;
+}
+
+.header .logo {
+  height: 51px;
+}
+
+.header .search {
+  text-align: right;
+  padding-top: 20px;
+}
+
+.header ul {
+  display: flex;
+}
+
+.header li {
+  padding-right: 30px;
+  margin-right: 2px;
+  border-bottom: 2px solid #4D4D4D;
+  flex: none;
+}
+
+.header ul::after {
+  content: "";
+  border-bottom: 2px solid #4D4D4D;
+  flex: 100%;
+}
+
+.header .nav a {
+  text-decoration: none;
+}
