@@ -1,0 +1,47 @@
+.titlebar {
+  margin-bottom: 10px;
+}
+
+.titlebar > .content {
+  padding-top: 10px;
+  display: flex;
+}
+
+.titlebar > .content > h1, .titlebar > .content > h2 {
+  font-size: 16pt;
+  font-weight: 300;
+}
+
+.titlebar > .content > h1 {
+  flex: 100%;
+  margin-right: 10px;
+}
+
+.titlebar > .content > h2 {
+  text-align: right;
+  color: #739CD2;
+  flex: none;
+}
+
+.titlebar {
+  background: inherit;
+}
+
+.titlebar.docked > .content {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding-bottom: 10px;
+  background: inherit;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.titlebar.docked > .content > h1 {
+  margin-left: 15px;
+  margin-right: 20px;
+}
+
+.titlebar.docked > .content > h2 {
+  margin-right: 15px;
+}

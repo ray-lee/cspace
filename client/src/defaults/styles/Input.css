@@ -1,0 +1,31 @@
+.input {
+  width: 100%;
+}
+
+.input:not(:last-child) {
+  margin-bottom: 10px;  
+}
+
+.input label {
+  font-size: 8pt;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.input.required label {
+  color: red;
+}
+
+.input.required label::after {
+  content: '*';
+}
+
+.input textarea.control {
+  height: 6em;
+}
+
+.input .control {
+  height: 2em;
+  display: block;
+  width: 100%;
+}

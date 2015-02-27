@@ -1,0 +1,15 @@
+.columngroup {
+  display: flex;
+}
+
+.columngroup:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.columngroup > .column {
+  flex: 100%;
+}
+
+.columngroup > .column:not(:last-child) {
+  margin-right: 10px;
+}

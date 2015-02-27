@@ -1,9 +1,9 @@
 var React = require('react');
 var Router = require('react-router');
 
-var App = require('./components/App/App.jsx');
-var Home = require('./components/Home/Home.jsx');
-var RecordEditor = require('./components/RecordEditor/RecordEditor.jsx');
+var App = require('./components/App.jsx');
+var Home = require('./components/Home.jsx');
+var RecordEditor = require('./components/RecordEditor.jsx');
 
 var {
   Route,
