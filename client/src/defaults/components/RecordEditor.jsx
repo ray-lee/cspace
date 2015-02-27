@@ -4,9 +4,7 @@ var TitleBar = require('./TitleBar.jsx');
 var CollapsiblePanel = require('./CollapsiblePanel.jsx');
 var TabbedPanel = require('./TabbedPanel.jsx');
 var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
-var Panel = require('./Panel.jsx');
-var PanelHeader = require('./PanelHeader.jsx');
-var PanelBody = require('./PanelBody.jsx');
+var { Panel, PanelHeader, PanelBody } = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
 // var CollectionSpace = require('collectionspace');
 

@@ -1,8 +1,7 @@
 var React = require('react');
 var Panel = require('./Panel.jsx');
 var CollapsiblePanel = require('./CollapsiblePanel.jsx');
-var PanelHeader = require('./PanelHeader.jsx');
-var PanelBody = require('./PanelBody.jsx');
+var { PanelHeader, PanelBody } = require('./Panel.jsx');
 
 var CollapsiblePanelGroup = React.createClass({
   render: function() {

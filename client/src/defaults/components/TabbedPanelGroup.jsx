@@ -1,8 +1,6 @@
 var React = require('react');
-var Panel = require('./Panel.jsx');
+var { Panel, PanelHeader, PanelBody } = require('./Panel.jsx');
 var TabbedPanel = require('./TabbedPanel.jsx');
-var PanelHeader = require('./PanelHeader.jsx');
-var PanelBody = require('./PanelBody.jsx');
 
 require('../styles/TabbedPanelGroup.css');
 

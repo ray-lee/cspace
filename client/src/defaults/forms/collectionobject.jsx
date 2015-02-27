@@ -1,8 +1,6 @@
 var React = require('react');
 var CollapsiblePanel = require('../components/CollapsiblePanel.jsx');
-var Panel = require('../components/Panel.jsx');
-var PanelHeader = require('../components/PanelHeader.jsx');
-var PanelBody = require('../components/PanelBody.jsx');
+var { Panel, PanelHeader, PanelBody } = require('../components/Panel.jsx');
 var ColumnGroup = require('../components/ColumnGroup.jsx');
 var Column = require('../components/Column.jsx');
 var Input = require('../components/Input.jsx');

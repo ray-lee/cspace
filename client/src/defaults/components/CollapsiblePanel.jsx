@@ -1,6 +1,5 @@
 var React = require('react/addons');
-var PanelHeader = require('./PanelHeader.jsx');
-var PanelBody = require('./PanelBody.jsx');
+var { PanelHeader, PanelBody } = require('./Panel.jsx');
 
 require('../styles/CollapsiblePanel.css');
 
