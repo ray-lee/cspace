@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var ScrollObserver = require('../mixins/ScrollObserver.jsx');
 
 require('../styles/TitleBar.css');

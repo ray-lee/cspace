@@ -3,16 +3,43 @@
   border-radius: 3px;
 }
 
-.panelHeader {
+.panel > .panelheader {
   padding: 3px 10px 3px 10px;
   color: #FFFFFF;
   background-color: rgba(0, 0, 0, .55);
   border-radius: 3px 3px 0 0;
+  min-height: calc(1em + 6px);
 }
 
-.panelBody {
+.panel > .panelbody {
   background-color: rgba(212, 212, 212, .2);
   padding: 10px;
+}
+
+.panel.collapsed > .panelheader {
+  border-radius: 3px;
+}
+
+.panel.collapsed > .panelbody {
+  display: none;
+}
+
+.panel.collapsiblepanel > .panelheader {
+  background-size: 8px 7px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  background-image: url(../images/collapse.png);
+}
+
+.panel.collapsiblepanel > .panelheader:hover {
+  background-color: rgba(0, 0, 0, .6);
+  border-color: rgba(16, 16, 16, .2);
+  box-shadow: 0 -10px 14px 0 rgba(32, 32, 32, .2) inset;
+}
+
+.panel.collapsiblepanel.collapsed > .panelheader {
+  border-radius: 3px;
+  background-image: url(../images/expand.png);
 }
 
 .panel:not(:last-child) {

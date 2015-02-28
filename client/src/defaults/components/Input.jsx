@@ -4,17 +4,28 @@ require('../styles/Input.css');
 
 var Input = React.createClass({
   propTypes: {
+    id: React.PropTypes.string, //.isRequired
     required: React.PropTypes.bool,
     readOnly: React.PropTypes.bool,
     multiline: React.PropTypes.bool,
-    value: React.PropTypes.string
+    multivalue: React.PropTypes.bool,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+      ]))
+    ])
   },
   
   getDefaultProps: function() {
     return {
+      id: '',
       required: false,
       readOnly: false,
       multiline: false,
+      multivalue: false,
       value: ''
     };
   },

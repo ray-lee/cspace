@@ -2,46 +2,47 @@
   margin-top: 8px;
 }
 
-.tabbedpanelgroup > .tabbedpaneltabs > .tabbedpaneltab {
+.tabbedpanelgroup > .tabs > .tab {
   display: inline-block;
 }
 
-.tabbedpanelgroup > .tabbedpaneltabs > .tabbedpaneltab:not(:last-child) {
+.tabbedpanelgroup > .tabs > .tab:not(:last-child) {
   margin-right: 3px;
 }
 
-.tabbedpanelgroup > .tabbedpaneltabs > .tabbedpaneltab > .panelheader {
-  background-color: rgba(115, 156, 210, .6);
-  color: white;
+.tabbedpanelgroup > .tabs > .tab {
   margin: 0;
   padding: 4px 10px 2px 10px;
   border-radius: 5px 5px 0 0;
+  cursor: default; 
+  background-color: rgba(115, 156, 210, .6);
+  color: white;
   box-shadow: 0 -1px 1px 0 #BBBBBB inset;
-  cursor: default;
 }
 
-.tabbedpanelgroup > .tabbedpaneltabs > .tabbedpaneltab > .panelheader:hover {
+.tabbedpanelgroup > .tabs > .tab:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(115, 156, 210);
   box-shadow: 0 -1px 1px 0 #E5E5E5 inset;
 }
 
-.tabbedpanelgroup > .tabbedpaneltabs > .tabbedpaneltab.selected > .panelheader {
+.tabbedpanelgroup > .tabs > .tab.selected {
   background-color: rgb(255, 255, 255);
   color: rgb(115, 156, 210);
   box-shadow: 0 -1px 1px 0 #E5E5E5;
   padding: 5px 10px 2px 10px;
 }
 
-.tabbedpanelgroup > .tabbedpanelbodies > .tabbedpanelbody {
+.tabbedpanelgroup > .panelbodies > .panelbody {
+  padding: 10px;
   display: none;
 }
 
-.tabbedpanelgroup > .tabbedpanelbodies > .tabbedpanelbody.selected {
+.tabbedpanelgroup > .panelbodies > .panelbody.selected {
   display: block;
 }
 
-.tabbedpanelgroup > .tabbedpanelbodies > .tabbedpanelbody > .panelbody {
+.tabbedpanelgroup > .panelbodies > .panelbody {
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 2px 0 #E5E5E5;
 }

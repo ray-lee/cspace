@@ -1,10 +1,8 @@
 var React = require('react');
 var Router = require('react-router');
 var TitleBar = require('./TitleBar.jsx');
-var CollapsiblePanel = require('./CollapsiblePanel.jsx');
-var TabbedPanel = require('./TabbedPanel.jsx');
 var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
-var { Panel, PanelHeader, PanelBody } = require('./Panel.jsx');
+var Panel = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
 // var CollectionSpace = require('collectionspace');
 
@@ -39,56 +37,31 @@ var Record = React.createClass({
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
-            <TabbedPanel key="primary">
-              <PanelHeader>Primary Record</PanelHeader>
-              <PanelBody>
-                <ToolBar/>
-                {form}
-              </PanelBody>
-            </TabbedPanel>
-            <TabbedPanel key="anothertab">
-              <PanelHeader>Another Tab</PanelHeader>
-              <PanelBody>
-                <CollapsiblePanel>
-                  <PanelHeader>Panel</PanelHeader>
-                  <PanelBody>
-                    <div>
-                    This is a collapsible panel.
-                    </div>
-                    <TabbedPanelGroup>
-                      <Panel key="hello">
-                        <PanelHeader>
-                          Hello
-                        </PanelHeader>
-                        <PanelBody>
-                          Another panel.
-                        </PanelBody>
-                      </Panel>
-                      <Panel key="world">
-                        <PanelHeader>
-                          World
-                        </PanelHeader>
-                        <PanelBody>
-                          Wow, it's yet another panel.
-                        </PanelBody>
-                      </Panel>
-                    </TabbedPanelGroup>
-                  </PanelBody>
-                </CollapsiblePanel>
-                <Panel>
-                  <PanelHeader>Fixed</PanelHeader>
-                  <PanelBody>
-                    This is a fixed panel.
-                  </PanelBody>
-                </Panel>
-                <CollapsiblePanel collapsed={true}>
-                  <PanelHeader>Initally Collapsed</PanelHeader>
-                  <PanelBody>
-                    This panel was initially collapsed.
-                  </PanelBody>
-                </CollapsiblePanel>
-              </PanelBody>
-            </TabbedPanel>
+            <Panel key="primary" header="Primary Record">
+              <ToolBar/>
+              {form}
+            </Panel>
+            <Panel key="anothertab" header="Another Tab">
+              <Panel header="Panel">
+                <div>
+                This is a collapsible panel.
+                </div>
+                <TabbedPanelGroup>
+                  <Panel key="hello" header="Hello">
+                    Another panel.
+                  </Panel>
+                  <Panel key="world" header="World">
+                    Wow, it's yet another panel.
+                  </Panel>
+                </TabbedPanelGroup>
+              </Panel>
+              <Panel header="Fixed" collapsible={false}>
+                This is a fixed panel.
+              </Panel>
+              <Panel header="Initially Collapsed" collapsed={true}>
+                This panel was initially collapsed.
+              </Panel>
+            </Panel>
           </TabbedPanelGroup>
         </div>
       </main>

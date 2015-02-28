@@ -1,6 +1,5 @@
 var React = require('react');
-var { Panel, PanelHeader, PanelBody } = require('./Panel.jsx');
-var TabbedPanel = require('./TabbedPanel.jsx');
+var Panel = require('./Panel.jsx');
 
 require('../styles/TabbedPanelGroup.css');
 
@@ -16,29 +15,29 @@ var TabbedPanelGroup = React.createClass({
   },
 
   getInitialState: function() {
-    var selectedKey = this.props.selectedKey;
-    
-    if (selectedKey === null) {
-      var keys = [];
-
-      React.Children.forEach(this.props.children, function(child) {
-        if (child.type === Panel.type || child.type === TabbedPanel.type) {
-          keys.push(child.key);
-        }
-      });
-      
-      if (keys.length > 0) {
-        selectedKey = keys[0];
-      }
-    }
-    
     return {
-      selectedKey: selectedKey,
-      renderHiddenBodies: false
+      selectedKey: this.props.selectedKey || this.findFirstKey()
     };
   },
   
-  handleTabClick: function(event) {
+  findFirstKey: function() {
+    var firstKey = null;
+    var keys = [];
+
+    React.Children.forEach(this.props.children, function(child) {
+      if (child.type === Panel.type) {
+        keys.push(child.key);
+      }
+    });
+    
+    if (keys.length > 0) {
+      firstKey = keys[0];
+    }
+
+    return firstKey;
+  },
+  
+  onTabClick: function(event) {
     var target = event.currentTarget;
     var key = target.getAttribute('data-tabbedpanelgroupkey');
     
@@ -58,35 +57,11 @@ var TabbedPanelGroup = React.createClass({
     var keys = [];
     
     React.Children.forEach(this.props.children, function(child) {
-      if (child.type === Panel.type || child.type === TabbedPanel.type) {
-        var panelHeader = null;
-        var panelBody = null;
+      if (child.type === Panel.type) {
+        panelHeaders.push(child.props.header);
+        panelBodies.push(child.props.children);
         
         keys.push(child.key);
-        
-        React.Children.forEach(child.props.children, function(panelChild) {
-          if (panelChild.type === PanelHeader.type) {
-            panelHeader = panelChild;
-          }
-          else if (panelChild.type === PanelBody.type) {
-            panelBody = panelChild;
-          }
-        });
-      
-        if (panelHeader === null) {
-          panelHeader = (
-            <PanelHeader />
-          );
-        }
-        
-        if (panelBody === null) {
-          panelBody = (
-            <PanelBody />
-          );
-        }
-        
-        panelHeaders.push(panelHeader);
-        panelBodies.push(panelBody);
       }
     });
     
@@ -96,12 +71,12 @@ var TabbedPanelGroup = React.createClass({
       var key = keys[index];
 
       var classes = React.addons.classSet({
-        'tabbedpaneltab': true,
+        'tab': true,
         'selected': selectedKey === key
       });
 
       return(
-        <div key={key} className={classes} data-tabbedpanelgroupkey={key} onClick={this.handleTabClick}>
+        <div key={key} className={classes} data-tabbedpanelgroupkey={key} onClick={this.onTabClick}>
           {panelHeader}
         </div>
       );
@@ -111,7 +86,7 @@ var TabbedPanelGroup = React.createClass({
       var key = keys[index];
 
       var classes = React.addons.classSet({
-        'tabbedpanelbody': true,
+        'panelbody': true,
         'selected': selectedKey === key
       });
 
@@ -124,10 +99,10 @@ var TabbedPanelGroup = React.createClass({
     
     return (
       <div className="tabbedpanelgroup">
-        <div className="tabbedpaneltabs">
+        <div className="tabs">
           {tabs}
         </div>
-        <div className="tabbedpanelbodies">
+        <div className="panelbodies">
           {bodies}
         </div>
       </div>
