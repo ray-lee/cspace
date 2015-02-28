@@ -4,6 +4,7 @@ require('../styles/Input.css');
 
 var ControlledInput = React.createClass({
   propTypes: {
+    label: React.PropTypes.string,
     required: React.PropTypes.bool,
     readOnly: React.PropTypes.bool,
     value: React.PropTypes.string
@@ -11,6 +12,7 @@ var ControlledInput = React.createClass({
   
   getDefaultProps: function() {
     return {
+      label: null,
       required: false,
       readOnly: false,
       value: ''
@@ -26,11 +28,11 @@ var ControlledInput = React.createClass({
   render: function() {
     var label = null;
     
-    React.Children.forEach(this.props.children, function(child) {
-      if (child.type === React.DOM.label.type) {
-        label = child;
-      }
-    });
+    if (this.props.label != null) {
+      label = (
+        <label>{this.props.label}</label>
+      );
+    }
     
     var control;
     

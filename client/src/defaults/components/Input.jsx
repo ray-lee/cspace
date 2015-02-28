@@ -4,7 +4,9 @@ require('../styles/Input.css');
 
 var Input = React.createClass({
   propTypes: {
-    id: React.PropTypes.string, //.isRequired
+    label: React.PropTypes.node,
+    description: React.PropTypes.node,
+    help: React.PropTypes.node,
     required: React.PropTypes.bool,
     readOnly: React.PropTypes.bool,
     multiline: React.PropTypes.bool,
@@ -21,7 +23,9 @@ var Input = React.createClass({
   
   getDefaultProps: function() {
     return {
-      id: '',
+      label: null,
+      description: null,
+      help: null,
       required: false,
       readOnly: false,
       multiline: false,
@@ -37,13 +41,13 @@ var Input = React.createClass({
   },
   
   render: function() {
-    var label = null;
+    var label;
     
-    React.Children.forEach(this.props.children, function(child) {
-      if (child.type === React.DOM.label.type) {
-        label = child;
-      }
-    });
+    if (this.props.label != null) {
+      label = (
+        <label>{this.props.label}</label>
+      );
+    }
     
     var control;
     
