@@ -10,7 +10,7 @@ var Input = React.createClass({
     required: React.PropTypes.bool,
     readOnly: React.PropTypes.bool,
     multiline: React.PropTypes.bool,
-    multivalue: React.PropTypes.bool,
+    jewel: React.PropTypes.element,
     value: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number,
@@ -29,7 +29,7 @@ var Input = React.createClass({
       required: false,
       readOnly: false,
       multiline: false,
-      multivalue: false,
+      jewel: <button>@</button>,
       value: ''
     };
   },
@@ -40,8 +40,14 @@ var Input = React.createClass({
     }
   },
   
+  onChange: function() {
+    this.setState({
+      value: event.target.value
+    });
+  },
+  
   render: function() {
-    var label;
+    var label = null;
     
     if (this.props.label != null) {
       label = (
@@ -49,7 +55,7 @@ var Input = React.createClass({
       );
     }
     
-    var control;
+    var control = null;
     
     if (this.props.readOnly) {
       control = (
@@ -59,14 +65,28 @@ var Input = React.createClass({
     else {
       if (this.props.multiline) {
         control = (
-          <textarea className="control" value={this.state.value} />
+          <textarea className="control" value={this.state.value} onChange={this.onChange}/>
         );
       }
       else {
         control = (
-          <input className="control" type="text" value={this.state.value} />
+          <input className="control" type="text" value={this.state.value} onChange={this.onChange}/>
         );
       }
+    }
+    
+    var controls = null;
+
+    if (this.props.jewel) {
+      controls = (
+        <div className="jeweledcontrol">
+          {control}
+          {this.props.jewel}
+        </div>
+      );
+    }
+    else {
+      controls = control;
     }
     
     var classes = React.addons.classSet({
@@ -77,7 +97,7 @@ var Input = React.createClass({
     return (
       <div className={classes}>
         {label}
-        {control}
+        {controls}
       </div>
     );
   }

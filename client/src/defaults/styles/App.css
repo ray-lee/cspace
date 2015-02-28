@@ -18,8 +18,8 @@ body, input, textarea, button, table, td, th {
 }
 
 table {
-  border-spacing: 0;
-  border-collapse: collapse;
+  border: 1px solid #DDDDDD;
+  border-spacing: 1px;
 }
 
 h1, h2, h3, h4, h5, h6 {
