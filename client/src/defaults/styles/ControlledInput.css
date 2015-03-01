@@ -1,0 +1,29 @@
+.controlledinput {
+  position: relative;
+}
+
+.controlledinput .dropdownjewel {
+  background-image: url(../images/input-dropdown.png);
+  background-size: 8px 7px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-left: 1px solid #DDDDDD;
+}
+
+.controlledinput .input {
+  margin-bottom: 0;
+}
+
+.controlledinput .optionlist {
+  padding: 2px 0 2px 0;
+}
+
+.controlledinput .optionlist .option {
+  padding: 2px 4px 2px 4px;
+  cursor: default;
+}
+
+.controlledinput .optionlist .option:hover {
+  background-color: rgb(115, 156, 210);
+  color: white;
+}

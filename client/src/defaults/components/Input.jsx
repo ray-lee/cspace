@@ -18,7 +18,10 @@ var Input = React.createClass({
         React.PropTypes.string,
         React.PropTypes.number
       ]))
-    ])
+    ]),
+    onChange: React.PropTypes.func,
+    onClick: React.PropTypes.func,
+    onKeyPress: React.PropTypes.func
   },
   
   getDefaultProps: function() {
@@ -29,7 +32,7 @@ var Input = React.createClass({
       required: false,
       readOnly: false,
       multiline: false,
-      jewel: <button>@</button>,
+      jewel: null,
       value: ''
     };
   },
@@ -40,10 +43,22 @@ var Input = React.createClass({
     }
   },
   
-  onChange: function() {
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: nextProps.value
+    });
+  },
+  
+  onChange: function(event) {
     this.setState({
       value: event.target.value
     });
+  },
+  
+  focus: function() {
+    if ('control' in this.refs) {
+      this.refs['control'].getDOMNode().focus();
+    }
   },
   
   render: function() {
@@ -63,14 +78,16 @@ var Input = React.createClass({
       );
     }
     else {
+      var onChange = ('onChange' in this.props) ? this.props.onChange : this.onChange;
+      
       if (this.props.multiline) {
         control = (
-          <textarea className="control" value={this.state.value} onChange={this.onChange}/>
+          <textarea ref="control" className="control" value={this.state.value} onChange={onChange}/>
         );
       }
       else {
         control = (
-          <input className="control" type="text" value={this.state.value} onChange={this.onChange}/>
+          <input ref="control" className="control" type="text" value={this.state.value} onChange={onChange}/>
         );
       }
     }
@@ -95,7 +112,7 @@ var Input = React.createClass({
     });
     
     return (
-      <div className={classes}>
+      <div className={classes} onClick={this.props.onClick} onKeyPress={this.props.onKeyPress} onBlur={this.props.onBlur}>
         {label}
         {controls}
       </div>

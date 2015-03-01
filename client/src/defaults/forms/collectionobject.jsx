@@ -4,8 +4,8 @@ var ColumnGroup = require('../components/ColumnGroup.jsx');
 var Column = require('../components/Column.jsx');
 var Input = require('../components/Input.jsx');
 var ControlledInput = require('../components/ControlledInput.jsx');
-var TabularCompositeInput = require('../components/TabularCompositeInput.jsx');
 var CompositeInput = require('../components/CompositeInput.jsx');
+var TabularCompositeInput = require('../components/TabularCompositeInput.jsx');
 
 module.exports = 
   <form className="collectionobject">
