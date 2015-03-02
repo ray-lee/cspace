@@ -37,7 +37,7 @@ var TabbedPanelGroup = React.createClass({
     return firstKey;
   },
   
-  onTabClick: function(event) {
+  handleTabClick: function(event) {
     var target = event.currentTarget;
     var key = target.getAttribute('data-tabbedpanelgroupkey');
     
@@ -76,7 +76,7 @@ var TabbedPanelGroup = React.createClass({
       });
 
       return(
-        <div key={key} className={classes} data-tabbedpanelgroupkey={key} onClick={this.onTabClick}>
+        <div key={key} className={classes} data-tabbedpanelgroupkey={key} onClick={this.handleTabClick}>
           {panelHeader}
         </div>
       );

@@ -7,6 +7,18 @@ require('../styles/TitleBar.css');
 
 var TitleBar = React.createClass({
   mixins: [ScrollObserver],
+
+  propTypes: {
+    title: React.PropTypes.string,
+    recordType: React.PropTypes.string
+  },
+  
+  getDefaultProps: function() {
+    return {
+      title: '',
+      recordType: ''
+    };
+  },
   
   getInitialState: function() {
     return {
@@ -19,26 +31,18 @@ var TitleBar = React.createClass({
     
     if (this.state.docked) {
       if (window.scrollY < node.offsetTop) {
-        this.undock();
+        this.setState({
+          docked: false
+        });
       }
     }
     else {
       if (window.scrollY >= node.offsetTop) {
-        this.dock();
+        this.setState({
+          docked: true
+        });
       }
     }
-  },
-  
-  dock: function() {
-    this.setState({
-      docked: true
-    });
-  },
-  
-  undock: function() {
-    this.setState({
-      docked: false
-    });
   },
   
   render: function() {
@@ -58,7 +62,7 @@ var TitleBar = React.createClass({
     return (
       <header style={styles} className={classes}>
         <div className="content">
-          <h1>{this.props.children}</h1>
+          <h1>{this.props.title}</h1>
           <h2>{this.props.recordType}</h2>
         </div>
       </header>

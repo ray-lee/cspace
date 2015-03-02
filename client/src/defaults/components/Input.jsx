@@ -49,7 +49,7 @@ var Input = React.createClass({
     });
   },
   
-  onChange: function(event) {
+  handleChange: function(event) {
     this.setState({
       value: event.target.value
     });
@@ -78,16 +78,16 @@ var Input = React.createClass({
       );
     }
     else {
-      var onChange = ('onChange' in this.props) ? this.props.onChange : this.onChange;
+      var handleChange = ('onChange' in this.props) ? this.props.onChange : this.handleChange;
       
       if (this.props.multiline) {
         control = (
-          <textarea ref="control" className="control" value={this.state.value} onChange={onChange}/>
+          <textarea ref="control" className="control" value={this.state.value} onChange={handleChange}/>
         );
       }
       else {
         control = (
-          <input ref="control" className="control" type="text" value={this.state.value} onChange={onChange}/>
+          <input ref="control" className="control" type="text" value={this.state.value} onChange={handleChange}/>
         );
       }
     }

@@ -23,22 +23,14 @@ var SearchField = React.createClass({
       value: this.props.value
     };
   },
-
-  render: function() {
-    var value = this.state.value;
-    
-    return (
-      <input className="searchfield" type="text" placeholder="Search by CSID" value={value} onChange={this._onChange} onKeyDown={this._onKeyDown} />
-    );
-  },
   
-  _onChange: function(event) {
+  handleChange: function(event) {
     this.setState({
       value: event.target.value
     });
   },
   
-  _onKeyDown: function(event) {
+  handleKeyDown: function(event) {
     if (event.keyCode === ENTER_KEY_CODE) {
       var csid = event.target.value.trim();
       
@@ -46,6 +38,12 @@ var SearchField = React.createClass({
         this.transitionTo('collectionobject', {csid: csid});
       }
     }
+  },
+  
+  render: function() {
+    return (
+      <input className="searchfield" type="text" placeholder="Search by CSID" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
+    );
   }
 });
 

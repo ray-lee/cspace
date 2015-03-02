@@ -32,23 +32,23 @@ var ControlledInput = React.createClass({
     }
   },
   
-  onChange: function(event) {
+  handleChange: function(event) {
     // TODO: Implement typeahead.
   },
   
-  onInputClick: function(event) {
+  handleInputClick: function(event) {
     this.setState({
       popupOpen: true
     });
   },
   
-  onInputKeyPress: function(event) {
+  handleInputKeyPress: function(event) {
     this.setState({
       popupOpen: true
     });
   },
   
-  onInputBlur: function(event) {
+  handleInputBlur: function(event) {
     // A bit of a hack: If the input has focus, and the popup is clicked,
     // onBlur fires on the input before onClick on the popup. If we close
     // the popup immediately, onClick will never fire on it, so the selection
@@ -65,11 +65,11 @@ var ControlledInput = React.createClass({
     }.bind(this), 250);
   },
   
-  onJewelClick: function(event) {
+  handleJewelClick: function(event) {
     this.refs['input'].focus();
   },
   
-  onOptionListClick: function(event) {
+  handleOptionListClick: function(event) {
     var target = event.target;
     
     if (target.hasAttribute('data-optionvalue')) {
@@ -84,7 +84,7 @@ var ControlledInput = React.createClass({
     var props = this.props;
     
     var jewel = (
-      <div className="dropdownjewel" onClick={this.onJewelClick}></div>
+      <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
     );
     
     var optionList = this.props.options.map(function(value) {
@@ -104,12 +104,12 @@ var ControlledInput = React.createClass({
     return (
       <div className="input controlledinput" onBlur={this.onBlur}>
         <Input ref="input" {...props} value={this.state.value} jewel={jewel}
-            onChange={this.onChange}
-            onClick={this.onInputClick}
-            onKeyPress={this.onInputKeyPress}
-            onBlur={this.onInputBlur}/>
+            onChange={this.handleChange}
+            onClick={this.handleInputClick}
+            onKeyPress={this.handleInputKeyPress}
+            onBlur={this.handleInputBlur}/>
         <PopUp open={this.state.popupOpen}>
-          <ul className="optionlist" onClick={this.onOptionListClick}>
+          <ul className="optionlist" onClick={this.handleOptionListClick}>
             {emptyOption}
             {optionList}
           </ul>

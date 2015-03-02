@@ -33,7 +33,7 @@ var Record = React.createClass({
     
     return (
       <main className="recordeditor">
-        <TitleBar recordType={recordType}>This is the title of the record</TitleBar>
+        <TitleBar title="This is the title of the record" recordType={recordType}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
@@ -44,7 +44,7 @@ var Record = React.createClass({
             <Panel key="anothertab" header="Another Tab">
               <Panel header="Panel">
                 <div>
-                This is a collapsible panel.
+                  This is a collapsible panel.
                 </div>
                 <TabbedPanelGroup>
                   <Panel key="hello" header="Hello">

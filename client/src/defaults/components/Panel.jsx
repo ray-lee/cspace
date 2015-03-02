@@ -23,13 +23,9 @@ var Panel = React.createClass({
     };
   },
   
-  onHeaderClick: function(event) {
-    this.toggleCollapsed();
-  },
-  
-  toggleCollapsed: function() {
+  handleHeaderClick: function(event) {
     var collapsed = this.state.collapsed;
-    
+
     this.setState({
       collapsed: !collapsed
     });
@@ -39,10 +35,10 @@ var Panel = React.createClass({
     var header = null;
     
     if (this.props.collapsible || this.props.header != null) {
-      var onHeaderClick = this.props.collapsible ? this.onHeaderClick : null;
+      var handleHeaderClick = this.props.collapsible ? this.handleHeaderClick : null;
       
       header = (
-        <div className='panelheader' onClick={onHeaderClick}>
+        <div className='panelheader' onClick={handleHeaderClick}>
           {this.props.header}
         </div>
       );
