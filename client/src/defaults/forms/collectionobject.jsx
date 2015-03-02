@@ -12,16 +12,50 @@ module.exports =
     <Panel header="Object Identification Information">
       <ColumnGroup>
         <Column>
-          <Input required={true} label="Identification number" value="1-100"/>
+          <Input required={true} label="Identification number"/>
           <Input label="Number of objects"/>
           <TabularCompositeInput label="Number">
             <Input label="Number"/>
-            <ControlledInput label="Type"/>
+            <ControlledInput label="Type"
+              options={[
+                'lender',
+                'obsolete',
+                'previous',
+                'serial',
+                'unknown'
+              ]}
+            />
           </TabularCompositeInput>
-          <ControlledInput label="Responsible department"/>
-          <ControlledInput label="Collection"/>
-          <ControlledInput label="Record status"/>
-          <Input readOnly={true} label="Computed current location"/>
+          <ControlledInput label="Responsible department"
+            options={[
+              'antiquities',
+              'architecture-design',
+              'decorative-arts',
+              'ethnography',
+              'herpetology',
+              'media-performance-art',
+              'paintings-sculpture',
+              'paleobotany',
+              'photographs',
+              'prints-drawings'
+            ]}
+          />
+          <ControlledInput label="Collection"
+            options={[
+              'library-collection',
+              'permanent-collection',
+              'study-collection',
+              'teaching-collection'
+            ]}
+          />
+          <ControlledInput label="Record status" defaultValue="new"
+            options={[
+              'approved',
+              'in-process',
+              'new',
+              'temporary'
+            ]}
+          />
         </Column>
         <Column>
           <Input multiline={true} label="Brief description"/>
@@ -29,11 +63,21 @@ module.exports =
           <Input multiline={true} label="Comments"/>
         </Column>
       </ColumnGroup>
+      <Input readOnly={true} label="Computed current location"/>
       <CompositeInput label="Title">
         <ColumnGroup>
           <Column>
             <Input label="Title"/>
-            <ControlledInput label="Title type"/>
+            <ControlledInput label="Title type"
+              options={[
+                'assigned-by-artist',
+                'collection',
+                'generic',
+                'popular',
+                'series',
+                'trade'
+              ]}
+            />
           </Column>
           <Column>
             <ControlledInput label="Title language"/>
@@ -46,10 +90,33 @@ module.exports =
       </CompositeInput>
       <TabularCompositeInput label="Object name">
         <Input label="Name"/>
-        <ControlledInput label="Currency"/>
-        <ControlledInput label="Level"/>
-        <ControlledInput label="System"/>
-        <ControlledInput label="Type"/>
+        <ControlledInput label="Currency"
+          options={[
+            'current',
+            'archaic'
+          ]}
+        />
+        <ControlledInput label="Level"
+          options={[
+            'group',
+            'subgroup'
+          ]}
+        />
+        <ControlledInput label="System"
+          options={[
+            'art-and-architecture-thesaurus',
+            'nomenclature'
+          ]}
+        />
+        <ControlledInput label="Type"
+          options={[
+            'classified',
+            'denomination',
+            'simple',
+            'taxonomic',
+            'typological'
+          ]}
+        />
         <ControlledInput label="Language"/>
         <Input label="Note"/>
       </TabularCompositeInput>

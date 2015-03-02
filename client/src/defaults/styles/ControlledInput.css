@@ -21,6 +21,7 @@
 .controlledinput .optionlist .option {
   padding: 2px 4px 2px 4px;
   cursor: default;
+  white-space: nowrap;
 }
 
 .controlledinput .optionlist .option:hover {

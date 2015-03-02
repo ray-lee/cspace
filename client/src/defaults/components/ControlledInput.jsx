@@ -20,8 +20,14 @@ var ControlledInput = React.createClass({
   },
   
   getInitialState: function() {
+    var value = this.props.value || this.props.defaultValue;
+    
+    if (!value && this.props.required && this.props.options.length > 0) {
+      value = this.props.options[0];
+    }
+    
     return {
-      value: this.props.value,
+      value: value,
       popupOpen: false
     }
   },
@@ -81,6 +87,20 @@ var ControlledInput = React.createClass({
       <div className="dropdownjewel" onClick={this.onJewelClick}></div>
     );
     
+    var optionList = this.props.options.map(function(value) {
+      return (
+        <li key={value} data-optionvalue={value} className="option">{value}</li>
+      );
+    });
+    
+    var emptyOption = null;
+    
+    if (!this.props.required) {
+      emptyOption = (
+        <li key="" data-optionvalue="" className="option"> </li>
+      );
+    };
+    
     return (
       <div className="input controlledinput" onBlur={this.onBlur}>
         <Input ref="input" {...props} value={this.state.value} jewel={jewel}
@@ -90,9 +110,8 @@ var ControlledInput = React.createClass({
             onBlur={this.onInputBlur}/>
         <PopUp open={this.state.popupOpen}>
           <ul className="optionlist" onClick={this.onOptionListClick}>
-            <li key="" data-optionvalue="" className="option"> </li>
-            <li key="option1" data-optionvalue="option1" className="option">option1</li>
-            <li key="option2" data-optionvalue="option2" className="option">option2</li>
+            {emptyOption}
+            {optionList}
           </ul>
         </PopUp>
       </div>
