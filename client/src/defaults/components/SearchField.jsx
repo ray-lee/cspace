@@ -35,7 +35,10 @@ var SearchField = React.createClass({
       var csid = event.target.value.trim();
       
       if (csid !== '') {
-        this.transitionTo('collectionobject', {csid: csid});
+        this.transitionTo('record', {
+          recordType: 'collectionobject',
+          csid: csid
+        });
       }
     }
   },

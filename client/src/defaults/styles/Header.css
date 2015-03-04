@@ -1,5 +1,6 @@
 .header .controls {
-  margin-bottom: 8px;
+  margin-top: 10px;
+  margin-bottom: 14px;
   display: flex;
 }
 
@@ -8,7 +9,7 @@
 }
 
 .header .logo {
-  height: 51px;
+  height: 44px;
 }
 
 .header .search {

@@ -2,6 +2,10 @@
   background-color: #F0F5FB;
 }
 
-.recordeditor .recordeditorbody {
+.recordeditor > .recordeditorbody {
   width: 70%;
+}
+
+.recordeditor > .recordeditorbody form:not(:last-child) {
+  padding-bottom: 10px;
 }

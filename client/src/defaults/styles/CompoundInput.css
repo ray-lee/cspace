@@ -1,14 +1,14 @@
-.compositeinput:not(:last-child) {
+.compoundinput:not(:last-child) {
   margin-bottom: 10px;
 }
 
-.compositeinput > label {
+.compoundinput > label {
   font-size: 8pt;
   display: block;
   margin-bottom: 2px;
 }
 
-.compositeinput > .compositeinputbody {
+.compoundinput > .compoundinputbody {
   background-color: rgba(212, 212, 212, .2);
   padding: 10px;
   border: 1px solid #DDDDDD;

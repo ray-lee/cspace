@@ -1,11 +1,12 @@
 var React = require('react');
+var Form = require('../components/Form.jsx');
 var Panel = require('../components/Panel.jsx');
 var ColumnGroup = require('../components/ColumnGroup.jsx');
 var Column = require('../components/Column.jsx');
 var Input = require('../components/Input.jsx');
 var ControlledInput = require('../components/ControlledInput.jsx');
-var CompositeInput = require('../components/CompositeInput.jsx');
-var TabularCompositeInput = require('../components/TabularCompositeInput.jsx');
+var CompoundInput = require('../components/CompoundInput.jsx');
+var TabularCompoundInput = require('../components/TabularCompoundInput.jsx');
 
 var numberTypes = require('../controlled_lists/number_types.js');
 var departments = require('../controlled_lists/departments.js');
@@ -18,16 +19,16 @@ var nameSystems = require('../controlled_lists/name_systems.js');
 var nameTypes = require('../controlled_lists/name_types.js');
 
 module.exports = (
-  <form className="collectionobject">
+  <Form recordType="collectionobject">
     <Panel header="Object Identification Information">
       <ColumnGroup>
         <Column>
           <Input required={true} label="Identification number"/>
           <Input label="Number of objects"/>
-          <TabularCompositeInput label="Number">
+          <TabularCompoundInput label="Number">
             <Input label="Number"/>
             <ControlledInput label="Type" options={numberTypes}/>
-          </TabularCompositeInput>
+          </TabularCompoundInput>
           <ControlledInput label="Responsible department" options={departments}/>
           <ControlledInput label="Collection" options={collections}/>
           <ControlledInput label="Record status" defaultValue="new" options={recordStatuses}/>
@@ -39,7 +40,7 @@ module.exports = (
         </Column>
       </ColumnGroup>
       <Input readOnly={true} label="Computed current location"/>
-      <CompositeInput label="Title">
+      <CompoundInput label="Title">
         <ColumnGroup>
           <Column>
             <Input label="Title"/>
@@ -47,14 +48,14 @@ module.exports = (
           </Column>
           <Column>
             <ControlledInput label="Title language"/>
-            <TabularCompositeInput label="Title translation">
+            <TabularCompoundInput label="Title translation">
               <Input label="Translation"/>
               <ControlledInput label="Translation language"/>
-            </TabularCompositeInput>
+            </TabularCompoundInput>
           </Column>
         </ColumnGroup>
-      </CompositeInput>
-      <TabularCompositeInput label="Object name">
+      </CompoundInput>
+      <TabularCompoundInput label="Object name">
         <Input label="Name"/>
         <ControlledInput label="Currency" options={nameCurrencies}/>
         <ControlledInput label="Level" options={nameLevels}/>
@@ -62,7 +63,7 @@ module.exports = (
         <ControlledInput label="Type" options={nameTypes}/>
         <ControlledInput label="Language"/>
         <Input label="Note"/>
-      </TabularCompositeInput>
+      </TabularCompoundInput>
     </Panel>
-  </form>
+  </Form>
 );

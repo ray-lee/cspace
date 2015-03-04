@@ -2,9 +2,9 @@ var React = require('react');
 var Input = require('./Input.jsx');
 var ControlledInput = require('./ControlledInput.jsx');
 
-require('../styles/CompositeInput.css');
+require('../styles/CompoundInput.css');
 
-var CompositeInput = React.createClass({
+var CompoundInput = React.createClass({
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,
@@ -29,9 +29,9 @@ var CompositeInput = React.createClass({
     }
     
     return (
-      <div className="compositeinput">
+      <div className="compoundinput">
         {label}
-        <div className="compositeinputbody">
+        <div className="compoundinputbody">
           {this.props.children}
         </div>
       </div>
@@ -39,4 +39,4 @@ var CompositeInput = React.createClass({
   }
 });
 
-module.exports = CompositeInput;
+module.exports = CompoundInput;

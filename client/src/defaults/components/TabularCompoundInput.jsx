@@ -1,8 +1,8 @@
 var React = require('react');
 
-require('../styles/TabularCompositeInput.css');
+require('../styles/TabularCompoundInput.css');
 
-var TabularCompositeInput = React.createClass({
+var TabularCompoundInput = React.createClass({
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,
@@ -50,7 +50,7 @@ var TabularCompositeInput = React.createClass({
     });
     
     return (
-      <table className="tabularcompositeinput">
+      <table className="tabularcompoundinput">
         {label}
         <thead>
           <tr>
@@ -67,4 +67,4 @@ var TabularCompositeInput = React.createClass({
   }
 });
 
-module.exports = TabularCompositeInput;
+module.exports = TabularCompoundInput;

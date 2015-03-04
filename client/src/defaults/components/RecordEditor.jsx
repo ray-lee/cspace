@@ -40,6 +40,7 @@ var Record = React.createClass({
             <Panel key="primary" header="Primary Record">
               <ToolBar/>
               {form}
+              <ToolBar/>
             </Panel>
             <Panel key="anothertab" header="Another Tab">
               <Panel header="Panel">

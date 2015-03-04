@@ -16,7 +16,8 @@ var {
 var routes = (  
   <Route name="app" path="/cspace/core" handler={App}>
     <DefaultRoute name="home" handler={Home} />
-    <Route name="record" path="record/:recordType" handler={RecordEditor} />
+    <Route name="newrecord" path="record/:recordType" handler={RecordEditor} />
+    <Route name="record" path="record/:recordType/:csid" handler={RecordEditor} />
   </Route>
 );
 

@@ -1,30 +1,28 @@
 var React = require('react');
 
-require('../styles/popup.css');
-
-var PopUp = React.createClass({
+var Form = React.createClass({
   propTypes: {
-    open: React.PropTypes.bool
+    recordType: React.PropTypes.string
   },
   
   getDefaultProps: function() {
     return {
-      open: false
+      recordType: null
     };
   },
   
   render: function() {
     var classes = React.addons.classSet({
-      'popup': true,
-      'open': this.props.open
+      form: true,
+      recordType: this.props.recordType
     });
     
     return (
-      <div className={classes}>
+      <form className={classes}>
         {this.props.children}
-      </div>
+      </form>
     );
   }
 });
 
-module.exports = PopUp;
+module.exports = Form;

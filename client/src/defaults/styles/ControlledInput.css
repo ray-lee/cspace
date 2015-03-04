@@ -28,3 +28,24 @@
   background-color: rgb(115, 156, 210);
   color: white;
 }
+
+.controlledinput > .popup {
+  position: absolute;
+  min-width: 100%;
+  max-height: 200px;
+  z-index: 10;
+  background: #FFFFFF;
+  box-shadow: 0 0 3px 0 #DDDDDD;
+  display: none;
+  overflow: scroll;
+}
+
+.controlledinput > .popup.open {
+  display: block;
+}
+
+.controlledinput > .popup.closing {
+  background: none;
+  display: block;
+  opacity: 0;
+}

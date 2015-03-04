@@ -1,8 +1,13 @@
 var React = require('react');
 var Input = require('./Input.jsx');
-var PopUp = require('./PopUp.jsx');
 
 require('../styles/ControlledInput.css');
+
+var POPUP_STATE_CLOSED = 0;
+var POPUP_STATE_CLOSING = 1;
+var POPUP_STATE_OPEN = 2;
+
+var closeTimer = null;
 
 var ControlledInput = React.createClass({
   propTypes: {
@@ -28,7 +33,7 @@ var ControlledInput = React.createClass({
     
     return {
       value: value,
-      popupOpen: false
+      popupState: POPUP_STATE_CLOSED
     }
   },
   
@@ -37,14 +42,19 @@ var ControlledInput = React.createClass({
   },
   
   handleInputClick: function(event) {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
     this.setState({
-      popupOpen: true
+      popupState: POPUP_STATE_OPEN
     });
   },
   
   handleInputKeyPress: function(event) {
     this.setState({
-      popupOpen: true
+      popupState: POPUP_STATE_OPEN
     });
   },
   
@@ -58,11 +68,15 @@ var ControlledInput = React.createClass({
     // The best we can do is to wait before closing the popup, to see if it's
     // being clicked.
     
-    setTimeout(function() {
+    this.setState({
+      popupState: POPUP_STATE_CLOSING
+    });
+    
+    closeTimer = setTimeout(function() {
       this.setState({
-        popupOpen: false
+        popupState: POPUP_STATE_CLOSED
       });
-    }.bind(this), 250);
+    }.bind(this), 150);
   },
   
   handleJewelClick: function(event) {
@@ -75,7 +89,7 @@ var ControlledInput = React.createClass({
     if (target.hasAttribute('data-optionvalue')) {
       this.setState({
         value: target.getAttribute('data-optionvalue'),
-        popupOpen: false
+        popupState: POPUP_STATE_CLOSED
       });
     }
   },
@@ -101,19 +115,25 @@ var ControlledInput = React.createClass({
       );
     };
     
+    var popupClasses = React.addons.classSet({
+      'popup': true,
+      'open': this.state.popupState === POPUP_STATE_OPEN,
+      'closing': this.state.popupState === POPUP_STATE_CLOSING
+    });
+    
     return (
-      <div className="input controlledinput" onBlur={this.onBlur}>
+      <div className="input controlledinput" onFocus={this.handleFocus}>
         <Input ref="input" {...props} value={this.state.value} jewel={jewel}
             onChange={this.handleChange}
             onClick={this.handleInputClick}
             onKeyPress={this.handleInputKeyPress}
             onBlur={this.handleInputBlur}/>
-        <PopUp open={this.state.popupOpen}>
+        <div className={popupClasses}>
           <ul className="optionlist" onClick={this.handleOptionListClick}>
             {emptyOption}
             {optionList}
           </ul>
-        </PopUp>
+        </div>
       </div>
     );
   }

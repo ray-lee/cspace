@@ -7,7 +7,7 @@
     "start": "webpack-dev-server",
     "build:dev": "webpack --devtool eval",
     "deploy:dev": "cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
-    "predeploy:dev": "cp src/defaults/index.html dist/core && npm run build:dev",
+    "predeploy:dev": "cp src/defaults/index.html dist/core && cp -r src/defaults/images dist/core && npm run build:dev",
     "clean": "rm -r dist/core/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
