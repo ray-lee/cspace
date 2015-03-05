@@ -4,6 +4,7 @@ var Panel = require('../components/Panel.jsx');
 var ColumnGroup = require('../components/ColumnGroup.jsx');
 var Column = require('../components/Column.jsx');
 var Input = require('../components/Input.jsx');
+var RepeatingInput = require('../components/RepeatingInput.jsx');
 var ControlledInput = require('../components/ControlledInput.jsx');
 var CompoundInput = require('../components/CompoundInput.jsx');
 var TabularCompoundInput = require('../components/TabularCompoundInput.jsx');
@@ -25,36 +26,46 @@ module.exports = (
         <Column>
           <Input required={true} label="Identification number"/>
           <Input label="Number of objects"/>
-          <TabularCompoundInput label="Number">
-            <Input label="Number"/>
-            <ControlledInput label="Type" options={numberTypes}/>
-          </TabularCompoundInput>
-          <ControlledInput label="Responsible department" options={departments}/>
+          <RepeatingInput label="Number">
+            <TabularCompoundInput>
+              <Input label="Number"/>
+              <ControlledInput label="Type" options={numberTypes}/>
+            </TabularCompoundInput>
+          </RepeatingInput>
+          <RepeatingInput label="Responsible department">
+            <ControlledInput options={departments}/>
+          </RepeatingInput>
           <ControlledInput label="Collection" options={collections}/>
           <ControlledInput label="Record status" defaultValue="new" options={recordStatuses}/>
         </Column>
         <Column>
-          <Input multiline={true} label="Brief description"/>
+          <RepeatingInput label="Brief description">
+            <Input multiline={true}/>
+          </RepeatingInput>
           <Input multiline={true} label="Distinguishing features"/>
-          <Input multiline={true} label="Comments"/>
+          <RepeatingInput label="Comments">
+            <Input multiline={true}/>
+          </RepeatingInput>
         </Column>
       </ColumnGroup>
       <Input readOnly={true} label="Computed current location"/>
-      <CompoundInput label="Title">
-        <ColumnGroup>
-          <Column>
-            <Input label="Title"/>
-            <ControlledInput label="Title type" options={titleTypes}/>
-          </Column>
-          <Column>
-            <ControlledInput label="Title language"/>
-            <TabularCompoundInput label="Title translation">
-              <Input label="Translation"/>
-              <ControlledInput label="Translation language"/>
-            </TabularCompoundInput>
-          </Column>
-        </ColumnGroup>
-      </CompoundInput>
+      <RepeatingInput label="Title"> 
+        <CompoundInput>
+          <ColumnGroup>
+            <Column>
+              <Input label="Title"/>
+              <ControlledInput label="Title type" options={titleTypes}/>
+            </Column>
+            <Column>
+              <ControlledInput label="Title language"/>
+              <TabularCompoundInput label="Title translation">
+                <Input label="Translation"/>
+                <ControlledInput label="Translation language"/>
+              </TabularCompoundInput>
+            </Column>
+          </ColumnGroup>
+        </CompoundInput>
+      </RepeatingInput>
       <TabularCompoundInput label="Object name">
         <Input label="Name"/>
         <ControlledInput label="Currency" options={nameCurrencies}/>

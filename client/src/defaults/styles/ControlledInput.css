@@ -7,7 +7,6 @@
   background-size: 8px 7px;
   background-repeat: no-repeat;
   background-position: center center;
-  border-left: 1px solid #DDDDDD;
 }
 
 .controlledinput .input {
@@ -33,11 +32,12 @@
   position: absolute;
   min-width: 100%;
   max-height: 200px;
-  z-index: 10;
+  z-index: 90;
   background: #FFFFFF;
   box-shadow: 0 0 3px 0 #DDDDDD;
   display: none;
   overflow: scroll;
+  top: 1px;
 }
 
 .controlledinput > .popup.open {

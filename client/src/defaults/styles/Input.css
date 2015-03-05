@@ -22,6 +22,7 @@
 
 .input .control {
   height: 22px;
+  line-height: 18px;
   display: block;
   width: 100%;
 }

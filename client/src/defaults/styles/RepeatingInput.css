@@ -1,0 +1,56 @@
+.repeatinginput > .instances {
+  margin-bottom: 1px;
+}
+
+.repeatinginput > .instances > .instance > .input:not(:last-child) {
+  margin-bottom: 0;
+}
+
+.repeatinginput > .instances > .instance {
+  display: flex;
+  align-items: stretch;
+}
+
+.repeatinginput > .instances > .instance:not(:last-child) {
+  margin-bottom: 1px;
+}
+
+.repeatinginput > .instances > .instance > .tab {
+  padding-top: 3px;
+  font-size: 8pt;
+  width: 16px;
+  text-align: center;
+  color: #BBBBBB;
+  background: white;
+  border: 1px solid #DDDDDD;
+  border-right: none;
+}
+
+.repeatinginput > .instances > .instance > .input {
+  flex: 100%;
+}
+
+.repeatinginput > .instances > .instance > .removeButton {
+  width: 16px;
+  height: 22px;
+  font-size: 8pt;
+  margin-left: 1px;
+  background: none;
+  border: 1px solid #DDDDDD;
+  background: white;
+  color: #4D4D4D;
+}
+
+.repeatinginput > .addButton {
+  height: 16px;
+  /* margin-left: 12px; */
+  padding: 0 4px 0 4px;
+  font-size: 8pt;
+  float: right;
+  margin-right: 17px;
+  background: white;
+  border-color: #DDDDDD;
+  color: #4D4D4D;
+  position: relative;
+  z-index: 10;
+}

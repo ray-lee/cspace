@@ -76,7 +76,7 @@ var ControlledInput = React.createClass({
       this.setState({
         popupState: POPUP_STATE_CLOSED
       });
-    }.bind(this), 150);
+    }.bind(this), 200);
   },
   
   handleJewelClick: function(event) {

@@ -29,7 +29,7 @@ var CompoundInput = React.createClass({
     }
     
     return (
-      <div className="compoundinput">
+      <div className="input compoundinput">
         {label}
         <div className="compoundinputbody">
           {this.props.children}

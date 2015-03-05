@@ -50,7 +50,7 @@ var TabularCompoundInput = React.createClass({
     });
     
     return (
-      <table className="tabularcompoundinput">
+      <table className="input tabularcompoundinput">
         {label}
         <thead>
           <tr>

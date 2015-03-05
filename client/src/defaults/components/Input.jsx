@@ -55,6 +55,16 @@ var Input = React.createClass({
     });
   },
   
+  handleBlur: function(event) {
+    this.commit();
+  },
+  
+  commit: function(event) {
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.key, this.state.value);
+    }
+  },
+  
   focus: function() {
     if ('control' in this.refs) {
       this.refs['control'].getDOMNode().focus();
@@ -82,12 +92,12 @@ var Input = React.createClass({
       
       if (this.props.multiline) {
         control = (
-          <textarea ref="control" className="control" value={this.state.value} onChange={handleChange}/>
+          <textarea ref="control" className="control" value={this.state.value} placeholder=" " onChange={handleChange} onBlur={this.handleBlur}/>
         );
       }
       else {
         control = (
-          <input ref="control" className="control" type="text" value={this.state.value} onChange={handleChange}/>
+          <input ref="control" className="control" type="text" value={this.state.value} placeholder=" " onChange={handleChange} onBlur={this.handleBlur}/>
         );
       }
     }
