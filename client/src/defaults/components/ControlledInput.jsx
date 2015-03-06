@@ -3,18 +3,12 @@ var Input = require('./Input.jsx');
 
 require('../styles/ControlledInput.css');
 
-var POPUP_STATE_CLOSED = 0;
-var POPUP_STATE_CLOSING = 1;
-var POPUP_STATE_OPEN = 2;
-
 var ControlledInput = React.createClass({
   propTypes: {
     options: React.PropTypes.arrayOf(React.PropTypes.string),
     defaultValue: React.PropTypes.string,
     value: React.PropTypes.string
   },
-  
-  closeTimer: null,
   
   getDefaultProps: function() {
     return {
@@ -33,7 +27,7 @@ var ControlledInput = React.createClass({
     
     return {
       value: value,
-      popupState: POPUP_STATE_CLOSED
+      popupOpen: false
     }
   },
   
@@ -42,50 +36,24 @@ var ControlledInput = React.createClass({
   },
   
   handleInputClick: function(event) {
-    if (this.state.popupState === POPUP_STATE_CLOSING) {
-      if (this.closeTimer) {
-        clearTimeout(this.closeTimer);
-        this.closeTimer = null;
-      }
-    }
-
-    if (this.state.popupState !== POPUP_STATE_OPEN) {
-      this.setState({
-        popupState: POPUP_STATE_OPEN
-      });
-    }
+    this.setState({
+      popupOpen: true
+    });
   },
   
   handleInputKeyPress: function(event) {
-    if (event.keyCode !== 9) { // Ignore tab
-      this.setState({
-        popupState: POPUP_STATE_OPEN
-      });
-    }
+    this.setState({
+      popupOpen: true
+    });
   },
   
   handleInputBlur: function(event) {
-    console.log('blur ' + event.relatedTarget);
-    // A bit of a hack: If the input has focus, and the popup is clicked,
-    // onBlur fires on the input before onClick on the popup. If we close
-    // the popup immediately, onClick will never fire on it, so the selection
-    // won't be recognized. The better way to handle this would be to check
-    // if the element that is taking focus is the popup, using event.relatedTarget.
-    // But Firefox doesn't set event.relatedTarget, so it doesn't work there.
-    // The best we can do is to wait before closing the popup, to see if it's
-    // being clicked.
+    // Hack for Firefox. See handleOptionListMouseDown.
     
-    if (this.state.popupState == POPUP_STATE_OPEN) {
+    if (!this.isClickingOptionList) {
       this.setState({
-        popupState: POPUP_STATE_CLOSING
+        popupOpen: false
       });
-    
-      this.closeTimer = setTimeout(function() {
-        this.setState({
-          popupState: POPUP_STATE_CLOSED
-        });
-        this.closeTimer = null;
-      }.bind(this), 200);
     }
   },
   
@@ -96,23 +64,38 @@ var ControlledInput = React.createClass({
   },
   
   handlePopUpFocus: function(event) {
-    if (this.state.popupState === POPUP_STATE_CLOSING) {
-      if (this.closeTimer) {
-        clearTimeout(this.closeTimer);
-        this.closeTimer = null;
-      }
-    }
+    this.setState({
+      popupOpen: true
+    });
+  },
+  
+  handlePopUpBlur: function(event) {
+    this.setState({
+      popupOpen: false
+    });
+  },
+  
+  handleOptionListMouseDown: function(event) {
+    // Hack for Firefox. Mouse down on the option list causes the input to blur,
+    // which causes the popup to close before onClick can register on it.
+    // Catch mouse down on the option list, so we know not to close the popup
+    // when the input blurs.
+    
+    this.isClickingOptionList = true;
   },
   
   handleOptionListClick: function(event) {
-    console.log('click');
+    this.isClickingOptionList = false;
+    
     var target = event.target;
     
     if (target.hasAttribute('data-optionvalue')) {
       this.setState({
         value: target.getAttribute('data-optionvalue'),
-        popupState: POPUP_STATE_CLOSED
+        popupOpen: false
       });
+      
+      this.refs['input'].focus();
     }
   },
   
@@ -139,13 +122,12 @@ var ControlledInput = React.createClass({
     
     var popupClasses = React.addons.classSet({
       'popup': true,
-      'open': this.state.popupState === POPUP_STATE_OPEN,
-      'closing': this.state.popupState === POPUP_STATE_CLOSING
+      'open': this.state.popupOpen,
     });
 
     var popup = (
-      <div className={popupClasses} tabIndex="1" onFocus={this.handlePopUpFocus}>
-        <ul className="optionlist" onClick={this.handleOptionListClick}>
+      <div className={popupClasses} tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
+        <ul className="optionlist" onMouseDown={this.handleOptionListMouseDown} onClick={this.handleOptionListClick}>
           {emptyOption}
           {optionList}
         </ul>

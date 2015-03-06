@@ -43,10 +43,3 @@
 .controlledinput .popup.open {
   display: block;
 }
-
-.controlledinput .popup.closing {
-  background: none;
-  display: block;
-  opacity: 0.5;
-  z-index: 1;
-}
