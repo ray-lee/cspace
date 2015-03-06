@@ -73,9 +73,14 @@ button {
   outline: none;
 }
 
+button:hover, button:focus {
+  border-color: #32561B;
+  outline: none;
+}
+
 button:hover {
-  border-color: rgba(16, 16, 16, .2);
-  box-shadow: 0 -10px 14px 0 rgba(32, 32, 32, .2) inset;
+  background-color: #4A7F28;
+  box-shadow: 0 0 4px 0 #E5E5E5;  
 }
 
 main {

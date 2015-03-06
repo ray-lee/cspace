@@ -24,6 +24,12 @@
   display: none;
 }
 
+.panel > .panelbody::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .panel.collapsiblepanel > .panelheader {
   background-size: 8px 7px;
   background-repeat: no-repeat;
@@ -33,9 +39,7 @@
 }
 
 .panel.collapsiblepanel > .panelheader:hover {
-  background-color: rgba(0, 0, 0, .6);
-  border-color: rgba(16, 16, 16, .2);
-  box-shadow: 0 -10px 14px 0 rgba(32, 32, 32, .2) inset;
+  background-color: rgba(0, 0, 0, .65);
 }
 
 .panel.collapsiblepanel.collapsed > .panelheader {

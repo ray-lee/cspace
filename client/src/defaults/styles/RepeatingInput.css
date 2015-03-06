@@ -1,24 +1,24 @@
-.repeatinginput > .instances {
+.repeatinginput > ul.instances {
   margin-bottom: 1px;
 }
 
-.repeatinginput > .instances > .instance > .input:not(:last-child) {
+.repeatinginput > .instances > li.instance > .input:not(:last-child) {
   margin-bottom: 0;
 }
 
-.repeatinginput > .instances > .instance {
+.repeatinginput > .instances > li.instance {
   display: flex;
   align-items: stretch;
 }
 
-.repeatinginput > .instances > .instance:not(:last-child) {
+.repeatinginput > .instances > li.instance:not(:last-child) {
   margin-bottom: 1px;
 }
 
-.repeatinginput > .instances > .instance > .tab {
+.repeatinginput > .instances > .instance .tab {
   padding-top: 3px;
   font-size: 8pt;
-  width: 16px;
+  width: 22px;
   text-align: center;
   color: #BBBBBB;
   background: white;
@@ -26,31 +26,50 @@
   border-right: none;
 }
 
-.repeatinginput > .instances > .instance > .input {
+.repeatinginput > .instances > li.instance > .input {
   flex: 100%;
 }
 
-.repeatinginput > .instances > .instance > .removeButton {
-  width: 16px;
+.repeatinginput > .instances > .instance .removeButton {
+  width: 22px;
   height: 22px;
   font-size: 8pt;
-  margin-left: 1px;
   background: none;
   border: 1px solid #DDDDDD;
   background: white;
   color: #4D4D4D;
+  border-radius: 0;
+  border-left: none;
 }
 
 .repeatinginput > .addButton {
+  width: 22px;
   height: 16px;
   /* margin-left: 12px; */
   padding: 0 4px 0 4px;
   font-size: 8pt;
-  float: right;
-  margin-right: 17px;
+  /* float: right; 
+  margin-right: 21px; */
   background: white;
   border-color: #DDDDDD;
   color: #4D4D4D;
   position: relative;
   z-index: 10;
+  border-radius: 0;
 }
+
+.repeatinginput > .addButton:hover,
+.repeatinginput > .addButton:focus,
+.repeatinginput > .instances > .instance .removeButton:hover,
+.repeatinginput > .instances > .instance .removeButton:focus {
+  outline: 1px solid #32561B;
+  outline-offset: -1px;
+}
+
+.repeatinginput > .addButton:hover,
+.repeatinginput > .instances > .instance .removeButton:hover {
+  background-color: #4A7F28;
+  box-shadow: 0 0 4px 0 #E5E5E5;
+  color: #FFFFFF;
+}
+

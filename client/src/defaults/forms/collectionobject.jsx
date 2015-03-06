@@ -54,27 +54,33 @@ module.exports = (
           <ColumnGroup>
             <Column>
               <Input label="Title"/>
-              <ControlledInput label="Title type" options={titleTypes}/>
+              <RepeatingInput label="Title language">
+                <ControlledInput/>
+              </RepeatingInput>
             </Column>
             <Column>
-              <ControlledInput label="Title language"/>
-              <TabularCompoundInput label="Title translation">
-                <Input label="Translation"/>
-                <ControlledInput label="Translation language"/>
-              </TabularCompoundInput>
+              <ControlledInput label="Title type" options={titleTypes}/>
+              <RepeatingInput label="Title translation">
+                <TabularCompoundInput>
+                  <Input label="Translation"/>
+                  <ControlledInput label="Translation language"/>
+                </TabularCompoundInput>
+              </RepeatingInput>
             </Column>
           </ColumnGroup>
         </CompoundInput>
       </RepeatingInput>
-      <TabularCompoundInput label="Object name">
-        <Input label="Name"/>
-        <ControlledInput label="Currency" options={nameCurrencies}/>
-        <ControlledInput label="Level" options={nameLevels}/>
-        <ControlledInput label="System" options={nameSystems}/>
-        <ControlledInput label="Type" options={nameTypes}/>
-        <ControlledInput label="Language"/>
-        <Input label="Note"/>
-      </TabularCompoundInput>
+      <RepeatingInput label="Object name">
+        <TabularCompoundInput>
+          <Input label="Name"/>
+          <ControlledInput label="Currency" options={nameCurrencies}/>
+          <ControlledInput label="Level" options={nameLevels}/>
+          <ControlledInput label="System" options={nameSystems}/>
+          <ControlledInput label="Type" options={nameTypes}/>
+          <ControlledInput label="Language"/>
+          <Input label="Note"/>
+        </TabularCompoundInput>
+      </RepeatingInput>
     </Panel>
   </Form>
 );

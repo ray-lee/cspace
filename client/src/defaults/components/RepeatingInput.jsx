@@ -1,4 +1,5 @@
 var React = require('react');
+var TabularCompoundInput = require('./TabularCompoundInput.jsx');
 
 require('../styles/RepeatingInput.css');
 
@@ -58,51 +59,62 @@ var RepeatingInput = React.createClass({
       value: value
     });
   },
-  
-  handleInputInstanceCommit(key, value) {
-
-  },
-  
-  render: function() {
-    var label = null;
     
-    if (this.props.label != null) {
-      label = (
-        <label>{this.props.label}</label>
-      );
-    }
-
+  render: function() {
     var inputTemplate = React.Children.only(this.props.children);
     
-    var instances = this.state.value.map(function(value, index) {
-      var inputInstance = React.addons.cloneWithProps(inputTemplate, {
-        key: index,
-        label: null,
-        description: null,
-        help: null,
-        readOnly: this.props.readOnly,
-        value: value,
-        onCommit: this.handleInputInstanceCommit
-      });
-      
-      return (
-        <li className="instance">
-          <div className="tab">{index + 1}</div>
-          {inputInstance}
-          <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
-        </li>
-      );
-    }, this);
+    if (inputTemplate.type === TabularCompoundInput.type) {
+      // TabularCompoundInput handles its own repeating. As a convenience,
+      // allow it to be wrapped in a RepeatingInput, but just set the
+      // repeating property to true.
+      console.log(inputTemplate);
+       
+      return React.addons.cloneWithProps(inputTemplate, {
+          label: this.props.label,
+          description: this.props.description,
+          help: this.props.help,
+          readOnly: this.props.readOnly,
+          value: this.props.value,
+          repeating: true
+        });
+    }
+    else {
+      var label = null;
     
-    return (
-      <div className="input repeatinginput">
-        {label}
-        <ul className="instances">
-          {instances}
-        </ul>
-        <button className="addButton" onClick={this.handleAddButtonClick}>Add</button>
-      </div>
-    );
+      if (this.props.label != null) {
+        label = (
+          <label>{this.props.label}</label>
+        );
+      }
+
+      var instances = this.state.value.map(function(value, index) {
+        var inputInstance = React.addons.cloneWithProps(inputTemplate, {
+          label: null,
+          description: null,
+          help: null,
+          readOnly: this.props.readOnly,
+          value: value
+        });
+      
+        return (
+          <li className="instance">
+            <div className="tab">{index + 1}</div>
+            {inputInstance}
+            <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+          </li>
+        );
+      }, this);
+    
+      return (
+        <div className="input repeatinginput">
+          {label}
+          <ul className="instances">
+            {instances}
+          </ul>
+          <button className="addButton" onClick={this.handleAddButtonClick}>+</button>
+        </div>
+      );
+    }
   }
 });
 
