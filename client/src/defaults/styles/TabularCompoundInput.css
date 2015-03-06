@@ -54,6 +54,11 @@
   border: none;
 }
 
+.tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButton:focus,
+.tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButton:hover {
+  outline-offset: 0;
+}
+
 .repeatinginput > .tabularcompoundinput {
   margin-bottom: 1px;
 }
