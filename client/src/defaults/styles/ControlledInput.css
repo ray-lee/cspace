@@ -28,7 +28,7 @@
   color: white;
 }
 
-.controlledinput > .popup {
+.controlledinput  .popup {
   position: absolute;
   min-width: 100%;
   max-height: 200px;
@@ -37,15 +37,16 @@
   box-shadow: 0 0 3px 0 #DDDDDD;
   display: none;
   overflow: scroll;
-  top: 1px;
+  top: 23px;
 }
 
-.controlledinput > .popup.open {
+.controlledinput .popup.open {
   display: block;
 }
 
-.controlledinput > .popup.closing {
+.controlledinput .popup.closing {
   background: none;
   display: block;
-  opacity: 0;
+  opacity: 0.5;
+  z-index: 1;
 }

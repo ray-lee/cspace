@@ -60,7 +60,7 @@ var RepeatingInput = React.createClass({
   },
   
   handleInputInstanceCommit(key, value) {
-    console.log('commit ' + key + " " + value);
+
   },
   
   render: function() {

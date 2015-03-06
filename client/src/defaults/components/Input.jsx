@@ -11,6 +11,7 @@ var Input = React.createClass({
     readOnly: React.PropTypes.bool,
     multiline: React.PropTypes.bool,
     jewel: React.PropTypes.element,
+    popup: React.PropTypes.element,
     value: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number,
@@ -33,6 +34,7 @@ var Input = React.createClass({
       readOnly: false,
       multiline: false,
       jewel: null,
+      popup: null,
       value: ''
     };
   },
@@ -57,6 +59,10 @@ var Input = React.createClass({
   
   handleBlur: function(event) {
     this.commit();
+    
+    if (this.props.onBlur) {
+      this.props.onBlur(event);
+    }
   },
   
   commit: function(event) {
@@ -92,29 +98,31 @@ var Input = React.createClass({
       
       if (this.props.multiline) {
         control = (
-          <textarea ref="control" className="control" value={this.state.value} placeholder=" " onChange={handleChange} onBlur={this.handleBlur}/>
+          <textarea ref="control" className="control" value={this.state.value} placeholder=" "
+            onChange={handleChange}
+            onBlur={this.handleBlur}
+            onClick={this.props.onClick}
+            onKeyPress={this.props.onKeyPress}/>
         );
       }
       else {
         control = (
-          <input ref="control" className="control" type="text" value={this.state.value} placeholder=" " onChange={handleChange} onBlur={this.handleBlur}/>
+          <input ref="control" className="control" type="text" value={this.state.value} placeholder=" "
+            onChange={handleChange}
+            onBlur={this.handleBlur}
+            onClick={this.props.onClick}
+            onKeyPress={this.props.onKeyPress}/>
         );
       }
     }
     
-    var controls = null;
-
-    if (this.props.jewel) {
-      controls = (
-        <div className="jeweledcontrol">
-          {control}
-          {this.props.jewel}
-        </div>
-      );
-    }
-    else {
-      controls = control;
-    }
+    var controls = (
+      <div className="jeweledcontrol">
+        {control}
+        {this.props.jewel}
+        {this.props.popup}
+      </div>
+    );
     
     var classes = React.addons.classSet({
       'input': true,
@@ -122,7 +130,7 @@ var Input = React.createClass({
     });
     
     return (
-      <div className={classes} onClick={this.props.onClick} onKeyPress={this.props.onKeyPress} onBlur={this.props.onBlur}>
+      <div className={classes}>
         {label}
         {controls}
       </div>

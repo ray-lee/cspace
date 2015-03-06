@@ -7,14 +7,14 @@ var POPUP_STATE_CLOSED = 0;
 var POPUP_STATE_CLOSING = 1;
 var POPUP_STATE_OPEN = 2;
 
-var closeTimer = null;
-
 var ControlledInput = React.createClass({
   propTypes: {
     options: React.PropTypes.arrayOf(React.PropTypes.string),
     defaultValue: React.PropTypes.string,
     value: React.PropTypes.string
   },
+  
+  closeTimer: null,
   
   getDefaultProps: function() {
     return {
@@ -42,23 +42,30 @@ var ControlledInput = React.createClass({
   },
   
   handleInputClick: function(event) {
-    if (closeTimer) {
-      clearTimeout(closeTimer);
-      closeTimer = null;
+    if (this.state.popupState === POPUP_STATE_CLOSING) {
+      if (this.closeTimer) {
+        clearTimeout(this.closeTimer);
+        this.closeTimer = null;
+      }
     }
 
-    this.setState({
-      popupState: POPUP_STATE_OPEN
-    });
+    if (this.state.popupState !== POPUP_STATE_OPEN) {
+      this.setState({
+        popupState: POPUP_STATE_OPEN
+      });
+    }
   },
   
   handleInputKeyPress: function(event) {
-    this.setState({
-      popupState: POPUP_STATE_OPEN
-    });
+    if (event.keyCode !== 9) { // Ignore tab
+      this.setState({
+        popupState: POPUP_STATE_OPEN
+      });
+    }
   },
   
   handleInputBlur: function(event) {
+    console.log('blur ' + event.relatedTarget);
     // A bit of a hack: If the input has focus, and the popup is clicked,
     // onBlur fires on the input before onClick on the popup. If we close
     // the popup immediately, onClick will never fire on it, so the selection
@@ -68,22 +75,37 @@ var ControlledInput = React.createClass({
     // The best we can do is to wait before closing the popup, to see if it's
     // being clicked.
     
-    this.setState({
-      popupState: POPUP_STATE_CLOSING
-    });
-    
-    closeTimer = setTimeout(function() {
+    if (this.state.popupState == POPUP_STATE_OPEN) {
       this.setState({
-        popupState: POPUP_STATE_CLOSED
+        popupState: POPUP_STATE_CLOSING
       });
-    }.bind(this), 200);
+    
+      this.closeTimer = setTimeout(function() {
+        this.setState({
+          popupState: POPUP_STATE_CLOSED
+        });
+        this.closeTimer = null;
+      }.bind(this), 200);
+    }
   },
   
   handleJewelClick: function(event) {
     this.refs['input'].focus();
+    
+    this.handleInputClick(event);
+  },
+  
+  handlePopUpFocus: function(event) {
+    if (this.state.popupState === POPUP_STATE_CLOSING) {
+      if (this.closeTimer) {
+        clearTimeout(this.closeTimer);
+        this.closeTimer = null;
+      }
+    }
   },
   
   handleOptionListClick: function(event) {
+    console.log('click');
     var target = event.target;
     
     if (target.hasAttribute('data-optionvalue')) {
@@ -120,20 +142,23 @@ var ControlledInput = React.createClass({
       'open': this.state.popupState === POPUP_STATE_OPEN,
       'closing': this.state.popupState === POPUP_STATE_CLOSING
     });
-    
+
+    var popup = (
+      <div className={popupClasses} tabIndex="1" onFocus={this.handlePopUpFocus}>
+        <ul className="optionlist" onClick={this.handleOptionListClick}>
+          {emptyOption}
+          {optionList}
+        </ul>
+      </div>
+    );
+        
     return (
-      <div className="input controlledinput" onFocus={this.handleFocus}>
-        <Input ref="input" {...props} value={this.state.value} jewel={jewel}
+      <div className="input controlledinput">
+        <Input ref="input" {...props} value={this.state.value} jewel={jewel} popup={popup}
             onChange={this.handleChange}
             onClick={this.handleInputClick}
             onKeyPress={this.handleInputKeyPress}
             onBlur={this.handleInputBlur}/>
-        <div className={popupClasses}>
-          <ul className="optionlist" onClick={this.handleOptionListClick}>
-            {emptyOption}
-            {optionList}
-          </ul>
-        </div>
       </div>
     );
   }
