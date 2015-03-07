@@ -67,7 +67,6 @@ var RepeatingInput = React.createClass({
       // TabularCompoundInput handles its own repeating. As a convenience,
       // allow it to be wrapped in a RepeatingInput, but just set the
       // repeating property to true.
-      console.log(inputTemplate);
        
       return React.addons.cloneWithProps(inputTemplate, {
           label: this.props.label,

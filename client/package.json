@@ -5,9 +5,15 @@
   "main": "src/defaults/main.jsx",
   "scripts": {
     "start": "webpack-dev-server",
+
     "build:dev": "webpack --devtool eval",
-    "deploy:dev": "cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
+    "deploy:dev": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
     "predeploy:dev": "cp src/defaults/index.html dist/core && cp -r src/defaults/images dist/core && npm run build:dev",
+
+    "build:prod": "webpack -p",
+    "deploy:prod": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
+    "predeploy:prod": "cp src/defaults/index.html dist/core && cp -r src/defaults/images dist/core && npm run build:prod",
+
     "clean": "rm -r dist/core/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
