@@ -3,7 +3,7 @@ A prototype CollectionSpace client application.
 There are two parts:
 
 1. A minimal server-side application to serve client resources, implemented as a Java servlet.
-2. A clent-side application written in JavaScript that runs in the browser.
+2. A client-side application written in JavaScript that runs in the browser.
 
 # Server Installation
 
