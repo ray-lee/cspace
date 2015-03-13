@@ -1,4 +1,5 @@
 var React = require('react');
+var IntlMixin = require('react-intl').IntlMixin;
 var Router = require('react-router');
 var TitleBar = require('./TitleBar.jsx');
 var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
@@ -9,7 +10,7 @@ var ToolBar = require('./ToolBar.jsx')
 require('../styles/RecordEditor.css');
 
 var Record = React.createClass({
-  mixins: [Router.State],
+  mixins: [IntlMixin, Router.State],
   
   // componentDidMount: function() {
   //   var cspace = new CollectionSpace();
@@ -33,11 +34,11 @@ var Record = React.createClass({
     
     return (
       <main className="recordeditor">
-        <TitleBar title="This is a prototype record editor." recordType={recordType}/>
+        <TitleBar title="This is a prototype record editor." recordType={this.getIntlMessage('recordtypes.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
-            <Panel key="primary" header="Primary Record">
+            <Panel key="primary" header={this.getIntlMessage('recordeditor.tabs.primary')}>
               <ToolBar/>
               {form}
               <ToolBar/>

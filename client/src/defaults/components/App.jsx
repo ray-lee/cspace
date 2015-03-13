@@ -1,4 +1,5 @@
 var React = require('react');
+var { IntlMixin } = require('react-intl');
 var { RouteHandler } = require('react-router');
 
 var Header = require('./Header.jsx');
@@ -7,6 +8,20 @@ var Footer = require('./Footer.jsx');
 require('../styles/App.css');
 
 var App = React.createClass({
+  mixins: [IntlMixin],
+  
+  propTypes: {
+    locales: React.PropTypes.arrayOf(React.PropTypes.string),
+    messages: React.PropTypes.object
+  },
+  
+  getDefaultProps: function() {
+    return {
+      locales: ['en'],
+      messages: require('../messages/en.js')
+    };
+  },
+  
   render: function() {
     return (
       <div className="app">

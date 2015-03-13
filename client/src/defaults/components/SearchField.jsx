@@ -1,4 +1,5 @@
 var React = require('react');
+var IntlMixin = require('react-intl').IntlMixin;
 var Navigation = require('react-router').Navigation;
 
 require('../styles/SearchField.css');
@@ -6,7 +7,7 @@ require('../styles/SearchField.css');
 var ENTER_KEY_CODE = 13;
 
 var SearchField = React.createClass({
-  mixins: [Navigation],
+  mixins: [IntlMixin, Navigation],
 
   propTypes: {
     value: React.PropTypes.string
@@ -45,7 +46,7 @@ var SearchField = React.createClass({
   
   render: function() {
     return (
-      <input className="searchfield" type="text" placeholder="Search by CSID" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
+      <input className="searchfield" type="text" placeholder={this.getIntlMessage('searchfield.searchbycsid')} value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
     );
   }
 });

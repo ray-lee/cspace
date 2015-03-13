@@ -1,16 +1,19 @@
 var React = require('react');
+var IntlMixin = require('react-intl').IntlMixin;
 
 require('../styles/Footer.css');
 
 var Footer = React.createClass({
+  mixins: [IntlMixin],
+  
   render: function() {
     return (
       <footer className="footer">
         <ul>
-          <li>Copyright &copy; 2009 - 2015 CollectionSpace</li>
-          <li><a href="http://www.collectionspace.org/current_release/">Release N.0</a></li>
-          <li><a href="http://www.collectionspace.org/">About CollectionSpace</a></li>
-          <li><a href="http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback">Leave Feedback</a></li>
+          <li>{this.getIntlMessage('footer.copy')}</li>
+          <li><a href={this.getIntlMessage('footer.releaselink')}>{this.getIntlMessage('footer.release')}</a></li>
+          <li><a href={this.getIntlMessage('footer.aboutlink')}>{this.getIntlMessage('footer.about')}</a></li>
+          <li><a href={this.getIntlMessage('footer.feedbacklink')}>{this.getIntlMessage('footer.feedback')}</a></li>
         </ul>
       </footer>
     );
