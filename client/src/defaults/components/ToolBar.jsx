@@ -9,10 +9,10 @@ var ToolBar = React.createClass({
   render: function() {
     return (
       <div className="toolbar">
-        <button>{this.getIntlMessage('toolbar.clone')}</button>
-        <button>{this.getIntlMessage('toolbar.revert')}</button>
-        <button>{this.getIntlMessage('toolbar.delete')}</button>
-        <button>{this.getIntlMessage('toolbar.save')}</button>
+        <button>{this.getIntlMessage('toolBar.clone')}</button>
+        <button>{this.getIntlMessage('toolBar.revert')}</button>
+        <button>{this.getIntlMessage('toolBar.delete')}</button>
+        <button>{this.getIntlMessage('toolBar.save')}</button>
       </div>
     );
   }

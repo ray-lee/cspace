@@ -5,7 +5,7 @@ require('../styles/ControlledInput.css');
 
 var ControlledInput = React.createClass({
   propTypes: {
-    options: React.PropTypes.arrayOf(React.PropTypes.string),
+    options: React.PropTypes.arrayOf(React.PropTypes.object),
     defaultValue: React.PropTypes.string,
     value: React.PropTypes.string
   },
@@ -106,11 +106,17 @@ var ControlledInput = React.createClass({
       <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
     );
     
-    var optionList = this.props.options.map(function(value) {
+    var selectedOptionLabel = null;
+    
+    var optionList = this.props.options.map(function(option) {
+      if (option.value === this.state.value) {
+        selectedOptionLabel = option.label;
+      }
+      
       return (
-        <li key={value} data-optionvalue={value} className="option">{value}</li>
+        <li key={option.value} data-optionvalue={option.value} className="option">{option.label}</li>
       );
-    });
+    }, this);
     
     var emptyOption = null;
     
@@ -136,7 +142,7 @@ var ControlledInput = React.createClass({
         
     return (
       <div className="input controlledinput">
-        <Input ref="input" {...props} value={this.state.value} jewel={jewel} popup={popup}
+        <Input ref="input" {...props} value={selectedOptionLabel} jewel={jewel} popup={popup}
             onChange={this.handleChange}
             onClick={this.handleInputClick}
             onKeyPress={this.handleInputKeyPress}

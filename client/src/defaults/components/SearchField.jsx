@@ -46,7 +46,7 @@ var SearchField = React.createClass({
   
   render: function() {
     return (
-      <input className="searchfield" type="text" placeholder={this.getIntlMessage('searchfield.searchbycsid')} value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
+      <input className="searchfield" type="text" placeholder={this.getIntlMessage('searchField.placeholder')} value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
     );
   }
 });

@@ -34,11 +34,11 @@ var Record = React.createClass({
 
     return (
       <main className="recordeditor">
-        <TitleBar title="This is a prototype record editor." recordType={this.getIntlMessage('recordtype.' + recordType)}/>
+        <TitleBar title="This is a prototype record editor." recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
-            <Panel key="primary" header={this.getIntlMessage('recordeditor.tabs.primary')}>
+            <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
               <ToolBar/>
               <Form/>
               <ToolBar/>

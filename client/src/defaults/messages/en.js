@@ -7,21 +7,21 @@ module.exports = {
     admin: 'Administration'
   },
   
-  searchfield: {
-    searchbycsid: 'Search by CSID'
+  searchField: {
+    placeholder: 'Search by CSID'
   },
 
-  recordtype: {
+  recordType: {
     collectionobject: 'Collection Object'
   },
   
-  recordeditor: {
+  recordEditor: {
     tabs: {
       primary: 'Primary Record'
     }
   },
   
-  toolbar: {
+  toolBar: {
     clone: 'Clone',
     revert: 'Revert',
     delete: 'Delete',
@@ -29,13 +29,13 @@ module.exports = {
   },
   
   footer: {
-    copy: 'Copyright © 2009 - 2015 CollectionSpace',
+    copyright: 'Copyright © 2009 - 2015 CollectionSpace',
     release: 'Release N.0',
-    releaselink: 'http://www.collectionspace.org/current_release/',
+    releaseLink: 'http://www.collectionspace.org/current_release/',
     about: 'About CollectionSpace',
-    aboutlink: 'http://www.collectionspace.org/',
+    aboutLink: 'http://www.collectionspace.org/',
     feedback: 'Leave feedback',
-    feedbacklink: 'http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback'
+    feedbackLink: 'http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback'
   },
   
   form: {
@@ -74,8 +74,73 @@ module.exports = {
       }
     }
   },
-  
-  controlledlist: {
     
+  controlledList: {
+    collections: {
+      'library-collection': 'Library collection',
+      'permanent-collection': 'Permanent collection',
+      'study-collection': 'Study collection',
+      'teaching-collection': 'Teaching collection'
+    },
+    
+    departments: {
+      'antiquities': 'Antiquities',
+      'architecture-design': 'Architecture and Design',
+      'decorative-arts': 'Decorative Arts',
+      'ethnography': 'Ethnography',
+      'herpetology': 'Herpetology',
+      'media-performance-art': 'Media and Performance Art',
+      'paintings-sculpture': 'Paintings and Sculpture',
+      'paleobotany': 'Paleobotany',
+      'photographs': 'Photographs',
+      'prints-drawings': 'Prints and Drawings'
+    },
+    
+    nameCurrencies: {
+      'current': 'Current',
+      'archaic': 'Archaic'
+    },
+    
+    nameLevels: {
+      'group': 'Group',
+      'subgroup': 'Subgroup'
+    },
+    
+    nameSystems: {
+      'art-and-architecture-thesaurus': 'Art & Architecture Thesaurus',
+      'nomenclature': 'Nomenclature'
+    },
+    
+    nameTypes: {
+      'classified': 'Classified',
+      'denomination': 'Denomination',
+      'simple': 'Simple',
+      'taxonomic': 'Taxonomic',
+      'typological': 'Typological'
+    },
+  
+    numberTypes: {
+      'lender': 'Lender',
+      'obsolete': 'Obsolete',
+      'previous': 'Previous',
+      'serial': 'Serial',
+      'unknown': 'Unknown'
+    },
+    
+    recordStatuses: {
+      'approved': 'Approved',
+      'in-process': 'In process',
+      'new': 'New',
+      'temporary': 'Temporary'
+    },
+    
+    titleTypes: {
+      'assigned-by-artist': 'Assigned by artist',
+      'collection': 'Collection',
+      'generic': 'Generic',
+      'popular': 'Popular',
+      'series': 'Series',
+      'trade': 'Trade'
+    }
   }
 };

@@ -10,10 +10,10 @@ var Footer = React.createClass({
     return (
       <footer className="footer">
         <ul>
-          <li>{this.getIntlMessage('footer.copy')}</li>
-          <li><a href={this.getIntlMessage('footer.releaselink')}>{this.getIntlMessage('footer.release')}</a></li>
-          <li><a href={this.getIntlMessage('footer.aboutlink')}>{this.getIntlMessage('footer.about')}</a></li>
-          <li><a href={this.getIntlMessage('footer.feedbacklink')}>{this.getIntlMessage('footer.feedback')}</a></li>
+          <li>{this.getIntlMessage('footer.copyright')}</li>
+          <li><a href={this.getIntlMessage('footer.releaseLink')}>{this.getIntlMessage('footer.release')}</a></li>
+          <li><a href={this.getIntlMessage('footer.aboutLink')}>{this.getIntlMessage('footer.about')}</a></li>
+          <li><a href={this.getIntlMessage('footer.feedbackLink')}>{this.getIntlMessage('footer.feedback')}</a></li>
         </ul>
       </footer>
     );

@@ -10,21 +10,22 @@ var ControlledInput = require('../components/ControlledInput.jsx');
 var CompoundInput = require('../components/CompoundInput.jsx');
 var TabularCompoundInput = require('../components/TabularCompoundInput.jsx');
 
-var numberTypes = require('../controlled_lists/number_types.js');
-var departments = require('../controlled_lists/departments.js');
-var collections = require('../controlled_lists/collections.js');
-var recordStatuses = require('../controlled_lists/record_statuses.js');
-var titleTypes = require('../controlled_lists/title_types.js');
-var nameCurrencies = require('../controlled_lists/name_currencies.js');
-var nameLevels = require('../controlled_lists/name_levels.js');
-var nameSystems = require('../controlled_lists/name_systems.js');
-var nameTypes = require('../controlled_lists/name_types.js');
-
 module.exports = React.createClass({
   mixins: [IntlMixin],
   
   label: function(fieldName) {
     return this.getIntlMessage('form.collectionobject.field.' + fieldName);
+  },
+  
+  getOptions: function(controlledListName) {
+    var values = require('../controlled_lists/' + controlledListName + '.js');
+    
+    return values.map(function(value) {
+      return {
+        value: value,
+        label: this.getIntlMessage('controlledList.' + controlledListName + '.' + value)
+      };
+    }, this);
   },
   
   render: function() {
@@ -39,16 +40,16 @@ module.exports = React.createClass({
               <RepeatingInput name="otherNumberList" label={this.label('otherNumberList')}>
                 <TabularCompoundInput name="otherNumber">
                   <Input name="numberValue" label={this.label('numberValue')}/>
-                  <ControlledInput name="numberType" label={this.label('numberType')} options={numberTypes}/>
+                  <ControlledInput name="numberType" label={this.label('numberType')} options={this.getOptions('numberTypes')}/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
               <RepeatingInput name="responsibleDepartments" label={this.label('responsibleDepartments')}>
-                <ControlledInput name="responsibleDepartment" options={departments}/>
+                <ControlledInput name="responsibleDepartment" options={this.getOptions('departments')}/>
               </RepeatingInput>
       
-              <ControlledInput name="collection" label={this.label('collection')} options={collections}/>
-              <ControlledInput name="recordStatus" label={this.label('recordStatus')} defaultValue="new" options={recordStatuses}/>
+              <ControlledInput name="collection" label={this.label('collection')} options={this.getOptions('collections')}/>
+              <ControlledInput name="recordStatus" label={this.label('recordStatus')} defaultValue="new" options={this.getOptions('recordStatuses')}/>
             </Column>
       
             <Column>
@@ -75,7 +76,7 @@ module.exports = React.createClass({
                 </Column>
       
                 <Column>
-                  <ControlledInput name="titleType" label={this.label('titleType')} options={titleTypes}/>
+                  <ControlledInput name="titleType" label={this.label('titleType')} options={this.getOptions('titleTypes')}/>
       
                   <RepeatingInput name="titleTranslationSubGroupList" label={this.label('titleTranslationSubGroupList')}>
                     <TabularCompoundInput name="titleTranslationSubGroup">
@@ -91,10 +92,10 @@ module.exports = React.createClass({
           <RepeatingInput name="objectNameList" label={this.label('objectNameList')}>
             <TabularCompoundInput name="objectNameGroup">
               <Input name="objectName" label={this.label('objectName')}/>
-              <ControlledInput name="objectNameCurrency" label={this.label('objectNameCurrency')} options={nameCurrencies}/>
-              <ControlledInput name="objectNameLevel" label={this.label('objectNameLevel')} options={nameLevels}/>
-              <ControlledInput name="objectNameSystem" label={this.label('objectNameSystem')} options={nameSystems}/>
-              <ControlledInput name="objectNameType" label={this.label('objectNameType')} options={nameTypes}/>
+              <ControlledInput name="objectNameCurrency" label={this.label('objectNameCurrency')} options={this.getOptions('nameCurrencies')}/>
+              <ControlledInput name="objectNameLevel" label={this.label('objectNameLevel')} options={this.getOptions('nameLevels')}/>
+              <ControlledInput name="objectNameSystem" label={this.label('objectNameSystem')} options={this.getOptions('nameSystems')}/>
+              <ControlledInput name="objectNameType" label={this.label('objectNameType')} options={this.getOptions('nameTypes')}/>
               <ControlledInput name="objectNameLanguage" label={this.label('objectNameLanguage')}/>
               <Input label="Note"/>
             </TabularCompoundInput>
