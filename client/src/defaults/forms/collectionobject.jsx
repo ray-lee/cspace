@@ -1,4 +1,5 @@
 var React = require('react');
+var IntlMixin = require('react-intl').IntlMixin;
 var Form = require('../components/Form.jsx');
 var Panel = require('../components/Panel.jsx');
 var ColumnGroup = require('../components/ColumnGroup.jsx');
@@ -19,68 +20,87 @@ var nameLevels = require('../controlled_lists/name_levels.js');
 var nameSystems = require('../controlled_lists/name_systems.js');
 var nameTypes = require('../controlled_lists/name_types.js');
 
-module.exports = (
-  <Form recordType="collectionobject">
-    <Panel header="Object Identification Information">
-      <ColumnGroup>
-        <Column>
-          <Input required={true} label="Identification number"/>
-          <Input label="Number of objects"/>
-          <RepeatingInput label="Number">
-            <TabularCompoundInput>
-              <Input label="Number"/>
-              <ControlledInput label="Type" options={numberTypes}/>
-            </TabularCompoundInput>
-          </RepeatingInput>
-          <RepeatingInput label="Responsible department">
-            <ControlledInput options={departments}/>
-          </RepeatingInput>
-          <ControlledInput label="Collection" options={collections}/>
-          <ControlledInput label="Record status" defaultValue="new" options={recordStatuses}/>
-        </Column>
-        <Column>
-          <RepeatingInput label="Brief description">
-            <Input multiline={true}/>
-          </RepeatingInput>
-          <Input multiline={true} label="Distinguishing features"/>
-          <RepeatingInput label="Comments">
-            <Input multiline={true}/>
-          </RepeatingInput>
-        </Column>
-      </ColumnGroup>
-      <Input readOnly={true} label="Computed current location"/>
-      <RepeatingInput label="Title"> 
-        <CompoundInput>
+module.exports = React.createClass({
+  mixins: [IntlMixin],
+  
+  label: function(fieldName) {
+    return this.getIntlMessage('form.collectionobject.field.' + fieldName);
+  },
+  
+  render: function() {
+    return (
+      <Form recordType="collectionobject">
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.identificationInformation')}>
           <ColumnGroup>
             <Column>
-              <Input label="Title"/>
-              <RepeatingInput label="Title language">
-                <ControlledInput/>
-              </RepeatingInput>
-            </Column>
-            <Column>
-              <ControlledInput label="Title type" options={titleTypes}/>
-              <RepeatingInput label="Title translation">
-                <TabularCompoundInput>
-                  <Input label="Translation"/>
-                  <ControlledInput label="Translation language"/>
+              <Input name="objectNumber" label={this.label('objectNumber')} required={true}/>
+              <Input name="numberOfObjects" label={this.label('numberOfObjects')}/>
+      
+              <RepeatingInput name="otherNumberList" label={this.label('otherNumberList')}>
+                <TabularCompoundInput name="otherNumber">
+                  <Input name="numberValue" label={this.label('numberValue')}/>
+                  <ControlledInput name="numberType" label={this.label('numberType')} options={numberTypes}/>
                 </TabularCompoundInput>
+              </RepeatingInput>
+      
+              <RepeatingInput name="responsibleDepartments" label={this.label('responsibleDepartments')}>
+                <ControlledInput name="responsibleDepartment" options={departments}/>
+              </RepeatingInput>
+      
+              <ControlledInput name="collection" label={this.label('collection')} options={collections}/>
+              <ControlledInput name="recordStatus" label={this.label('recordStatus')} defaultValue="new" options={recordStatuses}/>
+            </Column>
+      
+            <Column>
+              <RepeatingInput name="briefDescriptions" label={this.label('briefDescriptions')}>
+                <Input name="briefDescription" multiline={true}/>
+              </RepeatingInput>
+      
+              <Input name="distinguishingFeatures" label={this.label('distinguishingFeatures')} multiline={true}/>
+      
+              <RepeatingInput name="comments" label={this.label('comments')}>
+                <Input name="comment" multiline={true}/>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
-        </CompoundInput>
-      </RepeatingInput>
-      <RepeatingInput label="Object name">
-        <TabularCompoundInput>
-          <Input label="Name"/>
-          <ControlledInput label="Currency" options={nameCurrencies}/>
-          <ControlledInput label="Level" options={nameLevels}/>
-          <ControlledInput label="System" options={nameSystems}/>
-          <ControlledInput label="Type" options={nameTypes}/>
-          <ControlledInput label="Language"/>
-          <Input label="Note"/>
-        </TabularCompoundInput>
-      </RepeatingInput>
-    </Panel>
-  </Form>
-);
+      
+          <Input name="computedCurrentLocation" label={this.label('computedCurrentLocation')} readOnly={true}/>
+      
+          <RepeatingInput name="titleGroupList" label={this.label('titleGroupList')}> 
+            <CompoundInput name="titleGroup">
+              <ColumnGroup>
+                <Column>
+                  <Input name="title" label={this.label('title')}/>
+                  <ControlledInput name="titleLanguage" label={this.label('titleLanguage')}/>
+                </Column>
+      
+                <Column>
+                  <ControlledInput name="titleType" label={this.label('titleType')} options={titleTypes}/>
+      
+                  <RepeatingInput name="titleTranslationSubGroupList" label={this.label('titleTranslationSubGroupList')}>
+                    <TabularCompoundInput name="titleTranslationSubGroup">
+                      <Input name="titleTranslation" label={this.label('titleTranslation')}/>
+                      <ControlledInput name="titleTranslationLanguage" label={this.label('titleTranslationLanguage')}/>
+                    </TabularCompoundInput>
+                  </RepeatingInput>
+                </Column>
+              </ColumnGroup>
+            </CompoundInput>
+          </RepeatingInput>
+      
+          <RepeatingInput name="objectNameList" label={this.label('objectNameList')}>
+            <TabularCompoundInput name="objectNameGroup">
+              <Input name="objectName" label={this.label('objectName')}/>
+              <ControlledInput name="objectNameCurrency" label={this.label('objectNameCurrency')} options={nameCurrencies}/>
+              <ControlledInput name="objectNameLevel" label={this.label('objectNameLevel')} options={nameLevels}/>
+              <ControlledInput name="objectNameSystem" label={this.label('objectNameSystem')} options={nameSystems}/>
+              <ControlledInput name="objectNameType" label={this.label('objectNameType')} options={nameTypes}/>
+              <ControlledInput name="objectNameLanguage" label={this.label('objectNameLanguage')}/>
+              <Input label="Note"/>
+            </TabularCompoundInput>
+          </RepeatingInput>
+        </Panel>
+      </Form>
+    );
+  }
+});

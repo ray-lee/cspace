@@ -30,17 +30,17 @@ var Record = React.createClass({
   
   render: function() {
     var recordType = this.getParams().recordType;
-    var form = require('../forms/' + recordType + '.jsx');
-    
+    var Form = require('../forms/' + recordType + '.jsx');
+
     return (
       <main className="recordeditor">
-        <TitleBar title="This is a prototype record editor." recordType={this.getIntlMessage('recordtypes.' + recordType)}/>
+        <TitleBar title="This is a prototype record editor." recordType={this.getIntlMessage('recordtype.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordeditor.tabs.primary')}>
               <ToolBar/>
-              {form}
+              <Form/>
               <ToolBar/>
             </Panel>
             <Panel key="test" header="Test Tab">

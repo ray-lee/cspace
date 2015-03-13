@@ -11,16 +11,6 @@ var Form = React.createClass({
     };
   },
   
-  childContextTypes: {
-    recordType: React.PropTypes.string.isRequired
-  },
-
-  getChildContext: function() {
-    return { 
-      recordType: this.props.recordType
-    };
-  },
-  
   render: function() {
     var classes = React.addons.classSet({
       form: true,
