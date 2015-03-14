@@ -32,7 +32,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Form recordType="collectionobject">
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.identificationInformation')}>
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.identification')} collapsed={true}>
           <ColumnGroup>
             <Column>
               <Input name="objectNumber" label={this.label('objectNumber')} required={true}/>
@@ -101,6 +101,49 @@ module.exports = React.createClass({
               <Input label="Note"/>
             </TabularCompoundInput>
           </RepeatingInput>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.description')}>
+          <ColumnGroup>
+            <Column>
+              <Input name="copyNumber" label={this.label('copyNumber')}/>
+              
+              <RepeatingInput name="objectStatusList" label={this.label('objectStatusList')}>
+                <ControlledInput name="objectStatus" options={this.getOptions('objectStatuses')}/>
+              </RepeatingInput>
+      
+              <ControlledInput name="sex" label={this.label('sex')} options={this.getOptions('sexes')}/>
+              <ControlledInput name="phase" label={this.label('phase')} options={this.getOptions('phases')}/>
+              
+              <RepeatingInput name="forms" label={this.label('forms')}>
+                <ControlledInput name="form" options={this.getOptions('forms')}/>
+              </RepeatingInput>
+            </Column>
+      
+            <Column>
+            </Column>
+          </ColumnGroup>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.production')}>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.history')}>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.owner')}>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.viewer')}>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.reference')}>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.collection')}>
+        </Panel>
+      
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.hierarchy')}>
         </Panel>
       </Form>
     );

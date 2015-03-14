@@ -41,7 +41,15 @@ module.exports = {
   form: {
     collectionobject: {
       panel: {
-        identificationInformation: 'Object Identification Information'
+        identification: 'Object Identification Information',
+        description: 'Object Description Information',
+        production: 'Object Production Information',
+        history: 'Object History and Association Information',
+        owner: 'Object Owner\'s Contribution Information',
+        viewer: 'Object Viewer\'s Contribution Information',
+        reference: 'Reference Information',
+        collection: 'Object Collection Information',
+        hierarchy: 'Object Hierarchy',
       },
       
       field: {
@@ -70,7 +78,12 @@ module.exports = {
         objectNameLevel: 'Level',
         objectNameSystem: 'System',
         objectNameType: 'Type',
-        objectNameLanguage: 'Language'
+        objectNameLanguage: 'Language',
+        copyNumber: 'Copy number',
+        objectStatusList: 'Object status',
+        sex: 'Sex',
+        phase: 'Phase',
+        forms: 'Form'
       }
     }
   },
@@ -141,6 +154,35 @@ module.exports = {
       'popular': 'Popular',
       'series': 'Series',
       'trade': 'Trade'
+    },
+    
+    objectStatuses: {
+      'copy': 'Copy',
+      'forgery': 'Forgery',
+      'holotype': 'Holotype',
+      'paralectotype': 'Paralectotype',
+      'paratype': 'Paratype',
+      'type': 'Type'
+    },
+    
+    sexes: {
+      'male': 'Male',
+      'female': 'Female'
+    },
+    
+    phases: {
+      'adult': 'Adult',
+      'imago': 'Imago',
+      'larva': 'Larva',
+      'nymph': 'Nymph',
+      'pupa': 'Pupa'
+    },
+    
+    forms: {
+      'dry': 'Dry',
+      'pinned': 'Pinned',
+      'thin-section': 'Thin section',
+      'wet': 'Wet'
     }
   }
 };
