@@ -1,4 +1,4 @@
-var ScrollObserver = {
+var ScrollObserverMixin = {
   componentDidMount: function() {
     window.addEventListener('scroll', this.handleScroll, false);
   },
@@ -8,4 +8,4 @@ var ScrollObserver = {
   }
 };
 
-module.exports = ScrollObserver;
+module.exports = ScrollObserverMixin;

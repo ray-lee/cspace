@@ -1,13 +1,21 @@
 var React = require('react');
 var Input = require('./Input.jsx');
+var InputMixin = require('../mixins/InputMixin.jsx');
 
 require('../styles/ControlledInput.css');
 
 var ControlledInput = React.createClass({
+  mixins: [InputMixin],
+  
   propTypes: {
+    name: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     options: React.PropTypes.arrayOf(React.PropTypes.object),
     defaultValue: React.PropTypes.string,
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    onCommit: React.PropTypes.func
   },
   
   getDefaultProps: function() {
@@ -31,7 +39,13 @@ var ControlledInput = React.createClass({
     }
   },
   
-  handleChange: function(event) {
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: nextProps.value
+    });
+  },
+  
+  handleInputChange: function(event) {
     // TODO: Implement typeahead.
   },
   
@@ -55,6 +69,10 @@ var ControlledInput = React.createClass({
         popupOpen: false
       });
     }
+  },
+  
+  handleInputCommit: function(event) {
+    // Swallow this silently.
   },
   
   handleJewelClick: function(event) {
@@ -90,12 +108,19 @@ var ControlledInput = React.createClass({
     var target = event.target;
     
     if (target.hasAttribute('data-optionvalue')) {
-      this.setState({
-        value: target.getAttribute('data-optionvalue'),
-        popupOpen: false
-      });
-      
+      this.setValue(target.getAttribute('data-optionvalue'));
       this.refs['input'].focus();
+    }
+  },
+  
+  setValue: function(value) {
+    this.setState({
+      value: value,
+      popupOpen: false
+    });
+    
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, value);
     }
   },
   
@@ -106,7 +131,7 @@ var ControlledInput = React.createClass({
       <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
     );
     
-    var selectedOptionLabel = null;
+    var selectedOptionLabel = '';
     
     var optionList = this.props.options.map(function(option) {
       if (option.value === this.state.value) {
@@ -143,10 +168,11 @@ var ControlledInput = React.createClass({
     return (
       <div className="input controlledinput">
         <Input ref="input" {...props} value={selectedOptionLabel} jewel={jewel} popup={popup}
-            onChange={this.handleChange}
+            onChange={this.handleInputChange}
             onClick={this.handleInputClick}
             onKeyPress={this.handleInputKeyPress}
-            onBlur={this.handleInputBlur}/>
+            onBlur={this.handleInputBlur}
+            onCommit={this.handleInputCommit}/>
       </div>
     );
   }

@@ -1,8 +1,11 @@
 var React = require('react');
+var InputMixin = require('../mixins/InputMixin.jsx');
 
 require('../styles/TabularCompoundInput.css');
 
 var TabularCompoundInput = React.createClass({
+  mixins: [InputMixin],
+  
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,

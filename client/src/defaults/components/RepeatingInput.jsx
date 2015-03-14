@@ -1,9 +1,12 @@
 var React = require('react');
 var TabularCompoundInput = require('./TabularCompoundInput.jsx');
+var InputMixin = require('../mixins/InputMixin.jsx');
 
 require('../styles/RepeatingInput.css');
 
 var RepeatingInput = React.createClass({
+  mixins: [InputMixin],
+  
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,
@@ -53,11 +56,22 @@ var RepeatingInput = React.createClass({
     event.preventDefault();
 
     var value = this.state.value.slice();
-    value.push(null)
+    value.push('');
     
     this.setState({
       value: value
     });
+  },
+  
+  handleInstanceCommit: function(index, instanceValue) {
+    // TODO: Use immutables.
+    
+    var value = this.state.value.slice();
+    value[index] = instanceValue;
+    
+    this.setState({
+      value: value
+    })
   },
     
   render: function() {
@@ -88,15 +102,17 @@ var RepeatingInput = React.createClass({
 
       var instances = this.state.value.map(function(value, index) {
         var inputInstance = React.addons.cloneWithProps(inputTemplate, {
+          name: index,
           label: null,
           description: null,
           help: null,
           readOnly: this.props.readOnly,
-          value: value
+          value: value,
+          onCommit: this.handleInstanceCommit
         });
       
         return (
-          <li className="instance">
+          <li key={index} className="instance">
             <div className="tab">{index + 1}</div>
             {inputInstance}
             <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>

@@ -1,12 +1,12 @@
 var React = require('react/addons');
-var ScrollObserver = require('../mixins/ScrollObserver.jsx');
+var ScrollObserverMixin = require('../mixins/ScrollObserverMixin.jsx');
 
 require('../styles/TitleBar.css');
 
 // TODO: A lot of this code can be removed once position: sticky lands in all browsers.
 
 var TitleBar = React.createClass({
-  mixins: [ScrollObserver],
+  mixins: [ScrollObserverMixin],
 
   propTypes: {
     title: React.PropTypes.string,

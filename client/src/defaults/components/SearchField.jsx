@@ -4,8 +4,6 @@ var Navigation = require('react-router').Navigation;
 
 require('../styles/SearchField.css');
 
-var ENTER_KEY_CODE = 13;
-
 var SearchField = React.createClass({
   mixins: [IntlMixin, Navigation],
 
@@ -32,7 +30,7 @@ var SearchField = React.createClass({
   },
   
   handleKeyDown: function(event) {
-    if (event.keyCode === ENTER_KEY_CODE) {
+    if (event.key === 'Enter') {
       var csid = event.target.value.trim();
       
       if (csid !== '') {

@@ -1,9 +1,16 @@
 var React = require('react');
+var InputMixin = require('../mixins/InputMixin.jsx');
 
 require('../styles/Input.css');
 
 var Input = React.createClass({
+  mixins: [InputMixin],
+  
   propTypes: {
+    name: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     label: React.PropTypes.node,
     description: React.PropTypes.node,
     help: React.PropTypes.node,
@@ -22,7 +29,8 @@ var Input = React.createClass({
     ]),
     onChange: React.PropTypes.func,
     onClick: React.PropTypes.func,
-    onKeyPress: React.PropTypes.func
+    onKeyPress: React.PropTypes.func,
+    onCommit: React.PropTypes.func
   },
   
   getDefaultProps: function() {
@@ -52,22 +60,42 @@ var Input = React.createClass({
   },
   
   handleChange: function(event) {
+    if (this.props.onChange) {
+      return this.props.onChange(event);
+    }
+
     this.setState({
       value: event.target.value
     });
   },
   
   handleBlur: function(event) {
-    this.commit();
-    
     if (this.props.onBlur) {
       this.props.onBlur(event);
+    }
+
+    this.commit();
+  },
+  
+  handleClick: function(event) {
+    if (this.props.onKeyPress) {
+      return this.props.onKeyPress(event);
+    }
+  },
+  
+  handleKeyPress: function(event) {
+    if (this.props.onKeyPress) {
+      this.props.onKeyPress(event);
+    }
+
+    if (event.key === 'Enter') {
+      this.commit();
     }
   },
   
   commit: function(event) {
     if (this.props.onCommit) {
-      this.props.onCommit(this.props.key, this.state.value);
+      this.props.onCommit(this.props.name, this.state.value);
     }
   },
   
@@ -94,24 +122,22 @@ var Input = React.createClass({
       );
     }
     else {
-      var handleChange = ('onChange' in this.props) ? this.props.onChange : this.handleChange;
-      
       if (this.props.multiline) {
         control = (
           <textarea ref="control" className="control" value={this.state.value} placeholder=" "
-            onChange={handleChange}
+            onChange={this.handleChange}
             onBlur={this.handleBlur}
-            onClick={this.props.onClick}
-            onKeyPress={this.props.onKeyPress}/>
+            onClick={this.handleClick}
+            onKeyPress={this.handleKeyPress}/>
         );
       }
       else {
         control = (
-          <input ref="control" className="control" type="text" value={this.state.value} placeholder=" "
-            onChange={handleChange}
+          <input name={this.props.name} ref="control" className="control" type="text" value={this.state.value} placeholder=" "
+            onChange={this.handleChange}
             onBlur={this.handleBlur}
-            onClick={this.props.onClick}
-            onKeyPress={this.props.onKeyPress}/>
+            onClick={this.handleClick}
+            onKeyPress={this.handleKeyPress}/>
         );
       }
     }
