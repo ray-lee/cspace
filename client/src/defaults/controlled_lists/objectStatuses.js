@@ -1,10 +1,8 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'copy',
   'forgery',
   'holotype',
   'paralectotype',
   'paratype',
   'type'
-);
+];

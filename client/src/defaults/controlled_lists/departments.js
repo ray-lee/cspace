@@ -1,6 +1,4 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'antiquities',
   'architecture-design',
   'decorative-arts',
@@ -11,4 +9,4 @@ module.exports = Immutable.List.of(
   'paleobotany',
   'photographs',
   'prints-drawings'
-);
+];

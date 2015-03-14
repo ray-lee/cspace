@@ -1,10 +1,8 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'assigned-by-artist',
   'collection',
   'generic',
   'popular',
   'series',
   'trade'
-);
+];

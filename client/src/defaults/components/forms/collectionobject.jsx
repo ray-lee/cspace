@@ -21,7 +21,7 @@ module.exports = React.createClass({
   getOptions: function(controlledListName) {
     var values = require('../../controlled_lists/' + controlledListName + '.js');
     
-    return values.map(function(value) {
+    return Immutable.List(values).map(function(value) {
       return Immutable.Map({
         value: value,
         label: this.getIntlMessage('controlledList.' + controlledListName + '.' + value)

@@ -1,9 +1,7 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'classified',
   'denomination',
   'simple',
   'taxonomic',
   'typological'
-);
+];

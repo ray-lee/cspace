@@ -1,8 +1,6 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'dry',
   'pinned',
   'thin-section',
   'wet'
-);
+];

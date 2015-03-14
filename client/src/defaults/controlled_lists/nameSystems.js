@@ -1,6 +1,4 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'art-and-architecture-thesaurus',
   'nomenclature'
-);
+];

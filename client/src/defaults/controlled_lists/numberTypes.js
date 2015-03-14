@@ -1,9 +1,7 @@
-var Immutable = require('immutable');
-
-module.exports = Immutable.List.of(
+module.exports = [
   'lender',
   'obsolete',
   'previous',
   'serial',
   'unknown'
-);
+];
