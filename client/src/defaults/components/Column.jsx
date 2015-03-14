@@ -1,6 +1,8 @@
-var React = require('react');
+var React = require('react/addons');
 
 var Column = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+  
   render: function() {
     return (
       <div className="column">

@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Router = require('react-router');
 var TitleBar = require('./TitleBar.jsx');
@@ -10,7 +10,7 @@ var ToolBar = require('./ToolBar.jsx')
 require('../styles/RecordEditor.css');
 
 var Record = React.createClass({
-  mixins: [IntlMixin, Router.State],
+  mixins: [IntlMixin, Router.State, React.addons.PureRenderMixin],
   
   // componentDidMount: function() {
   //   var cspace = new CollectionSpace();

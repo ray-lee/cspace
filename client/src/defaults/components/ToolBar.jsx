@@ -1,10 +1,10 @@
-var React = require('react');
+var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 
 require('../styles/ToolBar.css');
 
 var ToolBar = React.createClass({
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin],
   
   render: function() {
     return (

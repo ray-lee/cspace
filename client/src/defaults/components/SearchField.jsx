@@ -1,11 +1,11 @@
-var React = require('react');
+var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Navigation = require('react-router').Navigation;
 
 require('../styles/SearchField.css');
 
 var SearchField = React.createClass({
-  mixins: [IntlMixin, Navigation],
+  mixins: [IntlMixin, Navigation, React.addons.PureRenderMixin],
 
   propTypes: {
     value: React.PropTypes.string

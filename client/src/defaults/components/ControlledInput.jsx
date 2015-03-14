@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var Immutable = require('immutable');
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
@@ -6,7 +6,7 @@ var InputMixin = require('../mixins/InputMixin.jsx');
 require('../styles/ControlledInput.css');
 
 var ControlledInput = React.createClass({
-  mixins: [InputMixin],
+  mixins: [InputMixin, React.addons.PureRenderMixin],
   
   propTypes: {
     name: React.PropTypes.oneOfType([

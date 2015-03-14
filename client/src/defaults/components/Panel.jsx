@@ -1,8 +1,10 @@
-var React = require('react');
+var React = require('react/addons');
 
 require('../styles/Panel.css');
 
-var Panel = React.createClass({  
+var Panel = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+  
   propTypes: {
     header: React.PropTypes.node,
     collapsible: React.PropTypes.bool,

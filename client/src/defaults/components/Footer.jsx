@@ -1,10 +1,10 @@
-var React = require('react');
+var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 
 require('../styles/Footer.css');
 
 var Footer = React.createClass({
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin],
   
   render: function() {
     return (

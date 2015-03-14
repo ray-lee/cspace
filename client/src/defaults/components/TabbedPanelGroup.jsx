@@ -1,9 +1,11 @@
-var React = require('react');
+var React = require('react/addons');
 var Panel = require('./Panel.jsx');
 
 require('../styles/TabbedPanelGroup.css');
 
 var TabbedPanelGroup = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+  
   propTypes: {
     selectedKey: React.PropTypes.string
   },

@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var SearchField = require('./SearchField.jsx');
 var logoUrl = require('../images/logo.png');
@@ -6,7 +6,7 @@ var logoUrl = require('../images/logo.png');
 require('../styles/Header.css');
 
 var Header = React.createClass({
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin],
 
   render: function() {
     return (

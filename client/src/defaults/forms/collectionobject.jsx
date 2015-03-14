@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Immutable = require('immutable');
 var Form = require('../components/Form.jsx');
@@ -12,7 +12,7 @@ var CompoundInput = require('../components/CompoundInput.jsx');
 var TabularCompoundInput = require('../components/TabularCompoundInput.jsx');
 
 module.exports = React.createClass({
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin],
   
   label: function(fieldName) {
     return this.getIntlMessage('form.collectionobject.field.' + fieldName);

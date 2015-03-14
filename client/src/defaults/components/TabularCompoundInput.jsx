@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var Immutable = require('immutable');
 var InputMixin = require('../mixins/InputMixin.jsx');
 var CompoundInputMixin = require('../mixins/CompoundInputMixin.jsx');
@@ -6,7 +6,7 @@ var CompoundInputMixin = require('../mixins/CompoundInputMixin.jsx');
 require('../styles/TabularCompoundInput.css');
 
 var TabularCompoundInput = React.createClass({
-  mixins: [InputMixin, CompoundInputMixin],
+  mixins: [InputMixin, CompoundInputMixin, React.addons.PureRenderMixin],
   
   propTypes: {
     label: React.PropTypes.node,

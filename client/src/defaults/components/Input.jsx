@@ -1,10 +1,10 @@
-var React = require('react');
+var React = require('react/addons');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
 require('../styles/Input.css');
 
 var Input = React.createClass({
-  mixins: [InputMixin],
+  mixins: [InputMixin, React.addons.PureRenderMixin],
   
   propTypes: {
     name: React.PropTypes.oneOfType([

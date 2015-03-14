@@ -1,9 +1,11 @@
-var React = require('react');
+var React = require('react/addons');
 var Panel = require('./Panel.jsx');
 
 // TODO: Implement reordering, max number of expanded panels.
 
 var CollapsiblePanelGroup = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+  
   render: function() {
     var children = React.Children.map(this.props.children, function(child) {
       if (child.type === Panel.type) {

@@ -1,6 +1,8 @@
-var React = require('react');
+var React = require('react/addons');
 
 var Form = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+  
   propTypes: {
     recordType: React.PropTypes.string.isRequired
   },

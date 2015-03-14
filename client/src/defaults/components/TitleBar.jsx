@@ -6,7 +6,7 @@ require('../styles/TitleBar.css');
 // TODO: A lot of this code can be removed once position: sticky lands in all browsers.
 
 var TitleBar = React.createClass({
-  mixins: [ScrollObserverMixin],
+  mixins: [ScrollObserverMixin, React.addons.PureRenderMixin],
 
   propTypes: {
     title: React.PropTypes.string,

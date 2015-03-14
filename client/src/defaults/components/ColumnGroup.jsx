@@ -1,8 +1,10 @@
-var React = require('react');
+var React = require('react/addons');
 
 require('../styles/ColumnGroup.css')
 
 var ColumnGroup = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+  
   render: function() {
     return (
       <div className="columngroup">
