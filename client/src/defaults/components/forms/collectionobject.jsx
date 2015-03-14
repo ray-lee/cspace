@@ -1,15 +1,15 @@
 var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Immutable = require('immutable');
-var Form = require('../components/Form.jsx');
-var Panel = require('../components/Panel.jsx');
-var ColumnGroup = require('../components/ColumnGroup.jsx');
-var Column = require('../components/Column.jsx');
-var Input = require('../components/Input.jsx');
-var RepeatingInput = require('../components/RepeatingInput.jsx');
-var ControlledInput = require('../components/ControlledInput.jsx');
-var CompoundInput = require('../components/CompoundInput.jsx');
-var TabularCompoundInput = require('../components/TabularCompoundInput.jsx');
+var Form = require('../Form.jsx');
+var Panel = require('../Panel.jsx');
+var ColumnGroup = require('../ColumnGroup.jsx');
+var Column = require('../Column.jsx');
+var Input = require('../Input.jsx');
+var RepeatingInput = require('../RepeatingInput.jsx');
+var ControlledInput = require('../ControlledInput.jsx');
+var CompoundInput = require('../CompoundInput.jsx');
+var TabularCompoundInput = require('../TabularCompoundInput.jsx');
 
 module.exports = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin],
@@ -19,7 +19,7 @@ module.exports = React.createClass({
   },
   
   getOptions: function(controlledListName) {
-    var values = require('../controlled_lists/' + controlledListName + '.js');
+    var values = require('../../controlled_lists/' + controlledListName + '.js');
     
     return values.map(function(value) {
       return Immutable.Map({

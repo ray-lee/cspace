@@ -30,7 +30,7 @@ var Record = React.createClass({
   
   render: function() {
     var recordType = this.getParams().recordType;
-    var Form = require('../forms/' + recordType + '.jsx');
+    var Form = require('./forms/' + recordType + '.jsx');
 
     return (
       <main className="recordeditor">
