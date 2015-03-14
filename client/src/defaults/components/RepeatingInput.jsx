@@ -1,4 +1,5 @@
 var React = require('react');
+var Immutable = require('immutable');
 var TabularCompoundInput = require('./TabularCompoundInput.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
@@ -12,7 +13,8 @@ var RepeatingInput = React.createClass({
     description: React.PropTypes.node,
     help: React.PropTypes.node,
     readOnly: React.PropTypes.bool,
-    value: React.PropTypes.array
+    value: React.PropTypes.instanceOf(Immutable.List),
+    onCommit: React.PropTypes.func
   },
   
   getDefaultProps: function() {
@@ -21,59 +23,65 @@ var RepeatingInput = React.createClass({
       description: null,
       help: null,
       readOnly: false,
-      value: [null]
+      value: Immutable.List()
     };
   },
   
   getInitialState: function() {
+    var value = this.props.value;
+    
+    if (value.size == 0) {
+      var inputTemplate = React.Children.only(this.props.children);
+      value = value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '');
+    }
+    
     return {
-      value: this.props.value
+      value: value
     }
   },
   
   handleRemoveButtonClick: function(event) {
-    // TODO: Use immutables.
-    
     event.stopPropagation();
     event.preventDefault();
 
-    if (this.state.value.length > 1) {
+    if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
-      var value = this.state.value.slice();
-      
-      value.splice(index, 1);
 
       this.setState({
-        value: value
+        value: this.state.value.delete(index)
       });
     }
   },
   
   handleAddButtonClick: function(event) {
-    // TODO: Use immutables.
-    
     event.stopPropagation();
     event.preventDefault();
 
-    var value = this.state.value.slice();
-    value.push('');
-    
+    var inputTemplate = React.Children.only(this.props.children);
+
     this.setState({
-      value: value
+      value: this.state.value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '')
     });
   },
   
   handleInstanceCommit: function(index, instanceValue) {
-    // TODO: Use immutables.
-    
-    var value = this.state.value.slice();
-    value[index] = instanceValue;
-    
+    var newValue = this.state.value.set(index, instanceValue);
+  
     this.setState({
-      value: value
-    })
+      value: newValue
+    });
+  
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, newValue);
+    }
   },
-    
+  
+  handleTabularCommit: function(name, value) {
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, value);
+    }
+  },
+  
   render: function() {
     var inputTemplate = React.Children.only(this.props.children);
     
@@ -88,6 +96,7 @@ var RepeatingInput = React.createClass({
           help: this.props.help,
           readOnly: this.props.readOnly,
           value: this.props.value,
+          onCommit: this.handleTabularCommit,
           repeating: true
         });
     }
@@ -118,7 +127,7 @@ var RepeatingInput = React.createClass({
             <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
           </li>
         );
-      }, this);
+      }, this).toArray();
     
       return (
         <div className="input repeatinginput">

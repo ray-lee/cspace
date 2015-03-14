@@ -1,29 +1,54 @@
 var React = require('react');
+var Immutable = require('immutable');
 var Input = require('./Input.jsx');
 var ControlledInput = require('./ControlledInput.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
+var CompoundInputMixin = require('../mixins/CompoundInputMixin.jsx');
 
 require('../styles/CompoundInput.css');
 
 var CompoundInput = React.createClass({
-  mixins: [InputMixin],
+  mixins: [InputMixin, CompoundInputMixin],
   
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,
-    help: React.PropTypes.node
+    help: React.PropTypes.node,
+    value: React.PropTypes.instanceOf(Immutable.Map),
+    onCommit: React.PropTypes.func
   },
   
   getDefaultProps: function() {
     return {
       label: null,
       description: null,
-      help: null
+      help: null,
+      value: Immutable.Map()
     };
   },
   
+  getInitialState: function() {
+    return {
+      value: this.props.value
+    }
+  },
+  
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: nextProps.value
+    });
+  },
+  
   handleCommit: function(name, value) {
-    console.log("commit: " + name + "=" + value);
+    var newValue = this.state.value.set(name, value);
+
+    this.setState({
+      value: newValue
+    });
+
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, newValue);
+    }
   },
   
   bindCommitHandlers: function(children) {
@@ -31,7 +56,11 @@ var CompoundInput = React.createClass({
       var clone;
       
       if (child.type.isInput) {
+        var name = child.props.name;
+        var value = this.state.value.get(name);
+        
         clone = React.addons.cloneWithProps(child, {
+          value: value,
           onCommit: this.handleCommit
         });
       }

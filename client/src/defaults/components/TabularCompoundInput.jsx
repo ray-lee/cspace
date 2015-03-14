@@ -1,16 +1,23 @@
 var React = require('react');
+var Immutable = require('immutable');
 var InputMixin = require('../mixins/InputMixin.jsx');
+var CompoundInputMixin = require('../mixins/CompoundInputMixin.jsx');
 
 require('../styles/TabularCompoundInput.css');
 
 var TabularCompoundInput = React.createClass({
-  mixins: [InputMixin],
+  mixins: [InputMixin, CompoundInputMixin],
   
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,
     help: React.PropTypes.node,
-    repeating: React.PropTypes.bool
+    repeating: React.PropTypes.bool,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.instanceOf(Immutable.List),
+      React.PropTypes.instanceOf(Immutable.Map)
+    ]),
+    onCommit: React.PropTypes.func
   },
   
   getDefaultProps: function() {
@@ -18,46 +25,115 @@ var TabularCompoundInput = React.createClass({
       label: null,
       description: null,
       help: null,
-      repeating: false
+      repeating: false,
+      value: Immutable.Map()
     };
+  },
+  
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: this.normalizeValue(nextProps.value)
+    });
   },
   
   getInitialState: function() {
     return {
-      value: this.props.value
+      value: this.normalizeValue(this.props.value)
     }
   },
   
-  handleRemoveButtonClick: function(event) {
-    // TODO: Use immutables.
+  normalizeValue: function(value) {
+    if (this.props.repeating && !Immutable.List.isList(this.props.value)) {
+      value = Immutable.List.of(value);
+    }
+
+    if (value.size == 0) {
+      value = value.push(Immutable.Map());
+    }
     
+    return value;
+  },
+  
+  handleRemoveButtonClick: function(event) {
     event.stopPropagation();
     event.preventDefault();
 
-    if (this.state.value.length > 1) {
+    if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
-      var value = this.state.value.slice();
-      
-      value.splice(index, 1);
 
       this.setState({
-        value: value
+        value: this.state.value.delete(index)
       });
     }
   },
   
   handleAddButtonClick: function(event) {
-    // TODO: Use immutables.
-    
     event.stopPropagation();
     event.preventDefault();
 
-    var value = this.state.value.slice();
-    value.push(null)
+    this.setState({
+      value: this.state.value.push(Immutable.Map())
+    });
+  },
+  
+  handleCommit: function(name, value) {
+    var path = name.split('.');
+    var newValue = this.state.value.setIn(path, value);
     
     this.setState({
-      value: value
+      value: newValue
     });
+
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, newValue);
+    }
+  },
+  
+  valueToRow: function(value, index) {
+    var cells = [];
+    
+    if (this.props.repeating) {
+      cells.push(
+        <td key="tab" className="tab">{index + 1}</td>
+      );
+    }
+    
+    React.Children.forEach(this.props.children, function(child) {
+      var name = child.props.name;
+      
+      if (this.props.repeating && name) {
+        name = index + '.' + name;
+      }
+      
+      var input = React.addons.cloneWithProps(child, {
+        name: name,
+        label: null,
+        description: null,
+        help: null,
+        value: value.get(child.props.name),
+        onCommit: this.handleCommit
+      });
+
+      cells.push(
+        <td key={'f_' + child.props.name}>
+          {input}
+        </td>
+      );
+    }, this);
+    
+    if (this.props.repeating) {
+      cells.push(
+        <td key="remove" className="removeButtonCell">
+          <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+        </td>
+      );
+    }
+    
+    return (
+      <tr key={index} className="instance">
+        {cells}
+      </tr>
+    );
   },
   
   render: function() {
@@ -74,13 +150,13 @@ var TabularCompoundInput = React.createClass({
     
     if (this.props.repeating) {
       headers.push(
-        <th/>
+        <th key="tab"/>
       );
     }
     
     React.Children.forEach(this.props.children, function(child) {
       headers.push(
-        <th className="header">
+        <th key={'f_' + child.props.name} className="header">
           {child.props.label}
         </th>
       );
@@ -88,49 +164,11 @@ var TabularCompoundInput = React.createClass({
     
     if (this.props.repeating) {
       headers.push(
-        <th/>
+        <th key="remove"/>
       );
     }
     
-    var values = Array.isArray(this.state.value) ? this.state.value : [this.state.value];
-    
-    var rows = values.map(function(value, index) {
-      var cells = [];
-      
-      if (this.props.repeating) {
-        cells.push(
-          <td className="tab">{index + 1}</td>
-        );
-      }
-      
-      React.Children.forEach(this.props.children, function(child, index) {
-        var input = React.addons.cloneWithProps(child, {
-          label: null,
-          description: null,
-          help: null
-        });
-  
-        cells.push(
-          <td>
-            {input}
-          </td>
-        );
-      });
-      
-      if (this.props.repeating) {
-        cells.push(
-          <td className="removeButtonCell">
-            <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
-          </td>
-        );
-      }
-      
-      return (
-        <tr className="instance">
-          {cells}
-        </tr>
-      );
-    }, this);
+    var rows = Immutable.List.isList(this.state.value) ? this.state.value.map(this.valueToRow, this).toArray() : this.valueToRow(this.state.value);
     
     var addButton = null;
     

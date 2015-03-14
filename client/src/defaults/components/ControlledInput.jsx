@@ -1,4 +1,5 @@
 var React = require('react');
+var Immutable = require('immutable');
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
@@ -12,7 +13,7 @@ var ControlledInput = React.createClass({
       React.PropTypes.string,
       React.PropTypes.number
     ]),
-    options: React.PropTypes.arrayOf(React.PropTypes.object),
+    options: React.PropTypes.instanceOf(Immutable.List),
     defaultValue: React.PropTypes.string,
     value: React.PropTypes.string,
     onCommit: React.PropTypes.func
@@ -20,7 +21,7 @@ var ControlledInput = React.createClass({
   
   getDefaultProps: function() {
     return {
-      options: [],
+      options: Immutable.List(),
       defaultValue: '',
       value: ''
     };
@@ -29,8 +30,8 @@ var ControlledInput = React.createClass({
   getInitialState: function() {
     var value = this.props.value || this.props.defaultValue;
     
-    if (!value && this.props.required && this.props.options.length > 0) {
-      value = this.props.options[0];
+    if (!value && this.props.required && this.props.options.size > 0) {
+      value = this.props.options.first().get('value');
     }
     
     return {
@@ -133,15 +134,18 @@ var ControlledInput = React.createClass({
     
     var selectedOptionLabel = '';
     
-    var optionList = this.props.options.map(function(option) {
-      if (option.value === this.state.value) {
-        selectedOptionLabel = option.label;
+    var options = this.props.options.map(function(option) {
+      var value = option.get('value');
+      var label = option.get('label');
+      
+      if (value === this.state.value) {
+        selectedOptionLabel = label;
       }
       
       return (
-        <li key={option.value} data-optionvalue={option.value} className="option">{option.label}</li>
+        <li key={value} data-optionvalue={value} className="option">{label}</li>
       );
-    }, this);
+    }, this).toArray();
     
     var emptyOption = null;
     
@@ -160,7 +164,7 @@ var ControlledInput = React.createClass({
       <div className={popupClasses} tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
         <ul className="optionlist" onMouseDown={this.handleOptionListMouseDown} onClick={this.handleOptionListClick}>
           {emptyOption}
-          {optionList}
+          {options}
         </ul>
       </div>
     );

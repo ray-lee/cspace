@@ -1,5 +1,6 @@
 var React = require('react');
 var IntlMixin = require('react-intl').IntlMixin;
+var Immutable = require('immutable');
 var Form = require('../components/Form.jsx');
 var Panel = require('../components/Panel.jsx');
 var ColumnGroup = require('../components/ColumnGroup.jsx');
@@ -21,10 +22,10 @@ module.exports = React.createClass({
     var values = require('../controlled_lists/' + controlledListName + '.js');
     
     return values.map(function(value) {
-      return {
+      return Immutable.Map({
         value: value,
         label: this.getIntlMessage('controlledList.' + controlledListName + '.' + value)
-      };
+      });
     }, this);
   },
   
