@@ -46,10 +46,15 @@ var RepeatingInput = React.createClass({
 
     if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
-
+      var newValue = this.state.value.delete(index);
+      
       this.setState({
-        value: this.state.value.delete(index)
+        value: newValue
       });
+      
+      if (this.props.onCommit) {
+        this.props.onCommit(this.props.name, newValue);
+      }
     }
   },
   
@@ -58,10 +63,15 @@ var RepeatingInput = React.createClass({
     event.preventDefault();
 
     var inputTemplate = React.Children.only(this.props.children);
-
+    var newValue = this.state.value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '');
+    
     this.setState({
-      value: this.state.value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '')
+      value: newValue
     });
+    
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, newValue);
+    }
   },
   
   handleInstanceCommit: function(index, instanceValue) {

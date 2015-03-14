@@ -60,10 +60,15 @@ var TabularCompoundInput = React.createClass({
 
     if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
-
+      var newValue = this.state.value.delete(index);
+      
       this.setState({
-        value: this.state.value.delete(index)
+        value: newValue
       });
+      
+      if (this.props.onCommit) {
+        this.props.onCommit(this.props.name, newValue);
+      }
     }
   },
   
@@ -71,9 +76,15 @@ var TabularCompoundInput = React.createClass({
     event.stopPropagation();
     event.preventDefault();
 
+    var newValue = this.state.value.push(Immutable.Map());
+    
     this.setState({
-      value: this.state.value.push(Immutable.Map())
+      value: newValue
     });
+    
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, newValue);
+    }
   },
   
   handleCommit: function(name, value) {
