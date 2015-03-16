@@ -14,7 +14,7 @@
 .tabularcompoundinput > thead > tr > th {
   font-size: 8pt;
   text-align: left;
-  padding: 2px 1px 2px 1px;
+  padding: 2px;
 }
 
 .tabularcompoundinput > tbody > tr > td {

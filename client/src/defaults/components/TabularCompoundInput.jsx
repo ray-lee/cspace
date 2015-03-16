@@ -43,12 +43,14 @@ var TabularCompoundInput = React.createClass({
   },
   
   normalizeValue: function(value) {
-    if (this.props.repeating && !Immutable.List.isList(this.props.value)) {
-      value = Immutable.List.of(value);
-    }
-
-    if (value.size == 0) {
-      value = value.push(Immutable.Map());
+    if (this.props.repeating) {
+      if (!Immutable.List.isList(this.props.value)) {
+        value = Immutable.List.of(value);
+      }
+      
+      if (value.size == 0) {
+        value = value.push(Immutable.Map());
+      }
     }
     
     return value;

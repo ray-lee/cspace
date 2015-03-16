@@ -1,0 +1,22 @@
+module.exports = [
+  'microscopy_reticule',
+  'standard_mesh_screen',
+  'sliding_calipers',
+  'spreading_calipers',
+  'measuring_tape_cloth',
+  'measuring_tape_metal',
+  'osteometric_board',
+  'ruler',
+  'pacing_pedometer',
+  'odometer',
+  'taping_chaining',
+  'stadia_transit',
+  'optical_range_finder',
+  'electronic_distance_measurement',
+  'protractor',
+  'goniometer',
+  'theodolite_total_station',
+  'balance_beam_scale',
+  'spring_scale',
+  'hydraulic_or_pneumatic_scale'
+];
