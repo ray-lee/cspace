@@ -12,7 +12,7 @@ body, input, textarea, table, td, th {
 }
 
 body, input, textarea, button, table, td, th {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', Arial, sans-serif;
   font-size: 9pt;
   font-weight: 400;
 }
