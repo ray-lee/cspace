@@ -5,6 +5,8 @@ require('../styles/Panel.css');
 var Panel = React.createClass({
   mixins: [React.addons.PureRenderMixin],
   
+  mounted: false,
+  
   propTypes: {
     header: React.PropTypes.node,
     collapsible: React.PropTypes.bool,
@@ -23,6 +25,10 @@ var Panel = React.createClass({
     return {
       collapsed: this.props.collapsed
     };
+  },
+  
+  componentDidMount: function() {
+    this.mounted = true;
   },
   
   handleHeaderClick: function(event) {
@@ -46,6 +52,22 @@ var Panel = React.createClass({
       );
     }
     
+    // If the panel is initially collapsed, don't render the body DOM
+    // (as opposed to rendering the DOM, but hiding it via CSS). This
+    // saves memory when initially closed panels are never opened.
+
+    var renderCollapsedBody = this.mounted;
+    var collapsed = this.props.collapsible && this.props.collapsed;
+    var body = null;
+    
+    if (renderCollapsedBody || !collapsed) {
+      body = (
+        <div className='panelbody'>
+          {this.props.children}
+        </div>
+      );
+    }
+
     var classes = React.addons.classSet({
       panel: true,
       collapsiblepanel: this.props.collapsible,
@@ -55,9 +77,7 @@ var Panel = React.createClass({
     return (
       <div className={classes}>
         {header}
-        <div className='panelbody'>
-          {this.props.children}
-        </div>
+        {body}
       </div>
     );
   }

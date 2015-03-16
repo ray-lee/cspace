@@ -6,6 +6,8 @@ require('../styles/TabbedPanelGroup.css');
 var TabbedPanelGroup = React.createClass({
   mixins: [React.addons.PureRenderMixin],
   
+  mounted: false,
+  
   propTypes: {
     selectedKey: React.PropTypes.string
   },
@@ -20,6 +22,10 @@ var TabbedPanelGroup = React.createClass({
     return {
       selectedKey: this.props.selectedKey || this.findFirstKey()
     };
+  },
+  
+  componentDidMount: function() {
+    this.mounted = true;
   },
   
   findFirstKey: function() {
@@ -84,19 +90,30 @@ var TabbedPanelGroup = React.createClass({
       );
     }, this);
     
+    // If a panel is not selected, don't render the body DOM
+    // (as opposed to rendering the DOM, but hiding it via CSS). This
+    // saves memory when initially hidden panels are never selected.
+    
+    var renderUnselectedPanel = this.mounted;
+    
     var bodies = panelBodies.map(function(panelBody, index) {
       var key = keys[index];
+      var body = null;
+      
+      if (renderUnselectedPanel || selectedKey === key) {
+        var classes = React.addons.classSet({
+          'panelbody': true,
+          'selected': selectedKey === key
+        });
 
-      var classes = React.addons.classSet({
-        'panelbody': true,
-        'selected': selectedKey === key
-      });
-
-      return(
-        <div key={key} className={classes}>
-          {panelBody}
-        </div>
-      );
+        body = (
+          <div key={key} className={classes}>
+            {panelBody}
+          </div>
+        );
+      }
+      
+      return body;
     });
     
     return (
