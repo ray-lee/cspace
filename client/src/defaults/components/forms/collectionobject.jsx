@@ -522,19 +522,67 @@ module.exports = React.createClass({
           </TabularCompoundInput>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.owner')}>
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.owner')} collapsed={true}>
+          <Input name="ownersPersonalExperience" label={this.label('ownersPersonalExperience')} multiline={true}/>
+          <Input name="ownersPersonalResponse" label={this.label('ownersPersonalResponse')} multiline={true}/>
+
+          <RepeatingInput name="ownersReferences" label={this.label('ownersReferences')}>
+            <Input name="ownersReference"/>
+          </RepeatingInput>
+
+          <Input name="ownersContributionNote" label={this.label('ownersContributionNote')} multiline={true}/>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.viewer')}>
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.viewer')} collapsed={true}>
+          <Input name="viewersRole" label={this.label('viewersRole')}/>
+          <Input name="viewersPersonalExperience" label={this.label('viewersPersonalExperience')} multiline={true}/>
+          <Input name="viewersPersonalResponse" label={this.label('viewersPersonalResponse')} multiline={true}/>
+
+          <RepeatingInput name="viewersReferences" label={this.label('viewersReferences')}>
+            <Input name="viewersReference"/>
+          </RepeatingInput>
+
+          <Input name="viewersContributionNote" label={this.label('viewersContributionNote')} multiline={true}/>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.reference')}>
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.reference')} collapsed={true}>
+          <RepeatingInput name="referenceGroupList" label={this.label('referenceGroupList')}>
+            <TabularCompoundInput name="referenceGroup">
+              <Input name="reference" label={this.label('reference')}/>
+              <Input name="referenceNote" label={this.label('referenceNote')}/>
+            </TabularCompoundInput>
+          </RepeatingInput>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.collection')}>
-        </Panel>
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.collection')} collapsed={true}>
+          <ColumnGroup>
+            <Column>
+              <Input name="fieldCollectionDate" label={this.label('fieldCollectionDate')}/>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.hierarchy')}>
+              <RepeatingInput name="fieldCollectionMethods" label={this.label('fieldCollectionMethods')}>
+                <ControlledInput name="fieldCollectionMethod"/>
+              </RepeatingInput>
+      
+              <Input name="fieldCollectionNote" label={this.label('fieldCollectionNote')} multiline={true}/>
+              <Input name="fieldCollectionNumber" label={this.label('fieldCollectionNumber')}/>
+            </Column>
+
+            <Column>
+              <Input name="fieldCollectionPlace" label={this.label('fieldCollectionPlace')}/>
+      
+              <RepeatingInput name="fieldCollectionSources" label={this.label('fieldCollectionSources')}>
+                <Input name="fieldCollectionSource"/>
+              </RepeatingInput>
+
+              <RepeatingInput name="fieldCollectors" label={this.label('fieldCollectors')}>
+                <Input name="fieldCollector"/>
+              </RepeatingInput>
+
+              <RepeatingInput name="fieldColEventNames" label={this.label('fieldColEventNames')}>
+                <Input name="fieldColEventName"/>
+              </RepeatingInput>
+            </Column>
+          </ColumnGroup>
         </Panel>
       </Form>
     );

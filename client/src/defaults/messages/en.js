@@ -52,8 +52,7 @@ module.exports = {
         owner: 'Object Owner\'s Contribution Information',
         viewer: 'Object Viewer\'s Contribution Information',
         reference: 'Reference Information',
-        collection: 'Object Collection Information',
-        hierarchy: 'Object Hierarchy'
+        collection: 'Object Collection Information'
       },
       
       field: {
@@ -233,7 +232,27 @@ module.exports = {
         ownershipExchangeMethod: 'Method',
         ownershipExchangeNote: 'Note',
         ownershipExchangePriceCurrency: 'Price - currency',
-        ownershipExchangePriceValue: 'Price - value'
+        ownershipExchangePriceValue: 'Price - value',
+        ownersPersonalExperience: 'Owner\'s personal experience',
+        ownersPersonalResponse: 'Owner\'s personal response',
+        ownersReferences: 'Owner\'s reference',
+        ownersContributionNote: 'Owner\'s contribution note',
+        viewersRole: 'Viewer\'s role',
+        viewersPersonalExperience: 'Viewer\'s personal experience',
+        viewersPersonalResponse: 'Viewer\'s personal response',
+        viewersReferences: 'Viewer\'s reference',
+        viewersContributionNote: 'Viewer\'s contribution note',
+        referenceGroupList: 'Reference information',
+        reference: 'Reference',
+        referenceNote: 'Reference note',
+        fieldCollectionDate: 'Field collection date',
+        fieldCollectionMethods: 'Field collection method',
+        fieldCollectionNote: 'Field collection note',
+        fieldCollectionNumber: 'Field collection number',
+        fieldCollectionPlace: 'Field collection place',
+        fieldCollectionSources: 'Field collection source',
+        fieldCollectors: 'Field collection collector',
+        fieldColEventNames: 'Field collection event name'
       }
     }
   },
