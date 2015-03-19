@@ -20,7 +20,6 @@
   font-size: 8pt;
   width: 20px;
   text-align: center;
-/*  color: #BBBBBB;*/
   background: white;
   border: 1px solid #DDDDDD;
   border-right: none;
@@ -35,7 +34,6 @@
   width: 21px;
   height: 22px;
   font-size: 8pt;
-  background: none;
   border: 1px solid #DDDDDD;
   background: white;
   color: #4D4D4D;
@@ -48,11 +46,8 @@
 .repeatinginput > .addButton {
   width: 22px;
   height: 16px;
-  /* margin-left: 12px; */
   padding: 0 4px 0 4px;
   font-size: 8pt;
-  /* float: right; 
-  margin-right: 21px; */
   background: white;
   border-color: #DDDDDD;
   color: #4D4D4D;

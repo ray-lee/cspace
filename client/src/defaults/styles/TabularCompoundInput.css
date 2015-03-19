@@ -57,6 +57,8 @@
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButton:focus,
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButton:hover {
   outline-offset: 0;
+  left: 0;
+  border-left: none;
 }
 
 .repeatinginput > .tabularcompoundinput {
