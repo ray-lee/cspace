@@ -82,6 +82,7 @@ module.exports = {
         objectNameSystem: 'System',
         objectNameType: 'Type',
         objectNameLanguage: 'Language',
+        objectNameNote: 'Note',
         copyNumber: 'Copy number',
         objectStatusList: 'Object status',
         sex: 'Sex',

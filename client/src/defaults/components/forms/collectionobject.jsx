@@ -85,7 +85,7 @@ module.exports = React.createClass({
               <ControlledInput name="objectNameSystem" label={this.label('objectNameSystem')} options={this.getOptions('nameSystems')}/>
               <ControlledInput name="objectNameType" label={this.label('objectNameType')} options={this.getOptions('nameTypes')}/>
               <ControlledInput name="objectNameLanguage" label={this.label('objectNameLanguage')}/>
-              <Input label="Note"/>
+              <Input name="objectNameNote" label={this.label('objectNameNote')}/>
             </TabularCompoundInput>
           </RepeatingInput>
         </Panel>
