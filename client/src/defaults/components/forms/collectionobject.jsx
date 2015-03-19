@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
-var Immutable = require('immutable');
+var FormMixin = require('../../mixins/FormMixin.jsx')
 var Form = require('../Form.jsx');
 var Panel = require('../Panel.jsx');
 var ColumnGroup = require('../ColumnGroup.jsx');
@@ -12,23 +12,10 @@ var CompoundInput = require('../CompoundInput.jsx');
 var TabularCompoundInput = require('../TabularCompoundInput.jsx');
 
 module.exports = React.createClass({
-  mixins: [IntlMixin, React.addons.PureRenderMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin, FormMixin],
   
-  label: function(fieldName) {
-    return this.getIntlMessage('form.collectionobject.field.' + fieldName);
-  },
-  
-  getOptions: function(controlledListName) {
-    var values = require('../../controlled_lists/' + controlledListName + '.js');
+  recordType: 'collectionobject',
     
-    return Immutable.List(values).map(function(value) {
-      return Immutable.Map({
-        value: value,
-        label: this.getIntlMessage('controlledList.' + controlledListName + '.' + value)
-      });
-    }, this);
-  },
-  
   render: function() {
     return (
       <Form recordType="collectionobject">

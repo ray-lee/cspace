@@ -34,7 +34,7 @@ var Record = React.createClass({
 
     return (
       <main className="recordeditor">
-        <TitleBar title="This is a prototype record editor." recordType={this.getIntlMessage('recordType.' + recordType)}/>
+        <TitleBar recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
