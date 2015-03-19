@@ -132,7 +132,7 @@ var RepeatingInput = React.createClass({
       
         return (
           <li key={index} className="instance">
-            <div className="tab">{index + 1}</div>
+            <div className="tab left">{index + 1}</div>
             {inputInstance}
             <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
           </li>

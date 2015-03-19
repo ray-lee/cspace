@@ -18,12 +18,13 @@
 .repeatinginput > .instances > .instance .tab {
   padding-top: 3px;
   font-size: 8pt;
-  width: 22px;
+  width: 20px;
   text-align: center;
 /*  color: #BBBBBB;*/
   background: white;
   border: 1px solid #DDDDDD;
   border-right: none;
+  flex-shrink: 0;
 }
 
 .repeatinginput > .instances > li.instance > .input {
@@ -31,7 +32,7 @@
 }
 
 .repeatinginput > .instances > .instance .removeButton {
-  width: 22px;
+  width: 21px;
   height: 22px;
   font-size: 8pt;
   background: none;
@@ -40,6 +41,8 @@
   color: #4D4D4D;
   border-radius: 0;
   border-left: none;
+  flex-shrink: 0;
+  position: relative;  
 }
 
 .repeatinginput > .addButton {
@@ -67,10 +70,15 @@
   outline-offset: -1px;
 }
 
+.repeatinginput > .instances > .instance .removeButton:hover,
+.repeatinginput > .instances > .instance .removeButton:focus {
+  left: -1px;
+  border-left: 1px solid #DDDDDD;
+}
+
 .repeatinginput > .addButton:hover,
 .repeatinginput > .instances > .instance .removeButton:hover {
   background-color: #4A7F28;
-  box-shadow: 0 0 4px 0 #E5E5E5;
   color: #FFFFFF;
 }
 
