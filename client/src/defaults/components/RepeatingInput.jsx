@@ -40,6 +40,28 @@ var RepeatingInput = React.createClass({
     }
   },
   
+  handleMoveTopButtonClick: function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    if (this.state.value.size > 1) {
+      var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
+
+      if (index > 0) {
+        var item = this.state.value.get(index);
+        var newValue = this.state.value.delete(index).unshift(item);
+        
+        this.setState({
+          value: newValue
+        });
+      
+        if (this.props.onCommit) {
+          this.props.onCommit(this.props.name, newValue);
+        }
+      }
+    }
+  },
+  
   handleRemoveButtonClick: function(event) {
     event.stopPropagation();
     event.preventDefault();
@@ -132,7 +154,7 @@ var RepeatingInput = React.createClass({
       
         return (
           <li key={index} className="instance">
-            <div className="tab left">{index + 1}</div>
+            <div className="tab"><button className="moveTopButton" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
             {inputInstance}
             <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
           </li>

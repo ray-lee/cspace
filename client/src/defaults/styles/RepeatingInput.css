@@ -16,7 +16,6 @@
 }
 
 .repeatinginput > .instances > .instance .tab {
-  padding-top: 3px;
   font-size: 8pt;
   width: 20px;
   text-align: center;
@@ -24,6 +23,21 @@
   border: 1px solid #DDDDDD;
   border-right: none;
   flex-shrink: 0;
+  position: relative;
+}
+
+.repeatinginput > .instances > .instance .tab > .moveTopButton {
+  border-radius: 0;
+  border: none;
+  background: white;
+  color: #4D4D4D;
+  font-size: 8pt;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
 }
 
 .repeatinginput > .instances > li.instance > .input {
@@ -40,7 +54,7 @@
   border-radius: 0;
   border-left: none;
   flex-shrink: 0;
-  position: relative;  
+  position: relative;
 }
 
 .repeatinginput > .addButton {
@@ -57,6 +71,31 @@
   line-height: 12px;
 }
 
+.repeatinginput > .instances > .instance .tab > .moveTopButton:hover,
+.repeatinginput > .instances > .instance .tab > .moveTopButton:focus {
+  left: -1px;
+  top: -1px;
+  border: 1px solid #DDDDDD;
+  width: 22px;
+  height: 22px;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0);
+  background-size: 7px 8px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.repeatinginput > .instances > .instance .tab > .moveTopButton:focus {
+  background-image: url(../images/move-top-black.png);
+}
+
+.repeatinginput > .instances > .instance .tab > .moveTopButton:hover {
+  background-image: url(../images/move-top-white.png);
+  background-color: #4A7F28;
+}
+
+.repeatinginput > .instances > .instance .tab > .moveTopButton:hover,
+.repeatinginput > .instances > .instance .tab > .moveTopButton:focus,
 .repeatinginput > .addButton:hover,
 .repeatinginput > .addButton:focus,
 .repeatinginput > .instances > .instance .removeButton:hover,
