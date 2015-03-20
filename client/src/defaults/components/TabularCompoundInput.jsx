@@ -57,9 +57,6 @@ var TabularCompoundInput = React.createClass({
   },
   
   handleMoveTopButtonClick: function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    
     if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
 
@@ -79,9 +76,6 @@ var TabularCompoundInput = React.createClass({
   },
   
   handleRemoveButtonClick: function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
     if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
       var newValue = this.state.value.delete(index);
@@ -97,9 +91,6 @@ var TabularCompoundInput = React.createClass({
   },
   
   handleAddButtonClick: function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
     var newValue = this.state.value.push(Immutable.Map());
     
     this.setState({
@@ -129,7 +120,7 @@ var TabularCompoundInput = React.createClass({
     
     if (this.props.repeating) {
       cells.push(
-        <td key="tab" className="tab"><button className="moveTopButton" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></td>
+        <td key="tab" className="tab"><button className="moveTopButton" type="button" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></td>
       );
     }
     
@@ -159,7 +150,7 @@ var TabularCompoundInput = React.createClass({
     if (this.props.repeating) {
       cells.push(
         <td key="remove" className="removeButtonCell">
-          <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+          <button className="removeButton" type="button" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
         </td>
       );
     }
@@ -209,7 +200,7 @@ var TabularCompoundInput = React.createClass({
     
     if (this.props.repeating) {
       addButton = (
-          <button className="addButton" onClick={this.handleAddButtonClick}>Add</button>
+          <button className="addButton" type="button" onClick={this.handleAddButtonClick}>Add</button>
       );
     }
     
@@ -237,7 +228,7 @@ var TabularCompoundInput = React.createClass({
       return (
         <div className="input repeatinginput">
           {table}
-          <button className="addButton" onClick={this.handleAddButtonClick}>+</button>
+          <button className="addButton" type="button" onClick={this.handleAddButtonClick}>+</button>
         </div>
       );
     }

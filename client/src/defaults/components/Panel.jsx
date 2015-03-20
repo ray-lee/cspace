@@ -42,11 +42,18 @@ var Panel = React.createClass({
   render: function() {
     var header = null;
     
-    if (this.props.collapsible || this.props.header != null) {
+    if (this.props.collapsible) {
       var handleHeaderClick = this.props.collapsible ? this.handleHeaderClick : null;
       
       header = (
-        <div className='panelheader' onClick={handleHeaderClick}>
+        <button className="panelheader" type="button" onClick={handleHeaderClick}>
+          {this.props.header}
+        </button>
+      );
+    }
+    else if (this.props.header != null) {
+      header = (
+        <div className="panelheader">
           {this.props.header}
         </div>
       );

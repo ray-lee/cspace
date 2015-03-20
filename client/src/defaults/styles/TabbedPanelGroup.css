@@ -18,12 +18,17 @@
   background-color: rgba(115, 156, 210, .6);
   color: white;
   box-shadow: 0 -1px 1px 0 #BBBBBB inset;
+  border: none;
 }
 
 .tabbedpanelgroup > .tabs > .tab:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(115, 156, 210);
   box-shadow: 0 -1px 1px 0 #E5E5E5 inset;
+}
+
+.tabbedpanelgroup > .tabs > .tab:focus {
+  outline: 1px dotted #4D4D4D;
 }
 
 .tabbedpanelgroup > .tabs > .tab.selected {

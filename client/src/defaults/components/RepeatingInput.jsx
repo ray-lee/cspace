@@ -41,9 +41,6 @@ var RepeatingInput = React.createClass({
   },
   
   handleMoveTopButtonClick: function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    
     if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
 
@@ -63,9 +60,6 @@ var RepeatingInput = React.createClass({
   },
   
   handleRemoveButtonClick: function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
     if (this.state.value.size > 1) {
       var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
       var newValue = this.state.value.delete(index);
@@ -81,9 +75,6 @@ var RepeatingInput = React.createClass({
   },
   
   handleAddButtonClick: function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
     var inputTemplate = React.Children.only(this.props.children);
     var newValue = this.state.value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '');
     
@@ -154,9 +145,9 @@ var RepeatingInput = React.createClass({
       
         return (
           <li key={index} className="instance">
-            <div className="tab"><button className="moveTopButton" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
+            <div className="tab"><button className="moveTopButton" type="button" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
             {inputInstance}
-            <button className="removeButton" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+            <button className="removeButton" type="button" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
           </li>
         );
       }, this).toArray();
@@ -167,7 +158,7 @@ var RepeatingInput = React.createClass({
           <ul className="instances">
             {instances}
           </ul>
-          <button className="addButton" onClick={this.handleAddButtonClick}>+</button>
+          <button className="addButton" type="button" onClick={this.handleAddButtonClick}>+</button>
         </div>
       );
     }

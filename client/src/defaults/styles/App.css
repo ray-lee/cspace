@@ -74,13 +74,17 @@ button {
 }
 
 button:hover, button:focus {
-  border-color: #32561B;
+  border-color: #4D4D4D;
   outline: none;
 }
 
 button:hover {
   background-color: #4A7F28;
   box-shadow: 0 0 4px 0 #E5E5E5;  
+}
+
+button::-moz-focus-inner {
+  border: 0;
 }
 
 main {
