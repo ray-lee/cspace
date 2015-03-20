@@ -38,8 +38,8 @@
 
 .tabularcompoundinput > tbody > tr > td .controlledinput .popup {
   top: 21px;
-  left: -1px;
-  min-width: calc(100% + 2px);
+  left: 0;
+  min-width: calc(100%);
 }
 
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButtonCell {
