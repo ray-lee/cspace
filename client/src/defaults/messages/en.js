@@ -260,10 +260,10 @@ module.exports = {
     
   controlledList: {
     collections: {
-      'library-collection': 'Library collection',
-      'permanent-collection': 'Permanent collection',
-      'study-collection': 'Study collection',
-      'teaching-collection': 'Teaching collection'
+      'library-collection': 'library collection',
+      'permanent-collection': 'permanent collection',
+      'study-collection': 'study collection',
+      'teaching-collection': 'teaching collection'
     },
     
     departments: {
@@ -280,102 +280,102 @@ module.exports = {
     },
     
     nameCurrencies: {
-      'current': 'Current',
-      'archaic': 'Archaic'
+      'current': 'current',
+      'archaic': 'archaic'
     },
     
     nameLevels: {
-      'group': 'Group',
-      'subgroup': 'Subgroup'
+      'group': 'group',
+      'subgroup': 'subgroup'
     },
     
     nameSystems: {
       'art-and-architecture-thesaurus': 'Art & Architecture Thesaurus',
-      'nomenclature': 'Nomenclature'
+      'nomenclature': 'nomenclature'
     },
     
     nameTypes: {
-      'classified': 'Classified',
-      'denomination': 'Denomination',
-      'simple': 'Simple',
-      'taxonomic': 'Taxonomic',
-      'typological': 'Typological'
+      'classified': 'classified',
+      'denomination': 'denomination',
+      'simple': 'simple',
+      'taxonomic': 'taxonomic',
+      'typological': 'typological'
     },
   
     numberTypes: {
-      'lender': 'Lender',
-      'obsolete': 'Obsolete',
-      'previous': 'Previous',
-      'serial': 'Serial',
-      'unknown': 'Unknown'
+      'lender': 'lender',
+      'obsolete': 'obsolete',
+      'previous': 'previous',
+      'serial': 'serial',
+      'unknown': 'unknown'
     },
     
     recordStatuses: {
-      'approved': 'Approved',
-      'in-process': 'In process',
-      'new': 'New',
-      'temporary': 'Temporary'
+      'approved': 'approved',
+      'in-process': 'in process',
+      'new': 'new',
+      'temporary': 'temporary'
     },
     
     titleTypes: {
-      'assigned-by-artist': 'Assigned by artist',
-      'collection': 'Collection',
-      'generic': 'Generic',
-      'popular': 'Popular',
-      'series': 'Series',
-      'trade': 'Trade'
+      'assigned-by-artist': 'assigned by artist',
+      'collection': 'collection',
+      'generic': 'generic',
+      'popular': 'popular',
+      'series': 'series',
+      'trade': 'trade'
     },
     
     objectStatuses: {
-      'copy': 'Copy',
-      'forgery': 'Forgery',
-      'holotype': 'Holotype',
-      'paralectotype': 'Paralectotype',
-      'paratype': 'Paratype',
-      'type': 'Type'
+      'copy': 'copy',
+      'forgery': 'forgery',
+      'holotype': 'holotype',
+      'paralectotype': 'paralectotype',
+      'paratype': 'paratype',
+      'type': 'type'
     },
     
     sexes: {
-      'male': 'Male',
-      'female': 'Female'
+      'male': 'male',
+      'female': 'female'
     },
     
     phases: {
-      'adult': 'Adult',
-      'imago': 'Imago',
-      'larva': 'Larva',
-      'nymph': 'Nymph',
-      'pupa': 'Pupa'
+      'adult': 'adult',
+      'imago': 'imago',
+      'larva': 'larva',
+      'nymph': 'nymph',
+      'pupa': 'pupa'
     },
     
     forms: {
-      'dry': 'Dry',
-      'pinned': 'Pinned',
-      'thin-section': 'Thin section',
-      'wet': 'Wet'
+      'dry': 'dry',
+      'pinned': 'pinned',
+      'thin-section': 'thin section',
+      'wet': 'wet'
     },
     
     ageUnits: {
-      'days': 'Days',
-      'months': 'Months',
-      'weeks': 'Weeks',
-      'years': 'Years'
+      'days': 'days',
+      'months': 'months',
+      'weeks': 'weeks',
+      'years': 'years'
     },
     
     objectComponentNames: {
-      'blade': 'Blade',
-      'buttonhole': 'Buttonhole',
-      'handle': 'Handle',
-      'sleeve': 'Sleeve'
+      'blade': 'blade',
+      'buttonhole': 'buttonhole',
+      'handle': 'handle',
+      'sleeve': 'sleeve'
     },
     
     technicalAttributes: {
-      'magnetic-tape-type': 'Magnetic tape type',
-      'record-speed': 'Record speed'
+      'magnetic-tape-type': 'magnetic tape type',
+      'record-speed': 'record speed'
     },
     
     technicalAttributeMeasurements: {
-      'metal': 'Metal',
+      'metal': 'metal',
       '78': '78'
     },
     
@@ -384,30 +384,30 @@ module.exports = {
     },
     
     measuredParts: {
-      'base': 'Base',
-      'frame': 'Frame',
-      'framed': 'Framed',
-      'image-size': 'Image size',
-      'mount': 'Mount',
-      'paper-size': 'Paper size',
-      'plate-size': 'Plate size',
-      'unframed': 'Unframed'
+      'base': 'base',
+      'frame': 'frame',
+      'framed': 'framed',
+      'image-size': 'image size',
+      'mount': 'mount',
+      'paper-size': 'paper size',
+      'plate-size': 'plate size',
+      'unframed': 'unframed'
     },
     
     dimensions: {
-      'area': 'Area',
-      'base': 'Base',
-      'circumference': 'Circumference',
-      'count': 'Count',
-      'depth': 'Depth',
-      'diameter': 'Diameter',
-      'height': 'Height',
-      'length': 'Length',
-      'running-time': 'Running time',
-      'target': 'Target',
-      'volume': 'Volume',
-      'weight': 'Weight',
-      'width': 'Width'
+      'area': 'area',
+      'base': 'base',
+      'circumference': 'circumference',
+      'count': 'count',
+      'depth': 'depth',
+      'diameter': 'diameter',
+      'height': 'height',
+      'length': 'length',
+      'running-time': 'running time',
+      'target': 'target',
+      'volume': 'volume',
+      'weight': 'weight',
+      'width': 'width'
     },
     
     measurementUnits: {
@@ -427,46 +427,46 @@ module.exports = {
     },
     
     measurementMethods: {
-      'microscopy_reticule': 'Microscopy (reticule)',
-      'standard_mesh_screen': 'Standard mesh/screen',
-      'sliding_calipers': 'Sliding calipers',
-      'spreading_calipers': 'Spreading calipers',
-      'measuring_tape_cloth': 'Measuring tape (cloth)',
-      'measuring_tape_metal': 'Measuring tape (metal)',
-      'osteometric_board': 'Osteometric board',
-      'ruler': 'Ruler',
-      'pacing_pedometer': 'Pacing pedometer',
-      'odometer': 'Odometer',
-      'taping_chaining': 'Taping/chaining',
-      'stadia_transit': 'Stadia/transit',
-      'optical_range_finder': 'Optical range finder',
-      'electronic_distance_measurement': 'Electronic distance measurement',
-      'protractor': 'Protractor',
-      'goniometer': 'Goniometer',
-      'theodolite_total_station': 'Theodolite/total station',
-      'balance_beam_scale': 'Balance/beam scale',
-      'spring_scale': 'Spring scale',
-      'hydraulic_or_pneumatic_scale': 'Hydraulic or pneumatic scale'
+      'microscopy_reticule': 'microscopy (reticule)',
+      'standard_mesh_screen': 'standard mesh/screen',
+      'sliding_calipers': 'sliding calipers',
+      'spreading_calipers': 'spreading calipers',
+      'measuring_tape_cloth': 'measuring tape (cloth)',
+      'measuring_tape_metal': 'measuring tape (metal)',
+      'osteometric_board': 'osteometric board',
+      'ruler': 'ruler',
+      'pacing_pedometer': 'pacing pedometer',
+      'odometer': 'odometer',
+      'taping_chaining': 'taping/chaining',
+      'stadia_transit': 'stadia/transit',
+      'optical_range_finder': 'optical range finder',
+      'electronic_distance_measurement': 'electronic distance measurement',
+      'protractor': 'protractor',
+      'goniometer': 'goniometer',
+      'theodolite_total_station': 'theodolite/total station',
+      'balance_beam_scale': 'balance/beam scale',
+      'spring_scale': 'spring scale',
+      'hydraulic_or_pneumatic_scale': 'hydraulic or pneumatic scale'
     },
     
     contentPositions: {
-      'back': 'Back',
-      'base': 'Base',
-      'bottom': 'Bottom',
-      'front': 'Front',
-      'inside': 'Inside',
-      'left': 'Left',
-      'outside': 'Outside',
-      'recto': 'Recto',
-      'right': 'Right',
-      'rim': 'Rim',
-      'top': 'Top',
-      'verso': 'Verso'
+      'back': 'back',
+      'base': 'base',
+      'bottom': 'bottom',
+      'front': 'front',
+      'inside': 'inside',
+      'left': 'left',
+      'outside': 'outside',
+      'recto': 'recto',
+      'right': 'right',
+      'rim': 'rim',
+      'top': 'top',
+      'verso': 'verso'
     },
     
     contentObjectTypes: {
-      furniture: 'Furniture',
-      food: 'Food'
+      furniture: 'furniture',
+      food: 'food'
     },
     
     contentScripts: {
@@ -474,39 +474,39 @@ module.exports = {
       'gothic-script': 'Gothic script',
       'palmer-method': 'Palmer method',
       'roman-cursive': 'Roman cursive',
-      'rustic-capitals': 'Rustic capitals',
+      'rustic-capitals': 'rustic capitals',
       'spencerian-method': 'Spencerian method',
-      'square-capitals': 'Square capitals'
+      'square-capitals': 'square capitals'
     },
     
     inscriptionContentTypes: {
-      'brand': 'Brand',
-      'decoration': 'Decoration',
-      'estate-stamp': 'Estate stamp',
-      'graffiti': 'Graffiti',
-      'label': 'Label',
-      "maker's-mark": "Maker's mark"
+      'brand': 'brand',
+      'decoration': 'decoration',
+      'estate-stamp': 'estate stamp',
+      'graffiti': 'graffiti',
+      'label': 'label',
+      "maker's-mark": "maker's mark"
     },
     
     ownershipAccessLevels: {
-      'limited': 'Limited',
-      'open': 'Open',
-      'restricted': 'Restricted'
+      'limited': 'limited',
+      'open': 'open',
+      'restricted': 'restricted'
     },
     
     ownershipCategories: {
-      'company': 'Company',
-      'public': 'Public',
-      'private': 'Private'
+      'company': 'company',
+      'public': 'public',
+      'private': 'private'
     },
     
     ownershipExchangeMethods: {
-      'bequest': 'Bequest',
-      'exchange': 'Exchange',
-      'gift': 'Gift',
-      'purchase': 'Purchase',
-      'transfer': 'Transfer',
-      'treasure': 'Treasure'
+      'bequest': 'bequest',
+      'exchange': 'exchange',
+      'gift': 'gift',
+      'purchase': 'purchase',
+      'transfer': 'transfer',
+      'treasure': 'treasure'
     }
   }
 };
