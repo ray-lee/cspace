@@ -43,6 +43,7 @@ var Record = React.createClass({
               <Form/>
               <ToolBar/>
             </Panel>
+            {/*
             <Panel key="test" header="Test Tab">
               <Panel header="Panel">
                 <div>
@@ -64,6 +65,7 @@ var Record = React.createClass({
                 This panel was initially collapsed.
               </Panel>
             </Panel>
+            */}
           </TabbedPanelGroup>
         </div>
       </main>
