@@ -46,6 +46,19 @@
 
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .tab {
   width: 20px;
+  position: static;
+}
+
+.tabularcompoundinput.repeatinginput > .instances > tr.instance .tab > .moveTopButton {
+  position: static;
+}
+
+.tabularcompoundinput.repeatinginput > .instances > tr.instance .tab > .moveTopButton:focus,
+.tabularcompoundinput.repeatinginput > .instances > tr.instance .tab > .moveTopButton:hover {
+  width: 20px;
+  height: 20px;
+  outline-offset: 0;
+  border: none;
 }
 
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButton {
