@@ -77,6 +77,12 @@ var Input = React.createClass({
     this.commit();
   },
   
+  handleMouseDown: function(event) {
+    if (this.props.onMouseDown) {
+      return this.props.onMouseDown(event);
+    }
+  },
+  
   handleClick: function(event) {
     if (this.props.onKeyPress) {
       return this.props.onKeyPress(event);
@@ -90,6 +96,12 @@ var Input = React.createClass({
 
     if (event.key === 'Enter') {
       this.commit();
+    }
+  },
+  
+  handleKeyDown: function(event) {
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(event);
     }
   },
   
@@ -128,16 +140,19 @@ var Input = React.createClass({
             onChange={this.handleChange}
             onBlur={this.handleBlur}
             onClick={this.handleClick}
-            onKeyPress={this.handleKeyPress}/>
+            onKeyPress={this.handleKeyPress}
+            onKeyDown={this.handleKeyDown}/>
         );
       }
       else {
         control = (
-          <input name={this.props.name} ref="control" className="control" type="text" value={this.state.value} placeholder=" "
+          <input name={this.props.name} ref="control" className="control" type="text" value={this.state.value} placeholder=" " autoComplete={this.props.autoComplete}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
+            onMouseDown={this.handleMouseDown}
             onClick={this.handleClick}
-            onKeyPress={this.handleKeyPress}/>
+            onKeyPress={this.handleKeyPress}
+            onKeyDown={this.handleKeyDown}/>
         );
       }
     }

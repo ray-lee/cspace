@@ -30,8 +30,13 @@ var ControlledInput = React.createClass({
   getInitialState: function() {
     var value = this.props.value || this.props.defaultValue;
     
-    if (!value && this.props.required && this.props.options.size > 0) {
-      value = this.props.options.first().get('value');
+    if (!value) {
+      if (this.props.required && this.props.options.size > 0) {
+        value = this.props.options.first().get('value');
+      }
+      else {
+        value = '';
+      }
     }
     
     return {
@@ -54,6 +59,24 @@ var ControlledInput = React.createClass({
     this.setState({
       popupOpen: true
     });
+  },
+  
+  handleInputKeyDown: function(event) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      if (!this.state.popupOpen) {
+        this.setState({
+          popupOpen: true
+        });
+      }
+      else {
+        if (event.key === 'ArrowDown') {
+          console.log("down")
+        }
+        else if (event.key === 'ArrowUp') {
+          console.log("up")
+        }
+      }
+    }
   },
   
   handleInputKeyPress: function(event) {
@@ -126,54 +149,62 @@ var ControlledInput = React.createClass({
   },
   
   render: function() {
-    var props = this.props;
-    
     var jewel = (
       <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
     );
     
-    var selectedOptionLabel = '';
+    var options = this.props.options;
     
-    var options = this.props.options.map(function(option) {
+    if (!this.props.required) {
+      // Prepend an empty option.
+      
+      options = options.unshift(Immutable.Map({
+        value: '',
+        label: ' '
+      }));
+    }
+    
+    var optionNum = 0;
+    var selectedOptionLabel = '';
+
+    var optionNodes = options.map(function(option, index) {
       var value = option.get('value');
       var label = option.get('label');
       
       if (value === this.state.value) {
         selectedOptionLabel = label;
+        
+        return null;
       }
+
+      var optionNode = (
+        <li key={value} ref={optionNum} className="option" data-optionnum={optionNum} data-optionvalue={value}>{label}</li>
+      );
       
-      return (
-        <li key={value} data-optionvalue={value} className="option">{label}</li>
-      );
+      optionNum++;
+      
+      return optionNode;
     }, this).toArray();
-    
-    var emptyOption = null;
-    
-    if (!this.props.required) {
-      emptyOption = (
-        <li key="" data-optionvalue="" className="option"> </li>
-      );
-    };
     
     var popupClasses = React.addons.classSet({
       'popup': true,
-      'open': this.state.popupOpen,
+      'open': this.state.popupOpen
     });
 
     var popup = (
-      <div className={popupClasses} tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
+      <div className={popupClasses} ref="popup" tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
         <ul className="optionlist" onMouseDown={this.handleOptionListMouseDown} onClick={this.handleOptionListClick}>
-          {emptyOption}
-          {options}
+          {optionNodes}
         </ul>
       </div>
     );
         
     return (
       <div className="input controlledinput">
-        <Input ref="input" {...props} value={selectedOptionLabel} jewel={jewel} popup={popup}
+        <Input ref="input" {...(this.props)} value={selectedOptionLabel} jewel={jewel} popup={popup} role="combobox" autoComplete="off"
             onChange={this.handleInputChange}
             onClick={this.handleInputClick}
+            onKeyDown={this.handleInputKeyDown}
             onKeyPress={this.handleInputKeyPress}
             onBlur={this.handleInputBlur}
             onCommit={this.handleInputCommit}/>
