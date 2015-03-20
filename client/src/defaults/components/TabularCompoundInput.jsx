@@ -56,6 +56,28 @@ var TabularCompoundInput = React.createClass({
     return value;
   },
   
+  handleMoveTopButtonClick: function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    if (this.state.value.size > 1) {
+      var index = parseInt(event.target.getAttribute('data-repeatinginputindex'));
+
+      if (index > 0) {
+        var item = this.state.value.get(index);
+        var newValue = this.state.value.delete(index).unshift(item);
+        
+        this.setState({
+          value: newValue
+        });
+      
+        if (this.props.onCommit) {
+          this.props.onCommit(this.props.name, newValue);
+        }
+      }
+    }
+  },
+  
   handleRemoveButtonClick: function(event) {
     event.stopPropagation();
     event.preventDefault();
@@ -107,7 +129,7 @@ var TabularCompoundInput = React.createClass({
     
     if (this.props.repeating) {
       cells.push(
-        <td key="tab" className="tab">{index + 1}</td>
+        <td key="tab" className="tab"><button className="moveTopButton" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></td>
       );
     }
     
