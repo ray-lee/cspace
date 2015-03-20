@@ -23,7 +23,11 @@
   white-space: nowrap;
 }
 
-.controlledinput .optionlist .option.selected,
+.controlledinput .optionlist .option.active {
+  outline: 1px dotted #4D4D4D;
+  outline-offset: -1px;
+}
+
 .controlledinput .optionlist .option:hover {
   background-color: rgb(115, 156, 210);
   color: white;

@@ -41,7 +41,8 @@ var ControlledInput = React.createClass({
     
     return {
       value: value,
-      popupOpen: false
+      popupOpen: false,
+      activeOptionNum: null
     }
   },
   
@@ -51,47 +52,92 @@ var ControlledInput = React.createClass({
     });
   },
   
+  componentDidUpdate: function() {
+    var activeOptionNum = this.state.activeOptionNum;
+    var top = activeOptionNum == null ? 0 : this.refs['opt' + activeOptionNum].getDOMNode().offsetTop
+
+    this.refs.popup.getDOMNode().scrollTop = top;
+  },
+  
   handleInputChange: function(event) {
     // TODO: Implement typeahead.
   },
   
   handleInputClick: function(event) {
-    this.setState({
-      popupOpen: true
-    });
+    this.openPopUp();
   },
   
   handleInputKeyDown: function(event) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       if (!this.state.popupOpen) {
-        this.setState({
-          popupOpen: true
-        });
+        this.openPopUp();
       }
       else {
+        var optionCount = React.Children.count(this.refs.optionList.props.children);
+        var maxOptionNum = optionCount - 1;
+        var activeOptionNum = this.state.activeOptionNum;
+                
         if (event.key === 'ArrowDown') {
-          console.log("down")
+          if (activeOptionNum == null) {
+            activeOptionNum = 0;
+          }
+          else {
+            activeOptionNum = activeOptionNum + 1;
+
+            if (activeOptionNum > maxOptionNum) {
+              activeOptionNum = 0;
+            }
+          }
+          
+          this.setState({
+            activeOptionNum: activeOptionNum
+          })
         }
         else if (event.key === 'ArrowUp') {
-          console.log("up")
+          if (activeOptionNum == null) {
+            activeOptionNum = maxOptionNum;
+          }
+          else {
+            activeOptionNum = activeOptionNum - 1;
+
+            if (activeOptionNum < 0) {
+              activeOptionNum = maxOptionNum;
+            }
+          }
+          
+          this.setState({
+            activeOptionNum: activeOptionNum
+          })
         }
       }
+    }
+    else if (event.key === 'Escape') {
+      this.closePopUp();
     }
   },
   
   handleInputKeyPress: function(event) {
-    this.setState({
-      popupOpen: true
-    });
+    if (this.state.popupOpen) {
+      if (event.key === 'Enter') {
+        if (this.state.activeOptionNum !== null) {
+          var target = this.refs['opt' + this.state.activeOptionNum].getDOMNode();
+    
+          if (target.hasAttribute('data-optionvalue')) {
+            this.setValue(target.getAttribute('data-optionvalue'));
+          }
+        }
+      }
+    }
+    else {
+      this.openPopUp();
+    }
   },
   
   handleInputBlur: function(event) {
     // Hack for Firefox. See handleOptionListMouseDown.
     
     if (!this.isClickingOptionList) {
-      this.setState({
-        popupOpen: false
-      });
+      this.closePopUp();
     }
   },
   
@@ -106,15 +152,11 @@ var ControlledInput = React.createClass({
   },
   
   handlePopUpFocus: function(event) {
-    this.setState({
-      popupOpen: true
-    });
+    //this.openPopUp();
   },
   
   handlePopUpBlur: function(event) {
-    this.setState({
-      popupOpen: false
-    });
+    this.closePopUp();
   },
   
   handleOptionListMouseDown: function(event) {
@@ -128,13 +170,26 @@ var ControlledInput = React.createClass({
   
   handleOptionListClick: function(event) {
     this.isClickingOptionList = false;
-    
+
     var target = event.target;
-    
+
     if (target.hasAttribute('data-optionvalue')) {
       this.setValue(target.getAttribute('data-optionvalue'));
       this.refs['input'].focus();
     }
+  },
+  
+  openPopUp: function() {
+    this.setState({
+      popupOpen: true,
+      activeOptionNum: null
+    });
+  },
+  
+  closePopUp: function() {
+    this.setState({
+      popupOpen: false
+    });
   },
   
   setValue: function(value) {
@@ -165,26 +220,36 @@ var ControlledInput = React.createClass({
     }
     
     var optionNum = 0;
+    var optionNodes = [];
     var selectedOptionLabel = '';
 
-    var optionNodes = options.map(function(option, index) {
+    options.forEach(function(option, index) {
       var value = option.get('value');
       var label = option.get('label');
       
       if (value === this.state.value) {
         selectedOptionLabel = label;
-        
-        return null;
       }
-
-      var optionNode = (
-        <li key={value} ref={optionNum} className="option" data-optionnum={optionNum} data-optionvalue={value}>{label}</li>
-      );
+      else {
+        var optionClasses = React.addons.classSet({
+          'option': true,
+          'active': optionNum === this.state.activeOptionNum
+        });
+        
+        optionNodes.push(
+          <li key={value} ref={'opt' + optionNum} className={optionClasses} data-optionnum={optionNum} data-optionvalue={value}>{label}</li>
+        );
       
-      optionNum++;
-      
-      return optionNode;
-    }, this).toArray();
+        optionNum++;
+      }
+    }, this);
+    
+    // The label for the empty option is a non-breaking space so that the option will have height in the option list,
+    // but when displayed in the text field, it should be empty.
+    
+    if (selectedOptionLabel === ' ') {
+      selectedOptionLabel = '';
+    }
     
     var popupClasses = React.addons.classSet({
       'popup': true,
@@ -193,7 +258,7 @@ var ControlledInput = React.createClass({
 
     var popup = (
       <div className={popupClasses} ref="popup" tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
-        <ul className="optionlist" onMouseDown={this.handleOptionListMouseDown} onClick={this.handleOptionListClick}>
+        <ul ref="optionList" className="optionlist" onMouseDown={this.handleOptionListMouseDown} onClick={this.handleOptionListClick}>
           {optionNodes}
         </ul>
       </div>
