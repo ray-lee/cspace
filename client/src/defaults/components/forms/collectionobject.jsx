@@ -571,6 +571,30 @@ module.exports = React.createClass({
             </Column>
           </ColumnGroup>
         </Panel>
+      
+        {/*
+        <Panel header={this.getIntlMessage('form.collectionobject.panel.hierarchy')}>
+          <ColumnGroup>
+            <Column>
+              <TabularCompoundInput>
+                <Input name="broaderContext" label={this.label('broaderContext')}/>
+                <Input name="broaderContextType" label={this.label('broaderContextType')}/>
+              </TabularCompoundInput>
+              <RepeatingInput name="narrowerContexts">
+                <TabularCompoundInput>
+                  <Input name="narrowerContext" label={this.label('narrowerContext')}/>
+                  <Input name="narrowerContextType" label={this.label('narrowerContextType')}/>
+                </TabularCompoundInput> 
+              </RepeatingInput>
+            </Column>
+            <Column>
+              <RepeatingInput name="equivalentContexts" readonly={true} label={this.label('equivalentContexts')}>
+                <Input name="equivalentContext"/>
+              </RepeatingInput>
+            </Column>
+          </ColumnGroup>
+        </Panel>
+        */}
       </Form>
     );
   }

@@ -52,7 +52,8 @@ module.exports = {
         owner: 'Object Owner\'s Contribution Information',
         viewer: 'Object Viewer\'s Contribution Information',
         reference: 'Reference Information',
-        collection: 'Object Collection Information'
+        collection: 'Object Collection Information',
+        hierarchy: 'Object Hierarchy'
       },
       
       field: {
@@ -253,7 +254,12 @@ module.exports = {
         fieldCollectionPlace: 'Field collection place',
         fieldCollectionSources: 'Field collection source',
         fieldCollectors: 'Field collection collector',
-        fieldColEventNames: 'Field collection event name'
+        fieldColEventNames: 'Field collection event name',
+        broaderContext: 'Broader object',
+        broaderContextType: 'Type',
+        narrowerContext: 'Object component',
+        narrowerContextType: 'Type',
+        equivalentContexts: 'Equivalent component'
       }
     }
   },
