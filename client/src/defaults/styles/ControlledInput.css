@@ -35,7 +35,7 @@
 
 .controlledinput .popup {
   position: absolute;
-  min-width: calc(100% - 2px);
+  min-width: calc(100% - 1px);
   max-height: 200px;
   z-index: 90;
   background: #FFFFFF;
