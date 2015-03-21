@@ -1,32 +1,43 @@
 var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Router = require('react-router');
+var Immutable = require('immutable');
 var TitleBar = require('./TitleBar.jsx');
 var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
 var Panel = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
-// var CollectionSpace = require('collectionspace');
+var RecordStore = require('../stores/RecordStore.js');
 
 require('../styles/RecordEditor.css');
 
 var Record = React.createClass({
   mixins: [IntlMixin, Router.State, React.addons.PureRenderMixin],
   
-  // componentDidMount: function() {
-  //   var cspace = new CollectionSpace();
-  //
-  //   cspace.connect('admin@core.collectionspace.org', 'Administrator')
-  //     .then(function() {
-  //       return cspace.getRecord('cataloging', '1a8dcb2b-522a-4d60-ae9f');
-  //     })
-  //     .then(function(data) {
-  //       console.log(data);
-  //       return cspace.disconnect();
-  //     })
-  //     .then(null, function(error) {
-  //       console.error(error);
-  //     });
-  // },
+  getInitialState: function() {
+    return {
+      fields: Immutable.Map({
+        objectNumber: 'objnum',
+        numberOfObjects: '12'
+      });
+    }
+  },
+  
+  componentDidMount: function() {
+    RecordStore.addChangeListener(this.handleStoreChange);
+
+    var recordType = this.getParams().recordType;
+    var csid = this.getParams().csid;
+    
+    if (csid) {
+      RecordStore.get(recordType, csid);
+    }
+  },
+  
+  handleStoreChange: function(csid, data) {
+    if (csid === this.getParams().csid) {
+      console.log(data);
+    }
+  },
   
   render: function() {
     var recordType = this.getParams().recordType;
@@ -40,7 +51,7 @@ var Record = React.createClass({
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
               <ToolBar/>
-              <Form/>
+              <Form fields={this.state.fields}/>
               <ToolBar/>
             </Panel>
             {/*
