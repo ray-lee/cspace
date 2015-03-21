@@ -1,4 +1,4 @@
-package org.collectionspace.application;
+package org.collectionspace;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -17,6 +17,7 @@ public class CollectionSpaceServlet extends HttpServlet {
 	private static final String STATIC_ASSET_DIR_PATH = "../../cspace/ui";
 	private static final String UI_ENTRY_FILE_NAME = "index.html";	
 	private static final int BUFFER_SIZE = 4096;
+	private static final int CACHE_TIME_SECS = 604800; // 1 week
 	
 	private Path servletPath;
 	
@@ -36,6 +37,7 @@ public class CollectionSpaceServlet extends HttpServlet {
 		String assetPath = (pathElements.length > 2) ? pathElements[2] : "";
 		
 		// The request must be tenant-qualified.
+		
 		if (tenant == null) {
 			response.sendError(404);
 			return;
@@ -63,6 +65,9 @@ public class CollectionSpaceServlet extends HttpServlet {
 			throws IOException {
 		
 		if (file.canRead() && file.isFile()) {
+			// TODO: Use the cache filter in Tomcat 7.
+			response.setHeader("Cache-Control", "max-age=" + CACHE_TIME_SECS);
+			
 			String mimeType = getServletContext().getMimeType(file.getPath());
 			
 			response.setContentType(mimeType);
