@@ -35,7 +35,6 @@ var Input = React.createClass({
   
   getDefaultProps: function() {
     return {
-      label: null,
       description: null,
       help: null,
       required: false,

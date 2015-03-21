@@ -22,54 +22,54 @@ module.exports = React.createClass({
         <Panel header={this.getIntlMessage('form.collectionobject.panel.identification')}>
           <ColumnGroup>
             <Column>
-              <Input name="objectNumber" label={this.label('objectNumber')} required={true}/>
-              <Input name="numberOfObjects" label={this.label('numberOfObjects')}/>
+              <Input name="objectNumber" required={true}/>
+              <Input name="numberOfObjects"/>
       
-              <RepeatingInput name="otherNumberList" label={this.label('otherNumberList')}>
+              <RepeatingInput name="otherNumberList">
                 <TabularCompoundInput name="otherNumber">
-                  <Input name="numberValue" label={this.label('numberValue')}/>
-                  <ControlledInput name="numberType" label={this.label('numberType')} options={this.getOptions('numberTypes')}/>
+                  <Input name="numberValue"/>
+                  <ControlledInput name="numberType" options={this.getOptions('numberTypes')}/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
-              <RepeatingInput name="responsibleDepartments" label={this.label('responsibleDepartments')}>
+              <RepeatingInput name="responsibleDepartments">
                 <ControlledInput name="responsibleDepartment" options={this.getOptions('departments')}/>
               </RepeatingInput>
       
-              <ControlledInput name="collection" label={this.label('collection')} options={this.getOptions('collections')}/>
-              <ControlledInput name="recordStatus" label={this.label('recordStatus')} defaultValue="new" options={this.getOptions('recordStatuses')}/>
+              <ControlledInput name="collection" options={this.getOptions('collections')}/>
+              <ControlledInput name="recordStatus" defaultValue="new" options={this.getOptions('recordStatuses')}/>
             </Column>
       
             <Column>
-              <RepeatingInput name="briefDescriptions" label={this.label('briefDescriptions')}>
+              <RepeatingInput name="briefDescriptions">
                 <Input name="briefDescription" multiline={true}/>
               </RepeatingInput>
       
-              <Input name="distinguishingFeatures" label={this.label('distinguishingFeatures')} multiline={true}/>
+              <Input name="distinguishingFeatures" multiline={true}/>
       
-              <RepeatingInput name="comments" label={this.label('comments')}>
+              <RepeatingInput name="comments">
                 <Input name="comment" multiline={true}/>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
       
-          <Input name="computedCurrentLocation" label={this.label('computedCurrentLocation')} readOnly={true}/>
+          <Input name="computedCurrentLocation" readOnly={true}/>
       
-          <RepeatingInput name="titleGroupList" label={this.label('titleGroupList')}> 
+          <RepeatingInput name="titleGroupList"> 
             <CompoundInput name="titleGroup">
               <ColumnGroup>
                 <Column>
-                  <Input name="title" label={this.label('title')}/>
-                  <ControlledInput name="titleLanguage" label={this.label('titleLanguage')}/>
+                  <Input name="title"/>
+                  <ControlledInput name="titleLanguage"/>
                 </Column>
       
                 <Column>
-                  <ControlledInput name="titleType" label={this.label('titleType')} options={this.getOptions('titleTypes')}/>
+                  <ControlledInput name="titleType" options={this.getOptions('titleTypes')}/>
       
-                  <RepeatingInput name="titleTranslationSubGroupList" label={this.label('titleTranslationSubGroupList')}>
+                  <RepeatingInput name="titleTranslationSubGroupList">
                     <TabularCompoundInput name="titleTranslationSubGroup">
-                      <Input name="titleTranslation" label={this.label('titleTranslation')}/>
-                      <ControlledInput name="titleTranslationLanguage" label={this.label('titleTranslationLanguage')}/>
+                      <Input name="titleTranslation"/>
+                      <ControlledInput name="titleTranslationLanguage"/>
                     </TabularCompoundInput>
                   </RepeatingInput>
                 </Column>
@@ -77,15 +77,15 @@ module.exports = React.createClass({
             </CompoundInput>
           </RepeatingInput>
       
-          <RepeatingInput name="objectNameList" label={this.label('objectNameList')}>
+          <RepeatingInput name="objectNameList">
             <TabularCompoundInput name="objectNameGroup">
-              <Input name="objectName" label={this.label('objectName')}/>
-              <ControlledInput name="objectNameCurrency" label={this.label('objectNameCurrency')} options={this.getOptions('nameCurrencies')}/>
-              <ControlledInput name="objectNameLevel" label={this.label('objectNameLevel')} options={this.getOptions('nameLevels')}/>
-              <ControlledInput name="objectNameSystem" label={this.label('objectNameSystem')} options={this.getOptions('nameSystems')}/>
-              <ControlledInput name="objectNameType" label={this.label('objectNameType')} options={this.getOptions('nameTypes')}/>
-              <ControlledInput name="objectNameLanguage" label={this.label('objectNameLanguage')}/>
-              <Input name="objectNameNote" label={this.label('objectNameNote')}/>
+              <Input name="objectName"/>
+              <ControlledInput name="objectNameCurrency" options={this.getOptions('nameCurrencies')}/>
+              <ControlledInput name="objectNameLevel" options={this.getOptions('nameLevels')}/>
+              <ControlledInput name="objectNameSystem" options={this.getOptions('nameSystems')}/>
+              <ControlledInput name="objectNameType" options={this.getOptions('nameTypes')}/>
+              <ControlledInput name="objectNameLanguage"/>
+              <Input name="objectNameNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
         </Panel>
@@ -93,192 +93,192 @@ module.exports = React.createClass({
         <Panel header={this.getIntlMessage('form.collectionobject.panel.description')}>
           <ColumnGroup>
             <Column>
-              <Input name="copyNumber" label={this.label('copyNumber')}/>
+              <Input name="copyNumber"/>
               
-              <RepeatingInput name="objectStatusList" label={this.label('objectStatusList')}>
+              <RepeatingInput name="objectStatusList">
                 <ControlledInput name="objectStatus" options={this.getOptions('objectStatuses')}/>
               </RepeatingInput>
       
-              <ControlledInput name="sex" label={this.label('sex')} options={this.getOptions('sexes')}/>
-              <ControlledInput name="phase" label={this.label('phase')} options={this.getOptions('phases')}/>
+              <ControlledInput name="sex" options={this.getOptions('sexes')}/>
+              <ControlledInput name="phase" options={this.getOptions('phases')}/>
               
-              <RepeatingInput name="forms" label={this.label('forms')}>
+              <RepeatingInput name="forms">
                 <ControlledInput name="form" options={this.getOptions('forms')}/>
               </RepeatingInput>
             </Column>
       
             <Column>
-              <Input name="editionNumber" label={this.label('editionNumber')}/>
+              <Input name="editionNumber"/>
               
               <TabularCompoundInput>
-                <Input name="age" label={this.label('age')}/>
-                <ControlledInput name="ageQualifier" label={this.label('ageQualifier')}/>
-                <ControlledInput name="ageUnit" label={this.label('ageUnit')} options={this.getOptions('ageUnits')}/>
+                <Input name="age"/>
+                <ControlledInput name="ageQualifier"/>
+                <ControlledInput name="ageUnit" options={this.getOptions('ageUnits')}/>
               </TabularCompoundInput>
       
-              <RepeatingInput name="styles" label={this.label('styles')}>
+              <RepeatingInput name="styles">
                 <Input name="style"/>
               </RepeatingInput>
       
-              <RepeatingInput name="colors" label={this.label('colors')}>
+              <RepeatingInput name="colors">
                 <Input name="color"/>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
       
-          <RepeatingInput name="materialGroupList" label={this.label('materialGroupList')}>
+          <RepeatingInput name="materialGroupList">
             <TabularCompoundInput name="materialGroup">
-              <Input name="material" label={this.label('material')}/>
-              <Input name="materialComponent" label={this.label('materialComponent')}/>
-              <Input name="materialComponentNote" label={this.label('materialComponentNote')}/>
-              <Input name="materialName" label={this.label('materialName')}/>
-              <Input name="materialSource" label={this.label('materialSource')}/>
+              <Input name="material"/>
+              <Input name="materialComponent"/>
+              <Input name="materialComponentNote"/>
+              <Input name="materialName"/>
+              <Input name="materialSource"/>
             </TabularCompoundInput>
           </RepeatingInput>
       
-          <Input name="physicalDescription" label={this.label('physicalDescription')} multiline={true}/>
+          <Input name="physicalDescription" multiline={true}/>
       
           <ColumnGroup>
             <Column>
-              <RepeatingInput name="objectComponentGroupList" label={this.label('objectComponentGroupList')}>
+              <RepeatingInput name="objectComponentGroupList">
                 <TabularCompoundInput name="objectComponentGroup">
-                  <ControlledInput name="objectComponentName" label={this.label('objectComponentName')} options={this.getOptions('objectComponentNames')}/>
-                  <Input name="objectComponentInformation" label={this.label('objectComponentInformation')}/>
+                  <ControlledInput name="objectComponentName" options={this.getOptions('objectComponentNames')}/>
+                  <Input name="objectComponentInformation"/>
                 </TabularCompoundInput>
               </RepeatingInput>
             </Column>
       
             <Column>
-              <RepeatingInput name="technicalAttributeGroupList" label={this.label('technicalAttributeGroupList')}>
+              <RepeatingInput name="technicalAttributeGroupList">
                 <TabularCompoundInput name="technicalAttributeGroup">
-                  <ControlledInput name="technicalAttribute" label={this.label('technicalAttribute')} options={this.getOptions('technicalAttributes')}/>
-                  <ControlledInput name="technicalAttributeMeasurement" label={this.label('technicalAttributeMeasurement')} options={this.getOptions('technicalAttributeMeasurements')}/>
-                  <ControlledInput name="technicalAttributeMeasurementUnit" label={this.label('technicalAttributeMeasurementUnit')} options={this.getOptions('technicalAttributeMeasurementUnits')}/>
+                  <ControlledInput name="technicalAttribute" options={this.getOptions('technicalAttributes')}/>
+                  <ControlledInput name="technicalAttributeMeasurement" options={this.getOptions('technicalAttributeMeasurements')}/>
+                  <ControlledInput name="technicalAttributeMeasurementUnit" options={this.getOptions('technicalAttributeMeasurementUnits')}/>
                 </TabularCompoundInput>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
       
-          <RepeatingInput name="measuredPartGroupList" label={this.label('measuredPartGroupList')}>
+          <RepeatingInput name="measuredPartGroupList">
             <CompoundInput name="measuredPartGroup">
               <ColumnGroup>
                 <Column>
-                  <ControlledInput name="measuredPart" label={this.label('measuredPart')} options={this.getOptions('measuredParts')}/>
+                  <ControlledInput name="measuredPart" options={this.getOptions('measuredParts')}/>
                 </Column>
       
                 <Column>
-                  <Input name="dimensionSummary" label={this.label('dimensionSummary')}/>
+                  <Input name="dimensionSummary"/>
                 </Column>
               </ColumnGroup>
       
-              <RepeatingInput name="dimensionSubGroupList" label={this.label('dimensionSubGroupList')}>
+              <RepeatingInput name="dimensionSubGroupList">
                 <TabularCompoundInput name="dimensionSubGroup">
-                  <ControlledInput name="dimension" label={this.label('dimension')} options={this.getOptions('dimensions')}/>
-                  <Input name="measuredBy" label={this.label('measuredBy')}/>
-                  <ControlledInput name="measurementMethod" label={this.label('measurementMethod')} options={this.getOptions('measurementMethods')}/>
-                  <Input name="value" label={this.label('value')}/>
-                  <ControlledInput name="measurementUnit" label={this.label('measurementUnit')} options={this.getOptions('measurementUnits')}/>
-                  <Input name="valueQualifier" label={this.label('valueQualifier')}/>
-                  <Input name="valueDate" label={this.label('valueDate')}/>
+                  <ControlledInput name="dimension" options={this.getOptions('dimensions')}/>
+                  <Input name="measuredBy"/>
+                  <ControlledInput name="measurementMethod" options={this.getOptions('measurementMethods')}/>
+                  <Input name="value"/>
+                  <ControlledInput name="measurementUnit" options={this.getOptions('measurementUnits')}/>
+                  <Input name="valueQualifier"/>
+                  <Input name="valueDate"/>
                 </TabularCompoundInput>
               </RepeatingInput>
             </CompoundInput>
           </RepeatingInput>
       
           <Panel header={this.getIntlMessage('form.collectionobject.panel.content')}>
-            <Input name="contentDescription" label={this.label('contentDescription')} multiline={true}/>
+            <Input name="contentDescription" multiline={true}/>
             
             <ColumnGroup>
               <Column>
-                <RepeatingInput name="contentLanguages" label={this.label('contentLanguages')}>
+                <RepeatingInput name="contentLanguages">
                   <ControlledInput name="contentLanguage"/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentActivities" label={this.label('contentActivities')}>
+                <RepeatingInput name="contentActivities">
                   <Input name="contentActivity"/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentConcepts" label={this.label('contentConcepts')}>
+                <RepeatingInput name="contentConcepts">
                   <Input name="contentConcept"/>
                 </RepeatingInput>
 
-                <Input name="contentDate" label={this.label('contentDate')}/>
+                <Input name="contentDate"/>
 
-                <RepeatingInput name="contentPositions" label={this.label('contentPositions')}>
+                <RepeatingInput name="contentPositions">
                   <ControlledInput name="contentPosition" options={this.getOptions('contentPositions')}/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentObjectGroupList" label={this.label('contentObjectGroupList')}>
+                <RepeatingInput name="contentObjectGroupList">
                   <TabularCompoundInput name="contentObjectGroup">
-                    <Input name="contentObject" label={this.label('contentObject')}/>
-                    <ControlledInput name="contentObjectType" label={this.label('contentObjectType')} options={this.getOptions('contentObjectTypes')}/>
+                    <Input name="contentObject"/>
+                    <ControlledInput name="contentObjectType" options={this.getOptions('contentObjectTypes')}/>
                   </TabularCompoundInput>
                 </RepeatingInput>
               </Column>
       
               <Column>
-                <RepeatingInput name="contentPeoples" label={this.label('contentPeoples')}>
+                <RepeatingInput name="contentPeoples">
                   <Input name="contentPeople"/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentPersons" label={this.label('contentPersons')}>
+                <RepeatingInput name="contentPersons">
                   <Input name="contentPerson"/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentPlaces" label={this.label('contentPlaces')}>
+                <RepeatingInput name="contentPlaces">
                   <Input name="contentPlace"/>
                 </RepeatingInput>
       
-                <RepeatingInput name="contentScripts" label={this.label('contentScripts')}>
+                <RepeatingInput name="contentScripts">
                   <ControlledInput name="contentScript" options={this.getOptions('contentScripts')}/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentOrganizations" label={this.label('contentOrganizations')}>
+                <RepeatingInput name="contentOrganizations">
                   <Input name="contentOrganization"/>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentEventNameGroupList" label={this.label('contentEventNameGroupList')}>
+                <RepeatingInput name="contentEventNameGroupList">
                   <TabularCompoundInput name="contentEventNameGroup">
-                    <Input name="contentEventName" label={this.label('contentEventName')}/>
-                    <Input name="contentEventNameType" label={this.label('contentEventNameType')}/>
+                    <Input name="contentEventName"/>
+                    <Input name="contentEventNameType"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentOtherGroupList" label={this.label('contentOtherGroupList')}>
+                <RepeatingInput name="contentOtherGroupList">
                   <TabularCompoundInput name="contentOtherGroup">
-                    <Input name="contentOther" label={this.label('contentOther')}/>
-                    <Input name="contentOtherType" label={this.label('contentOtherType')}/>
+                    <Input name="contentOther"/>
+                    <Input name="contentOtherType"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
               </Column>
             </ColumnGroup>
       
-            <Input name="contentNote" label={this.label('contentNote')} multiline={true}/>
+            <Input name="contentNote" multiline={true}/>
           </Panel>
       
           <Panel header={this.getIntlMessage('form.collectionobject.panel.textualInscription')}>
             <RepeatingInput name="textualInscriptionGroupList">
               <CompoundInput name="textualInscriptionGroup">
-                <Input name="inscriptionContent" label={this.label('inscriptionContent')} multiline={true}/>
+                <Input name="inscriptionContent" multiline={true}/>
       
                 <ColumnGroup>
                   <Column>
-                    <Input name="inscriptionContentInscriber" label={this.label('inscriptionContentInscriber')}/>
-                    <ControlledInput name="inscriptionContentLanguage" label={this.label('inscriptionContentLanguage')}/>
-                    <Input name="inscriptionContentDateGroup" label={this.label('inscriptionContentDateGroup')}/>
+                    <Input name="inscriptionContentInscriber"/>
+                    <ControlledInput name="inscriptionContentLanguage"/>
+                    <Input name="inscriptionContentDateGroup"/>
                   </Column>
 
                   <Column>
-                    <ControlledInput name="inscriptionContentPosition" label={this.label('inscriptionContentPosition')} options={this.getOptions('contentPositions')}/>
-                    <ControlledInput name="inscriptionContentScript" label={this.label('inscriptionContentScript')} options={this.getOptions('contentScripts')}/>
-                    <ControlledInput name="inscriptionContentType" label={this.label('inscriptionContentType')} options={this.getOptions('inscriptionContentTypes')}/>
-                    <Input name="inscriptionContentMethod" label={this.label('inscriptionContentMethod')}/>
+                    <ControlledInput name="inscriptionContentPosition" options={this.getOptions('contentPositions')}/>
+                    <ControlledInput name="inscriptionContentScript" options={this.getOptions('contentScripts')}/>
+                    <ControlledInput name="inscriptionContentType" options={this.getOptions('inscriptionContentTypes')}/>
+                    <Input name="inscriptionContentMethod"/>
                   </Column>
                 </ColumnGroup>
 
-                <Input name="inscriptionContentInterpretation" label={this.label('inscriptionContentInterpretation')} multiline={true}/>
-                <Input name="inscriptionContentTranslation" label={this.label('inscriptionContentTranslation')}/>
-                <Input name="inscriptionContentTransliteration" label={this.label('inscriptionContentTransliteration')}/>
+                <Input name="inscriptionContentInterpretation" multiline={true}/>
+                <Input name="inscriptionContentTranslation"/>
+                <Input name="inscriptionContentTransliteration"/>
               </CompoundInput>
             </RepeatingInput>
           </Panel>
@@ -286,22 +286,22 @@ module.exports = React.createClass({
           <Panel header={this.getIntlMessage('form.collectionobject.panel.nontextualInscription')}>
             <RepeatingInput name="nonTextualInscriptionGroupList">
               <CompoundInput name="nonTextualInscriptionGroup">
-                <Input name="inscriptionDescription" label={this.label('inscriptionDescription')} multiline={true}/>
+                <Input name="inscriptionDescription" multiline={true}/>
       
                 <ColumnGroup>
                   <Column>
-                    <Input name="inscriptionDescriptionInscriber" label={this.label('inscriptionDescriptionInscriber')}/>
-                    <Input name="inscriptionDescriptionDateGroup" label={this.label('inscriptionDescriptionDateGroup')}/>
+                    <Input name="inscriptionDescriptionInscriber"/>
+                    <Input name="inscriptionDescriptionDateGroup"/>
                   </Column>
 
                   <Column>
-                    <ControlledInput name="inscriptionDescriptionPosition" label={this.label('inscriptionDescriptionPosition')} options={this.getOptions('contentPositions')}/>
-                    <ControlledInput name="inscriptionDescriptionType" label={this.label('inscriptionDescriptionType')} options={this.getOptions('inscriptionContentTypes')}/>
-                    <Input name="inscriptionDescriptionMethod" label={this.label('inscriptionDescriptionMethod')}/>
+                    <ControlledInput name="inscriptionDescriptionPosition" options={this.getOptions('contentPositions')}/>
+                    <ControlledInput name="inscriptionDescriptionType" options={this.getOptions('inscriptionContentTypes')}/>
+                    <Input name="inscriptionDescriptionMethod"/>
                   </Column>
                 </ColumnGroup>
 
-                <Input name="inscriptionDescriptionInterpretation" label={this.label('inscriptionDescriptionInterpretation')} multiline={true}/>
+                <Input name="inscriptionDescriptionInterpretation" multiline={true}/>
               </CompoundInput>
             </RepeatingInput>
           </Panel>
@@ -310,52 +310,52 @@ module.exports = React.createClass({
         <Panel header={this.getIntlMessage('form.collectionobject.panel.production')}>
           <ColumnGroup>
             <Column>
-              <RepeatingInput name="objectProductionDateGroupList" label={this.label('objectProductionDateGroupList')}>
+              <RepeatingInput name="objectProductionDateGroupList">
                 <Input name="objectProductionDateGroup"/>
               </RepeatingInput>
 
-              <RepeatingInput name="techniqueGroupList" label={this.label('techniqueGroupList')}>
+              <RepeatingInput name="techniqueGroupList">
                 <TabularCompoundInput name="techniqueGroup">
-                  <Input name="technique" label={this.label('technique')}/>
-                  <Input name="techniqueType" label={this.label('techniqueType')}/>
+                  <Input name="technique"/>
+                  <Input name="techniqueType"/>
                 </TabularCompoundInput>
               </RepeatingInput>
 
-              <RepeatingInput name="objectProductionPlaceGroupList" label={this.label('objectProductionPlaceGroupList')}>
+              <RepeatingInput name="objectProductionPlaceGroupList">
                 <TabularCompoundInput name="objectProductionPlaceGroup">
-                  <Input name="objectProductionPlace" label={this.label('objectProductionPlace')}/>
-                  <Input name="objectProductionPlaceRole" label={this.label('objectProductionPlaceRole')}/>
+                  <Input name="objectProductionPlace"/>
+                  <Input name="objectProductionPlaceRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
 
-              <RepeatingInput name="objectProductionReasons" label={this.label('objectProductionReasons')}>
+              <RepeatingInput name="objectProductionReasons">
                 <Input name="objectProductionReason" multiline={true}/>
               </RepeatingInput>
             </Column>
       
             <Column>
-              <RepeatingInput name="objectProductionPeopleGroupList" label={this.label('objectProductionPeopleGroupList')}>
+              <RepeatingInput name="objectProductionPeopleGroupList">
                 <TabularCompoundInput name="objectProductionPeopleGroup">
-                  <Input name="objectProductionPeople" label={this.label('objectProductionPeople')}/>
-                  <Input name="objectProductionPeopleRole" label={this.label('objectProductionPeopleRole')}/>
+                  <Input name="objectProductionPeople"/>
+                  <Input name="objectProductionPeopleRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
-              <RepeatingInput name="objectProductionPersonGroupList" label={this.label('objectProductionPersonGroupList')}>
+              <RepeatingInput name="objectProductionPersonGroupList">
                 <TabularCompoundInput name="objectProductionPersonGroup">
-                  <Input name="objectProductionPerson" label={this.label('objectProductionPerson')}/>
-                  <Input name="objectProductionPersonRole" label={this.label('objectProductionPersonRole')}/>
+                  <Input name="objectProductionPerson"/>
+                  <Input name="objectProductionPersonRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
-              <RepeatingInput name="objectProductionOrganizationGroupList" label={this.label('objectProductionOrganizationGroupList')}>
+              <RepeatingInput name="objectProductionOrganizationGroupList">
                 <TabularCompoundInput name="objectProductionOrganizationGroup">
-                  <Input name="objectProductionOrganization" label={this.label('objectProductionOrganization')}/>
-                  <Input name="objectProductionOrganizationRole" label={this.label('objectProductionOrganizationRole')}/>
+                  <Input name="objectProductionOrganization"/>
+                  <Input name="objectProductionOrganizationRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
-              <Input name="objectProductionNote" label={this.label('objectProductionNote')} multiline={true}/>
+              <Input name="objectProductionNote" multiline={true}/>
             </Column>
           </ColumnGroup>
         </Panel>
@@ -364,124 +364,124 @@ module.exports = React.createClass({
           <Panel header={this.getIntlMessage('form.collectionobject.panel.association')}>
             <ColumnGroup>
               <Column>
-                <RepeatingInput name="assocActivityGroupList" label={this.label('assocActivityGroupList')}>
+                <RepeatingInput name="assocActivityGroupList">
                   <TabularCompoundInput name="assocActivityGroup">
-                    <Input name="assocActivity" label={this.label('assocActivity')}/>
-                    <Input name="assocActivityType" label={this.label('assocActivityType')}/>
-                    <Input name="assocActivityNote" label={this.label('assocActivityNote')}/>
+                    <Input name="assocActivity"/>
+                    <Input name="assocActivityType"/>
+                    <Input name="assocActivityNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
 
-                <RepeatingInput name="assocObjectGroupList" label={this.label('assocObjectGroupList')}>
+                <RepeatingInput name="assocObjectGroupList">
                   <TabularCompoundInput name="assocObjectGroup">
-                    <Input name="assocObject" label={this.label('assocObject')}/>
-                    <Input name="assocObjectType" label={this.label('assocObjectType')}/>
-                    <Input name="assocObjectNote" label={this.label('assocObjectNote')}/>
+                    <Input name="assocObject"/>
+                    <Input name="assocObjectType"/>
+                    <Input name="assocObjectNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocConceptGroupList" label={this.label('assocConceptGroupList')}>
+                <RepeatingInput name="assocConceptGroupList">
                   <TabularCompoundInput name="assocConceptGroup">
-                    <Input name="assocConcept" label={this.label('assocConcept')}/>
-                    <Input name="assocConceptType" label={this.label('assocConceptType')}/>
-                    <Input name="assocConceptNote" label={this.label('assocConceptNote')}/>
+                    <Input name="assocConcept"/>
+                    <Input name="assocConceptType"/>
+                    <Input name="assocConceptNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocCulturalContextGroupList" label={this.label('assocCulturalContextGroupList')}>
+                <RepeatingInput name="assocCulturalContextGroupList">
                   <TabularCompoundInput name="assocCulturalContextGroup">
-                    <Input name="assocCulturalContext" label={this.label('assocCulturalContext')}/>
-                    <Input name="assocCulturalContextType" label={this.label('assocCulturalContextType')}/>
-                    <Input name="assocCulturalContextNote" label={this.label('assocCulturalContextNote')}/>
+                    <Input name="assocCulturalContext"/>
+                    <Input name="assocCulturalContextType"/>
+                    <Input name="assocCulturalContextNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocOrganizationGroupList" label={this.label('assocOrganizationGroupList')}>
+                <RepeatingInput name="assocOrganizationGroupList">
                   <TabularCompoundInput name="assocOrganizationGroup">
-                    <Input name="assocOrganization" label={this.label('assocOrganization')}/>
-                    <Input name="assocOrganizationType" label={this.label('assocOrganizationType')}/>
-                    <Input name="assocOrganizationNote" label={this.label('assocOrganizationNote')}/>
+                    <Input name="assocOrganization"/>
+                    <Input name="assocOrganizationType"/>
+                    <Input name="assocOrganizationNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocPeopleGroupList" label={this.label('assocPeopleGroupList')}>
+                <RepeatingInput name="assocPeopleGroupList">
                   <TabularCompoundInput name="assocPeopleGroup">
-                    <Input name="assocPeople" label={this.label('assocPeople')}/>
-                    <Input name="assocPeopleType" label={this.label('assocPeopleType')}/>
-                    <Input name="assocPeopleNote" label={this.label('assocPeopleNote')}/>
+                    <Input name="assocPeople"/>
+                    <Input name="assocPeopleType"/>
+                    <Input name="assocPeopleNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocPersonGroupList" label={this.label('assocPersonGroupList')}>
+                <RepeatingInput name="assocPersonGroupList">
                   <TabularCompoundInput name="assocPersonGroup">
-                    <Input name="assocPerson" label={this.label('assocPerson')}/>
-                    <Input name="assocPersonType" label={this.label('assocPersonType')}/>
-                    <Input name="assocPersonNote" label={this.label('assocPersonNote')}/>
+                    <Input name="assocPerson"/>
+                    <Input name="assocPersonType"/>
+                    <Input name="assocPersonNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocPlaceGroupList" label={this.label('assocPlaceGroupList')}>
+                <RepeatingInput name="assocPlaceGroupList">
                   <TabularCompoundInput name="assocPlaceGroup">
-                    <Input name="assocPlace" label={this.label('assocPlace')}/>
-                    <Input name="assocPlaceType" label={this.label('assocPlaceType')}/>
-                    <Input name="assocPlaceNote" label={this.label('assocPlaceNote')}/>
+                    <Input name="assocPlace"/>
+                    <Input name="assocPlaceType"/>
+                    <Input name="assocPlaceNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
               </Column>
       
               <Column>
                 <Panel collapsible={false}>
-                  <TabularCompoundInput label={this.label('assocEvent')}>
-                    <Input name="assocEventName" label={this.label('assocEventName')}/>
-                    <Input name="assocEventNameType" label={this.label('assocEventNameType')}/>
+                  <TabularCompoundInput>
+                    <Input name="assocEventName"/>
+                    <Input name="assocEventNameType"/>
                   </TabularCompoundInput>
 
-                  <RepeatingInput name="assocEventOrganizations" label={this.label('assocEventOrganizations')}>
+                  <RepeatingInput name="assocEventOrganizations">
                     <Input name="assocEventOrganization"/>
                   </RepeatingInput>
 
-                  <RepeatingInput name="assocEventPeoples" label={this.label('assocEventPeoples')}>
+                  <RepeatingInput name="assocEventPeoples">
                     <Input name="assocEventPeople"/>
                   </RepeatingInput>
 
-                  <RepeatingInput name="assocEventPersons" label={this.label('assocEventPersons')}>
+                  <RepeatingInput name="assocEventPersons">
                     <Input name="assocEventPerson"/>
                   </RepeatingInput>
 
-                  <RepeatingInput name="assocEventPlaces" label={this.label('assocEventPlaces')}>
+                  <RepeatingInput name="assocEventPlaces">
                     <Input name="assocEventPlace"/>
                   </RepeatingInput>
 
-                  <Input name="assocEventNote" label={this.label('assocEventNote')}/>
+                  <Input name="assocEventNote"/>
                 </Panel>
       
-                <RepeatingInput name="assocDateGroupList" label={this.label('assocDateGroupList')}>
+                <RepeatingInput name="assocDateGroupList">
                   <TabularCompoundInput name="assocDateGroup">
-                    <Input name="assocStructuredDateGroup" label={this.label('assocStructuredDateGroup')}/>
-                    <Input name="assocDateType" label={this.label('assocDateType')}/>
-                    <Input name="assocDateNote" label={this.label('assocDateNote')}/>
+                    <Input name="assocStructuredDateGroup"/>
+                    <Input name="assocDateType"/>
+                    <Input name="assocDateNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
               </Column>
             </ColumnGroup>
           </Panel>
       
-          <Input name="objectHistoryNote" label={this.label('objectHistoryNote')} multiline={true}/>
+          <Input name="objectHistoryNote" multiline={true}/>
       
-          <RepeatingInput name="usageGroupList" label={this.label('usageGroupList')}>
+          <RepeatingInput name="usageGroupList">
             <TabularCompoundInput name="usageGroup">
-              <Input name="usage" label={this.label('usage')}/>
-              <Input name="usageNote" label={this.label('usageNote')}/>
+              <Input name="usage"/>
+              <Input name="usageNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
       
           <ColumnGroup>
             <Column>
-              <RepeatingInput name="owners" label={this.label('owners')}>
+              <RepeatingInput name="owners">
                 <Input name="owner"/>
               </RepeatingInput>
 
-              <RepeatingInput name="ownershipDateGroupList" label={this.label('ownershipDateGroupList')}>
+              <RepeatingInput name="ownershipDateGroupList">
                 <Input name="ownershipDateGroup"/>
               </RepeatingInput>
             </Column>
@@ -489,54 +489,54 @@ module.exports = React.createClass({
             <Column>
               <ColumnGroup>
                 <Column>
-                  <ControlledInput name="ownershipAccess" label={this.label('ownershipAccess')} options={this.getOptions('ownershipAccessLevels')}/>
+                  <ControlledInput name="ownershipAccess" options={this.getOptions('ownershipAccessLevels')}/>
                 </Column>
 
                 <Column>
-                  <ControlledInput name="ownershipCategory" label={this.label('ownershipCategory')} options={this.getOptions('ownershipCategories')}/>
+                  <ControlledInput name="ownershipCategory" options={this.getOptions('ownershipCategories')}/>
                 </Column>
               </ColumnGroup>
 
-              <Input name="ownershipPlace" label={this.label('ownershipPlace')}/>
+              <Input name="ownershipPlace"/>
             </Column>
           </ColumnGroup>
 
-          <TabularCompoundInput label={this.label('ownershipExchange')}>
-            <ControlledInput name="ownershipExchangeMethod" label={this.label('ownershipExchangeMethod')} options={this.getOptions('ownershipExchangeMethods')}/>
-            <Input name="ownershipExchangeNote" label={this.label('ownershipExchangeNote')}/>
-            <ControlledInput name="ownershipExchangePriceCurrency" label={this.label('ownershipExchangePriceCurrency')}/>
-            <Input name="ownershipExchangePriceValue" label={this.label('ownershipExchangePriceValue')}/>
+          <TabularCompoundInput>
+            <ControlledInput name="ownershipExchangeMethod" options={this.getOptions('ownershipExchangeMethods')}/>
+            <Input name="ownershipExchangeNote"/>
+            <ControlledInput name="ownershipExchangePriceCurrency"/>
+            <Input name="ownershipExchangePriceValue"/>
           </TabularCompoundInput>
         </Panel>
       
         <Panel header={this.getIntlMessage('form.collectionobject.panel.owner')}>
-          <Input name="ownersPersonalExperience" label={this.label('ownersPersonalExperience')} multiline={true}/>
-          <Input name="ownersPersonalResponse" label={this.label('ownersPersonalResponse')} multiline={true}/>
+          <Input name="ownersPersonalExperience" multiline={true}/>
+          <Input name="ownersPersonalResponse" multiline={true}/>
 
-          <RepeatingInput name="ownersReferences" label={this.label('ownersReferences')}>
+          <RepeatingInput name="ownersReferences">
             <Input name="ownersReference"/>
           </RepeatingInput>
 
-          <Input name="ownersContributionNote" label={this.label('ownersContributionNote')} multiline={true}/>
+          <Input name="ownersContributionNote" multiline={true}/>
         </Panel>
       
         <Panel header={this.getIntlMessage('form.collectionobject.panel.viewer')}>
-          <Input name="viewersRole" label={this.label('viewersRole')}/>
-          <Input name="viewersPersonalExperience" label={this.label('viewersPersonalExperience')} multiline={true}/>
-          <Input name="viewersPersonalResponse" label={this.label('viewersPersonalResponse')} multiline={true}/>
+          <Input name="viewersRole"/>
+          <Input name="viewersPersonalExperience" multiline={true}/>
+          <Input name="viewersPersonalResponse" multiline={true}/>
 
-          <RepeatingInput name="viewersReferences" label={this.label('viewersReferences')}>
+          <RepeatingInput name="viewersReferences">
             <Input name="viewersReference"/>
           </RepeatingInput>
 
-          <Input name="viewersContributionNote" label={this.label('viewersContributionNote')} multiline={true}/>
+          <Input name="viewersContributionNote" multiline={true}/>
         </Panel>
       
         <Panel header={this.getIntlMessage('form.collectionobject.panel.reference')}>
-          <RepeatingInput name="referenceGroupList" label={this.label('referenceGroupList')}>
+          <RepeatingInput name="referenceGroupList">
             <TabularCompoundInput name="referenceGroup">
-              <Input name="reference" label={this.label('reference')}/>
-              <Input name="referenceNote" label={this.label('referenceNote')}/>
+              <Input name="reference"/>
+              <Input name="referenceNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
         </Panel>
@@ -544,28 +544,28 @@ module.exports = React.createClass({
         <Panel header={this.getIntlMessage('form.collectionobject.panel.collection')}>
           <ColumnGroup>
             <Column>
-              <Input name="fieldCollectionDate" label={this.label('fieldCollectionDate')}/>
+              <Input name="fieldCollectionDate"/>
       
-              <RepeatingInput name="fieldCollectionMethods" label={this.label('fieldCollectionMethods')}>
+              <RepeatingInput name="fieldCollectionMethods">
                 <ControlledInput name="fieldCollectionMethod"/>
               </RepeatingInput>
       
-              <Input name="fieldCollectionNote" label={this.label('fieldCollectionNote')} multiline={true}/>
-              <Input name="fieldCollectionNumber" label={this.label('fieldCollectionNumber')}/>
+              <Input name="fieldCollectionNote" multiline={true}/>
+              <Input name="fieldCollectionNumber"/>
             </Column>
 
             <Column>
-              <Input name="fieldCollectionPlace" label={this.label('fieldCollectionPlace')}/>
+              <Input name="fieldCollectionPlace"/>
       
-              <RepeatingInput name="fieldCollectionSources" label={this.label('fieldCollectionSources')}>
+              <RepeatingInput name="fieldCollectionSources">
                 <Input name="fieldCollectionSource"/>
               </RepeatingInput>
 
-              <RepeatingInput name="fieldCollectors" label={this.label('fieldCollectors')}>
+              <RepeatingInput name="fieldCollectors">
                 <Input name="fieldCollector"/>
               </RepeatingInput>
 
-              <RepeatingInput name="fieldColEventNames" label={this.label('fieldColEventNames')}>
+              <RepeatingInput name="fieldColEventNames">
                 <Input name="fieldColEventName"/>
               </RepeatingInput>
             </Column>
@@ -577,18 +577,18 @@ module.exports = React.createClass({
           <ColumnGroup>
             <Column>
               <TabularCompoundInput>
-                <Input name="broaderContext" label={this.label('broaderContext')}/>
-                <Input name="broaderContextType" label={this.label('broaderContextType')}/>
+                <Input name="broaderContext"/>
+                <Input name="broaderContextType"/>
               </TabularCompoundInput>
               <RepeatingInput name="narrowerContexts">
                 <TabularCompoundInput>
-                  <Input name="narrowerContext" label={this.label('narrowerContext')}/>
-                  <Input name="narrowerContextType" label={this.label('narrowerContextType')}/>
+                  <Input name="narrowerContext"/>
+                  <Input name="narrowerContextType"/>
                 </TabularCompoundInput> 
               </RepeatingInput>
             </Column>
             <Column>
-              <RepeatingInput name="equivalentContexts" readonly={true} label={this.label('equivalentContexts')}>
+              <RepeatingInput name="equivalentContexts" readonly={true}>
                 <Input name="equivalentContext"/>
               </RepeatingInput>
             </Column>

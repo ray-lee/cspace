@@ -1,3 +1,4 @@
+var React = require('react');
 var Immutable = require('immutable');
 
 var FormMixin = {
@@ -7,7 +8,7 @@ var FormMixin = {
   
   getInitialState: function() {
     return {
-      fields: Immutable.Map();
+      fields: Immutable.Map()
     }
   },
   

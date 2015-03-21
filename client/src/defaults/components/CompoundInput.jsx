@@ -20,7 +20,6 @@ var CompoundInput = React.createClass({
   
   getDefaultProps: function() {
     return {
-      label: null,
       description: null,
       help: null,
       value: Immutable.Map()

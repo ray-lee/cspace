@@ -22,7 +22,6 @@ var TabularCompoundInput = React.createClass({
   
   getDefaultProps: function() {
     return {
-      label: null,
       description: null,
       help: null,
       repeating: false,

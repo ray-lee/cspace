@@ -19,7 +19,6 @@ var RepeatingInput = React.createClass({
   
   getDefaultProps: function() {
     return {
-      label: null,
       description: null,
       help: null,
       readOnly: false,

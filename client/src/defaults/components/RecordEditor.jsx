@@ -18,7 +18,7 @@ var Record = React.createClass({
       fields: Immutable.Map({
         objectNumber: 'objnum',
         numberOfObjects: '12'
-      });
+      })
     }
   },
   
