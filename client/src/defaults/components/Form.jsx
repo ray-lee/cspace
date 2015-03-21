@@ -17,8 +17,20 @@ var Form = React.createClass({
     };
   },
   
-  getLabel: function(fieldName) {
+  getFieldLabel: function(fieldName) {
     var key = 'form.' + this.props.recordType + '.field.' + fieldName;
+    
+    try {
+      return this.getIntlMessage(key);
+    }
+    catch(error) {
+      console.warn("Missing message for key " + key);
+      return '';
+    }
+  },
+  
+  getPanelHeader: function(panelName) {
+    var key = 'form.' + this.props.recordType + '.panel.' + panelName;
     
     try {
       return this.getIntlMessage(key);
@@ -52,17 +64,30 @@ var Form = React.createClass({
   
   decorateNode: function(node) {
     var clone;
-
+    
     if (node.type.isInput) {
       var name = node.props.name;
       var label = node.props.label;
       
       if (name && typeof(label) === 'undefined') {
-        label = this.getLabel(name);
+        label = this.getFieldLabel(name);
       }
       
       clone = React.addons.cloneWithProps(node, {
         label: label,
+        children: this.decorateChildren(node.props.children)
+      });
+    }
+    else if (node.type.isPanel) {
+      var name = node.props.name;
+      var header = node.props.header;
+      
+      if (name && typeof(header) === 'undefined') {
+        header = this.getPanelHeader(name);
+      }
+      
+      clone = React.addons.cloneWithProps(node, {
+        header: header,
         children: this.decorateChildren(node.props.children)
       });
     }

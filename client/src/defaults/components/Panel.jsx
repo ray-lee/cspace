@@ -5,6 +5,10 @@ require('../styles/Panel.css');
 var Panel = React.createClass({
   mixins: [React.addons.PureRenderMixin],
   
+  statics: {
+    isPanel: true
+  },
+  
   mounted: false,
   
   propTypes: {
@@ -15,7 +19,6 @@ var Panel = React.createClass({
   
   getDefaultProps: function() {
     return {
-      header: null,
       collapsible: true,
       collapsed: false
     };

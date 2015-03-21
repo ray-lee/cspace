@@ -19,7 +19,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Form recordType="collectionobject">
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.identification')}>
+        <Panel name="identification">
           <ColumnGroup>
             <Column>
               <Input name="objectNumber" required={true}/>
@@ -90,7 +90,7 @@ module.exports = React.createClass({
           </RepeatingInput>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.description')}>
+        <Panel name="description">
           <ColumnGroup>
             <Column>
               <Input name="copyNumber"/>
@@ -185,7 +185,7 @@ module.exports = React.createClass({
             </CompoundInput>
           </RepeatingInput>
       
-          <Panel header={this.getIntlMessage('form.collectionobject.panel.content')}>
+          <Panel name="content">
             <Input name="contentDescription" multiline={true}/>
             
             <ColumnGroup>
@@ -256,7 +256,7 @@ module.exports = React.createClass({
             <Input name="contentNote" multiline={true}/>
           </Panel>
       
-          <Panel header={this.getIntlMessage('form.collectionobject.panel.textualInscription')}>
+          <Panel name="textualInscription">
             <RepeatingInput name="textualInscriptionGroupList">
               <CompoundInput name="textualInscriptionGroup">
                 <Input name="inscriptionContent" multiline={true}/>
@@ -283,7 +283,7 @@ module.exports = React.createClass({
             </RepeatingInput>
           </Panel>
       
-          <Panel header={this.getIntlMessage('form.collectionobject.panel.nontextualInscription')}>
+          <Panel name="nontextualInscription">
             <RepeatingInput name="nonTextualInscriptionGroupList">
               <CompoundInput name="nonTextualInscriptionGroup">
                 <Input name="inscriptionDescription" multiline={true}/>
@@ -307,7 +307,7 @@ module.exports = React.createClass({
           </Panel>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.production')}>
+        <Panel name="production">
           <ColumnGroup>
             <Column>
               <RepeatingInput name="objectProductionDateGroupList">
@@ -360,8 +360,8 @@ module.exports = React.createClass({
           </ColumnGroup>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.history')}>
-          <Panel header={this.getIntlMessage('form.collectionobject.panel.association')}>
+        <Panel name="history">
+          <Panel name="association">
             <ColumnGroup>
               <Column>
                 <RepeatingInput name="assocActivityGroupList">
@@ -509,7 +509,7 @@ module.exports = React.createClass({
           </TabularCompoundInput>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.owner')}>
+        <Panel name="owner">
           <Input name="ownersPersonalExperience" multiline={true}/>
           <Input name="ownersPersonalResponse" multiline={true}/>
 
@@ -520,7 +520,7 @@ module.exports = React.createClass({
           <Input name="ownersContributionNote" multiline={true}/>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.viewer')}>
+        <Panel name="viewer">
           <Input name="viewersRole"/>
           <Input name="viewersPersonalExperience" multiline={true}/>
           <Input name="viewersPersonalResponse" multiline={true}/>
@@ -532,7 +532,7 @@ module.exports = React.createClass({
           <Input name="viewersContributionNote" multiline={true}/>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.reference')}>
+        <Panel name="reference">
           <RepeatingInput name="referenceGroupList">
             <TabularCompoundInput name="referenceGroup">
               <Input name="reference"/>
@@ -541,7 +541,7 @@ module.exports = React.createClass({
           </RepeatingInput>
         </Panel>
       
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.collection')}>
+        <Panel name="collection">
           <ColumnGroup>
             <Column>
               <Input name="fieldCollectionDate"/>
@@ -573,7 +573,7 @@ module.exports = React.createClass({
         </Panel>
       
         {/*
-        <Panel header={this.getIntlMessage('form.collectionobject.panel.hierarchy')}>
+        <Panel name="hierarchy">
           <ColumnGroup>
             <Column>
               <TabularCompoundInput>

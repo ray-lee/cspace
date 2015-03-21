@@ -6,7 +6,6 @@ var CollectionSpace = require('collectionspace');
 var CHANGE_EVENT = 'change';
 
 var records = Immutable.Map();
-var cspace = new CollectionSpace();
 
 var RecordStore = assign({}, EventEmitter.prototype, {
   get: function(recordType, csid) {
@@ -15,7 +14,7 @@ var RecordStore = assign({}, EventEmitter.prototype, {
       recordType = 'cataloging';
     }
     
-    var store = this;
+    var cspace = new CollectionSpace();
     
     cspace.connect('admin@core.collectionspace.org', 'Administrator')
       .then(function() {
