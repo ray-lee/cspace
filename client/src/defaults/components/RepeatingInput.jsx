@@ -14,6 +14,7 @@ var RepeatingInput = React.createClass({
     help: React.PropTypes.node,
     readOnly: React.PropTypes.bool,
     value: React.PropTypes.instanceOf(Immutable.List),
+    defaultValue: React.PropTypes.instanceOf(Immutable.List),
     onCommit: React.PropTypes.func
   },
   
@@ -22,12 +23,12 @@ var RepeatingInput = React.createClass({
       description: null,
       help: null,
       readOnly: false,
-      value: Immutable.List()
+      defaultValue: Immutable.List()
     };
   },
   
   getInitialState: function() {
-    var value = this.props.value;
+    var value = this.props.value || this.props.defaultValue;
     
     if (value.size == 0) {
       var inputTemplate = React.Children.only(this.props.children);

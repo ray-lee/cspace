@@ -22,8 +22,7 @@ var ControlledInput = React.createClass({
   getDefaultProps: function() {
     return {
       options: Immutable.List(),
-      defaultValue: '',
-      value: ''
+      defaultValue: ''
     };
   },
   

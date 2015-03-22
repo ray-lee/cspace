@@ -21,11 +21,11 @@ var Input = React.createClass({
     popup: React.PropTypes.element,
     value: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.number,
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
-      ]))
+      React.PropTypes.number
+    ]),
+    defaultValue: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
     ]),
     onChange: React.PropTypes.func,
     onClick: React.PropTypes.func,
@@ -42,13 +42,13 @@ var Input = React.createClass({
       multiline: false,
       jewel: null,
       popup: null,
-      value: ''
+      defaultValue: ''
     };
   },
   
   getInitialState: function() {
     return {
-      value: this.props.value
+      value: this.props.value || this.props.defaultValue
     }
   },
   

@@ -17,6 +17,10 @@ var TabularCompoundInput = React.createClass({
       React.PropTypes.instanceOf(Immutable.List),
       React.PropTypes.instanceOf(Immutable.Map)
     ]),
+    defaultValue: React.PropTypes.oneOfType([
+      React.PropTypes.instanceOf(Immutable.List),
+      React.PropTypes.instanceOf(Immutable.Map)
+    ]),
     onCommit: React.PropTypes.func
   },
   
@@ -25,7 +29,7 @@ var TabularCompoundInput = React.createClass({
       description: null,
       help: null,
       repeating: false,
-      value: Immutable.Map()
+      defaultValue: Immutable.Map()
     };
   },
   
@@ -37,7 +41,7 @@ var TabularCompoundInput = React.createClass({
   
   getInitialState: function() {
     return {
-      value: this.normalizeValue(this.props.value)
+      value: this.normalizeValue(this.props.value || this.props.defaultValue)
     }
   },
   

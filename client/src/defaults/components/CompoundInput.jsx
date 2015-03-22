@@ -15,6 +15,7 @@ var CompoundInput = React.createClass({
     description: React.PropTypes.node,
     help: React.PropTypes.node,
     value: React.PropTypes.instanceOf(Immutable.Map),
+    defaultValue: React.PropTypes.instanceOf(Immutable.Map),
     onCommit: React.PropTypes.func
   },
   
@@ -22,13 +23,13 @@ var CompoundInput = React.createClass({
     return {
       description: null,
       help: null,
-      value: Immutable.Map()
+      defaultValue: Immutable.Map()
     };
   },
   
   getInitialState: function() {
     return {
-      value: this.props.value
+      value: this.props.value || this.props.defaultValue
     }
   },
   
