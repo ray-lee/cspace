@@ -47,7 +47,7 @@ var ControlledInput = React.createClass({
   
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: nextProps.value
+      value: nextProps.value || nextProps.defaultValue
     });
   },
   

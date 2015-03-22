@@ -28,16 +28,24 @@ var RepeatingInput = React.createClass({
   },
   
   getInitialState: function() {
-    var value = this.props.value || this.props.defaultValue;
-    
+    return {
+      value: this.normalizeValue(this.props.value || this.props.defaultValue)
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: this.normalizeValue(nextProps.value || nextProps.defaultValue)
+    });
+  },
+  
+  normalizeValue: function(value) {
     if (value.size == 0) {
       var inputTemplate = React.Children.only(this.props.children);
       value = value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '');
     }
     
-    return {
-      value: value
-    }
+    return value;
   },
   
   handleMoveTopButtonClick: function(event) {

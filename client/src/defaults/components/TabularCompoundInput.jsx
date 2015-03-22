@@ -35,7 +35,7 @@ var TabularCompoundInput = React.createClass({
   
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: this.normalizeValue(nextProps.value)
+      value: this.normalizeValue(nextProps.value || nextProps.defaultValue)
     });
   },
   
@@ -47,7 +47,7 @@ var TabularCompoundInput = React.createClass({
   
   normalizeValue: function(value) {
     if (this.props.repeating) {
-      if (!Immutable.List.isList(this.props.value)) {
+      if (!Immutable.List.isList(value)) {
         value = Immutable.List.of(value);
       }
       
