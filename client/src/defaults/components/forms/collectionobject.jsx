@@ -14,11 +14,9 @@ var TabularCompoundInput = require('../TabularCompoundInput.jsx');
 module.exports = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, FormMixin],
   
-  recordType: 'collectionobject',
-    
   render: function() {
     return (
-      <Form recordType="collectionobject">
+      <Form recordType="collectionobject" values={this.props.values}>
         <Panel name="identification">
           <ColumnGroup>
             <Column>

@@ -41,8 +41,7 @@ var Input = React.createClass({
       readOnly: false,
       multiline: false,
       jewel: null,
-      popup: null,
-      value: ''
+      popup: null
     };
   },
   

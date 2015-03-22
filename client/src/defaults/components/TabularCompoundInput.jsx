@@ -24,8 +24,7 @@ var TabularCompoundInput = React.createClass({
     return {
       description: null,
       help: null,
-      repeating: false,
-      value: Immutable.Map()
+      repeating: false
     };
   },
   
@@ -42,6 +41,10 @@ var TabularCompoundInput = React.createClass({
   },
   
   normalizeValue: function(value) {
+    if (!value) {
+      value = Immutable.Map();
+    }
+    
     if (this.props.repeating) {
       if (!Immutable.List.isList(this.props.value)) {
         value = Immutable.List.of(value);
@@ -135,7 +138,7 @@ var TabularCompoundInput = React.createClass({
         label: null,
         description: null,
         help: null,
-        value: value.get(child.props.name),
+        value: value ? value.get(child.props.name) : null,
         onCommit: this.handleCommit
       });
 

@@ -21,13 +21,16 @@ var RepeatingInput = React.createClass({
     return {
       description: null,
       help: null,
-      readOnly: false,
-      value: Immutable.List()
+      readOnly: false
     };
   },
   
   getInitialState: function() {
     var value = this.props.value;
+    
+    if (!value) {
+      value = Immutable.List();
+    }
     
     if (value.size == 0) {
       var inputTemplate = React.Children.only(this.props.children);
@@ -131,26 +134,33 @@ var RepeatingInput = React.createClass({
         );
       }
 
-      var instances = this.state.value.map(function(value, index) {
-        var inputInstance = React.addons.cloneWithProps(inputTemplate, {
-          name: index,
-          label: null,
-          description: null,
-          help: null,
-          readOnly: this.props.readOnly,
-          value: value,
-          onCommit: this.handleInstanceCommit
-        });
+      var instances;
       
-        return (
-          <li key={index} className="instance">
-            <div className="tab"><button className="moveTopButton" type="button" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
-            {inputInstance}
-            <button className="removeButton" type="button" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
-          </li>
-        );
-      }, this).toArray();
-    
+      if (this.state.value) {
+        instances = this.state.value.map(function(value, index) {
+          var inputInstance = React.addons.cloneWithProps(inputTemplate, {
+            name: index,
+            label: null,
+            description: null,
+            help: null,
+            readOnly: this.props.readOnly,
+            value: value,
+            onCommit: this.handleInstanceCommit
+          });
+      
+          return (
+            <li key={index} className="instance">
+              <div className="tab"><button className="moveTopButton" type="button" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
+              {inputInstance}
+              <button className="removeButton" type="button" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+            </li>
+          );
+        }, this).toArray();
+      }
+      else {
+        instances = [];
+      }
+      
       return (
         <div className="input repeatinginput">
           {label}
