@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
-var FormMixin = require('../../mixins/FormMixin.jsx')
+var OptionLoaderMixin = require('../../mixins/OptionLoaderMixin.jsx')
 var Form = require('../Form.jsx');
 var Panel = require('../Panel.jsx');
 var ColumnGroup = require('../ColumnGroup.jsx');
@@ -12,9 +12,7 @@ var CompoundInput = require('../CompoundInput.jsx');
 var TabularCompoundInput = require('../TabularCompoundInput.jsx');
 
 module.exports = React.createClass({
-  mixins: [IntlMixin, React.addons.PureRenderMixin, FormMixin],
-  
-  recordType: 'collectionobject',
+  mixins: [IntlMixin, React.addons.PureRenderMixin, OptionLoaderMixin],
     
   render: function() {
     return (

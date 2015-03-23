@@ -1,24 +1,9 @@
-var React = require('react');
 var Immutable = require('immutable');
 
-var FormMixin = {
-  propTypes: {
-    fields: React.PropTypes.instanceOf(Immutable.Map)
-  },
-  
-  getInitialState: function() {
-    return {
-      fields: Immutable.Map()
-    }
-  },
-  
-  label: function(fieldName) {
-    return this.getIntlMessage('form.' + this.recordType + '.field.' + fieldName);
-  },
-
+var OptionLoaderMixin = {
   getOptions: function(controlledListName) {
     var values = require('../controlled_lists/' + controlledListName + '.js');
-  
+
     return Immutable.List(values).map(function(value) {
       return Immutable.Map({
         value: value,
@@ -28,4 +13,4 @@ var FormMixin = {
   }
 };
 
-module.exports = FormMixin;
+module.exports = OptionLoaderMixin;
