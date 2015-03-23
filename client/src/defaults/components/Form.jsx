@@ -74,9 +74,8 @@ var Form = React.createClass({
         if (typeof(label) === 'undefined') {
           label = this.getFieldLabel(name);
         }
-        console.info(name + ' is ' + value);
+
         if (typeof(value) === 'undefined' && values) {
-          console.info(name + '=' + values.get(name));
           value = values.get(name);
         }
       }

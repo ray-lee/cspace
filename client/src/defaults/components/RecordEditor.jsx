@@ -18,9 +18,16 @@ var Record = React.createClass({
       values: Immutable.Map({
         objectNumber: 'OBJ 1-100',
         numberOfObjects: '27',
-        otherNumber: [
-          
-        ]
+        otherNumber: Immutable.List.of(
+          Immutable.Map({
+            numberValue: '1-100A',
+            numberType: 'previous'
+          }),
+          Immutable.Map({
+            numberValue: '23-ABC',
+            numberType: 'lender'
+          })
+        )
       })
     }
   },

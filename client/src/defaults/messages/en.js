@@ -59,7 +59,7 @@ module.exports = {
       field: {
         objectNumber: 'Identification number',
         numberOfObjects: 'Number of objects',
-        otherNumberList: 'Number',
+        otherNumberList: 'Other number',
         numberValue: 'Number',
         numberType: 'Type',
         responsibleDepartments: 'Responsible department',

@@ -16,7 +16,7 @@ module.exports = React.createClass({
     
   render: function() {
     return (
-      <Form recordType="collectionobject">
+      <Form recordType="collectionobject" values={this.props.values}>
         <Panel name="identification">
           <ColumnGroup>
             <Column>
