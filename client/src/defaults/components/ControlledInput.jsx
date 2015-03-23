@@ -28,7 +28,7 @@ var ControlledInput = React.createClass({
   
   getInitialState: function() {
     var value = this.props.value || this.props.defaultValue;
-    
+    console.log(value);
     if (!value) {
       if (this.props.required && this.props.options.size > 0) {
         value = this.props.options.first().get('value');

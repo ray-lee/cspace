@@ -15,9 +15,12 @@ var Record = React.createClass({
   
   getInitialState: function() {
     return {
-      fields: Immutable.Map({
-        objectNumber: 'objnum',
-        numberOfObjects: '12'
+      values: Immutable.Map({
+        objectNumber: 'OBJ 1-100',
+        numberOfObjects: '27',
+        otherNumber: [
+          
+        ]
       })
     }
   },
@@ -51,7 +54,7 @@ var Record = React.createClass({
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
               <ToolBar/>
-              <Form fields={this.state.fields}/>
+              <Form values={this.state.values}/>
               <ToolBar/>
             </Panel>
             {/*

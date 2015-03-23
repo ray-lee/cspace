@@ -44,7 +44,7 @@ var Form = React.createClass({
   /*
    * Set labels and values.
    */
-  decorateChildren: function(children) {
+  decorateChildren: function(children, values) {
     var count = React.Children.count(children);
     
     if (count == 0) {
@@ -52,30 +52,39 @@ var Form = React.createClass({
     }
     
     if (count == 1) {
-      return this.decorateNode(React.Children.only(children));
+      return this.decorateNode(React.Children.only(children), values);
     }
     
     var decoratedChildren = React.Children.map(children, function(child) {
-      return this.decorateNode(child);
+      return this.decorateNode(child, values);
     }, this);
     
     return decoratedChildren;
   },
   
-  decorateNode: function(node) {
+  decorateNode: function(node, values) {
     var clone;
     
     if (node.type.isInput) {
       var name = node.props.name;
       var label = node.props.label;
+      var value = node.props.value;
       
-      if (name && typeof(label) === 'undefined') {
-        label = this.getFieldLabel(name);
+      if (name) {
+        if (typeof(label) === 'undefined') {
+          label = this.getFieldLabel(name);
+        }
+        console.info(name + ' is ' + value);
+        if (typeof(value) === 'undefined' && values) {
+          console.info(name + '=' + values.get(name));
+          value = values.get(name);
+        }
       }
       
       clone = React.addons.cloneWithProps(node, {
         label: label,
-        children: this.decorateChildren(node.props.children)
+        value: value,
+        children: this.decorateChildren(node.props.children, (values ? values[name] : values))
       });
     }
     else if (node.type.isPanel) {
@@ -88,12 +97,12 @@ var Form = React.createClass({
       
       clone = React.addons.cloneWithProps(node, {
         header: header,
-        children: this.decorateChildren(node.props.children)
+        children: this.decorateChildren(node.props.children, values)
       });
     }
     else {
       clone = React.addons.cloneWithProps(node, {
-        children: this.decorateChildren(node.props.children)
+        children: this.decorateChildren(node.props.children, values)
       });
     }
 
@@ -108,7 +117,7 @@ var Form = React.createClass({
     
     return (
       <form className={classes}>
-        {this.decorateChildren(this.props.children)}
+        {this.decorateChildren(this.props.children, this.props.values)}
       </form>
     );
   }
