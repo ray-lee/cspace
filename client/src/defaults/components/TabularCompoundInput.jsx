@@ -173,27 +173,38 @@ var TabularCompoundInput = React.createClass({
         <caption>{this.props.label}</caption>
       );
     }
+
+    var thead = null;
     
-    var headers = [];
-    var rows = [];
+    if (hasLabel(this.props.children)) {
+      var headers = [];
     
-    if (this.props.repeating) {
-      headers.push(
-        <th key="tab"/>
-      );
-    }
+      if (this.props.repeating) {
+        headers.push(
+          <th key="tab"/>
+        );
+      }
     
-    React.Children.forEach(this.props.children, function(child) {
-      headers.push(
-        <th key={'f_' + child.props.name} className="header">
-          {child.props.label}
-        </th>
-      );
-    });
+      React.Children.forEach(this.props.children, function(child) {
+        headers.push(
+          <th key={'f_' + child.props.name} className="header">
+            {child.props.label}
+          </th>
+        );
+      });
     
-    if (this.props.repeating) {
-      headers.push(
-        <th key="remove"/>
+      if (this.props.repeating) {
+        headers.push(
+          <th key="remove"/>
+        );
+      }
+      
+      thead = (
+        <thead>
+          <tr>
+           {headers}
+          </tr>
+        </thead>
       );
     }
     
@@ -216,11 +227,7 @@ var TabularCompoundInput = React.createClass({
     var table = (
       <table className={classes}>
         {label}
-        <thead>
-          <tr>
-           {headers}
-          </tr>
-        </thead>
+        {thead}
         <tbody className="instances">
           {rows}
         </tbody>
@@ -240,5 +247,15 @@ var TabularCompoundInput = React.createClass({
     }
   }
 });
+
+var hasLabel = function(children) {
+  var hasLabel = false;
+  
+  React.Children.forEach(children, function(child) {
+    hasLabel = hasLabel || child.props.label;
+  });
+  
+  return hasLabel;
+};
 
 module.exports = TabularCompoundInput;
