@@ -26,6 +26,10 @@
   height: 20px;
 }
 
+.tabularcompoundinput > tbody > tr > td textarea.control {
+  height: 78px;
+}
+
 .tabularcompoundinput > tbody > tr > td .control:focus {
   outline: 1px solid #4D4D4D;
   outline-offset: 0;
@@ -43,10 +47,12 @@
 }
 
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .removeButtonCell {
+  vertical-align: top;
   width: 20px;
 }
 
 .tabularcompoundinput.repeatinginput > .instances > tr.instance .tab {
+  vertical-align: top;
   width: 20px;
   position: static;
 }
