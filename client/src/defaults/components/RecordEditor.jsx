@@ -15,25 +15,7 @@ var Record = React.createClass({
   
   getInitialState: function() {
     return {
-      values: Immutable.Map({
-        // objectNumber: 'OBJ 1-100',
-        // numberOfObjects: '27',
-        // otherNumber: Immutable.List.of(
-        //   Immutable.Map({
-        //     numberValue: '1-100A',
-        //     numberType: 'previous'
-        //   }),
-        //   Immutable.Map({
-        //     numberValue: '23-ABC',
-        //     numberType: 'lender'
-        //   })
-        // ),
-        // responsibleDepartments: Immutable.List.of(
-        //   Immutable.Map({
-        //     responsibleDepartment: 'herpetology'
-        //   })
-        // )
-      })
+      values: Immutable.Map()
     }
   },
   
@@ -64,7 +46,7 @@ var Record = React.createClass({
 
     return (
       <main className="recordeditor">
-        <TitleBar recordType={this.getIntlMessage('recordType.' + recordType)}/>
+        <TitleBar title={Form.type.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>

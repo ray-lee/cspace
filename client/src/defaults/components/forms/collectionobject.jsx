@@ -18,6 +18,25 @@ var StructuredDateInput = require('../StructuredDateInput.jsx');
 
 module.exports = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, OptionLoaderMixin],
+  
+  statics: {
+    renderTitle: function(values) {
+      var number = values.get('objectNumber');
+      var title = values.getIn(['titleGroup', 0, 'title']);
+      
+      var parts = [];
+      
+      if (number) {
+        parts.push(number);
+      }
+      
+      if (title) {
+        parts.push(title);
+      }
+      
+      return (parts.join(' – '));
+    }
+  },
     
   render: function() {
     return (
