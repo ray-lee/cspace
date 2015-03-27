@@ -17,27 +17,21 @@ var StructuredDateInput = React.createClass({
     };
   },
   
-  getInitialState: function() {
-    return {
-      value: getDisplayDate(this.props.value || this.props.defaultValue)
-    }
-  },
-  
-  componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      value: getDisplayDate(nextProps.value)
-    });
-  },
-  
   render: function() {
     return (
-      <Input {...(this.props)} value={this.state.value}/>
+      <Input {...(this.props)} value={getDisplayDate(this.props.value)} defaultValue={getDisplayDate(this.props.defaultValue)}/>
     );
   }
 });
 
 var getDisplayDate = function(value) {
-  return value.get('dateDisplayDate');
+  var displayDate = value;
+  
+  if (value) {
+     displayDate = value.get('dateDisplayDate');
+  }
+  
+  return displayDate;
 }
 
 module.exports = StructuredDateInput;

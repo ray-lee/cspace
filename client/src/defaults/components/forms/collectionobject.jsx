@@ -8,6 +8,7 @@ var Column = require('../Column.jsx');
 var Input = require('../Input.jsx');
 var RepeatingInput = require('../RepeatingInput.jsx');
 var ControlledInput = require('../ControlledInput.jsx');
+var VocabularyControlledInput = require('../VocabularyControlledInput.jsx');
 var CompoundInput = require('../CompoundInput.jsx');
 var TabularCompoundInput = require('../TabularCompoundInput.jsx');
 var MappedInput = require('../MappedInput.jsx');
@@ -68,7 +69,7 @@ module.exports = React.createClass({
               <ColumnGroup>
                 <Column>
                   <Input name="title"/>
-                  <ControlledInput name="titleLanguage"/>
+                  <VocabularyControlledInput name="titleLanguage"/>
                 </Column>
       
                 <Column>
@@ -77,7 +78,7 @@ module.exports = React.createClass({
                   <RepeatingInput name="titleTranslationSubGroup">
                     <TabularCompoundInput>
                       <Input name="titleTranslation"/>
-                      <ControlledInput name="titleTranslationLanguage"/>
+                      <VocabularyControlledInput name="titleTranslationLanguage"/>
                     </TabularCompoundInput>
                   </RepeatingInput>
                 </Column>
@@ -92,7 +93,7 @@ module.exports = React.createClass({
               <ControlledInput name="objectNameLevel" options={this.getOptions('nameLevels')}/>
               <ControlledInput name="objectNameSystem" options={this.getOptions('nameSystems')}/>
               <ControlledInput name="objectNameType" options={this.getOptions('nameTypes')}/>
-              <ControlledInput name="objectNameLanguage"/>
+              <VocabularyControlledInput name="objectNameLanguage"/>
               <Input name="objectNameNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
@@ -124,7 +125,7 @@ module.exports = React.createClass({
               
               <TabularCompoundInput>
                 <Input name="age"/>
-                <ControlledInput name="ageQualifier"/>
+                <VocabularyControlledInput name="ageQualifier"/>
                 <ControlledInput name="ageUnit" options={this.getOptions('ageUnits')}/>
               </TabularCompoundInput>
       
@@ -208,7 +209,7 @@ module.exports = React.createClass({
               <Column>
                 <RepeatingInput name="contentLanguages">
                   <MappedInput>
-                    <ControlledInput name="contentLanguage"/>
+                    <VocabularyControlledInput name="contentLanguage"/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -298,7 +299,7 @@ module.exports = React.createClass({
                 <ColumnGroup>
                   <Column>
                     <RefNameInput name="inscriptionContentInscriber"/>
-                    <ControlledInput name="inscriptionContentLanguage"/>
+                    <VocabularyControlledInput name="inscriptionContentLanguage"/>
                     <StructuredDateInput name="inscriptionContentDateGroup"/>
                   </Column>
 
@@ -550,7 +551,7 @@ module.exports = React.createClass({
           <TabularCompoundInput>
             <ControlledInput name="ownershipExchangeMethod" options={this.getOptions('ownershipExchangeMethods')}/>
             <Input name="ownershipExchangeNote"/>
-            <ControlledInput name="ownershipExchangePriceCurrency"/>
+            <VocabularyControlledInput name="ownershipExchangePriceCurrency"/>
             <Input name="ownershipExchangePriceValue"/>
           </TabularCompoundInput>
         </Panel>
@@ -598,7 +599,7 @@ module.exports = React.createClass({
       
               <RepeatingInput name="fieldCollectionMethods">
                 <MappedInput>
-                  <ControlledInput name="fieldCollectionMethod"/>
+                  <VocabularyControlledInput name="fieldCollectionMethod"/>
                 </MappedInput>
               </RepeatingInput>
       

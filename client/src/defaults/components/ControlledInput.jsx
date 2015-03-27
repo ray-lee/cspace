@@ -218,6 +218,19 @@ var ControlledInput = React.createClass({
       }));
     }
     
+    var valueInOptions = options.some(function(option) {
+      return (option.get('value') === this.state.value);
+    }, this);
+    
+    if (!valueInOptions) {
+      console.warn('Value `' + this.state.value + '` is not in options for controlled list input `' + this.props.name + '`');
+      
+      options = options.push(Immutable.Map({
+        value: this.state.value,
+        label: this.state.value
+      }));
+    }
+    
     var optionNum = 0;
     var optionNodes = [];
     var selectedOptionLabel = '';
