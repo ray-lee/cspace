@@ -10,6 +10,10 @@ var RepeatingInput = require('../RepeatingInput.jsx');
 var ControlledInput = require('../ControlledInput.jsx');
 var CompoundInput = require('../CompoundInput.jsx');
 var TabularCompoundInput = require('../TabularCompoundInput.jsx');
+var MappedInput = require('../MappedInput.jsx');
+var RefNameInput = require('../RefNameInput.jsx');
+var DateInput = require('../DateInput.jsx');
+var StructuredDateInput = require('../StructuredDateInput.jsx');
 
 module.exports = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, OptionLoaderMixin],
@@ -23,15 +27,17 @@ module.exports = React.createClass({
               <Input name="objectNumber" required={true}/>
               <Input name="numberOfObjects"/>
       
-              <RepeatingInput name="otherNumberList">
-                <TabularCompoundInput name="otherNumber">
+              <RepeatingInput name="otherNumber">
+                <TabularCompoundInput>
                   <Input name="numberValue"/>
                   <ControlledInput name="numberType" options={this.getOptions('numberTypes')}/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
               <RepeatingInput name="responsibleDepartments">
-                <ControlledInput name="responsibleDepartment" options={this.getOptions('departments')}/>
+                <MappedInput>
+                  <ControlledInput name="responsibleDepartment" options={this.getOptions('departments')}/>
+                </MappedInput>
               </RepeatingInput>
       
               <ControlledInput name="collection" options={this.getOptions('collections')}/>
@@ -40,21 +46,25 @@ module.exports = React.createClass({
       
             <Column>
               <RepeatingInput name="briefDescriptions">
-                <Input name="briefDescription" multiline={true}/>
+                <MappedInput>
+                  <Input name="briefDescription" multiline={true}/>
+                </MappedInput>
               </RepeatingInput>
       
               <Input name="distinguishingFeatures" multiline={true}/>
       
               <RepeatingInput name="comments">
-                <Input name="comment" multiline={true}/>
+                <MappedInput>
+                  <Input name="comment" multiline={true}/>
+                </MappedInput>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
       
-          <Input name="computedCurrentLocation" readOnly={true}/>
+          <RefNameInput name="computedCurrentLocation" readOnly={true}/>
       
-          <RepeatingInput name="titleGroupList"> 
-            <CompoundInput name="titleGroup">
+          <RepeatingInput name="titleGroup"> 
+            <CompoundInput>
               <ColumnGroup>
                 <Column>
                   <Input name="title"/>
@@ -64,8 +74,8 @@ module.exports = React.createClass({
                 <Column>
                   <ControlledInput name="titleType" options={this.getOptions('titleTypes')}/>
       
-                  <RepeatingInput name="titleTranslationSubGroupList">
-                    <TabularCompoundInput name="titleTranslationSubGroup">
+                  <RepeatingInput name="titleTranslationSubGroup">
+                    <TabularCompoundInput>
                       <Input name="titleTranslation"/>
                       <ControlledInput name="titleTranslationLanguage"/>
                     </TabularCompoundInput>
@@ -75,8 +85,8 @@ module.exports = React.createClass({
             </CompoundInput>
           </RepeatingInput>
       
-          <RepeatingInput name="objectNameList">
-            <TabularCompoundInput name="objectNameGroup">
+          <RepeatingInput name="objectNameGroup">
+            <TabularCompoundInput>
               <Input name="objectName"/>
               <ControlledInput name="objectNameCurrency" options={this.getOptions('nameCurrencies')}/>
               <ControlledInput name="objectNameLevel" options={this.getOptions('nameLevels')}/>
@@ -94,14 +104,18 @@ module.exports = React.createClass({
               <Input name="copyNumber"/>
               
               <RepeatingInput name="objectStatusList">
-                <ControlledInput name="objectStatus" options={this.getOptions('objectStatuses')}/>
+                <MappedInput>
+                  <ControlledInput name="objectStatus" options={this.getOptions('objectStatuses')}/>
+                </MappedInput>
               </RepeatingInput>
       
               <ControlledInput name="sex" options={this.getOptions('sexes')}/>
               <ControlledInput name="phase" options={this.getOptions('phases')}/>
               
               <RepeatingInput name="forms">
-                <ControlledInput name="form" options={this.getOptions('forms')}/>
+                <MappedInput>
+                  <ControlledInput name="form" options={this.getOptions('forms')}/>
+                </MappedInput>
               </RepeatingInput>
             </Column>
       
@@ -115,17 +129,21 @@ module.exports = React.createClass({
               </TabularCompoundInput>
       
               <RepeatingInput name="styles">
-                <Input name="style"/>
+                <MappedInput>
+                  <Input name="style"/>
+                </MappedInput>
               </RepeatingInput>
       
               <RepeatingInput name="colors">
-                <Input name="color"/>
+                <MappedInput>
+                  <Input name="color"/>
+                </MappedInput>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
       
-          <RepeatingInput name="materialGroupList">
-            <TabularCompoundInput name="materialGroup">
+          <RepeatingInput name="materialGroup">
+            <TabularCompoundInput>
               <Input name="material"/>
               <Input name="materialComponent"/>
               <Input name="materialComponentNote"/>
@@ -138,8 +156,8 @@ module.exports = React.createClass({
       
           <ColumnGroup>
             <Column>
-              <RepeatingInput name="objectComponentGroupList">
-                <TabularCompoundInput name="objectComponentGroup">
+              <RepeatingInput name="objectComponentGroup">
+                <TabularCompoundInput>
                   <ControlledInput name="objectComponentName" options={this.getOptions('objectComponentNames')}/>
                   <Input name="objectComponentInformation"/>
                 </TabularCompoundInput>
@@ -147,8 +165,8 @@ module.exports = React.createClass({
             </Column>
       
             <Column>
-              <RepeatingInput name="technicalAttributeGroupList">
-                <TabularCompoundInput name="technicalAttributeGroup">
+              <RepeatingInput name="technicalAttributeGroup">
+                <TabularCompoundInput>
                   <ControlledInput name="technicalAttribute" options={this.getOptions('technicalAttributes')}/>
                   <ControlledInput name="technicalAttributeMeasurement" options={this.getOptions('technicalAttributeMeasurements')}/>
                   <ControlledInput name="technicalAttributeMeasurementUnit" options={this.getOptions('technicalAttributeMeasurementUnits')}/>
@@ -157,8 +175,8 @@ module.exports = React.createClass({
             </Column>
           </ColumnGroup>
       
-          <RepeatingInput name="measuredPartGroupList">
-            <CompoundInput name="measuredPartGroup">
+          <RepeatingInput name="measuredPartGroup">
+            <CompoundInput>
               <ColumnGroup>
                 <Column>
                   <ControlledInput name="measuredPart" options={this.getOptions('measuredParts')}/>
@@ -169,15 +187,15 @@ module.exports = React.createClass({
                 </Column>
               </ColumnGroup>
       
-              <RepeatingInput name="dimensionSubGroupList">
-                <TabularCompoundInput name="dimensionSubGroup">
+              <RepeatingInput name="dimensionSubGroup">
+                <TabularCompoundInput>
                   <ControlledInput name="dimension" options={this.getOptions('dimensions')}/>
-                  <Input name="measuredBy"/>
+                  <RefNameInput name="measuredBy"/>
                   <ControlledInput name="measurementMethod" options={this.getOptions('measurementMethods')}/>
                   <Input name="value"/>
                   <ControlledInput name="measurementUnit" options={this.getOptions('measurementUnits')}/>
                   <Input name="valueQualifier"/>
-                  <Input name="valueDate"/>
+                  <DateInput name="valueDate"/>
                 </TabularCompoundInput>
               </RepeatingInput>
             </CompoundInput>
@@ -189,25 +207,33 @@ module.exports = React.createClass({
             <ColumnGroup>
               <Column>
                 <RepeatingInput name="contentLanguages">
-                  <ControlledInput name="contentLanguage"/>
+                  <MappedInput>
+                    <ControlledInput name="contentLanguage"/>
+                  </MappedInput>
                 </RepeatingInput>
 
                 <RepeatingInput name="contentActivities">
-                  <Input name="contentActivity"/>
+                  <MappedInput>
+                    <Input name="contentActivity"/>
+                  </MappedInput>
                 </RepeatingInput>
 
                 <RepeatingInput name="contentConcepts">
-                  <Input name="contentConcept"/>
+                  <MappedInput>
+                    <RefNameInput name="contentConcept"/>
+                  </MappedInput>
                 </RepeatingInput>
 
-                <Input name="contentDate"/>
-
+                <StructuredDateInput name="contentDate"/>
+      
                 <RepeatingInput name="contentPositions">
-                  <ControlledInput name="contentPosition" options={this.getOptions('contentPositions')}/>
+                  <MappedInput>
+                    <ControlledInput name="contentPosition" options={this.getOptions('contentPositions')}/>
+                  </MappedInput>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentObjectGroupList">
-                  <TabularCompoundInput name="contentObjectGroup">
+                <RepeatingInput name="contentObjectGroup">
+                  <TabularCompoundInput>
                     <Input name="contentObject"/>
                     <ControlledInput name="contentObjectType" options={this.getOptions('contentObjectTypes')}/>
                   </TabularCompoundInput>
@@ -216,34 +242,44 @@ module.exports = React.createClass({
       
               <Column>
                 <RepeatingInput name="contentPeoples">
-                  <Input name="contentPeople"/>
+                  <MappedInput>
+                    <Input name="contentPeople"/>
+                  </MappedInput>
                 </RepeatingInput>
 
                 <RepeatingInput name="contentPersons">
-                  <Input name="contentPerson"/>
+                  <MappedInput>
+                    <RefNameInput name="contentPerson"/>
+                  </MappedInput>
                 </RepeatingInput>
 
                 <RepeatingInput name="contentPlaces">
-                  <Input name="contentPlace"/>
+                  <MappedInput>
+                    <Input name="contentPlace"/>
+                  </MappedInput>
                 </RepeatingInput>
       
                 <RepeatingInput name="contentScripts">
-                  <ControlledInput name="contentScript" options={this.getOptions('contentScripts')}/>
+                  <MappedInput>
+                    <ControlledInput name="contentScript" options={this.getOptions('contentScripts')}/>
+                  </MappedInput>
                 </RepeatingInput>
 
                 <RepeatingInput name="contentOrganizations">
-                  <Input name="contentOrganization"/>
+                  <MappedInput>
+                    <RefNameInput name="contentOrganization"/>
+                  </MappedInput>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentEventNameGroupList">
-                  <TabularCompoundInput name="contentEventNameGroup">
+                <RepeatingInput name="contentEventNameGroup">
+                  <TabularCompoundInput>
                     <Input name="contentEventName"/>
                     <Input name="contentEventNameType"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
 
-                <RepeatingInput name="contentOtherGroupList">
-                  <TabularCompoundInput name="contentOtherGroup">
+                <RepeatingInput name="contentOtherGroup">
+                  <TabularCompoundInput>
                     <Input name="contentOther"/>
                     <Input name="contentOtherType"/>
                   </TabularCompoundInput>
@@ -255,15 +291,15 @@ module.exports = React.createClass({
           </Panel>
       
           <Panel name="textualInscription">
-            <RepeatingInput name="textualInscriptionGroupList">
-              <CompoundInput name="textualInscriptionGroup">
+            <RepeatingInput name="textualInscriptionGroup">
+              <CompoundInput>
                 <Input name="inscriptionContent" multiline={true}/>
       
                 <ColumnGroup>
                   <Column>
-                    <Input name="inscriptionContentInscriber"/>
+                    <RefNameInput name="inscriptionContentInscriber"/>
                     <ControlledInput name="inscriptionContentLanguage"/>
-                    <Input name="inscriptionContentDateGroup"/>
+                    <StructuredDateInput name="inscriptionContentDateGroup"/>
                   </Column>
 
                   <Column>
@@ -282,14 +318,14 @@ module.exports = React.createClass({
           </Panel>
       
           <Panel name="nontextualInscription">
-            <RepeatingInput name="nonTextualInscriptionGroupList">
-              <CompoundInput name="nonTextualInscriptionGroup">
+            <RepeatingInput name="nonTextualInscriptionGroup">
+              <CompoundInput>
                 <Input name="inscriptionDescription" multiline={true}/>
       
                 <ColumnGroup>
                   <Column>
-                    <Input name="inscriptionDescriptionInscriber"/>
-                    <Input name="inscriptionDescriptionDateGroup"/>
+                    <RefNameInput name="inscriptionDescriptionInscriber"/>
+                    <StructuredDateInput name="inscriptionDescriptionDateGroup"/>
                   </Column>
 
                   <Column>
@@ -308,47 +344,49 @@ module.exports = React.createClass({
         <Panel name="production">
           <ColumnGroup>
             <Column>
-              <RepeatingInput name="objectProductionDateGroupList">
-                <Input name="objectProductionDateGroup"/>
+              <RepeatingInput name="objectProductionDateGroup">
+                <StructuredDateInput/>
               </RepeatingInput>
 
-              <RepeatingInput name="techniqueGroupList">
-                <TabularCompoundInput name="techniqueGroup">
+              <RepeatingInput name="techniqueGroup">
+                <TabularCompoundInput>
                   <Input name="technique"/>
                   <Input name="techniqueType"/>
                 </TabularCompoundInput>
               </RepeatingInput>
 
-              <RepeatingInput name="objectProductionPlaceGroupList">
-                <TabularCompoundInput name="objectProductionPlaceGroup">
+              <RepeatingInput name="objectProductionPlaceGroup">
+                <TabularCompoundInput>
                   <Input name="objectProductionPlace"/>
                   <Input name="objectProductionPlaceRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
 
               <RepeatingInput name="objectProductionReasons">
-                <Input name="objectProductionReason" multiline={true}/>
+                <MappedInput>
+                  <Input name="objectProductionReason" multiline={true}/>
+                </MappedInput>
               </RepeatingInput>
             </Column>
       
             <Column>
-              <RepeatingInput name="objectProductionPeopleGroupList">
-                <TabularCompoundInput name="objectProductionPeopleGroup">
+              <RepeatingInput name="objectProductionPeopleGroup">
+                <TabularCompoundInput>
                   <Input name="objectProductionPeople"/>
                   <Input name="objectProductionPeopleRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
-              <RepeatingInput name="objectProductionPersonGroupList">
-                <TabularCompoundInput name="objectProductionPersonGroup">
-                  <Input name="objectProductionPerson"/>
+              <RepeatingInput name="objectProductionPersonGroup">
+                <TabularCompoundInput>
+                  <RefNameInput name="objectProductionPerson"/>
                   <Input name="objectProductionPersonRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
-              <RepeatingInput name="objectProductionOrganizationGroupList">
-                <TabularCompoundInput name="objectProductionOrganizationGroup">
-                  <Input name="objectProductionOrganization"/>
+              <RepeatingInput name="objectProductionOrganizationGroup">
+                <TabularCompoundInput>
+                  <RefNameInput name="objectProductionOrganization"/>
                   <Input name="objectProductionOrganizationRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
@@ -362,64 +400,64 @@ module.exports = React.createClass({
           <Panel name="association">
             <ColumnGroup>
               <Column>
-                <RepeatingInput name="assocActivityGroupList">
-                  <TabularCompoundInput name="assocActivityGroup">
+                <RepeatingInput name="assocActivityGroup">
+                  <TabularCompoundInput>
                     <Input name="assocActivity"/>
                     <Input name="assocActivityType"/>
                     <Input name="assocActivityNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
 
-                <RepeatingInput name="assocObjectGroupList">
-                  <TabularCompoundInput name="assocObjectGroup">
+                <RepeatingInput name="assocObjectGroup">
+                  <TabularCompoundInput>
                     <Input name="assocObject"/>
                     <Input name="assocObjectType"/>
                     <Input name="assocObjectNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocConceptGroupList">
-                  <TabularCompoundInput name="assocConceptGroup">
-                    <Input name="assocConcept"/>
+                <RepeatingInput name="assocConceptGroup">
+                  <TabularCompoundInput>
+                    <RefNameInput name="assocConcept"/>
                     <Input name="assocConceptType"/>
                     <Input name="assocConceptNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocCulturalContextGroupList">
-                  <TabularCompoundInput name="assocCulturalContextGroup">
+                <RepeatingInput name="assocCulturalContextGroup">
+                  <TabularCompoundInput>
                     <Input name="assocCulturalContext"/>
                     <Input name="assocCulturalContextType"/>
                     <Input name="assocCulturalContextNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocOrganizationGroupList">
-                  <TabularCompoundInput name="assocOrganizationGroup">
-                    <Input name="assocOrganization"/>
+                <RepeatingInput name="assocOrganizationGroup">
+                  <TabularCompoundInput>
+                    <RefNameInput name="assocOrganization"/>
                     <Input name="assocOrganizationType"/>
                     <Input name="assocOrganizationNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocPeopleGroupList">
-                  <TabularCompoundInput name="assocPeopleGroup">
+                <RepeatingInput name="assocPeopleGroup">
+                  <TabularCompoundInput>
                     <Input name="assocPeople"/>
                     <Input name="assocPeopleType"/>
                     <Input name="assocPeopleNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocPersonGroupList">
-                  <TabularCompoundInput name="assocPersonGroup">
-                    <Input name="assocPerson"/>
+                <RepeatingInput name="assocPersonGroup">
+                  <TabularCompoundInput>
+                    <RefNameInput name="assocPerson"/>
                     <Input name="assocPersonType"/>
                     <Input name="assocPersonNote"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
       
-                <RepeatingInput name="assocPlaceGroupList">
-                  <TabularCompoundInput name="assocPlaceGroup">
+                <RepeatingInput name="assocPlaceGroup">
+                  <TabularCompoundInput>
                     <Input name="assocPlace"/>
                     <Input name="assocPlaceType"/>
                     <Input name="assocPlaceNote"/>
@@ -435,27 +473,35 @@ module.exports = React.createClass({
                   </TabularCompoundInput>
 
                   <RepeatingInput name="assocEventOrganizations">
-                    <Input name="assocEventOrganization"/>
+                    <MappedInput>
+                      <RefNameInput name="assocEventOrganization"/>
+                    </MappedInput>
                   </RepeatingInput>
 
                   <RepeatingInput name="assocEventPeoples">
-                    <Input name="assocEventPeople"/>
+                    <MappedInput>
+                      <Input name="assocEventPeople"/>
+                    </MappedInput>
                   </RepeatingInput>
 
                   <RepeatingInput name="assocEventPersons">
-                    <Input name="assocEventPerson"/>
+                    <MappedInput>
+                      <RefNameInput name="assocEventPerson"/>
+                    </MappedInput>
                   </RepeatingInput>
 
                   <RepeatingInput name="assocEventPlaces">
-                    <Input name="assocEventPlace"/>
+                    <MappedInput>
+                      <Input name="assocEventPlace"/>
+                    </MappedInput>
                   </RepeatingInput>
 
                   <Input name="assocEventNote"/>
                 </Panel>
       
-                <RepeatingInput name="assocDateGroupList">
-                  <TabularCompoundInput name="assocDateGroup">
-                    <Input name="assocStructuredDateGroup"/>
+                <RepeatingInput name="assocDateGroup">
+                  <TabularCompoundInput>
+                    <StructuredDateInput name="assocStructuredDateGroup"/>
                     <Input name="assocDateType"/>
                     <Input name="assocDateNote"/>
                   </TabularCompoundInput>
@@ -466,8 +512,8 @@ module.exports = React.createClass({
       
           <Input name="objectHistoryNote" multiline={true}/>
       
-          <RepeatingInput name="usageGroupList">
-            <TabularCompoundInput name="usageGroup">
+          <RepeatingInput name="usageGroup">
+            <TabularCompoundInput>
               <Input name="usage"/>
               <Input name="usageNote"/>
             </TabularCompoundInput>
@@ -476,11 +522,13 @@ module.exports = React.createClass({
           <ColumnGroup>
             <Column>
               <RepeatingInput name="owners">
-                <Input name="owner"/>
+                <MappedInput>
+                  <RefNameInput name="owner"/>
+                </MappedInput>
               </RepeatingInput>
 
-              <RepeatingInput name="ownershipDateGroupList">
-                <Input name="ownershipDateGroup"/>
+              <RepeatingInput name="ownershipDateGroup">
+                <StructuredDateInput/>
               </RepeatingInput>
             </Column>
 
@@ -512,7 +560,9 @@ module.exports = React.createClass({
           <Input name="ownersPersonalResponse" multiline={true}/>
 
           <RepeatingInput name="ownersReferences">
-            <Input name="ownersReference"/>
+            <MappedInput>
+              <Input name="ownersReference"/>
+            </MappedInput>
           </RepeatingInput>
 
           <Input name="ownersContributionNote" multiline={true}/>
@@ -524,16 +574,18 @@ module.exports = React.createClass({
           <Input name="viewersPersonalResponse" multiline={true}/>
 
           <RepeatingInput name="viewersReferences">
-            <Input name="viewersReference"/>
+            <MappedInput>
+              <Input name="viewersReference"/>
+            </MappedInput>
           </RepeatingInput>
 
           <Input name="viewersContributionNote" multiline={true}/>
         </Panel>
       
         <Panel name="reference">
-          <RepeatingInput name="referenceGroupList">
-            <TabularCompoundInput name="referenceGroup">
-              <Input name="reference"/>
+          <RepeatingInput name="referenceGroup">
+            <TabularCompoundInput>
+              <RefNameInput name="reference"/>
               <Input name="referenceNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
@@ -542,10 +594,12 @@ module.exports = React.createClass({
         <Panel name="collection">
           <ColumnGroup>
             <Column>
-              <Input name="fieldCollectionDate"/>
+              <StructuredDateInput name="fieldCollectionDate"/>
       
               <RepeatingInput name="fieldCollectionMethods">
-                <ControlledInput name="fieldCollectionMethod"/>
+                <MappedInput>
+                  <ControlledInput name="fieldCollectionMethod"/>
+                </MappedInput>
               </RepeatingInput>
       
               <Input name="fieldCollectionNote" multiline={true}/>
@@ -553,18 +607,24 @@ module.exports = React.createClass({
             </Column>
 
             <Column>
-              <Input name="fieldCollectionPlace"/>
+              <RefNameInput name="fieldCollectionPlace"/>
       
               <RepeatingInput name="fieldCollectionSources">
-                <Input name="fieldCollectionSource"/>
+                <MappedInput>
+                  <RefNameInput name="fieldCollectionSource"/>
+                </MappedInput>
               </RepeatingInput>
 
               <RepeatingInput name="fieldCollectors">
-                <Input name="fieldCollector"/>
+                <MappedInput>
+                  <RefNameInput name="fieldCollector"/>
+                </MappedInput>
               </RepeatingInput>
 
               <RepeatingInput name="fieldColEventNames">
-                <Input name="fieldColEventName"/>
+                <MappedInput>
+                  <Input name="fieldColEventName"/>
+                </MappedInput>
               </RepeatingInput>
             </Column>
           </ColumnGroup>
@@ -587,7 +647,9 @@ module.exports = React.createClass({
             </Column>
             <Column>
               <RepeatingInput name="equivalentContexts" readonly={true}>
-                <Input name="equivalentContext"/>
+                <MappedInput>
+                  <Input name="equivalentContext"/>
+                </MappedInput>
               </RepeatingInput>
             </Column>
           </ColumnGroup>

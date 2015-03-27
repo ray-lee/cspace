@@ -16,18 +16,23 @@ var Record = React.createClass({
   getInitialState: function() {
     return {
       values: Immutable.Map({
-        objectNumber: 'OBJ 1-100',
-        numberOfObjects: '27',
-        otherNumber: Immutable.List.of(
-          Immutable.Map({
-            numberValue: '1-100A',
-            numberType: 'previous'
-          }),
-          Immutable.Map({
-            numberValue: '23-ABC',
-            numberType: 'lender'
-          })
-        )
+        // objectNumber: 'OBJ 1-100',
+        // numberOfObjects: '27',
+        // otherNumber: Immutable.List.of(
+        //   Immutable.Map({
+        //     numberValue: '1-100A',
+        //     numberType: 'previous'
+        //   }),
+        //   Immutable.Map({
+        //     numberValue: '23-ABC',
+        //     numberType: 'lender'
+        //   })
+        // ),
+        // responsibleDepartments: Immutable.List.of(
+        //   Immutable.Map({
+        //     responsibleDepartment: 'herpetology'
+        //   })
+        // )
       })
     }
   },
@@ -45,7 +50,11 @@ var Record = React.createClass({
   
   handleStoreChange: function(csid, data) {
     if (csid === this.getParams().csid) {
-      console.log(data);
+      console.info(data.toString());
+      
+      this.setState({
+        values: data.get('fields')
+      });
     }
   },
   

@@ -42,7 +42,7 @@ var RepeatingInput = React.createClass({
   normalizeValue: function(value) {
     if (value.size == 0) {
       var inputTemplate = React.Children.only(this.props.children);
-      value = value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '');
+      value = value.push(null);
     }
     
     return value;
@@ -84,7 +84,7 @@ var RepeatingInput = React.createClass({
   
   handleAddButtonClick: function(event) {
     var inputTemplate = React.Children.only(this.props.children);
-    var newValue = this.state.value.push(inputTemplate.type.isCompoundInput ? Immutable.Map() : '');
+    var newValue = this.state.value.push(null);
     
     this.setState({
       value: newValue

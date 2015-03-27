@@ -57,7 +57,15 @@ var CompoundInput = React.createClass({
       
       if (child.type.isInput) {
         var name = child.props.name;
-        var value = this.state.value.get(name);
+        var value;
+        
+        if (name) {
+          value = this.state.value.get(name);
+        }
+        else if (child.type.isCompoundInput) {
+          // If a compound input doesn't have a name, pass the current value down.
+          value = this.state.value;
+        }
         
         clone = React.addons.cloneWithProps(child, {
           value: value,

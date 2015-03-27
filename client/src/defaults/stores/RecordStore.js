@@ -15,19 +15,20 @@ var RecordStore = assign({}, EventEmitter.prototype, {
     }
     
     var cspace = new CollectionSpace();
-    
+  
     cspace.connect('admin@core.collectionspace.org', 'Administrator')
       .then(function() {
         return cspace.getRecord(recordType, csid); // '1a8dcb2b-522a-4d60-ae9f'
       })
       .then(function(data) {
-        records.set(csid, Immutable.Map(data));
+        var data = processRecordData(data);
+        records.set(csid, data);
         this.emitChange(csid, data);
-        
-        return cspace.disconnect();
+      
+        //return cspace.disconnect();
       }.bind(this))
       .then(null, function(error) {
-        console.error(error);
+        console.log(error);
       });
   },
 
@@ -43,5 +44,9 @@ var RecordStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 });
+
+var processRecordData = function(data) {
+  return Immutable.fromJS(data);
+};
 
 module.exports = RecordStore;

@@ -79,6 +79,10 @@ var Form = React.createClass({
           value = values.get(name);
         }
       }
+      else if (node.type.isCompoundInput) {
+        // If a compound input doesn't have a name, pass the current value down.
+        value = values;
+      }
       
       clone = React.addons.cloneWithProps(node, {
         label: label,

@@ -119,7 +119,7 @@ var Input = React.createClass({
   render: function() {
     var label = null;
     
-    if (this.props.label != null) {
+    if (this.props.label) {
       label = (
         <label>{this.props.label}</label>
       );
