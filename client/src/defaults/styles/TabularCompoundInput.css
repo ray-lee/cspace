@@ -37,7 +37,7 @@
   outline-offset: 0;
 }
 
-.tabularcompoundinput > tbody > tr > td .jeweledcontrol > .control + * {
+.tabularcompoundinput > tbody > tr > td .wrapper > .control + * {
   top: 1px;
   right: 1px;
 }

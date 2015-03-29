@@ -3,12 +3,18 @@ var Immutable = require('immutable');
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
-var RefNameInput = React.createClass({
+require('../styles/AuthorityControlledInput.css');
+
+var AuthorityControlledInput = React.createClass({
   mixins: [InputMixin, React.addons.PureRenderMixin],
   
   render: function() {
+    var jewel = (
+      <div className="autocompletejewel"></div>
+    );
+    
     return (
-      <Input {...(this.props)} value={getDisplayName(this.props.value)}/>
+      <Input {...(this.props)} value={getDisplayName(this.props.value)} jewel={jewel}/>
     );
   }
 });
@@ -23,4 +29,4 @@ var getDisplayName = function(refName) {
   return displayName;
 }
 
-module.exports = RefNameInput;
+module.exports = AuthorityControlledInput;

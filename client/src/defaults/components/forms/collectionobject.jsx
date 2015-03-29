@@ -12,7 +12,7 @@ var VocabularyControlledInput = require('../VocabularyControlledInput.jsx');
 var CompoundInput = require('../CompoundInput.jsx');
 var TabularCompoundInput = require('../TabularCompoundInput.jsx');
 var MappedInput = require('../MappedInput.jsx');
-var RefNameInput = require('../RefNameInput.jsx');
+var AuthorityControlledInput = require('../AuthorityControlledInput.jsx');
 var DateInput = require('../DateInput.jsx');
 var StructuredDateInput = require('../StructuredDateInput.jsx');
 
@@ -81,7 +81,7 @@ module.exports = React.createClass({
             </Column>
           </ColumnGroup>
       
-          <RefNameInput name="computedCurrentLocation" readOnly={true}/>
+          <AuthorityControlledInput name="computedCurrentLocation" readOnly={true}/>
       
           <RepeatingInput name="titleGroup"> 
             <CompoundInput>
@@ -210,7 +210,7 @@ module.exports = React.createClass({
               <RepeatingInput name="dimensionSubGroup">
                 <TabularCompoundInput>
                   <ControlledInput name="dimension" options={this.getOptions('dimensions')}/>
-                  <RefNameInput name="measuredBy"/>
+                  <AuthorityControlledInput name="measuredBy"/>
                   <ControlledInput name="measurementMethod" options={this.getOptions('measurementMethods')}/>
                   <Input name="value"/>
                   <ControlledInput name="measurementUnit" options={this.getOptions('measurementUnits')}/>
@@ -240,7 +240,7 @@ module.exports = React.createClass({
 
                 <RepeatingInput name="contentConcepts">
                   <MappedInput>
-                    <RefNameInput name="contentConcept"/>
+                    <AuthorityControlledInput name="contentConcept"/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -269,7 +269,7 @@ module.exports = React.createClass({
 
                 <RepeatingInput name="contentPersons">
                   <MappedInput>
-                    <RefNameInput name="contentPerson"/>
+                    <AuthorityControlledInput name="contentPerson"/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -287,7 +287,7 @@ module.exports = React.createClass({
 
                 <RepeatingInput name="contentOrganizations">
                   <MappedInput>
-                    <RefNameInput name="contentOrganization"/>
+                    <AuthorityControlledInput name="contentOrganization"/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -317,7 +317,7 @@ module.exports = React.createClass({
       
                 <ColumnGroup>
                   <Column>
-                    <RefNameInput name="inscriptionContentInscriber"/>
+                    <AuthorityControlledInput name="inscriptionContentInscriber"/>
                     <VocabularyControlledInput name="inscriptionContentLanguage"/>
                     <StructuredDateInput name="inscriptionContentDateGroup"/>
                   </Column>
@@ -344,7 +344,7 @@ module.exports = React.createClass({
       
                 <ColumnGroup>
                   <Column>
-                    <RefNameInput name="inscriptionDescriptionInscriber"/>
+                    <AuthorityControlledInput name="inscriptionDescriptionInscriber"/>
                     <StructuredDateInput name="inscriptionDescriptionDateGroup"/>
                   </Column>
 
@@ -399,14 +399,14 @@ module.exports = React.createClass({
       
               <RepeatingInput name="objectProductionPersonGroup">
                 <TabularCompoundInput>
-                  <RefNameInput name="objectProductionPerson"/>
+                  <AuthorityControlledInput name="objectProductionPerson"/>
                   <Input name="objectProductionPersonRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
               <RepeatingInput name="objectProductionOrganizationGroup">
                 <TabularCompoundInput>
-                  <RefNameInput name="objectProductionOrganization"/>
+                  <AuthorityControlledInput name="objectProductionOrganization"/>
                   <Input name="objectProductionOrganizationRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
@@ -438,7 +438,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="assocConceptGroup">
                   <TabularCompoundInput>
-                    <RefNameInput name="assocConcept"/>
+                    <AuthorityControlledInput name="assocConcept"/>
                     <Input name="assocConceptType"/>
                     <Input name="assocConceptNote"/>
                   </TabularCompoundInput>
@@ -454,7 +454,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="assocOrganizationGroup">
                   <TabularCompoundInput>
-                    <RefNameInput name="assocOrganization"/>
+                    <AuthorityControlledInput name="assocOrganization"/>
                     <Input name="assocOrganizationType"/>
                     <Input name="assocOrganizationNote"/>
                   </TabularCompoundInput>
@@ -470,7 +470,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="assocPersonGroup">
                   <TabularCompoundInput>
-                    <RefNameInput name="assocPerson"/>
+                    <AuthorityControlledInput name="assocPerson"/>
                     <Input name="assocPersonType"/>
                     <Input name="assocPersonNote"/>
                   </TabularCompoundInput>
@@ -494,7 +494,7 @@ module.exports = React.createClass({
 
                   <RepeatingInput name="assocEventOrganizations">
                     <MappedInput>
-                      <RefNameInput name="assocEventOrganization"/>
+                      <AuthorityControlledInput name="assocEventOrganization"/>
                     </MappedInput>
                   </RepeatingInput>
 
@@ -506,7 +506,7 @@ module.exports = React.createClass({
 
                   <RepeatingInput name="assocEventPersons">
                     <MappedInput>
-                      <RefNameInput name="assocEventPerson"/>
+                      <AuthorityControlledInput name="assocEventPerson"/>
                     </MappedInput>
                   </RepeatingInput>
 
@@ -543,7 +543,7 @@ module.exports = React.createClass({
             <Column>
               <RepeatingInput name="owners">
                 <MappedInput>
-                  <RefNameInput name="owner"/>
+                  <AuthorityControlledInput name="owner"/>
                 </MappedInput>
               </RepeatingInput>
 
@@ -605,7 +605,7 @@ module.exports = React.createClass({
         <Panel name="reference">
           <RepeatingInput name="referenceGroup">
             <TabularCompoundInput>
-              <RefNameInput name="reference"/>
+              <AuthorityControlledInput name="reference"/>
               <Input name="referenceNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
@@ -627,17 +627,17 @@ module.exports = React.createClass({
             </Column>
 
             <Column>
-              <RefNameInput name="fieldCollectionPlace"/>
+              <AuthorityControlledInput name="fieldCollectionPlace"/>
       
               <RepeatingInput name="fieldCollectionSources">
                 <MappedInput>
-                  <RefNameInput name="fieldCollectionSource"/>
+                  <AuthorityControlledInput name="fieldCollectionSource"/>
                 </MappedInput>
               </RepeatingInput>
 
               <RepeatingInput name="fieldCollectors">
                 <MappedInput>
-                  <RefNameInput name="fieldCollector"/>
+                  <AuthorityControlledInput name="fieldCollector"/>
                 </MappedInput>
               </RepeatingInput>
 

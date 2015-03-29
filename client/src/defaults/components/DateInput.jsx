@@ -3,12 +3,18 @@ var Immutable = require('immutable');
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
+require('../styles/DateInput.css');
+
 var DateInput = React.createClass({
   mixins: [InputMixin, React.addons.PureRenderMixin],
   
   render: function() {
+    var jewel = (
+      <div className="calendarjewel"></div>
+    );
+    
     return (
-      <Input {...(this.props)} value={formatDate(this.props.value)}/>
+      <Input {...(this.props)} value={formatDate(this.props.value)} jewel={jewel}/>
     );
   }
 });

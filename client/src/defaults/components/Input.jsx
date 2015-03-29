@@ -126,6 +126,13 @@ var Input = React.createClass({
   
   render: function() {
     var value = this.state.value;
+    
+    var jewel = null;
+    
+    if (!this.props.readOnly) {
+      jewel = this.props.jewel;
+    }
+    
     var label = null;
     
     if (this.props.label) {
@@ -168,7 +175,7 @@ var Input = React.createClass({
     var controls = (
       <div className="wrapper">
         {control}
-        {this.props.jewel}
+        {jewel}
         {this.props.popup}
       </div>
     );
@@ -176,7 +183,7 @@ var Input = React.createClass({
     var classes = React.addons.classSet({
       input: true,
       required: this.props.required,
-      jeweled: !!this.props.jewel
+      jeweled: !!jewel
     });
     
     return (

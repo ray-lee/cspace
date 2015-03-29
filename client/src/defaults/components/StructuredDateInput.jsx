@@ -3,6 +3,8 @@ var Immutable = require('immutable');
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
+require('../styles/StructuredDateInput.css');
+
 var StructuredDateInput = React.createClass({
   mixins: [InputMixin, React.addons.PureRenderMixin],
   
@@ -18,8 +20,12 @@ var StructuredDateInput = React.createClass({
   },
   
   render: function() {
+    var jewel = (
+      <div className="multicalendarjewel"></div>
+    );
+
     return (
-      <Input {...(this.props)} value={getDisplayDate(this.props.value)} defaultValue={getDisplayDate(this.props.defaultValue)}/>
+      <Input {...(this.props)} value={getDisplayDate(this.props.value)} defaultValue={getDisplayDate(this.props.defaultValue)} jewel={jewel}/>
     );
   }
 });
@@ -27,7 +33,7 @@ var StructuredDateInput = React.createClass({
 var getDisplayDate = function(value) {
   var displayDate = value;
   
-  if (value) {
+  if (value && Immutable.Map.isMap(value)) {
      displayDate = value.get('dateDisplayDate');
   }
   
