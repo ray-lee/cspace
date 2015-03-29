@@ -38,6 +38,19 @@ module.exports = {
     feedbackLink: 'http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback'
   },
   
+  recordHistory: {
+    created: {
+      byUserAtTime: 'Created {datetime, date, medium} {datetime, time, long} by {user}',
+      byUser: 'Created by {user}',
+      atTime: 'Created {datetime, date, medium} {datetime, time, long}',
+    },
+    updated: {
+      byUserAtTime: 'Last modified {datetime, date, medium} {datetime, time, long} by {user}',
+      byUser: 'Last modified by {user}',
+      atTime: 'Last modified {datetime, date, medium} {datetime, time, long}',
+    }
+  },
+  
   form: {
     collectionobject: {
       panel: {

@@ -37,7 +37,7 @@ var Record = React.createClass({
   
   handleStoreChange: function(csid, data) {
     if (csid === this.getParams().csid) {
-      console.info(data.toString());
+      //console.info(data.toString());
       
       this.setState({
         values: data.get('fields'),
@@ -57,7 +57,7 @@ var Record = React.createClass({
         <div className="recordeditorbody">
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
-              <ToolBar/>
+              <ToolBar values={this.state.values}/>
               <Form values={this.state.values}/>
               <ToolBar/>
             </Panel>
