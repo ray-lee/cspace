@@ -35,13 +35,16 @@ var RepeatingInput = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: this.normalizeValue(nextProps.value || nextProps.defaultValue)
+      value: this.normalizeValue(nextProps.value)
     });
   },
   
   normalizeValue: function(value) {
+    if (!value) {
+      value = Immutable.List();
+    }
+    
     if (value.size == 0) {
-      var inputTemplate = React.Children.only(this.props.children);
       value = value.push(null);
     }
     

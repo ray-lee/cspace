@@ -15,7 +15,8 @@ var Record = React.createClass({
   
   getInitialState: function() {
     return {
-      values: Immutable.Map()
+      values: Immutable.Map(),
+      loading: false
     }
   },
   
@@ -26,6 +27,10 @@ var Record = React.createClass({
     var csid = this.getParams().csid;
     
     if (csid) {
+      this.setState({
+        loading: true
+      });
+      
       RecordStore.get(recordType, csid);
     }
   },
@@ -35,7 +40,8 @@ var Record = React.createClass({
       console.info(data.toString());
       
       this.setState({
-        values: data.get('fields')
+        values: data.get('fields'),
+        loading: false
       });
     }
   },
@@ -46,7 +52,7 @@ var Record = React.createClass({
 
     return (
       <main className="recordeditor">
-        <TitleBar title={Form.type.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
+        <TitleBar loading={this.state.loading} title={Form.type.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>

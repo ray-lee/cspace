@@ -8,11 +8,13 @@
 
 .tabularcompoundinput > caption {
   font-size: 8pt;
+  font-weight: 300;
   margin-bottom: 2px;
 }
 
 .tabularcompoundinput > thead > tr > th {
   font-size: 8pt;
+  font-weight: 300;
   text-align: left;
   padding: 2px;
 }

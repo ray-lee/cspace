@@ -48,14 +48,22 @@ var Input = React.createClass({
   
   getInitialState: function() {
     return {
-      value: this.props.value || this.props.defaultValue
+      value: this.normalizeValue(this.props.value || this.props.defaultValue)
     }
   },
   
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: nextProps.value || nextProps.defaultValue
+      value: this.normalizeValue(nextProps.value)
     });
+  },
+  
+  normalizeValue: function(value) {
+    if (value == null || typeof(value) === 'undefined') {
+      value = '';
+    }
+    
+    return value;
   },
   
   handleChange: function(event) {
@@ -117,6 +125,7 @@ var Input = React.createClass({
   },
   
   render: function() {
+    var value = this.state.value;
     var label = null;
     
     if (this.props.label) {
@@ -129,13 +138,13 @@ var Input = React.createClass({
     
     if (this.props.readOnly) {
       control = (
-        <div className="control">{this.state.value}</div>
+        <div className="control readonly">{value}</div>
       );
     }
     else {
       if (this.props.multiline) {
         control = (
-          <textarea ref="control" className="control" value={this.state.value} placeholder=" "
+          <textarea ref="control" className="control" value={value} placeholder=" "
             onChange={this.handleChange}
             onBlur={this.handleBlur}
             onClick={this.handleClick}
@@ -145,7 +154,7 @@ var Input = React.createClass({
       }
       else {
         control = (
-          <input name={this.props.name} ref="control" className="control" type="text" value={this.state.value} placeholder=" " autoComplete={this.props.autoComplete}
+          <input name={this.props.name} ref="control" className="control" type="text" value={value} placeholder=" " autoComplete={this.props.autoComplete}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
             onMouseDown={this.handleMouseDown}
@@ -157,7 +166,7 @@ var Input = React.createClass({
     }
     
     var controls = (
-      <div className="jeweledcontrol">
+      <div className="wrapper">
         {control}
         {this.props.jewel}
         {this.props.popup}
@@ -165,8 +174,9 @@ var Input = React.createClass({
     );
     
     var classes = React.addons.classSet({
-      'input': true,
-      'required': this.props.required
+      input: true,
+      required: this.props.required,
+      jeweled: !!this.props.jewel
     });
     
     return (

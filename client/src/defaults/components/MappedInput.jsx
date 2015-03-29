@@ -19,14 +19,22 @@ var MappedInput = React.createClass({
   
   getInitialState: function() {
     return {
-      value: this.props.value || this.props.defaultValue
+      value: this.normalizeValue(this.props.value || this.props.defaultValue)
     }
   },
   
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: nextProps.value || nextProps.defaultValue
+      value: this.normalizeValue(nextProps.value)
     });
+  },
+  
+  normalizeValue: function(value) {
+    if (!value) {
+      value = Immutable.Map();
+    }
+    
+    return value;
   },
   
   handleCommit: function(name, value) {
@@ -46,7 +54,7 @@ var MappedInput = React.createClass({
     var name = child.props.name;
 
     return React.addons.cloneWithProps(React.Children.only(this.props.children), {
-      value: this.state.value.get(name),
+      value: this.state.value ? this.state.value.get(name) : '',
       onCommit: this.handleCommit
     });
   }

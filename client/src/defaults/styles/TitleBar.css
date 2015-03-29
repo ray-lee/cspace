@@ -1,5 +1,6 @@
 .titlebar {
   margin-bottom: 10px;
+  background-color: inherit;
 }
 
 .titlebar > .content {
@@ -17,14 +18,18 @@
   margin-right: 10px;
 }
 
+.titlebar.loading > .content > h1 {
+  padding-left: 30px;
+  background-image: url(../images/spinner.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 28px 28px;
+}
+
 .titlebar > .content > h2 {
   text-align: right;
   color: #739CD2;
   flex: none;
-}
-
-.titlebar {
-  background: inherit;
 }
 
 .titlebar.docked > .content {

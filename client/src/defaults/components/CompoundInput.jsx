@@ -29,14 +29,22 @@ var CompoundInput = React.createClass({
   
   getInitialState: function() {
     return {
-      value: this.props.value || this.props.defaultValue
+      value: this.normalizeValue(this.props.value || this.props.defaultValue)
     }
   },
   
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: nextProps.value || nextProps.defaultValue
+      value: this.normalizeValue(nextProps.value)
     });
+  },
+  
+  normalizeValue: function(value) {
+    if (!value) {
+      value = Immutable.Map();
+    }
+    
+    return value;
   },
   
   handleCommit: function(name, value) {

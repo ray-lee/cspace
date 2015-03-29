@@ -10,13 +10,15 @@ var TitleBar = React.createClass({
 
   propTypes: {
     title: React.PropTypes.string,
-    recordType: React.PropTypes.string
+    recordType: React.PropTypes.string,
+    loading: React.PropTypes.bool
   },
   
   getDefaultProps: function() {
     return {
       title: '',
-      recordType: ''
+      recordType: '',
+      loading: false
     };
   },
   
@@ -48,7 +50,8 @@ var TitleBar = React.createClass({
   render: function() {
     var classes = React.addons.classSet({
       titlebar: true,
-      docked: this.state.docked
+      docked: this.state.docked,
+      loading: this.props.loading
     });
     
     var styles = {};

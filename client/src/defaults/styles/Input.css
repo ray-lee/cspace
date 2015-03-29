@@ -8,6 +8,7 @@
 
 .input > label {
   font-size: 8pt;
+  font-weight: 300;
   display: block;
   margin-bottom: 2px;
 }
@@ -31,17 +32,17 @@
   height: 80px;
 }
 
-.input > .jeweledcontrol {
+.input > .wrapper {
   position: relative;
 }
 
-.input > .jeweledcontrol > .control {
+.input.jeweled > .wrapper > .control {
   padding-right: 20px;
 }
 
 /* The jewel: */
 
-.input > .jeweledcontrol > .control + * {
+.input > .wrapper > .control + * {
   position: absolute;
   top: 2px;
   right: 2px;

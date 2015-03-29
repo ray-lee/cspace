@@ -13,6 +13,7 @@ var ControlledInput = React.createClass({
       React.PropTypes.string,
       React.PropTypes.number
     ]),
+    required: React.PropTypes.bool,
     options: React.PropTypes.instanceOf(Immutable.List),
     defaultValue: React.PropTypes.string,
     value: React.PropTypes.string,
@@ -21,6 +22,7 @@ var ControlledInput = React.createClass({
   
   getDefaultProps: function() {
     return {
+      required: false,
       options: Immutable.List(),
       defaultValue: ''
     };
@@ -29,26 +31,29 @@ var ControlledInput = React.createClass({
   getInitialState: function() {
     var value = this.props.value || this.props.defaultValue;
 
-    if (!value) {
-      if (this.props.required && this.props.options.size > 0) {
-        value = this.props.options.first().get('value');
-      }
-      else {
-        value = '';
-      }
+    if (!value && this.props.required && this.props.options.size > 0) {
+      value = this.props.options.first().get('value');
     }
     
     return {
-      value: value,
+      value: this.normalizeValue(value),
       popupOpen: false,
       activeOptionNum: null
     }
   },
-  
+    
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      value: nextProps.value || nextProps.defaultValue
+      value: this.normalizeValue(nextProps.value)
     });
+  },
+  
+  normalizeValue: function(value) {
+    if (value == null || typeof(value) === 'undefined') {
+      value = '';
+    }
+    
+    return value;
   },
   
   componentDidUpdate: function() {
@@ -203,6 +208,8 @@ var ControlledInput = React.createClass({
   },
   
   render: function() {
+    var value = this.state.value;
+        
     var jewel = (
       <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
     );
@@ -219,15 +226,15 @@ var ControlledInput = React.createClass({
     }
     
     var valueInOptions = options.some(function(option) {
-      return (option.get('value') === this.state.value);
+      return (option.get('value') === value);
     }, this);
     
     if (!valueInOptions) {
-      console.warn('Value `' + this.state.value + '` is not in options for controlled list input `' + this.props.name + '`');
+      console.warn('Value `' + value + '` is not in options for controlled list input `' + this.props.name + '`');
       
       options = options.push(Immutable.Map({
-        value: this.state.value,
-        label: this.state.value
+        value: value,
+        label: value
       }));
     }
     
@@ -236,11 +243,11 @@ var ControlledInput = React.createClass({
     var selectedOptionLabel = '';
 
     options.forEach(function(option, index) {
-      var value = option.get('value');
-      var label = option.get('label');
+      var optionValue = option.get('value');
+      var optionLabel = option.get('label');
       
-      if (value === this.state.value) {
-        selectedOptionLabel = label;
+      if (optionValue === value) {
+        selectedOptionLabel = optionLabel;
       }
       else {
         var optionClasses = React.addons.classSet({
@@ -249,7 +256,7 @@ var ControlledInput = React.createClass({
         });
         
         optionNodes.push(
-          <li key={value} ref={'opt' + optionNum} className={optionClasses} data-optionnum={optionNum} data-optionvalue={value}>{label}</li>
+          <li key={optionValue} ref={'opt' + optionNum} className={optionClasses} data-optionnum={optionNum} data-optionvalue={optionValue}>{optionLabel}</li>
         );
       
         optionNum++;
