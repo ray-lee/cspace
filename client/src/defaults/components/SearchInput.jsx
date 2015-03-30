@@ -2,9 +2,9 @@ var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Navigation = require('react-router').Navigation;
 
-require('../styles/SearchField.css');
+require('../styles/SearchInput.css');
 
-var SearchField = React.createClass({
+var SearchInput = React.createClass({
   mixins: [IntlMixin, Navigation, React.addons.PureRenderMixin],
 
   propTypes: {
@@ -33,7 +33,7 @@ var SearchField = React.createClass({
     if (event.key === 'Enter') {
       var csid = event.target.value.trim();
       
-      if (csid !== '') {
+      if (csid) {
         this.transitionTo('record', {
           recordType: 'collectionobject',
           csid: csid
@@ -44,9 +44,9 @@ var SearchField = React.createClass({
   
   render: function() {
     return (
-      <input className="searchfield" type="text" placeholder={this.getIntlMessage('searchField.placeholder')} value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
+      <input className="searchinput" type="text" placeholder={this.getIntlMessage('searchInput.placeholder')} value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
     );
   }
 });
 
-module.exports = SearchField;
+module.exports = SearchInput;

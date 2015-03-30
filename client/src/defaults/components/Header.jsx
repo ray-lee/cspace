@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
-var SearchField = require('./SearchField.jsx');
+var SearchInput = require('./SearchInput.jsx');
 var logoUrl = require('../images/logo.png');
 
 require('../styles/Header.css');
@@ -12,11 +12,14 @@ var Header = React.createClass({
     return (
       <header className="header">
         <div className="controls">
-          <div>
+          <div className="logosearch">
             <img className="logo" src={logoUrl} alt={this.getIntlMessage('header.logoalt')}/>
+            <div className="search">
+              <SearchInput/>
+            </div>
           </div>
-          <div className="search">
-            <SearchField/>
+          <div className="user">
+            Administrator
           </div>
         </div>
         <nav className="nav">

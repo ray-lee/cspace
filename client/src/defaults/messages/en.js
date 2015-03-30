@@ -7,7 +7,7 @@ module.exports = {
     admin: 'Administration'
   },
   
-  searchField: {
+  searchInput: {
     placeholder: 'Search by CSID'
   },
 
