@@ -15,7 +15,7 @@ var Record = React.createClass({
   
   getInitialState: function() {
     return {
-      recordType: null,
+      recordType: this.getParams().recordType,
       csid: null,
       values: Immutable.Map(),
       loading: false
@@ -44,14 +44,18 @@ var Record = React.createClass({
     var csid = this.getParams().csid;
     
     if (recordType !== this.state.recordType || csid !== this.state.csid) {
-      this.setState({
+      var newState = {
         recordType: recordType,
         csid: csid,
-        values: Immutable.Map(),
-        loading: true
-      });
+        values: Immutable.Map()
+      };
       
-      RecordStore.get(recordType, csid);
+      if (csid) {
+        RecordStore.get(recordType, csid);
+        newState.loading = true;
+      }
+      
+      this.setState(newState);
     }
   },
   
@@ -67,7 +71,7 @@ var Record = React.createClass({
   },
   
   render: function() {
-    var recordType = this.getParams().recordType;
+    var recordType = this.state.recordType;
     var Form = require('./forms/' + recordType + '.jsx');
 
     return (

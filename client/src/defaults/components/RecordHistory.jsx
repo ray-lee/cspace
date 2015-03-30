@@ -39,17 +39,17 @@ var RecordHistory = React.createClass({
     if (createdAt && createdBy) {
       createdMessage = (
         <FormattedMessage message={this.getIntlMessage('recordHistory.created.byUserAtTime')} user={createdBy} datetime={createdAt}/>
-      )
+      );
     }
     else if (createdAt) {
       createdMessage = (
         <FormattedMessage message={this.getIntlMessage('recordHistory.created.atTime')} datetime={createdAt}/>
-      )
+      );
     }
     else if (createdBy) {
       createdMessage = (
         <FormattedMessage message={this.getIntlMessage('recordHistory.created.byUser')} user={createdBy}/>
-      )
+      );
     }
     
     var updatedMessage = ' ';
@@ -57,17 +57,17 @@ var RecordHistory = React.createClass({
     if (updatedAt && updatedBy) {
       updatedMessage = (
         <FormattedMessage message={this.getIntlMessage('recordHistory.updated.byUserAtTime')} user={updatedBy} datetime={updatedAt}/>
-      )
+      );
     }
     else if (updatedAt) {
       updatedMessage = (
         <FormattedMessage message={this.getIntlMessage('recordHistory.updated.atTime')} datetime={updatedAt}/>
-      )
+      );
     }
     else if (updatedBy) {
       updatedMessage = (
         <FormattedMessage message={this.getIntlMessage('recordHistory.updated.byUser')} user={updatedBy}/>
-      )
+      );
     }    
     return (
       <div className="recordhistory">
