@@ -6,6 +6,7 @@ var CollectionSpace = require('collectionspace');
 var CHANGE_EVENT = 'change';
 
 var records = Immutable.Map();
+var cspace = null;
 
 var RecordStore = assign({}, EventEmitter.prototype, {
   get: function(recordType, csid) {
@@ -14,8 +15,10 @@ var RecordStore = assign({}, EventEmitter.prototype, {
       recordType = 'cataloging';
     }
     
-    var cspace = new CollectionSpace();
-  
+    if (!cspace) {
+      cspace = new CollectionSpace();
+    }
+    
     cspace.connect('admin@core.collectionspace.org', 'Administrator')
       .then(function() {
         return cspace.getRecord(recordType, csid); // '1a8dcb2b-522a-4d60-ae9f'
@@ -24,8 +27,6 @@ var RecordStore = assign({}, EventEmitter.prototype, {
         var data = processRecordData(data);
         records.set(csid, data);
         this.emitChange(csid, data);
-      
-        //return cspace.disconnect();
       }.bind(this))
       .then(null, function(error) {
         console.log(error);

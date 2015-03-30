@@ -34,7 +34,7 @@ var RecordHistory = React.createClass({
       updatedAt = Date.parse(updatedAt);
     }
     
-    var createdMessage = '';
+    var createdMessage = ' ';
     
     if (createdAt && createdBy) {
       createdMessage = (
@@ -52,7 +52,7 @@ var RecordHistory = React.createClass({
       )
     }
     
-    var updatedMessage = '';
+    var updatedMessage = ' ';
 
     if (updatedAt && updatedBy) {
       updatedMessage = (

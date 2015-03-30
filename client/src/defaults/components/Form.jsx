@@ -24,7 +24,7 @@ var Form = React.createClass({
       return this.getIntlMessage(key);
     }
     catch(error) {
-      console.warn("Missing message for key " + key);
+      //console.warn("Missing message for key " + key);
       return '';
     }
   },
@@ -36,7 +36,7 @@ var Form = React.createClass({
       return this.getIntlMessage(key);
     }
     catch(error) {
-      console.warn("Missing message for key " + key);
+      //console.warn("Missing message for key " + key);
       return '';
     }
   },

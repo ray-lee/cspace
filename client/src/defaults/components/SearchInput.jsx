@@ -34,6 +34,10 @@ var SearchInput = React.createClass({
       var csid = event.target.value.trim();
       
       if (csid) {
+        this.setState({
+          value: ''
+        });
+        
         this.transitionTo('record', {
           recordType: 'collectionobject',
           csid: csid
