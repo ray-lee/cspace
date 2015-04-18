@@ -5,22 +5,9 @@ var cspace = require('../utils/CollectionSpace.js');
 
 var CHANGE_EVENT = 'change';
 
-var records = Immutable.Map();
+var userData = Immutable.Map();
 
-var RecordStore = assign({}, EventEmitter.prototype, {
-  get: function(recordType, csid) {
-    cspace.getRecord(recordType, csid) // '1a8dcb2b-522a-4d60-ae9f'
-      .then(function(data) {
-        var data = processRecordData(data);
-        records.set(csid, data);
-        
-        this.emitChange(csid, data);
-      }.bind(this))
-      .then(null, function(error) {
-        console.log(error);
-      });
-  },
-
+var UserStore = assign({}, EventEmitter.prototype, {
   emitChange: function(csid, data) {
     this.emit(CHANGE_EVENT, csid, data);
   },
@@ -34,8 +21,8 @@ var RecordStore = assign({}, EventEmitter.prototype, {
   },
 });
 
-var processRecordData = function(data) {
+var processUserData = function(data) {
   return Immutable.fromJS(data);
 };
 
-module.exports = RecordStore;
+module.exports = UserStore;

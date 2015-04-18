@@ -2,4 +2,6 @@
 
 var CollectionSpace = require('collectionspace');
 
-module.exports = new CollectionSpace();
+var cspace = new CollectionSpace();
+
+module.exports = cspace;

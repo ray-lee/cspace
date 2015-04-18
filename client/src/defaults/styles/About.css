@@ -1,0 +1,18 @@
+.about {
+  width: calc(50% - 30px);
+  padding-right: 30px;
+}
+
+.about > .content {
+  float: right;
+}
+
+.about h1 {
+  font-size: 16pt;
+  font-weight: 300;
+}
+
+.about ul {
+  list-style-type: disc;
+  margin-left: 2em;
+}

@@ -1,0 +1,23 @@
+.logout {
+  display: flex;
+  padding: 60px 30px 60px 30px;
+}
+
+.logout .panelbody {
+  padding: 30px;
+  min-width: 240px;
+  min-height: 100px;
+}
+
+.logout .statuscontainer {
+  display: flex;
+  align-items: baseline;
+  margin: 8px 0 8px 0;
+}
+
+.logout .inprogress {
+  background-image: url(../images/spinner.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 28px 28px;
+}

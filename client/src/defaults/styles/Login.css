@@ -1,0 +1,38 @@
+.login {
+  display: flex;
+  padding: 60px 30px 60px 30px;
+}
+
+.login .panelbody {
+  padding: 30px;
+}
+
+.login form > div {
+  display: flex;
+  align-items: baseline;
+  margin: 8px 0 8px 0;
+}
+
+.login .inprogress form {
+  visibility: hidden;
+}
+
+.login .inprogress {
+  background-image: url(../images/spinner.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 28px 28px;
+}
+
+.login label {
+  width: 20%;
+}
+
+.login input {
+  float: right;
+  width: 300px;
+}
+
+.login button {
+  float: right;
+}

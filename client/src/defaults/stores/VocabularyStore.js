@@ -1,7 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 var Immutable = require('immutable');
 var assign = require('object-assign');
-var cspace = require('./CollectionSpace.js');
+var cspace = require('../utils/CollectionSpace.js');
 
 var CHANGE_EVENT = 'change';
 
@@ -15,10 +15,7 @@ var VocabularyStore = assign({}, EventEmitter.prototype, {
       vocabulary = Immutable.Map();
       vocabularies = vocabularies.set(shortID, vocabulary);
       
-      cspace.connect('admin@core.collectionspace.org', 'Administrator')
-        .then(function() {
-          return cspace.getVocabulary(shortID);
-        })
+      cspace.getVocabulary(shortID)
         .then(function(data) {
           var data = processVocabularyData(data);
           vocabularies.set(shortID, data);
