@@ -3,6 +3,7 @@
   padding-top: 10px;
   font-size: 8pt;
   text-align: center;
+  background-image: linear-gradient(to bottom, #F0F0F0 0%, #FFFFFF 20%);
 }
 
 .footer ul {

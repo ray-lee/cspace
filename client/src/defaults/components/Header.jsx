@@ -11,7 +11,9 @@ var Header = React.createClass({
   render: function() {
     return (
       <header className="header">
-        <img className="logo" src={logoUrl} alt={this.getIntlMessage('header.logoalt')}/>
+        <div className="controls">
+          <img className="logo" src={logoUrl} alt={this.getIntlMessage('header.logoalt')}/>
+        </div>
       </header>
     );
   }

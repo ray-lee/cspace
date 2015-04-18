@@ -12,12 +12,12 @@ var RecordStore = assign({}, EventEmitter.prototype, {
     cspace.getRecord(recordType, csid) // '1a8dcb2b-522a-4d60-ae9f'
       .then(function(data) {
         var data = processRecordData(data);
-        records.set(csid, data);
+        records = records.set(csid, data);
         
         this.emitChange(csid, data);
       }.bind(this))
       .then(null, function(error) {
-        console.log(error);
+        console.error(error);
       });
   },
 

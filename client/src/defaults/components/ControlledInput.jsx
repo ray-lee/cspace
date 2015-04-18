@@ -229,7 +229,7 @@ var ControlledInput = React.createClass({
     }, this);
     
     if (!valueInOptions) {
-      console.warn('Value `' + value + '` is not in options for controlled list input `' + this.props.name + '`');
+      // console.warn('Value `' + value + '` is not in options for controlled list input `' + this.props.name + '`');
       
       options = options.push(Immutable.Map({
         value: value,

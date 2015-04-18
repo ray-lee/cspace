@@ -18,12 +18,12 @@ var VocabularyStore = assign({}, EventEmitter.prototype, {
       cspace.getVocabulary(shortID)
         .then(function(data) {
           var data = processVocabularyData(data);
-          vocabularies.set(shortID, data);
+          vocabularies = vocabularies.set(shortID, data);
           
           this.emitChange(shortID, data);
         }.bind(this))
         .then(null, function(error) {
-          console.log(error);
+          console.error(error);
         });
     }
 

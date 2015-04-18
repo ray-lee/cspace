@@ -1,10 +1,12 @@
 .login {
   display: flex;
   padding: 60px 30px 60px 30px;
+  min-height: 400px;
 }
 
 .login .panelbody {
   padding: 30px;
+  border-radius: 3px;
 }
 
 .login form > div {
@@ -17,11 +19,15 @@
   visibility: hidden;
 }
 
-.login .inprogress {
+.login .inprogress .panelbody {
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 28px 28px;
+}
+
+.login .message {
+  margin-bottom: 16px;
 }
 
 .login label {

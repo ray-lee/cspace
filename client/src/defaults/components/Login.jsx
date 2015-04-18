@@ -18,20 +18,52 @@ var Login = React.createClass({
     attemptedTransition: null
   },
   
+  shouldFocusUsername: false,
+  
   getInitialState: function() {
     return {
-      loginState: Login.STATE_INIT
+      loginState: Login.STATE_INIT,
+      username: '',
+      password: ''
     }
+  },
+  
+  componentDidMount: function() {
+    this.focusUsername();
+  },
+
+  componentDidUpdate: function() {
+    if (this.shouldFocusUsername) {
+      this.shouldFocusUsername = false;
+      this.focusUsername();
+    }
+  },
+  
+  focusUsername: function() {
+    this.refs.username.getDOMNode().focus();
+  },
+  
+  handleUsernameChange: function(event) {
+    this.setState({
+      username: event.target.value
+    });
+  },
+  
+  handlePasswordChange: function(event) {
+    this.setState({
+      password: event.target.value
+    });
   },
   
   handleFormSubmit: function(event) {
     event.preventDefault();
-
-    var username = this.refs.username.getDOMNode().value;
-    var password = this.refs.password.getDOMNode().value;
+    
+    var username = this.state.username;
+    var password = this.state.password;
     
     this.setState({
-      loginState: Login.STATE_IN_PROGRESS
+      loginState: Login.STATE_IN_PROGRESS,
+      password: ''
     });
     
     CollectionSpace.connect(username, password)
@@ -50,7 +82,9 @@ var Login = React.createClass({
       }.bind(this))
       .then(null, function(error) {
         console.log(error);
-
+        
+        this.shouldFocusUsername = true;
+        
         this.setState({
           loginState: Login.STATE_FAILED
         });
@@ -77,13 +111,13 @@ var Login = React.createClass({
         <About/>
         <div className={'formcontainer ' + this.state.loginState}>
           <Panel collapsible={false}>
-            <span className="message">{message}</span>
+            <div className="message">{message}</div>
             <form onSubmit={this.handleFormSubmit}>
               <div>
-                <label>Email</label><input ref="username" type="text" placeholder=" "/>
+                <label>Email</label><input ref="username" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder=" "/>
               </div>
               <div>
-                <label>Password</label><input ref="password" type="password" placeholder=" "/>
+                <label>Password</label><input ref="password" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder=" "/>
               </div>
               <button>Sign in</button>
             </form>
