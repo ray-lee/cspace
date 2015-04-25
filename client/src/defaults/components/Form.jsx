@@ -30,8 +30,6 @@ var Form = React.createClass({
   },
   
   handleInputCommit: function(name, value) {
-    console.log('handleInputCommit ' + name + ": " + value);
-    
     var newValues = this.state.values.set(name, value);
 
     this.setState({

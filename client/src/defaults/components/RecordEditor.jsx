@@ -7,11 +7,12 @@ var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
 var Panel = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
 var RecordStore = require('../stores/RecordStore.js');
+var RecordActions = require('../actions/RecordActions.js');
 
 require('../styles/RecordEditor.css');
 
 var Record = React.createClass({
-  mixins: [IntlMixin, Router.State, React.addons.PureRenderMixin],
+  mixins: [IntlMixin, Router.State, Router.Navigation, React.addons.PureRenderMixin],
   
   getInitialState: function() {
     return {
@@ -23,7 +24,7 @@ var Record = React.createClass({
   },
   
   componentDidMount: function() {
-    RecordStore.addChangeListener(this.handleStoreChange);
+    RecordStore.addUpdatedListener(this.handleStoreUpdated);
 
     var recordType = this.getParams().recordType;
     var csid = this.getParams().csid;
@@ -59,19 +60,31 @@ var Record = React.createClass({
     }
   },
   
-  handleStoreChange: function(csid, data) {
+  handleStoreUpdated: function(csid, data) {
     if (csid === this.state.csid) {
-      //console.info(data.toString());
-      
       this.setState({
         values: data.get('fields'),
         loading: false
       });
     }
+    else if (!this.state.csid) { //&& this.state.saving
+      this.setState({
+        values: data.get('fields'),
+        loading: false
+      });
+      
+      history.replaceState(null, csid, window.location.href + '/' + csid);
+    }
   },
   
   handleFormCommit: function(values) {
-    console.log(values);
+    this.setState({
+      values: values
+    });
+  },
+  
+  handleSaveButtonClick: function(event) {
+    RecordActions.save(this.state.recordType, this.state.csid, this.state.values);
   },
   
   render: function() {
@@ -80,14 +93,14 @@ var Record = React.createClass({
 
     return (
       <main className="recordeditor">
-        <TitleBar loading={this.state.loading} title={Form.type.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
+        <TitleBar loading={this.state.loading} title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
-              <ToolBar values={this.state.values}/>
+              <ToolBar values={this.state.values} onSaveButtonClick={this.handleSaveButtonClick}/>
               <Form values={this.state.values} onCommit={this.handleFormCommit}/>
-              <ToolBar/>
+              <ToolBar onSaveButtonClick={this.handleSaveButtonClick}/>
             </Panel>
             {/*
             <Panel key="test" header="Test Tab">

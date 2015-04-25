@@ -40,7 +40,7 @@ module.exports = React.createClass({
   
   render: function() {
     return (
-      <Form recordType="collectionobject" values={this.props.values}>
+      <Form recordType="collectionobject" {...(this.props)}>
         <Panel name="identification">
           <ColumnGroup>
             <Column>

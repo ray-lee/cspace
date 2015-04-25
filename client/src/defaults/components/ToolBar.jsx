@@ -18,6 +18,12 @@ var ToolBar = React.createClass({
     };
   },
   
+  handleSaveButtonClick: function(event) {
+    if (this.props.onSaveButtonClick) {
+      this.props.onSaveButtonClick(event);
+    }
+  },
+  
   render: function() {
     return (
       <div className="toolbar">
@@ -25,7 +31,7 @@ var ToolBar = React.createClass({
           <button type="button">{this.getIntlMessage('toolBar.clone')}</button>
           <button type="button">{this.getIntlMessage('toolBar.revert')}</button>
           <button type="button">{this.getIntlMessage('toolBar.delete')}</button>
-          <button type="button">{this.getIntlMessage('toolBar.save')}</button>
+          <button type="button" onClick={this.handleSaveButtonClick}>{this.getIntlMessage('toolBar.save')}</button>
         </div>
       
         <RecordHistory values={this.props.values}/>
