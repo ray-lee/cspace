@@ -1,10 +1,6 @@
 var React = require('react/addons');
 var Immutable = require('immutable');
 var IntlMixin = require('react-intl').IntlMixin;
-var ControlledInput = require('./ControlledInput.jsx');
-var VocabularyControlledInput = require('./VocabularyControlledInput.jsx');
-var ControlledListStore = require('../stores/ControlledListStore.js');
-var VocabularyStore = require('../stores/VocabularyStore.js');
 
 var Form = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin],
@@ -22,94 +18,29 @@ var Form = React.createClass({
   },
   
   getInitialState: function() {
-    var controlledListNames = {};
-    var vocabularyNames = {};
-    
-    this.collectControlledListNames(this.props.children, controlledListNames);
-    this.collectVocabularyNames(this.props.children, vocabularyNames);
-
-    var controlledLists = this.updateControlledLists(Immutable.Map(), Object.keys(controlledListNames));
-    var vocabularies = this.updateVocabularies(Immutable.Map(), Object.keys(vocabularyNames));
-
     return {
-      controlledLists: controlledLists,
-      vocabularies: vocabularies
+      values: this.props.values
     }
   },
   
-  componentDidMount: function() {
-    ControlledListStore.addChangeListener(this.handleControlledListStoreChange);
-    VocabularyStore.addChangeListener(this.handleVocabularyStoreChange);
-  },
-  
-  updateControlledLists: function(controlledLists, names) {
-    names.forEach(function(name) {
-      controlledLists = controlledLists.set(name, ControlledListStore.get(name));
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      values: nextProps.values
     });
+  },
+  
+  handleInputCommit: function(name, value) {
+    console.log('handleInputCommit ' + name + ": " + value);
     
-    return controlledLists;
-  },
-  
-  updateVocabularies: function(vocabularies, names) {
-    names.forEach(function(name) {
-      vocabularies = vocabularies.set(name, VocabularyStore.get(name));
-    });
-    
-    return vocabularies;
-  },
-  
-  collectControlledListNames: function(children, names) {
-    React.Children.forEach(children, function(child) {
-      if (child.type === ControlledInput.type) {
-        var name = child.props.controlledListName;
-
-        if (name) {
-          names[name] = true;
-        }
-      }
-      
-      this.collectControlledListNames(child.props.children, names);
-    }, this);
-  },
-  
-  handleControlledListStoreChange: function() {
-    
-  },
-  
-  handleVocabularyStoreChange: function(name, data) {
-    var vocabularies = this.state.vocabularies.set(name, data);
+    var newValues = this.state.values.set(name, value);
 
     this.setState({
-      vocabularies: vocabularies
+      values: newValues
     });
-  },
-  
-  labelControlledList: function(name, options) {
-    if (!options) {
-      return options;
-    }
-    
-    return options.map(function(option) {
-      if (!option.has('label')) {
-        option = option.set('label', this.getIntlMessage('controlledList.' + name + '.' + option.get('value')));
-      }
-      
-      return option;
-    }, this);
-  },
-  
-  collectVocabularyNames: function(children, names) {
-    React.Children.forEach(children, function(child) {
-      if (child.type === VocabularyControlledInput.type) {
-        var name = child.props.vocabularyName;
 
-        if (name) {
-          names[name] = true;
-        }
-      }
-      
-      this.collectVocabularyNames(child.props.children, names);
-    }, this);
+    if (this.props.onCommit) {
+      this.props.onCommit(newValues);
+    }
   },
   
   getFieldLabel: function(fieldName) {
@@ -182,27 +113,9 @@ var Form = React.createClass({
       overrideProps = {
         label: label,
         value: value,
+        onCommit: this.handleInputCommit,
         children: this.decorateChildren(node.props.children, (values ? values[name] : values))
       };
-
-      if (node.type === ControlledInput.type) {
-        if (typeof(node.props.options) === 'undefined') {
-          var controlledListName = node.props.controlledListName;
-      
-          if (controlledListName) {
-            overrideProps.options = this.labelControlledList(controlledListName, this.state.controlledLists.get(controlledListName));
-          }
-        }
-      }
-      else if (node.type === VocabularyControlledInput.type) {
-        if (typeof(node.props.vocabulary) === 'undefined') {
-          var vocabularyName = node.props.vocabularyName;
-        
-          if (vocabularyName) {
-            overrideProps.vocabulary = this.state.vocabularies.get(vocabularyName);
-          }
-        }
-      }
     }
     else if (node.type.isPanel) {
       var name = node.props.name;
@@ -234,7 +147,7 @@ var Form = React.createClass({
     
     return (
       <form className={classes}>
-        {this.decorateChildren(this.props.children, this.props.values)}
+        {this.decorateChildren(this.props.children, this.state.values)}
       </form>
     );
   }

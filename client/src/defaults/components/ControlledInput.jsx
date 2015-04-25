@@ -55,6 +55,16 @@ var ControlledInput = React.createClass({
     return value;
   },
   
+  componentDidMount: function() {
+    // If a default value was entered, commit it.
+
+    if ((this.props.value || this.state.value) && (this.props.value !== this.state.value)) {
+      if (this.props.onCommit) {
+        this.props.onCommit(this.props.name, this.state.value);
+      }
+    }
+  },
+  
   componentDidUpdate: function() {
     var activeOptionNum = this.state.activeOptionNum;
     var top = activeOptionNum == null ? 0 : this.refs['opt' + activeOptionNum].getDOMNode().offsetTop
@@ -214,6 +224,10 @@ var ControlledInput = React.createClass({
     );
     
     var options = this.props.options;
+    
+    if (!options) {
+      options = Immutable.List();
+    }
     
     if (!this.props.required) {
       // Prepend an empty option.

@@ -2,21 +2,44 @@ var React = require('react/addons');
 var Immutable = require('immutable');
 var ControlledInput = require('./ControlledInput.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
+var VocabularyStore = require('../stores/VocabularyStore.js');
 
 require('../styles/ControlledInput.css');
 
 var VocabularyControlledInput = React.createClass({
   mixins: [InputMixin, React.addons.PureRenderMixin],
   
+  propTypes: {
+    vocabularyName: React.PropTypes.string.isRequired
+  },
+  
+  getInitialState: function() {
+    return {
+      vocabulary: VocabularyStore.get(this.props.vocabularyName)
+    }
+  },
+  
+  componentDidMount: function() {
+    VocabularyStore.addChangeListener(this.handleVocabularyStoreChange);
+  },
+  
+  handleVocabularyStoreChange: function(name, data) {
+    if (name === this.props.vocabularyName) {
+      this.setState({
+        vocabulary: data
+      });
+    }
+  },
+  
   hasTerms: function() {
-    return (this.props.vocabulary && this.props.vocabulary.getIn(['fields', 'terms']));
+    return (this.state.vocabulary && this.state.vocabulary.getIn(['fields', 'terms']));
   },
   
   render: function() {
     var value = (this.hasTerms() ? this.props.value : getDisplayName(this.props.value));
     
     return (
-      <ControlledInput {...(this.props)} value={value} options={getOptions(this.props)}/>
+      <ControlledInput {...(this.props)} value={value} options={getOptions(this.state)}/>
     );
   }
 });
@@ -51,12 +74,12 @@ var getRefName = function(vocabularyShortID, term) {
   );
 }
 
-var getOptions = function(props) {
+var getOptions = function(state) {
   var options = Immutable.List();
 
-  if (props.vocabulary) {
-    var vocabularyShortID = props.vocabulary.getIn(['fields', 'shortIdentifier']);
-    var terms = props.vocabulary.getIn(['fields', 'terms']);
+  if (state.vocabulary) {
+    var vocabularyShortID = state.vocabulary.getIn(['fields', 'shortIdentifier']);
+    var terms = state.vocabulary.getIn(['fields', 'terms']);
 
     if (terms) {
       options = terms.map(function(term) {

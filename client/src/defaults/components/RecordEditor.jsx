@@ -70,6 +70,10 @@ var Record = React.createClass({
     }
   },
   
+  handleFormCommit: function(values) {
+    console.log(values);
+  },
+  
   render: function() {
     var recordType = this.state.recordType;
     var Form = require('./forms/' + recordType + '.jsx');
@@ -82,7 +86,7 @@ var Record = React.createClass({
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
               <ToolBar values={this.state.values}/>
-              <Form values={this.state.values}/>
+              <Form values={this.state.values} onCommit={this.handleFormCommit}/>
               <ToolBar/>
             </Panel>
             {/*

@@ -7,7 +7,7 @@ var ColumnGroup = require('../ColumnGroup.jsx');
 var Column = require('../Column.jsx');
 var Input = require('../Input.jsx');
 var RepeatingInput = require('../RepeatingInput.jsx');
-var ControlledInput = require('../ControlledInput.jsx');
+var StaticControlledInput = require('../StaticControlledInput.jsx');
 var VocabularyControlledInput = require('../VocabularyControlledInput.jsx');
 var CompoundInput = require('../CompoundInput.jsx');
 var TabularCompoundInput = require('../TabularCompoundInput.jsx');
@@ -38,10 +38,6 @@ module.exports = React.createClass({
     }
   },
   
-  getVocabulary: function(shortID) {
-    
-  },
-  
   render: function() {
     return (
       <Form recordType="collectionobject" values={this.props.values}>
@@ -54,18 +50,18 @@ module.exports = React.createClass({
               <RepeatingInput name="otherNumber">
                 <TabularCompoundInput>
                   <Input name="numberValue"/>
-                  <ControlledInput name="numberType" controlledListName="numberTypes"/>
+                  <StaticControlledInput name="numberType" controlledListName="numberTypes"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
               <RepeatingInput name="responsibleDepartments">
                 <MappedInput>
-                  <ControlledInput name="responsibleDepartment" controlledListName="departments"/>
+                  <StaticControlledInput name="responsibleDepartment" controlledListName="departments"/>
                 </MappedInput>
               </RepeatingInput>
       
-              <ControlledInput name="collection" controlledListName="collections"/>
-              <ControlledInput name="recordStatus" defaultValue="new" controlledListName="recordStatuses"/>
+              <StaticControlledInput name="collection" controlledListName="collections"/>
+              <StaticControlledInput name="recordStatus" defaultValue="new" controlledListName="recordStatuses"/>
             </Column>
       
             <Column>
@@ -96,7 +92,7 @@ module.exports = React.createClass({
                 </Column>
       
                 <Column>
-                  <ControlledInput name="titleType" controlledListName="titleTypes"/>
+                  <StaticControlledInput name="titleType" controlledListName="titleTypes"/>
       
                   <RepeatingInput name="titleTranslationSubGroup">
                     <TabularCompoundInput>
@@ -112,10 +108,10 @@ module.exports = React.createClass({
           <RepeatingInput name="objectNameGroup">
             <TabularCompoundInput>
               <Input name="objectName"/>
-              <ControlledInput name="objectNameCurrency" controlledListName="nameCurrencies"/>
-              <ControlledInput name="objectNameLevel" controlledListName="nameLevels"/>
-              <ControlledInput name="objectNameSystem" controlledListName="nameSystems"/>
-              <ControlledInput name="objectNameType" controlledListName="nameTypes"/>
+              <StaticControlledInput name="objectNameCurrency" controlledListName="nameCurrencies"/>
+              <StaticControlledInput name="objectNameLevel" controlledListName="nameLevels"/>
+              <StaticControlledInput name="objectNameSystem" controlledListName="nameSystems"/>
+              <StaticControlledInput name="objectNameType" controlledListName="nameTypes"/>
               <VocabularyControlledInput name="objectNameLanguage" vocabularyName="languages"/>
               <Input name="objectNameNote"/>
             </TabularCompoundInput>
@@ -129,16 +125,16 @@ module.exports = React.createClass({
               
               <RepeatingInput name="objectStatusList">
                 <MappedInput>
-                  <ControlledInput name="objectStatus" controlledListName="objectStatuses"/>
+                  <StaticControlledInput name="objectStatus" controlledListName="objectStatuses"/>
                 </MappedInput>
               </RepeatingInput>
       
-              <ControlledInput name="sex" controlledListName="sexes"/>
-              <ControlledInput name="phase" controlledListName="phases"/>
+              <StaticControlledInput name="sex" controlledListName="sexes"/>
+              <StaticControlledInput name="phase" controlledListName="phases"/>
               
               <RepeatingInput name="forms">
                 <MappedInput>
-                  <ControlledInput name="form" controlledListName="forms"/>
+                  <StaticControlledInput name="form" controlledListName="forms"/>
                 </MappedInput>
               </RepeatingInput>
             </Column>
@@ -149,7 +145,7 @@ module.exports = React.createClass({
               <TabularCompoundInput>
                 <Input name="age"/>
                 <VocabularyControlledInput name="ageQualifier" vocabularyName="agequalifier"/>
-                <ControlledInput name="ageUnit" controlledListName="ageUnits"/>
+                <StaticControlledInput name="ageUnit" controlledListName="ageUnits"/>
               </TabularCompoundInput>
       
               <RepeatingInput name="styles">
@@ -182,7 +178,7 @@ module.exports = React.createClass({
             <Column>
               <RepeatingInput name="objectComponentGroup">
                 <TabularCompoundInput>
-                  <ControlledInput name="objectComponentName" controlledListName="objectComponentNames"/>
+                  <StaticControlledInput name="objectComponentName" controlledListName="objectComponentNames"/>
                   <Input name="objectComponentInformation"/>
                 </TabularCompoundInput>
               </RepeatingInput>
@@ -191,9 +187,9 @@ module.exports = React.createClass({
             <Column>
               <RepeatingInput name="technicalAttributeGroup">
                 <TabularCompoundInput>
-                  <ControlledInput name="technicalAttribute" controlledListName="technicalAttributes"/>
-                  <ControlledInput name="technicalAttributeMeasurement" controlledListName="technicalAttributeMeasurements"/>
-                  <ControlledInput name="technicalAttributeMeasurementUnit" controlledListName="technicalAttributeMeasurementUnits"/>
+                  <StaticControlledInput name="technicalAttribute" controlledListName="technicalAttributes"/>
+                  <StaticControlledInput name="technicalAttributeMeasurement" controlledListName="technicalAttributeMeasurements"/>
+                  <StaticControlledInput name="technicalAttributeMeasurementUnit" controlledListName="technicalAttributeMeasurementUnits"/>
                 </TabularCompoundInput>
               </RepeatingInput>
             </Column>
@@ -203,7 +199,7 @@ module.exports = React.createClass({
             <CompoundInput>
               <ColumnGroup>
                 <Column>
-                  <ControlledInput name="measuredPart" controlledListName="measuredParts"/>
+                  <StaticControlledInput name="measuredPart" controlledListName="measuredParts"/>
                 </Column>
       
                 <Column>
@@ -213,11 +209,11 @@ module.exports = React.createClass({
       
               <RepeatingInput name="dimensionSubGroup">
                 <TabularCompoundInput>
-                  <ControlledInput name="dimension" controlledListName="dimensions"/>
+                  <StaticControlledInput name="dimension" controlledListName="dimensions"/>
                   <AuthorityControlledInput name="measuredBy"/>
-                  <ControlledInput name="measurementMethod" controlledListName="measurementMethods"/>
+                  <StaticControlledInput name="measurementMethod" controlledListName="measurementMethods"/>
                   <Input name="value"/>
-                  <ControlledInput name="measurementUnit" controlledListName="measurementUnits"/>
+                  <StaticControlledInput name="measurementUnit" controlledListName="measurementUnits"/>
                   <Input name="valueQualifier"/>
                   <DateInput name="valueDate"/>
                 </TabularCompoundInput>
@@ -252,14 +248,14 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="contentPositions">
                   <MappedInput>
-                    <ControlledInput name="contentPosition" controlledListName="contentPositions"/>
+                    <StaticControlledInput name="contentPosition" controlledListName="contentPositions"/>
                   </MappedInput>
                 </RepeatingInput>
 
                 <RepeatingInput name="contentObjectGroup">
                   <TabularCompoundInput>
                     <Input name="contentObject"/>
-                    <ControlledInput name="contentObjectType" controlledListName="contentObjectTypes"/>
+                    <StaticControlledInput name="contentObjectType" controlledListName="contentObjectTypes"/>
                   </TabularCompoundInput>
                 </RepeatingInput>
               </Column>
@@ -285,7 +281,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="contentScripts">
                   <MappedInput>
-                    <ControlledInput name="contentScript" controlledListName="contentScripts"/>
+                    <StaticControlledInput name="contentScript" controlledListName="contentScripts"/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -327,9 +323,9 @@ module.exports = React.createClass({
                   </Column>
 
                   <Column>
-                    <ControlledInput name="inscriptionContentPosition" controlledListName="contentPositions"/>
-                    <ControlledInput name="inscriptionContentScript" controlledListName="contentScripts"/>
-                    <ControlledInput name="inscriptionContentType" controlledListName="inscriptionContentTypes"/>
+                    <StaticControlledInput name="inscriptionContentPosition" controlledListName="contentPositions"/>
+                    <StaticControlledInput name="inscriptionContentScript" controlledListName="contentScripts"/>
+                    <StaticControlledInput name="inscriptionContentType" controlledListName="inscriptionContentTypes"/>
                     <Input name="inscriptionContentMethod"/>
                   </Column>
                 </ColumnGroup>
@@ -353,8 +349,8 @@ module.exports = React.createClass({
                   </Column>
 
                   <Column>
-                    <ControlledInput name="inscriptionDescriptionPosition" controlledListName="contentPositions"/>
-                    <ControlledInput name="inscriptionDescriptionType" controlledListName="inscriptionContentTypes"/>
+                    <StaticControlledInput name="inscriptionDescriptionPosition" controlledListName="contentPositions"/>
+                    <StaticControlledInput name="inscriptionDescriptionType" controlledListName="inscriptionContentTypes"/>
                     <Input name="inscriptionDescriptionMethod"/>
                   </Column>
                 </ColumnGroup>
@@ -559,11 +555,11 @@ module.exports = React.createClass({
             <Column>
               <ColumnGroup>
                 <Column>
-                  <ControlledInput name="ownershipAccess" controlledListName="ownershipAccessLevels"/>
+                  <StaticControlledInput name="ownershipAccess" controlledListName="ownershipAccessLevels"/>
                 </Column>
 
                 <Column>
-                  <ControlledInput name="ownershipCategory" controlledListName="ownershipCategories"/>
+                  <StaticControlledInput name="ownershipCategory" controlledListName="ownershipCategories"/>
                 </Column>
               </ColumnGroup>
 
@@ -572,7 +568,7 @@ module.exports = React.createClass({
           </ColumnGroup>
 
           <TabularCompoundInput>
-            <ControlledInput name="ownershipExchangeMethod" controlledListName="ownershipExchangeMethods"/>
+            <StaticControlledInput name="ownershipExchangeMethod" controlledListName="ownershipExchangeMethods"/>
             <Input name="ownershipExchangeNote"/>
             <VocabularyControlledInput name="ownershipExchangePriceCurrency" vocabularyName="currency"/>
             <Input name="ownershipExchangePriceValue"/>
