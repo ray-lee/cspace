@@ -40,7 +40,7 @@ var Logout = React.createClass({
     
     if (this.state.logoutState !== LogoutStates.IN_PROGRESS) {
       loginLink = (
-        <Link to="login">Sign in</Link>
+        <Link to="login">{this.getIntlMessage('logout.login')}</Link>
       );
     }
     

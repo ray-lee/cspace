@@ -35,6 +35,7 @@ module.exports = {
   },
   
   logout: {
+    login: 'Sign in',
     stateMessage: {
       COMPLETE: 'You are now signed out of CollectionSpace.',
       IN_PROGRESS: 'Signing out...',
