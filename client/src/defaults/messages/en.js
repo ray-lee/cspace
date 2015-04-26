@@ -7,6 +7,41 @@ module.exports = {
     admin: 'Administration'
   },
   
+  about: {
+    html: `
+      <h1>UI Prototype</h1>
+      <p>
+        This is a prototype of a new user interface for CollectionSpace.
+      </p>
+      <p>
+        For more information, see:
+        <ul>
+          <li><a href="https://docs.google.com/document/d/1cZE3t0JzO8ZEbZPl_7T7TdcoNFG6p4yoy0HOrK_1eLc/edit?usp=sharing">Proposal for a New CollectionSpace UI Architecture</a>, February 2015</li>
+          <li><a href="https://docs.google.com/presentation/d/1d9tSxhXl9J5BaC8oQfQl_biBFU13eNTW75ffGSOQ4G0/edit?usp=sharing">Presentation to the CollectionSpace Tech Working Group</a>, 10 April 2015</li>
+        </ul>
+      </p>
+    `
+  },
+  
+  login: {
+    username: 'Email',
+    password: 'Password',
+    login: 'Sign in',
+    stateMessage: {
+      DEFAULT: 'Please sign in to continue.',
+      IN_PROGRESS: 'Signing in...',
+      FAILED: 'Sign in failed. Please try a different email/password.'
+    }
+  },
+  
+  logout: {
+    stateMessage: {
+      COMPLETE: 'You are now signed out of CollectionSpace.',
+      IN_PROGRESS: 'Signing out...',
+      FAILED: 'Sign out failed. Please reload this page to try again.'
+    }
+  },
+  
   searchInput: {
     placeholder: 'Search by CSID'
   },
@@ -26,7 +61,7 @@ module.exports = {
     revert: 'Revert',
     delete: 'Delete',
     save: 'Save',
-    statusMessage: {
+    stateMessage: {
       SAVING: 'Saving...'
     }
   },

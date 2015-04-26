@@ -15,18 +15,18 @@
   margin: 8px 0 8px 0;
 }
 
-.login .inprogress form {
+.login .in_progress form {
   visibility: hidden;
 }
 
-.login .inprogress .panelbody {
+.login .in_progress .panelbody {
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 28px 28px;
 }
 
-.login .message {
+.login .statemessage {
   margin-bottom: 16px;
 }
 

@@ -16,7 +16,7 @@
   align-items: baseline;
 }
 
-.logout .inprogress .panelbody {
+.logout .in_progress .panelbody {
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
   background-position: center center;

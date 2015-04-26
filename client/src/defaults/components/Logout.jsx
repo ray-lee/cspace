@@ -5,21 +5,16 @@ var IntlMixin = require('react-intl').IntlMixin;
 var CollectionSpace = require('../utils/CollectionSpace.js');
 var About = require('./About.jsx');
 var Panel = require('./Panel.jsx');
+var LogoutStates = require('../constants/LogoutStates.js');
 
 require('../styles/Logout.css');
 
 var Logout = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, Router.Navigation],
   
-  statics: {
-    STATE_IN_PROGRESS: 'inprogress',
-    STATE_FAILED: 'failed',
-    STATE_COMPLETE: 'complete'
-  },
-  
   getInitialState: function() {
     return {
-      logoutState: Logout.STATE_IN_PROGRESS
+      logoutState: LogoutStates.IN_PROGRESS
     }
   },
   
@@ -27,36 +22,23 @@ var Logout = React.createClass({
     CollectionSpace.disconnect()
       .then(function() {
         this.setState({
-          logoutState: Logout.STATE_COMPLETE
+          logoutState: LogoutStates.COMPLETE
         });
       }.bind(this))
       .then(null, function(error) {
         console.log(error);
 
         this.setState({
-          logoutState: Logout.STATE_FAILED
+          logoutState: LogoutStates.FAILED
         });
       }.bind(this));
   },
   
   render: function() {
-    var message = '';
-    
-    switch (this.state.logoutState) {
-      case Logout.STATE_IN_PROGRESS:
-        message = 'Signing out...'
-        break;
-      case Logout.STATE_FAILED:
-        message = 'Sign out failed. Please reload this page to try again.'
-        break;
-      case Logout.STATE_COMPLETE:
-        message = 'You are now signed out of CollectionSpace.'
-        break;
-    }
-    
+    var message = this.getIntlMessage('logout.stateMessage.' + this.state.logoutState);
     var loginLink = null;
     
-    if (this.state.logoutState !== Logout.STATE_IN_PROGRESS) {
+    if (this.state.logoutState !== LogoutStates.IN_PROGRESS) {
       loginLink = (
         <Link to="login">Sign in</Link>
       );

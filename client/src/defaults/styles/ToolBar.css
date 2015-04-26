@@ -12,7 +12,7 @@
   padding: 1px 9px 1px 9px;
 }
 
-.toolbar .statusmessage {
+.toolbar .statemessage {
   padding-left: 16px;
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;

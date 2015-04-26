@@ -4,6 +4,7 @@ var IntlMixin = require('react-intl').IntlMixin;
 var CollectionSpace = require('../utils/CollectionSpace.js');
 var Panel = require('./Panel.jsx');
 var About = require('./About.jsx');
+var LoginStates = require('../constants/LoginStates.js');
 
 require('../styles/Login.css');
 
@@ -11,10 +12,6 @@ var Login = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, Router.Navigation],
   
   statics: {
-    STATE_INIT: 'init',
-    STATE_IN_PROGRESS: 'inprogress',
-    STATE_FAILED: 'failed',
-    
     attemptedTransition: null
   },
   
@@ -22,7 +19,7 @@ var Login = React.createClass({
   
   getInitialState: function() {
     return {
-      loginState: Login.STATE_INIT,
+      loginState: LoginStates.DEFAULT,
       username: '',
       password: ''
     }
@@ -62,7 +59,7 @@ var Login = React.createClass({
     var password = this.state.password;
     
     this.setState({
-      loginState: Login.STATE_IN_PROGRESS,
+      loginState: LoginStates.IN_PROGRESS,
       password: ''
     });
     
@@ -86,40 +83,28 @@ var Login = React.createClass({
         this.shouldFocusUsername = true;
         
         this.setState({
-          loginState: Login.STATE_FAILED
+          loginState: LoginStates.FAILED
         });
       }.bind(this));
   },
   
   render: function() {
-    var message = '';
-    
-    switch (this.state.loginState) {
-      case Login.STATE_INIT:
-        message = 'Please sign in to continue.'
-        break;
-      case Login.STATE_IN_PROGRESS:
-        message = 'Signing in...'
-        break;
-      case Login.STATE_FAILED:
-        message = 'Sign in failed. Please try a different email/password.'
-        break;
-    }
+    var stateMessage = this.getIntlMessage('login.stateMessage.' + this.state.loginState);
     
     return (
       <div className="login">
         <About/>
         <div className={'formcontainer ' + this.state.loginState}>
           <Panel collapsible={false}>
-            <div className="message">{message}</div>
+            <div className="statemessage">{stateMessage}</div>
             <form onSubmit={this.handleFormSubmit}>
               <div>
-                <label>Email</label><input ref="username" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder=" "/>
+                <label>{this.getIntlMessage('login.username')}</label><input ref="username" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder=" "/>
               </div>
               <div>
-                <label>Password</label><input ref="password" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder=" "/>
+                <label>{this.getIntlMessage('login.password')}</label><input ref="password" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder=" "/>
               </div>
-              <button>Sign in</button>
+              <button>{this.getIntlMessage('login.login')}</button>
             </form>
           </Panel>
         </div>
