@@ -72,8 +72,8 @@ var RecordHistory = React.createClass({
     return (
       <div className="recordhistory">
         <div className="content">
-          {createdMessage}<br/>
-          {updatedMessage}
+          {updatedMessage}<br/>
+          {createdMessage}
         </div>
       </div>
     );

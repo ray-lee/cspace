@@ -8,6 +8,7 @@ var Panel = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
 var RecordStore = require('../stores/RecordStore.js');
 var RecordActions = require('../actions/RecordActions.js');
+var RecordStates = require('../constants/RecordStates.js');
 
 require('../styles/RecordEditor.css');
 
@@ -19,7 +20,7 @@ var Record = React.createClass({
       recordType: this.getParams().recordType,
       csid: null,
       values: Immutable.Map(),
-      loading: false
+      recordState: null
     }
   },
   
@@ -33,11 +34,15 @@ var Record = React.createClass({
       this.setState({
         recordType: recordType,
         csid: csid,
-        loading: true
+        recordState: RecordStates.LOADING
       });
       
       RecordStore.get(recordType, csid);
     }
+  },
+  
+  componentWillUnmount: function() {
+    RecordStore.removeUpdatedListener(this.handleStoreUpdated);
   },
   
   componentWillReceiveProps: function(nextProps) {
@@ -53,7 +58,7 @@ var Record = React.createClass({
       
       if (csid) {
         RecordStore.get(recordType, csid);
-        newState.loading = true;
+        newState.recordState = RecordStates.LOADING;
       }
       
       this.setState(newState);
@@ -64,14 +69,19 @@ var Record = React.createClass({
     if (csid === this.state.csid) {
       this.setState({
         values: data.get('fields'),
-        loading: false
+        recordState: null
       });
     }
-    else if (!this.state.csid) { //&& this.state.saving
+    else if (!this.state.csid) {
+      // Finished creating.
+      
       this.setState({
+        csid: csid,
         values: data.get('fields'),
-        loading: false
+        recordState: null
       });
+      
+      // Put the new csid in the URL.
       
       history.replaceState(null, csid, window.location.href + '/' + csid);
     }
@@ -84,6 +94,10 @@ var Record = React.createClass({
   },
   
   handleSaveButtonClick: function(event) {
+    this.setState({
+      recordState: RecordStates.SAVING
+    });
+    
     RecordActions.save(this.state.recordType, this.state.csid, this.state.values);
   },
   
@@ -93,14 +107,14 @@ var Record = React.createClass({
 
     return (
       <main className="recordeditor">
-        <TitleBar loading={this.state.loading} title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
+        <TitleBar recordState={this.state.recordState} title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <TabbedPanelGroup>
             <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
-              <ToolBar values={this.state.values} onSaveButtonClick={this.handleSaveButtonClick}/>
+              <ToolBar recordState={this.state.recordState} values={this.state.values} onSaveButtonClick={this.handleSaveButtonClick}/>
               <Form values={this.state.values} onCommit={this.handleFormCommit}/>
-              <ToolBar onSaveButtonClick={this.handleSaveButtonClick}/>
+              <ToolBar recordState={this.state.recordState} onSaveButtonClick={this.handleSaveButtonClick}/>
             </Panel>
             {/*
             <Panel key="test" header="Test Tab">

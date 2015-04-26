@@ -23,6 +23,10 @@ var VocabularyControlledInput = React.createClass({
     VocabularyStore.addChangeListener(this.handleVocabularyStoreChange);
   },
   
+  componentWillUnmount: function() {
+    VocabularyStore.removeChangeListener(this.handleVocabularyStoreChange);
+  },
+  
   handleVocabularyStoreChange: function(name, data) {
     if (name === this.props.vocabularyName) {
       this.setState({

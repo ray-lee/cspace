@@ -24,6 +24,10 @@ var StaticControlledInput = React.createClass({
     ControlledListStore.addChangeListener(this.handleControlledListStoreChange);
   },
   
+  componentWillUnmount: function() {
+    ControlledListStore.removeChangeListener(this.handleControlledListStoreChange);
+  },
+  
   handleControlledListStoreChange: function(name, data) {
     if (name === this.props.controlledListName) {
       this.setState({

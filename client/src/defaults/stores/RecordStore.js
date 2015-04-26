@@ -44,31 +44,48 @@ var RecordStore = assign({}, EventEmitter.prototype, {
 });
 
 var processRecordData = function(data) {
-  return Immutable.fromJS(data);
+  return Immutable.fromJS(data, function (key, value) {
+    var isIndexed = Immutable.Iterable.isIndexed(value);
+    var value;
+    
+    if (!isIndexed) {
+      // Delete the _primary key on repeatables, since we don't use it.
+      value = value.toMap().delete('_primary');
+    }
+    else {
+      value = value.toList();
+    }
+    
+    return value;
+  });
 };
 
 RecordStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SAVE_RECORD:
-      console.log("saving: " + action.recordType + ' ' + action.csid);
-      
       var data = {
         fields: action.data.toJS()
       }
-      
+
       if (action.csid) {
-        // CollectionSpace.updateRecord(action.recordType, action.csid, action.data)
-        //   .then(function(data) {
-        //     var data = processRecordData(data);
-        //     records = records.set(csid, data);
-        //
-        //     this.emitUpdated(csid, data);
-        //   }.bind(this))
-        //   .then(null, function(error) {
-        //     console.error(error);
-        //   });
+        // The record to be saved has a CSID, so it's an update.
+
+        CollectionSpace.updateRecord(action.recordType, action.csid, data)
+          .then(function(data) {
+            var data = processRecordData(data);
+            var csid = data.get('csid');
+
+            records = records.set(csid, data);
+
+            RecordStore.emitUpdated(csid, data);
+          })
+          .then(null, function(error) {
+            console.error(error);
+          });
       }
       else {
+        // The record to be saved does not have a CSID, so it's a create.
+        
         CollectionSpace.createRecord(action.recordType, data)
           .then(function(data) {
             var data = processRecordData(data);

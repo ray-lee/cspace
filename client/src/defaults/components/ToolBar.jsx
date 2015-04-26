@@ -2,6 +2,7 @@ var React = require('react/addons');
 var Immutable = require('immutable');
 var IntlMixin = require('react-intl').IntlMixin;
 var RecordHistory = require('./RecordHistory.jsx');
+var RecordStates = require('../constants/RecordStates.js');
 
 require('../styles/ToolBar.css');
 
@@ -25,6 +26,14 @@ var ToolBar = React.createClass({
   },
   
   render: function() {
+    var statusMessage = null;
+    
+    if (this.props.recordState === RecordStates.SAVING) {
+      statusMessage = (
+        <div className={'statusmessage ' + this.props.recordState}>{this.getIntlMessage('toolBar.statusMessage.' + this.props.recordState)}</div>
+      );
+    }
+    
     return (
       <div className="toolbar">
         <div className="buttonbar">
@@ -33,7 +42,7 @@ var ToolBar = React.createClass({
           <button type="button">{this.getIntlMessage('toolBar.delete')}</button>
           <button type="button" onClick={this.handleSaveButtonClick}>{this.getIntlMessage('toolBar.save')}</button>
         </div>
-      
+        {statusMessage}
         <RecordHistory values={this.props.values}/>
       </div>
     );

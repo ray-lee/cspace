@@ -25,7 +25,10 @@ module.exports = {
     clone: 'Clone',
     revert: 'Revert',
     delete: 'Delete',
-    save: 'Save'
+    save: 'Save',
+    statusMessage: {
+      SAVING: 'Saving...'
+    }
   },
   
   footer: {

@@ -3,6 +3,7 @@ var Immutable = require('immutable');
 var assign = require('object-assign');
 var cspace = require('../utils/CollectionSpace.js');
 
+var MAX_LISTENERS = 64;
 var CHANGE_EVENT = 'change';
 
 var vocabularies = Immutable.Map();
@@ -46,5 +47,7 @@ var VocabularyStore = assign({}, EventEmitter.prototype, {
 var processVocabularyData = function(data) {
   return Immutable.fromJS(data);
 };
+
+VocabularyStore.setMaxListeners(MAX_LISTENERS);
 
 module.exports = VocabularyStore;
