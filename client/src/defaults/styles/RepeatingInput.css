@@ -27,6 +27,7 @@
 }
 
 .repeatinginput > .instances > .instance .tab > .moveTopButton {
+  font-weight: 300;
   border-radius: 0;
   border: none;
   background: white;
