@@ -1,5 +1,6 @@
 var React = require('react/addons');
 var ScrollObserverMixin = require('../mixins/ScrollObserverMixin.jsx');
+var RecordStates = require('../constants/RecordStates.js');
 
 require('../styles/TitleBar.css');
 
@@ -18,7 +19,7 @@ var TitleBar = React.createClass({
     return {
       title: '',
       recordType: '',
-      recordState: null
+      recordState: RecordStates.DEFAULT
     };
   },
   
@@ -53,9 +54,7 @@ var TitleBar = React.createClass({
       docked: this.state.docked
     };
 
-    if (this.props.recordState) {
-      classes[this.props.recordState] = true;
-    }
+    classes[this.props.recordState] = true;
 
     classes = React.addons.classSet(classes);
     

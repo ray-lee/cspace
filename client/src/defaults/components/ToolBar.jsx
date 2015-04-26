@@ -15,7 +15,8 @@ var ToolBar = React.createClass({
   
   getDefaultProps: function() {
     return {
-      values: Immutable.Map()
+      values: Immutable.Map(),
+      recordState: RecordStates.DEFAULT
     };
   },
   

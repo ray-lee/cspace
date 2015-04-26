@@ -20,7 +20,7 @@ var Record = React.createClass({
       recordType: this.getParams().recordType,
       csid: null,
       values: Immutable.Map(),
-      recordState: null
+      recordState: RecordStates.DEFAULT
     }
   },
   
@@ -69,7 +69,7 @@ var Record = React.createClass({
     if (csid === this.state.csid) {
       this.setState({
         values: data.get('fields'),
-        recordState: null
+        recordState: RecordStates.DEFAULT
       });
     }
     else if (!this.state.csid) {
@@ -78,7 +78,7 @@ var Record = React.createClass({
       this.setState({
         csid: csid,
         values: data.get('fields'),
-        recordState: null
+        recordState: RecordStates.DEFAULT
       });
       
       // Put the new csid in the URL.
