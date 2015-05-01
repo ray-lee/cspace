@@ -27,6 +27,8 @@ var RecordStore = assign({}, EventEmitter.prototype, {
         .then(null, function(error) {
           console.error(error);
         });
+        
+        return null;
     }
   },
   

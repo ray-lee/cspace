@@ -18,7 +18,7 @@ var Record = React.createClass({
   getInitialState: function() {
     return {
       recordType: this.getParams().recordType,
-      csid: null,
+      csid: this.getParams().csid,
       values: Immutable.Map(),
       recordState: RecordStates.DEFAULT
     }
@@ -27,17 +27,12 @@ var Record = React.createClass({
   componentDidMount: function() {
     RecordStore.addUpdatedListener(this.handleStoreUpdated);
 
-    var recordType = this.getParams().recordType;
-    var csid = this.getParams().csid;
-    
-    if (csid) {
+    if (this.state.csid) {
       this.setState({
-        recordType: recordType,
-        csid: csid,
         recordState: RecordStates.LOADING
       });
       
-      RecordStore.get(recordType, csid);
+      RecordStore.get(this.state.recordType, this.state.csid);
     }
   },
   
@@ -52,15 +47,22 @@ var Record = React.createClass({
     if (recordType !== this.state.recordType || csid !== this.state.csid) {
       var newState = {
         recordType: recordType,
-        csid: csid,
-        values: Immutable.Map()
+        csid: csid
       };
       
       if (csid) {
-        RecordStore.get(recordType, csid);
-        newState.recordState = RecordStates.LOADING;
+        var data = RecordStore.get(recordType, csid);
+        
+        if (data) {
+          newState.values = data.get('fields');
+          newState.recordState = RecordStates.DEFAULT;
+        }
+        else {
+          newState.values = Immutable.Map();
+          newState.recordState = RecordStates.LOADING;
+        }
       }
-      
+
       this.setState(newState);
     }
   },
