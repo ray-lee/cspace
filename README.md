@@ -23,6 +23,12 @@ cd client
 npm run deploy:prod
 ```
 
+Or, for development:
+
+```
+npm run deploy:dev
+```
+
 # Accessing the Application
 
 The prototype application consists of an editor for collectionobject records. Once installed, it may be accessed using Chrome or Firefox, at http://[hostname:port]/cspace/core/record/collectionobject. A live prototype is installed at http://qa.collectionspace.org:8180/cspace/core/record/collectionobject.
