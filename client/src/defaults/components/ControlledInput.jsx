@@ -34,17 +34,32 @@ var ControlledInput = React.createClass({
       value = this.props.options.first().get('value');
     }
     
+    value = this.normalizeValue(value);
+    
+    var options = this.normalizeOptions(this.props.options);
+    var filteredOptions = this.filterOptions(options, value);
+    
     return {
-      value: this.normalizeValue(value),
+      value: value,
+      options: options,
+      filteredOptions: filteredOptions,
       popupOpen: false,
       activeOptionNum: null
     }
   },
     
   componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      value: this.normalizeValue(nextProps.value)
-    });
+    if (nextProps.value !== this.props.value || nextProps.options !== this.props.options) {
+      var value = this.normalizeValue(nextProps.value);
+      var options = (nextProps.options === this.props.options) ? this.state.options : this.normalizeOptions(nextProps.options);
+      var filteredOptions = this.filterOptions(options, value);
+
+      this.setState({
+        value: value,
+        options: options,
+        filteredOptions: filteredOptions
+      });
+    }
   },
   
   normalizeValue: function(value) {
@@ -53,6 +68,42 @@ var ControlledInput = React.createClass({
     }
     
     return value;
+  },
+  
+  normalizeOptions: function(options) {
+    if (!options) {
+      options = Immutable.List();
+    }
+
+    if (!this.props.required) {
+      // Prepend an empty option.
+  
+      options = options.unshift(Immutable.Map({
+        value: '',
+        label: ' '
+      }));
+    }
+    
+    // Convert the list into an ordered map, keyed by value.
+    // This makes it fast to look up the label from a value.
+    
+    var tuples = [];
+    
+    options.forEach(function(option) {
+      tuples.push([option.get('value'), option]);
+    });
+    
+    options = Immutable.OrderedMap(tuples);
+    
+    return options;
+  },
+  
+  filterOptions: function(options, value) {
+    return Immutable.List(
+      options.valueSeq().filterNot(function(option) {
+        return (option.get('value') === value);
+      })
+    );
   },
   
   componentDidMount: function() {
@@ -67,6 +118,7 @@ var ControlledInput = React.createClass({
   
   componentDidUpdate: function() {
     var activeOptionNum = this.state.activeOptionNum;
+    
     var top = activeOptionNum == null ? 0 : this.refs['opt' + activeOptionNum].getDOMNode().offsetTop
 
     this.refs.popup.getDOMNode().scrollTop = top;
@@ -86,10 +138,10 @@ var ControlledInput = React.createClass({
         this.openPopUp();
       }
       else {
-        var optionCount = React.Children.count(this.refs.optionList.props.children);
+        var optionCount = this.state.filteredOptions.size;
         var maxOptionNum = optionCount - 1;
         var activeOptionNum = this.state.activeOptionNum;
-                
+        
         if (event.key === 'ArrowDown') {
           if (activeOptionNum == null) {
             activeOptionNum = 0;
@@ -101,7 +153,7 @@ var ControlledInput = React.createClass({
               activeOptionNum = 0;
             }
           }
-          
+
           this.setState({
             activeOptionNum: activeOptionNum
           })
@@ -132,12 +184,10 @@ var ControlledInput = React.createClass({
   handleInputKeyPress: function(event) {
     if (this.state.popupOpen) {
       if (event.key === 'Enter') {
-        if (this.state.activeOptionNum !== null) {
-          var target = this.refs['opt' + this.state.activeOptionNum].getDOMNode();
-    
-          if (target.hasAttribute('data-optionvalue')) {
-            this.setValue(target.getAttribute('data-optionvalue'));
-          }
+        var activeOptionNum = this.state.activeOptionNum;
+       
+        if (activeOptionNum !== null) {
+          this.setValue(this.state.filteredOptions.get(activeOptionNum).get('value'));
         }
       }
     }
@@ -208,6 +258,7 @@ var ControlledInput = React.createClass({
   setValue: function(value) {
     this.setState({
       value: value,
+      filteredOptions: this.filterOptions(this.state.options, value),
       popupOpen: false
     });
     
@@ -217,64 +268,29 @@ var ControlledInput = React.createClass({
   },
   
   render: function() {
-    var value = this.state.value;
-        
     var jewel = (
       <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
     );
     
-    var options = this.props.options;
+    var value = this.state.value;
+    var options = this.state.filteredOptions;
     
-    if (!options) {
-      options = Immutable.List();
-    }
-    
-    if (!this.props.required) {
-      // Prepend an empty option.
-      
-      options = options.unshift(Immutable.Map({
-        value: '',
-        label: ' '
-      }));
-    }
-    
-    var valueInOptions = options.some(function(option) {
-      return (option.get('value') === value);
-    }, this);
-    
-    if (!valueInOptions) {
-      // console.warn('Value `' + value + '` is not in options for controlled list input `' + this.props.name + '`');
-      
-      options = options.push(Immutable.Map({
-        value: value,
-        label: value
-      }));
-    }
-    
-    var optionNum = 0;
-    var optionNodes = [];
-    var selectedOptionLabel = '';
-
-    options.forEach(function(option, index) {
+    var optionNodes = options.valueSeq().map(function(option, index) {
       var optionValue = option.get('value');
       var optionLabel = option.get('label');
+
+      var optionClasses = React.addons.classSet({
+        'option': true,
+        'active': index === this.state.activeOptionNum
+      });
       
-      if (optionValue === value) {
-        selectedOptionLabel = optionLabel;
-      }
-      else {
-        var optionClasses = React.addons.classSet({
-          'option': true,
-          'active': optionNum === this.state.activeOptionNum
-        });
-        
-        optionNodes.push(
-          <li key={optionValue} ref={'opt' + optionNum} className={optionClasses} data-optionnum={optionNum} data-optionvalue={optionValue}>{optionLabel}</li>
-        );
-      
-        optionNum++;
-      }
-    }, this);
+      return (
+        <li key={optionValue} ref={'opt' + index} className={optionClasses} data-optionvalue={optionValue}>{optionLabel}</li>
+      );
+    }, this).toArray();
+    
+    var selectedOption = this.state.options.get(value);
+    var selectedOptionLabel = selectedOption ? selectedOption.get('label') : value;
     
     // The label for the empty option is a non-breaking space so that the option will have height in the option list,
     // but when displayed in the text field, it should be empty.
@@ -295,7 +311,7 @@ var ControlledInput = React.createClass({
         </ul>
       </div>
     );
-        
+    
     return (
       <div className="input controlledinput">
         <Input ref="input" {...(this.props)} value={selectedOptionLabel} jewel={jewel} popup={popup} role="combobox" autoComplete="off"

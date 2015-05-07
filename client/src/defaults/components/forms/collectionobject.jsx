@@ -41,6 +41,10 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Form recordType="collectionobject" {...(this.props)}>
+        {/*}
+        <StaticControlledInput name="recordStatus" defaultValue="new" controlledListName="recordStatuses"/>
+        */}
+        
         <Panel name="identification">
           <ColumnGroup>
             <Column>
@@ -649,7 +653,7 @@ module.exports = React.createClass({
             </Column>
           </ColumnGroup>
         </Panel>
-      
+        
         {/*
         <Panel name="hierarchy">
           <ColumnGroup>
