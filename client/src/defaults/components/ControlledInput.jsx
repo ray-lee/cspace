@@ -1,12 +1,14 @@
 var React = require('react/addons');
 var Immutable = require('immutable');
+var IntlMixin = require('react-intl').IntlMixin;
+var FormattedMessage = require('react-intl').FormattedMessage;
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 
 require('../styles/ControlledInput.css');
 
 var ControlledInput = React.createClass({
-  mixins: [InputMixin, React.addons.PureRenderMixin],
+  mixins: [InputMixin, React.addons.PureRenderMixin, IntlMixin],
   
   propTypes: {
     name: React.PropTypes.oneOfType([
@@ -37,12 +39,14 @@ var ControlledInput = React.createClass({
     value = this.normalizeValue(value);
     
     var options = this.normalizeOptions(this.props.options);
-    var filteredOptions = this.filterOptions(options, value);
+    var filter = null;
+    var filteredOptions = this.filterOptions(options, value, filter);
     
     return {
       value: value,
       options: options,
       filteredOptions: filteredOptions,
+      filter: filter,
       popupOpen: false,
       activeOptionNum: null
     }
@@ -50,14 +54,35 @@ var ControlledInput = React.createClass({
     
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.value !== this.props.value || nextProps.options !== this.props.options) {
-      var value = this.normalizeValue(nextProps.value);
-      var options = (nextProps.options === this.props.options) ? this.state.options : this.normalizeOptions(nextProps.options);
-      var filteredOptions = this.filterOptions(options, value);
-
+      var value;
+      var filter;
+      var options;
+      
+      if (nextProps.value !== this.props.value) {
+        // If the value changed, set it, and cancel any filtering.
+        
+        value = this.normalizeValue(nextProps.value);
+        filter = null;
+      }
+      else {
+        value = this.state.value;
+        filter = this.state.filter;
+      }
+      
+      if (nextProps.options !== this.props.options) {
+        options = this.normalizeOptions(nextProps.options);
+      }
+      else {
+        options = this.state.options;
+      }  
+      
+      var filteredOptions = this.filterOptions(options, value, filter);
+      
       this.setState({
         value: value,
         options: options,
-        filteredOptions: filteredOptions
+        filteredOptions: filteredOptions,
+        filter: filter
       });
     }
   },
@@ -98,12 +123,38 @@ var ControlledInput = React.createClass({
     return options;
   },
   
-  filterOptions: function(options, value) {
-    return Immutable.List(
-      options.valueSeq().filterNot(function(option) {
-        return (option.get('value') === value);
-      })
-    );
+  filterOptions: function(options, value, filter) {
+    var filteredOptions;
+    
+    if (typeof(filter) === 'undefined' || filter == null) {
+      // No filter was supplied. Just filter out the option with the value.
+      
+      filteredOptions = Immutable.List(
+        options.valueSeq().filterNot(function(option) {
+          return (option.get('value') === value);
+        })
+      );
+    }
+    else {
+      // Keep only the options whose labels begin with the filter.
+
+      if (filter === '') {
+        filteredOptions = Immutable.List(options.valueSeq());
+      }
+      else {
+        filter = filter.toLowerCase();
+        
+        filteredOptions = Immutable.List(
+          options.valueSeq().filter(function(option) {
+            var label = option.get('label').toLowerCase();
+            
+            return (label.lastIndexOf(filter, 0) === 0);
+          })
+        );
+      }
+    }
+    
+    return filteredOptions;
   },
   
   componentDidMount: function() {
@@ -117,15 +168,35 @@ var ControlledInput = React.createClass({
   },
   
   componentDidUpdate: function() {
-    var activeOptionNum = this.state.activeOptionNum;
+    // Ensure that the active option (the one that has keyboard focus)
+    // is scrolled into view.
     
-    var top = activeOptionNum == null ? 0 : this.refs['opt' + activeOptionNum].getDOMNode().offsetTop
-
-    this.refs.popup.getDOMNode().scrollTop = top;
+    var activeOptionNum = this.state.activeOptionNum;
+    var scrollTop = 0;
+    
+    if (activeOptionNum != null) {
+      // The active option number may no longer be in range,
+      // if the list has been filtered down. So test if the ref
+      // exists, before calling getDOMNode().
+      
+      var ref = this.refs['opt' + activeOptionNum];
+      
+      if (ref) {
+        scrollTop = ref.getDOMNode().offsetTop;
+      }
+    }
+    
+    this.refs.popup.getDOMNode().scrollTop = scrollTop;
   },
   
   handleInputChange: function(event) {
-    // TODO: Implement typeahead.
+    var filter = event.target.value;
+    var filteredOptions = this.filterOptions(this.state.options, this.state.value, filter);
+    
+    this.setState({
+      filter: filter,
+      filteredOptions: filteredOptions
+    });
   },
   
   handleInputClick: function(event) {
@@ -176,6 +247,11 @@ var ControlledInput = React.createClass({
         }
       }
     }
+    else if (event.key === 'Backspace') {
+      if (!this.state.popupOpen) {
+        this.openPopUp();
+      }
+    }
     else if (event.key === 'Escape') {
       this.closePopUp();
     }
@@ -185,8 +261,24 @@ var ControlledInput = React.createClass({
     if (this.state.popupOpen) {
       if (event.key === 'Enter') {
         var activeOptionNum = this.state.activeOptionNum;
-       
-        if (activeOptionNum !== null) {
+        
+        // The active option number may no longer be in range,
+        // if the list has been filtered down.
+      
+        if (activeOptionNum >= this.state.filteredOptions.size) {
+          activeOptionNum = null;
+        }
+        
+        if (activeOptionNum === null) {
+          // If there is only one filtered option, select it, even though it's not active.
+          
+          if (this.state.filter !== null && this.state.filteredOptions.size === 1) {
+            this.setValue(this.state.filteredOptions.first().get('value'));
+          }
+        }
+        else {
+          // Select the active option.
+          
           this.setValue(this.state.filteredOptions.get(activeOptionNum).get('value'));
         }
       }
@@ -233,13 +325,21 @@ var ControlledInput = React.createClass({
   
   handleOptionListClick: function(event) {
     this.isClickingOptionList = false;
-
-    var target = event.target;
-
-    if (target.hasAttribute('data-optionvalue')) {
-      this.setValue(target.getAttribute('data-optionvalue'));
-      this.refs['input'].focus();
-    }
+  },
+  
+  handleOptionClick: function(value, event) {
+    this.setValue(value);
+    this.refs['input'].focus();
+  },
+  
+  handleClearFilterOptionClick: function(event) {
+    var filter = '';
+    var filteredOptions = this.filterOptions(this.state.options, this.state.value, filter);
+    
+    this.setState({
+      filter: '',
+      filteredOptions: filteredOptions
+    });
   },
   
   openPopUp: function() {
@@ -251,14 +351,19 @@ var ControlledInput = React.createClass({
   
   closePopUp: function() {
     this.setState({
-      popupOpen: false
+      popupOpen: false,
+      filteredOptions: this.filterOptions(this.state.options, this.state.value, null),
+      filter: null
     });
   },
   
   setValue: function(value) {
+    var filteredOptions = this.filterOptions(this.state.options, value, null);
+    
     this.setState({
       value: value,
-      filteredOptions: this.filterOptions(this.state.options, value),
+      filteredOptions: filteredOptions,
+      filter: null,
       popupOpen: false
     });
     
@@ -275,7 +380,7 @@ var ControlledInput = React.createClass({
     var value = this.state.value;
     var options = this.state.filteredOptions;
     
-    var optionNodes = options.valueSeq().map(function(option, index) {
+    var optionNodes = options.map(function(option, index) {
       var optionValue = option.get('value');
       var optionLabel = option.get('label');
 
@@ -285,18 +390,49 @@ var ControlledInput = React.createClass({
       });
       
       return (
-        <li key={optionValue} ref={'opt' + index} className={optionClasses} data-optionvalue={optionValue}>{optionLabel}</li>
+        <li key={optionValue} ref={'opt' + index} className={optionClasses}
+            onClick={this.handleOptionClick.bind(this, optionValue)}>
+          {optionLabel}
+        </li>
       );
     }, this).toArray();
     
-    var selectedOption = this.state.options.get(value);
-    var selectedOptionLabel = selectedOption ? selectedOption.get('label') : value;
+    var inputValue = '';
+    var filteredCountMessage = null;
+    // var totalCountMessage = null;
     
-    // The label for the empty option is a non-breaking space so that the option will have height in the option list,
-    // but when displayed in the text field, it should be empty.
+    if (this.state.filter !== null) {
+      inputValue = this.state.filter;
+      
+      var filteredCount = options.size;
+      // var totalCount = this.state.options.size;
+      
+      filteredCountMessage = (
+        <div className="filteredcount">
+          <FormattedMessage message={this.getIntlMessage('controlledInput.filteredCount')} count={filteredCount}/>
+        </div>
+      );
+            
+      // if (filteredCount < totalCount && totalCount > 0) {
+      //   totalCountMessage = (
+      //     <a className="totalcount" onClick={this.handleClearFilterOptionClick}>
+      //       <FormattedMessage message={this.getIntlMessage('controlledInput.totalCount')} count={totalCount}/>
+      //     </a>
+      //   );
+      // }
+    }
+    else {
+      var selectedOption = this.state.options.get(value);
+      var selectedOptionLabel = selectedOption ? selectedOption.get('label') : value;
     
-    if (selectedOptionLabel === ' ') {
-      selectedOptionLabel = '';
+      // The label for the empty option is a non-breaking space so that the option will have height in the option list,
+      // but when displayed in the text field, it should be empty.
+    
+      if (selectedOptionLabel === ' ') {
+        selectedOptionLabel = '';
+      }
+      
+      inputValue = selectedOptionLabel;
     }
     
     var popupClasses = React.addons.classSet({
@@ -306,15 +442,22 @@ var ControlledInput = React.createClass({
 
     var popup = (
       <div className={popupClasses} ref="popup" tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
+        {filteredCountMessage}
         <ul ref="optionList" className="optionlist" onMouseDown={this.handleOptionListMouseDown} onClick={this.handleOptionListClick}>
           {optionNodes}
         </ul>
       </div>
     );
     
+    var classes = React.addons.classSet({
+      'input': true,
+      'controlledinput': true,
+      'filtering': this.state.filter !== null
+    });
+    
     return (
-      <div className="input controlledinput">
-        <Input ref="input" {...(this.props)} value={selectedOptionLabel} jewel={jewel} popup={popup} role="combobox" autoComplete="off"
+      <div className={classes}>
+        <Input ref="input" {...(this.props)} value={inputValue} jewel={jewel} popup={popup} role="combobox" autoComplete="off"
             onChange={this.handleInputChange}
             onClick={this.handleInputClick}
             onKeyDown={this.handleInputKeyDown}

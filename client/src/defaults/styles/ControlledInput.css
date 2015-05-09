@@ -13,6 +13,29 @@
   margin-bottom: 0;
 }
 
+.controlledinput.filtering input {
+  color: #999999;
+}
+
+.controlledinput .filteredcount, .controlledinput .totalcount {
+  padding: 0 4px 0 4px;
+  font-size: 8pt;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.controlledinput .filteredcount {
+  padding-top: 4px;
+}
+
+.controlledinput .totalcount {
+  padding-bottom: 4px;
+}
+
+.controlledinput .totalcount:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .controlledinput .optionlist {
   padding: 2px 0 2px 0;
 }

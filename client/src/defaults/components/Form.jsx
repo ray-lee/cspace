@@ -41,6 +41,14 @@ var Form = React.createClass({
     }
   },
   
+  handleFormSubmit: function(event) {
+    // If the form contains only one text field, the browser will
+    // try to submit the form when enter is pressed in that field.
+    // Suppress this.
+    
+    event.preventDefault();
+  },
+  
   getFieldLabel: function(fieldName) {
     var key = 'form.' + this.props.recordType + '.field.' + fieldName;
     
@@ -144,7 +152,7 @@ var Form = React.createClass({
     });
     
     return (
-      <form className={classes}>
+      <form className={classes} onSubmit={this.handleFormSubmit}>
         {this.decorateChildren(this.props.children, this.state.values)}
       </form>
     );

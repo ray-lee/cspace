@@ -90,6 +90,19 @@ module.exports = {
     }
   },
   
+  controlledInput: {
+    filteredCount: `{count, plural, 
+      =0 {No matches.}
+      =1 {1 match:}
+      other {# matches:}
+    }`,
+    totalCount: `{count, plural,
+      =0 {}
+      =1 {Show the option}
+      other {Show all # options}
+    }`
+  },
+  
   form: {
     collectionobject: {
       panel: {
