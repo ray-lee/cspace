@@ -40,10 +40,23 @@ var VocabularyControlledInput = React.createClass({
   },
   
   render: function() {
-    var value = (this.hasTerms() ? this.props.value : getDisplayName(this.props.value));
+    var value = this.props.value;
+    var options;
+    
+    if (this.hasTerms()) {
+      options = getOptions(this.state.vocabulary)
+    }
+    else if (value) {
+      // Create a placeholder options, containing just the value.
+
+      options = Immutable.List([Immutable.Map({
+        value: value,
+        label: getDisplayName(value)
+      })]);
+    }
     
     return (
-      <ControlledInput {...(this.props)} value={value} options={getOptions(this.state)}/>
+      <ControlledInput {...(this.props)} value={value} options={options}/>
     );
   }
 });
@@ -78,12 +91,12 @@ var getRefName = function(vocabularyShortID, term) {
   );
 }
 
-var getOptions = function(state) {
+var getOptions = function(vocabulary) {
   var options = Immutable.List();
 
-  if (state.vocabulary) {
-    var vocabularyShortID = state.vocabulary.getIn(['fields', 'shortIdentifier']);
-    var terms = state.vocabulary.getIn(['fields', 'terms']);
+  if (vocabulary) {
+    var vocabularyShortID = vocabulary.getIn(['fields', 'shortIdentifier']);
+    var terms = vocabulary.getIn(['fields', 'terms']);
 
     if (terms) {
       options = terms.map(function(term) {
@@ -93,14 +106,7 @@ var getOptions = function(state) {
         });
       });
     }
-  }  
-  
-  // if (props.value) {
-  //   options = options.push(Immutable.Map({
-  //     value: getShortIdentifier(props.value),
-  //     label: getDisplayName(props.value)
-  //   }));
-  // }
+  }
   
   return options;
 };
