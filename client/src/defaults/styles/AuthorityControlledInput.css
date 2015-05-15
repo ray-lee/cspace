@@ -1,6 +1,14 @@
-.autocompletejewel {
+.authoritycontrolledinput .autocompletejewel {
   background-image: url(../images/input-autocomplete.png);
   background-size: 10px 12px;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.authoritycontrolledinput.loading .autocompletejewel {
+  background-image: url(../images/spinner-jewel.svg);
+}
+
+.authoritycontrolledinput .optionlist .option.np { /* Non-preferred term */
+  padding-left: 12px;
 }

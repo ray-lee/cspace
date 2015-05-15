@@ -34,7 +34,7 @@
 
 .controlledinput .totalcount:hover {
   text-decoration: underline;
-  cursor: pointer;
+  cursor: default;
 }
 .controlledinput .optionlist {
   padding: 2px 0 2px 0;
@@ -62,7 +62,7 @@
   max-height: 200px;
   z-index: 90;
   background: #FFFFFF;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .33);
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .3);
   display: none;
   overflow: scroll;
   left: 1px;

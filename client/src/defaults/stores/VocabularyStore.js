@@ -31,8 +31,8 @@ var VocabularyStore = assign({}, EventEmitter.prototype, {
     return vocabulary;
   },
 
-  emitChange: function(csid, data) {
-    this.emit(CHANGE_EVENT, csid, data);
+  emitChange: function(shortID, data) {
+    this.emit(CHANGE_EVENT, shortID, data);
   },
 
   addChangeListener: function(callback) {

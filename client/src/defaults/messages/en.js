@@ -103,6 +103,10 @@ module.exports = {
     }`
   },
   
+  authorityControlledInput: {
+    loading: 'Searching...'
+  },
+  
   form: {
     collectionobject: {
       panel: {

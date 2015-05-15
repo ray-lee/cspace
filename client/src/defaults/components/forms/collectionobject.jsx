@@ -41,9 +41,12 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Form recordType="collectionobject" {...(this.props)}>
+        
         {/*
         <StaticControlledInput name="recordStatus" defaultValue="new" controlledListName="recordStatuses"/>
+        <AuthorityControlledInput name="contentPerson" authority={[['collectionobject', 'contentPerson']]}/>
         */}
+          
         <Panel name="identification">
           <ColumnGroup>
             <Column>
@@ -213,7 +216,7 @@ module.exports = React.createClass({
               <RepeatingInput name="dimensionSubGroup">
                 <TabularCompoundInput>
                   <StaticControlledInput name="dimension" controlledListName="dimensions"/>
-                  <AuthorityControlledInput name="measuredBy"/>
+                  <AuthorityControlledInput name="measuredBy" authority={[['dimension', 'measuredBy']]}/>
                   <StaticControlledInput name="measurementMethod" controlledListName="measurementMethods"/>
                   <Input name="value"/>
                   <StaticControlledInput name="measurementUnit" controlledListName="measurementUnits"/>
@@ -243,7 +246,7 @@ module.exports = React.createClass({
 
                 <RepeatingInput name="contentConcepts">
                   <MappedInput>
-                    <AuthorityControlledInput name="contentConcept"/>
+                    <AuthorityControlledInput name="contentConcept" authority={[['collectionobject', 'contentConcept']]}/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -272,7 +275,7 @@ module.exports = React.createClass({
 
                 <RepeatingInput name="contentPersons">
                   <MappedInput>
-                    <AuthorityControlledInput name="contentPerson"/>
+                    <AuthorityControlledInput name="contentPerson" authority={[['collectionobject', 'contentPerson']]}/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -290,7 +293,7 @@ module.exports = React.createClass({
 
                 <RepeatingInput name="contentOrganizations">
                   <MappedInput>
-                    <AuthorityControlledInput name="contentOrganization"/>
+                    <AuthorityControlledInput name="contentOrganization" authority={[['collectionobject', 'contentOrganization']]}/>
                   </MappedInput>
                 </RepeatingInput>
 
@@ -320,7 +323,7 @@ module.exports = React.createClass({
       
                 <ColumnGroup>
                   <Column>
-                    <AuthorityControlledInput name="inscriptionContentInscriber"/>
+                    <AuthorityControlledInput name="inscriptionContentInscriber" authority={[['collectionobject', 'inscriptionContentInscriber']]}/>
                     <VocabularyControlledInput name="inscriptionContentLanguage" vocabularyName="languages"/>
                     <StructuredDateInput name="inscriptionContentDateGroup"/>
                   </Column>
@@ -347,7 +350,7 @@ module.exports = React.createClass({
       
                 <ColumnGroup>
                   <Column>
-                    <AuthorityControlledInput name="inscriptionDescriptionInscriber"/>
+                    <AuthorityControlledInput name="inscriptionDescriptionInscriber" authority={[['collectionobject', 'inscriptionDescriptionInscriber']]}/>
                     <StructuredDateInput name="inscriptionDescriptionDateGroup"/>
                   </Column>
 
@@ -402,14 +405,14 @@ module.exports = React.createClass({
       
               <RepeatingInput name="objectProductionPersonGroup">
                 <TabularCompoundInput>
-                  <AuthorityControlledInput name="objectProductionPerson"/>
+                  <AuthorityControlledInput name="objectProductionPerson" authority={[['collectionobject', 'objectProductionPerson']]}/>
                   <Input name="objectProductionPersonRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
       
               <RepeatingInput name="objectProductionOrganizationGroup">
                 <TabularCompoundInput>
-                  <AuthorityControlledInput name="objectProductionOrganization"/>
+                  <AuthorityControlledInput name="objectProductionOrganization" authority={[['collectionobject', 'objectProductionOrganization']]}/>
                   <Input name="objectProductionOrganizationRole"/>
                 </TabularCompoundInput>
               </RepeatingInput>
@@ -441,7 +444,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="assocConceptGroup">
                   <TabularCompoundInput>
-                    <AuthorityControlledInput name="assocConcept"/>
+                    <AuthorityControlledInput name="assocConcept" authority={[['collectionobject', 'assocConcept']]}/>
                     <Input name="assocConceptType"/>
                     <Input name="assocConceptNote"/>
                   </TabularCompoundInput>
@@ -457,7 +460,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="assocOrganizationGroup">
                   <TabularCompoundInput>
-                    <AuthorityControlledInput name="assocOrganization"/>
+                    <AuthorityControlledInput name="assocOrganization" authority={[['collectionobject', 'assocOrganization']]}/>
                     <Input name="assocOrganizationType"/>
                     <Input name="assocOrganizationNote"/>
                   </TabularCompoundInput>
@@ -473,7 +476,7 @@ module.exports = React.createClass({
       
                 <RepeatingInput name="assocPersonGroup">
                   <TabularCompoundInput>
-                    <AuthorityControlledInput name="assocPerson"/>
+                    <AuthorityControlledInput name="assocPerson" authority={[['collectionobject', 'assocPerson']]}/>
                     <Input name="assocPersonType"/>
                     <Input name="assocPersonNote"/>
                   </TabularCompoundInput>
@@ -497,7 +500,7 @@ module.exports = React.createClass({
 
                   <RepeatingInput name="assocEventOrganizations">
                     <MappedInput>
-                      <AuthorityControlledInput name="assocEventOrganization"/>
+                      <AuthorityControlledInput name="assocEventOrganization" authority={[['collectionobject', 'assocEventOrganization']]}/>
                     </MappedInput>
                   </RepeatingInput>
 
@@ -509,7 +512,7 @@ module.exports = React.createClass({
 
                   <RepeatingInput name="assocEventPersons">
                     <MappedInput>
-                      <AuthorityControlledInput name="assocEventPerson"/>
+                      <AuthorityControlledInput name="assocEventPerson" authority={[['collectionobject', 'assocEventPerson']]}/>
                     </MappedInput>
                   </RepeatingInput>
 
@@ -546,7 +549,7 @@ module.exports = React.createClass({
             <Column>
               <RepeatingInput name="owners">
                 <MappedInput>
-                  <AuthorityControlledInput name="owner"/>
+                  <AuthorityControlledInput name="owner" authority={[['collectionobject', 'owner']]}/>
                 </MappedInput>
               </RepeatingInput>
 
@@ -608,7 +611,7 @@ module.exports = React.createClass({
         <Panel name="reference">
           <RepeatingInput name="referenceGroup">
             <TabularCompoundInput>
-              <AuthorityControlledInput name="reference"/>
+              <AuthorityControlledInput name="reference" authority={[['collectionobject', 'reference']]}/>
               <Input name="referenceNote"/>
             </TabularCompoundInput>
           </RepeatingInput>
@@ -630,17 +633,17 @@ module.exports = React.createClass({
             </Column>
 
             <Column>
-              <AuthorityControlledInput name="fieldCollectionPlace"/>
+              <AuthorityControlledInput name="fieldCollectionPlace" authority={[['collectionobject', 'fieldCollectionPlace']]}/>
       
               <RepeatingInput name="fieldCollectionSources">
                 <MappedInput>
-                  <AuthorityControlledInput name="fieldCollectionSource"/>
+                  <AuthorityControlledInput name="fieldCollectionSource" authority={[['collectionobject', 'fieldCollectionSource']]}/>
                 </MappedInput>
               </RepeatingInput>
 
               <RepeatingInput name="fieldCollectors">
                 <MappedInput>
-                  <AuthorityControlledInput name="fieldCollector"/>
+                  <AuthorityControlledInput name="fieldCollector" authority={[['collectionobject', 'fieldCollector']]}/>
                 </MappedInput>
               </RepeatingInput>
 

@@ -47,7 +47,7 @@ var VocabularyControlledInput = React.createClass({
       options = getOptions(this.state.vocabulary)
     }
     else if (value) {
-      // Create a placeholder options, containing just the value.
+      // Create a placeholder option list, containing just the value.
 
       options = Immutable.List([Immutable.Map({
         value: value,
