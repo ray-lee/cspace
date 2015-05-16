@@ -134,6 +134,8 @@ var AuthorityControlledInput = React.createClass({
   },
   
   handleInitiateSearchTimer: function() {
+    this.initiateSearchTimer = null;
+    
     var filter = this.state.filter;
     var newState = {};
     
