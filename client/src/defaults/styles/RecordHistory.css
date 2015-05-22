@@ -21,7 +21,7 @@
   display: none;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, .3);
   background-color: #FFFFFF;
-  padding: 12px;
+  padding: 12px 4px 12px 12px;
   left: -12px;
   top: -12px;
   width: 100%;
