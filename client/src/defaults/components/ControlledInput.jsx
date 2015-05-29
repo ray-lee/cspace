@@ -300,6 +300,11 @@ var ControlledInput = React.createClass({
     // Swallow this silently.
   },
   
+  handleJewelMouseDown: function(event) {
+    // Don't lose focus on the input when the jewel is clicked.
+    event.preventDefault();
+  },
+  
   handleJewelClick: function(event) {
     this.refs['input'].focus();
     
@@ -374,7 +379,7 @@ var ControlledInput = React.createClass({
   
   render: function() {
     var jewel = (
-      <div className="dropdownjewel" onClick={this.handleJewelClick}></div>
+      <div className="dropdownjewel" onClick={this.handleJewelClick} onMouseDown={this.handleJewelMouseDown}></div>
     );
     
     var value = this.state.value;

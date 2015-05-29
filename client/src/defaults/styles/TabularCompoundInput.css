@@ -12,7 +12,7 @@
   margin-bottom: 2px;
 }
 
-.tabularcompoundinput > thead > tr > th {
+.tabularcompoundinput tr > th {
   font-size: 8pt;
   font-weight: 300;
   text-align: left;
@@ -23,7 +23,9 @@
   border: 1px solid #DDDDDD;
 }
 
-.tabularcompoundinput > tbody > tr > td .control {
+.tabularcompoundinput > tbody > tr > td > .input > .wrapper > .control,
+.tabularcompoundinput > tbody > tr > td > .input > .input > .wrapper > .control
+{
   border: none;
   height: 20px;
 }
@@ -32,17 +34,22 @@
   height: 78px;
 }
 
-.tabularcompoundinput > tbody > tr > td .control:focus {
+.tabularcompoundinput > tbody > tr > td > .input > .wrapper > .control:focus,
+.tabularcompoundinput > tbody > tr > td > .input > .input > .wrapper > .control:focus
+{
   outline: 1px solid #4D4D4D;
   outline-offset: 0;
 }
 
-.tabularcompoundinput > tbody > tr > td .wrapper > .control + * {
+.tabularcompoundinput > tbody > tr > td > .input > .wrapper > .control + *,
+.tabularcompoundinput > tbody > tr > td > .input > .input > .wrapper > .control + *
+{
   top: 1px;
   right: 1px;
 }
 
-.tabularcompoundinput > tbody > tr > td .controlledinput .popup {
+.tabularcompoundinput > tbody > tr > td > .controlledinput > .input > .wrapper > .popup,
+.tabularcompoundinput > tbody > tr > td > .structureddateinput > .input > .wrapper > .popup {
   top: 21px;
   left: 0;
   min-width: calc(100%);

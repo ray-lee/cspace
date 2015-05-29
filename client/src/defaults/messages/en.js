@@ -98,13 +98,29 @@ module.exports = {
     }`,
     totalCount: `{count, plural,
       =0 {}
-      =1 {Show the option}
+      =1 {Show all options}
       other {Show all # options}
     }`
   },
   
   authorityControlledInput: {
     loading: 'Searching...'
+  },
+  
+  structuredDateInput: {
+    datePeriod: 'Period',
+    dateAssociation: 'Association',
+    dateNote: 'Note',
+    earliestSingle: 'Earliest/Single',
+    latest: 'Latest',
+    dateYear: 'Year',
+    dateMonth: 'Month',
+    dateDay: 'Day',
+    dateEra: 'Era',
+    dateCertainty: 'Certainty',
+    dateQualifier: 'Qualifier',
+    dateQualifierValue: 'Value',
+    dateQualifierUnit: 'Unit'
   },
   
   form: {
@@ -582,6 +598,12 @@ module.exports = {
       'purchase': 'purchase',
       'transfer': 'transfer',
       'treasure': 'treasure'
+    },
+    
+    dateQualifiers: {
+      '+/-': '+/-',
+      '+': '+',
+      '-': '-'
     }
   }
 };

@@ -4,3 +4,37 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+.structureddateinput > .input > .wrapper > .popup {
+  position: absolute;
+  width: 600px;
+  z-index: 90;
+  background: #E6F4F5;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .3);
+  display: none;
+  overflow: visible;
+  left: 1px;
+  top: 22px;
+  padding: 8px;
+}
+
+.structureddateinput > .input > .wrapper > .popup.open {
+  display: block;
+}
+
+.structureddateinput > .input > .wrapper > .popup tbody > tr > th {
+  border-top: 1px solid #C7D1D1;
+  border-bottom: 1px solid #C7D1D1;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.structureddateinput > .input > .wrapper > .popup input {
+  border-color: #C7D1D1;
+}
+
+.structureddateinput > .input > .wrapper > .popup table,
+.structureddateinput > .input > .wrapper > .popup td
+{
+  border-color: #C7D1D1;
+}
