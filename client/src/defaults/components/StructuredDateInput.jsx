@@ -134,6 +134,12 @@ var StructuredDateInput = React.createClass({
     }.bind(this), CLOSE_POPUP_DELAY);
   },
 
+  handlePopUpKeyDown: function(event) {
+    if (event.key === 'Escape') {
+      this.closePopUp();
+    }
+  },
+  
   openPopUp: function() {
     this.setState({
       popupOpen: true
@@ -155,7 +161,7 @@ var StructuredDateInput = React.createClass({
     var value = this.state.value;
     
     return (
-      <div className={popupClasses} ref="popup" tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
+      <div className={popupClasses} ref="popup" tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur} onKeyDown={this.handlePopUpKeyDown}>
         <ColumnGroup>
           <Column><Input name="datePeriod" label={this.getIntlMessage('structuredDateInput.datePeriod')} value={value.get('datePeriod')} onCommit={this.handleInputCommit}/></Column>
           <Column><Input name="dateAssociation" label={this.getIntlMessage('structuredDateInput.dateAssociation')} value={value.get('dateAssociation')} onCommit={this.handleInputCommit}/></Column>
