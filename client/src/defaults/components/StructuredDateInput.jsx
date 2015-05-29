@@ -52,11 +52,16 @@ var StructuredDateInput = React.createClass({
   },
   
   handleInputFocus: function(event) {
-    console.log("handleInputFocus");
     if (this.closePopupTimer != null) {
       clearTimeout(this.closePopupTimer);
       this.closePopupTimer = null;
     }
+  },
+  
+  handleInputBlur: function(event) {
+    this.closePopupTimer = setTimeout(function() {
+      this.closePopUp();
+    }.bind(this), CLOSE_POPUP_DELAY);
   },
   
   handleInputChange: function(event) {
@@ -94,8 +99,16 @@ var StructuredDateInput = React.createClass({
     }
   },
   
-  handleInputCommit: function(event) {
-    // Swallow this silently.
+  handleInputCommit: function(name, value) {
+    var newValue = this.state.value.set(name, value);
+
+    this.setState({
+      value: newValue
+    });
+    
+    if (this.props.onCommit) {
+      this.props.onCommit(this.props.name, newValue);
+    }
   },
   
   handleJewelClick: function(event) {
@@ -120,7 +133,7 @@ var StructuredDateInput = React.createClass({
       this.closePopUp();
     }.bind(this), CLOSE_POPUP_DELAY);
   },
-  
+
   openPopUp: function() {
     this.setState({
       popupOpen: true
@@ -139,12 +152,14 @@ var StructuredDateInput = React.createClass({
       'open': this.state.popupOpen
     });
     
+    var value = this.state.value;
+    
     return (
       <div className={popupClasses} ref="popup" tabIndex="-1" onFocus={this.handlePopUpFocus} onBlur={this.handlePopUpBlur}>
         <ColumnGroup>
-          <Column><Input name="datePeriod" label={this.getIntlMessage('structuredDateInput.datePeriod')}/></Column>
-          <Column><Input name="dateAssociation" label={this.getIntlMessage('structuredDateInput.dateAssociation')}/></Column>
-          <Column><Input name="dateNote" label={this.getIntlMessage('structuredDateInput.dateNote')}/></Column>
+          <Column><Input name="datePeriod" label={this.getIntlMessage('structuredDateInput.datePeriod')} value={value.get('datePeriod')} onCommit={this.handleInputCommit}/></Column>
+          <Column><Input name="dateAssociation" label={this.getIntlMessage('structuredDateInput.dateAssociation')} value={value.get('dateAssociation')} onCommit={this.handleInputCommit}/></Column>
+          <Column><Input name="dateNote" label={this.getIntlMessage('structuredDateInput.dateNote')} value={value.get('dateNote')} onCommit={this.handleInputCommit}/></Column>
         </ColumnGroup>
         <table className="tabularcompoundinput">
           <thead>
@@ -163,25 +178,25 @@ var StructuredDateInput = React.createClass({
           <tbody>
             <tr>
               <th>{this.getIntlMessage('structuredDateInput.earliestSingle')}</th>
-              <td><Input name="dateEarliestSingleYear"/></td>
-              <td><Input name="dateEarliestSingleMonth"/></td>
-              <td><Input name="dateEarliestSingleDay"/></td>
-              <td><VocabularyControlledInput name="dateEarliestSingleEra" vocabularyName="dateera"/></td>
-              <td><VocabularyControlledInput name="dateEarliestSingleCertainty" vocabularyName="datecertainty"/></td>
-              <td><StaticControlledInput name="dateEarliestSingleQualifier" controlledListName="dateQualifiers"/></td>
-              <td><Input name="dateEarliestSingleQualifierValue"/></td>
-              <td><VocabularyControlledInput name="dateEarliestSingleQualifierUnit" vocabularyName="datequalifier"/></td>
+              <td><Input name="dateEarliestSingleYear" value={value.get('dateEarliestSingleYear')} onCommit={this.handleInputCommit}/></td>
+              <td><Input name="dateEarliestSingleMonth" value={value.get('dateEarliestSingleMonth')} onCommit={this.handleInputCommit}/></td>
+              <td><Input name="dateEarliestSingleDay" value={value.get('dateEarliestSingleDay')} onCommit={this.handleInputCommit}/></td>
+              <td><VocabularyControlledInput name="dateEarliestSingleEra" value={value.get('dateEarliestSingleEra')} vocabularyName="dateera" onCommit={this.handleInputCommit}/></td>
+              <td><VocabularyControlledInput name="dateEarliestSingleCertainty" value={value.get('dateEarliestSingleCertainty')} vocabularyName="datecertainty" onCommit={this.handleInputCommit}/></td>
+              <td><StaticControlledInput name="dateEarliestSingleQualifier" value={value.get('dateEarliestSingleQualifier')} controlledListName="dateQualifiers" onCommit={this.handleInputCommit}/></td>
+              <td><Input name="dateEarliestSingleQualifierValue" value={value.get('dateEarliestSingleQualifierValue')} onCommit={this.handleInputCommit}/></td>
+              <td><VocabularyControlledInput name="dateEarliestSingleQualifierUnit" value={value.get('dateEarliestSingleQualifierUnit')} vocabularyName="datequalifier" onCommit={this.handleInputCommit}/></td>
             </tr>
             <tr>
               <th>{this.getIntlMessage('structuredDateInput.latest')}</th>
-              <td><Input name="dateLatestYear"/></td>
-              <td><Input name="dateLatestMonth"/></td>
-              <td><Input name="dateLatestDay"/></td>
-              <td><VocabularyControlledInput name="dateLatestEra" vocabularyName="dateera"/></td>
-              <td><VocabularyControlledInput name="dateLatestCertainty" vocabularyName="datecertainty"/></td>
-              <td><StaticControlledInput name="dateLatestQualifier" controlledListName="dateQualifiers"/></td>
-              <td><Input name="dateLatestQualifierValue"/></td>
-              <td><VocabularyControlledInput name="dateLatestQualifierUnit" vocabularyName="datequalifier"/></td>
+              <td><Input name="dateLatestYear" value={value.get('dateLatestYear')} onCommit={this.handleInputCommit}/></td>
+              <td><Input name="dateLatestMonth" value={value.get('dateLatestMonth')} onCommit={this.handleInputCommit}/></td>
+              <td><Input name="dateLatestDay" value={value.get('dateLatestDay')} onCommit={this.handleInputCommit}/></td>
+              <td><VocabularyControlledInput name="dateLatestEra" value={value.get('dateLatestEra')} vocabularyName="dateera" onCommit={this.handleInputCommit}/></td>
+              <td><VocabularyControlledInput name="dateLatestCertainty" value={value.get('dateLatestCertainty')} vocabularyName="datecertainty" onCommit={this.handleInputCommit}/></td>
+              <td><StaticControlledInput name="dateLatestQualifier" value={value.get('dateLatestQualifier')} controlledListName="dateQualifiers" onCommit={this.handleInputCommit}/></td>
+              <td><Input name="dateLatestQualifierValue" value={value.get('dateLatestQualifierValue')} onCommit={this.handleInputCommit}/></td>
+              <td><VocabularyControlledInput name="dateLatestQualifierUnit" value={value.get('dateLatestQualifierUnit')} vocabularyName="datequalifier" onCommit={this.handleInputCommit}/></td>
             </tr>
           </tbody>
         </table>
@@ -203,8 +218,9 @@ var StructuredDateInput = React.createClass({
     
     return (
       <div className={classes}>
-        <Input ref="input" {...(this.props)} value={this.state.value.get('dateDisplayDate')} defaultValue={getDisplayDate(this.props.defaultValue)} popup={popup} jewel={jewel}
+        <Input {...(this.props)} ref="input" name="dateDisplayDate" value={this.state.value.get('dateDisplayDate')} defaultValue={getDisplayDate(this.props.defaultValue)} popup={popup} jewel={jewel}
           onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
           onChange={this.handleInputChange}
           onClick={this.handleInputClick}
           onKeyDown={this.handleInputKeyDown}

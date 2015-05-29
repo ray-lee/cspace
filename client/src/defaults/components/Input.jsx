@@ -84,6 +84,12 @@ var Input = React.createClass({
     this.commit();
   },
   
+  handleFocus: function(event) {
+    if (this.props.onFocus) {
+      this.props.onFocus(event);
+    }
+  },
+  
   handleMouseDown: function(event) {
     if (this.props.onMouseDown) {
       return this.props.onMouseDown(event);
@@ -164,6 +170,7 @@ var Input = React.createClass({
           <input name={this.props.name} ref="control" className="control" type="text" value={value} placeholder=" " autoComplete={this.props.autoComplete}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
             onMouseDown={this.handleMouseDown}
             onClick={this.handleClick}
             onKeyPress={this.handleKeyPress}
