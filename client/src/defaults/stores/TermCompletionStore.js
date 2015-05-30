@@ -21,7 +21,7 @@ var TermCompletionStore = assign({}, EventEmitter.prototype, {
       result = null;
       queryResults = queryResults.setIn([authority, vocabulary, queryString], result);
       
-      cspace.searchAuthority(authority, vocabulary, queryString)
+      cspace.findTerms(authority, vocabulary, queryString)
         .then(function(data) {
           var data = processSearchData(data);
           queryResults = queryResults.setIn([authority, vocabulary, queryString], data);
