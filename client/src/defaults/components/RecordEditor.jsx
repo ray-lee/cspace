@@ -6,6 +6,7 @@ var TitleBar = require('./TitleBar.jsx');
 var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
 var Panel = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
+var SideBar = require('./SideBar.jsx')
 var RecordStore = require('../stores/RecordStore.js');
 var RecordActions = require('../actions/RecordActions.js');
 var RecordStates = require('../constants/RecordStates.js');
@@ -112,36 +113,42 @@ var Record = React.createClass({
         <TitleBar recordState={this.state.recordState} title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
-          <TabbedPanelGroup>
-            <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
-              <ToolBar recordState={this.state.recordState} values={this.state.values} onSaveButtonClick={this.handleSaveButtonClick}/>
-              <Form values={this.state.values} onCommit={this.handleFormCommit}/>
-              <ToolBar recordState={this.state.recordState} onSaveButtonClick={this.handleSaveButtonClick}/>
-            </Panel>
-            {/*
-            <Panel key="test" header="Test Tab">
-              <Panel header="Panel">
-                <div>
-                  This is a collapsible panel.
-                </div>
-                <TabbedPanelGroup>
-                  <Panel key="hello" header="Hello">
-                    A nested tabbed panel.
-                  </Panel>
-                  <Panel key="world" header="World">
-                    Wow, it's another tab.
-                  </Panel>
-                </TabbedPanelGroup>
+          <div className="tabcontainer">
+            <TabbedPanelGroup>
+              <Panel key="primary" header={this.getIntlMessage('recordEditor.tabs.primary')}>
+                <ToolBar recordState={this.state.recordState} values={this.state.values} onSaveButtonClick={this.handleSaveButtonClick}/>
+                <Form values={this.state.values} onCommit={this.handleFormCommit}/>
+                <ToolBar recordState={this.state.recordState} onSaveButtonClick={this.handleSaveButtonClick}/>
               </Panel>
-              <Panel header="Fixed" collapsible={false}>
-                This is a fixed panel.
+              {/*
+              <Panel key="test" header="Test Tab">
+                <Panel header="Panel">
+                  <div>
+                    This is a collapsible panel.
+                  </div>
+                  <TabbedPanelGroup>
+                    <Panel key="hello" header="Hello">
+                      A nested tabbed panel.
+                    </Panel>
+                    <Panel key="world" header="World">
+                      Wow, it's another tab.
+                    </Panel>
+                  </TabbedPanelGroup>
+                </Panel>
+                <Panel header="Fixed" collapsible={false}>
+                  This is a fixed panel.
+                </Panel>
+                <Panel header="Initially Collapsed" collapsed={true}>
+                  This panel was initially collapsed.
+                </Panel>
               </Panel>
-              <Panel header="Initially Collapsed" collapsed={true}>
-                This panel was initially collapsed.
-              </Panel>
-            </Panel>
-            */}
-          </TabbedPanelGroup>
+              */}
+            </TabbedPanelGroup>
+          </div>
+          
+          <div className="sidebarcontainer">
+            <SideBar/>
+          </div>
         </div>
       </main>
     );

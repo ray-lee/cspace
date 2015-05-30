@@ -1,0 +1,40 @@
+.termlist {
+  width: 100%;
+  border: none;
+  background: white;
+}
+
+.termlist > thead > tr > th {
+  background-color: #EFEFEF;
+  color: #739CD2;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.termlist > thead > tr > th,
+.termlist > tbody > tr > td
+{
+  padding: 3px;
+  text-align: left;
+  font-size: 8pt;
+  font-weight: 300;
+}
+
+.termlist > thead > tr > th:first-child,
+.termlist > tbody > tr > td:first-child
+{
+  padding-left: 10px;
+}
+
+.termlist > thead > tr > th:last-child,
+.termlist > tbody > tr > td:last-child
+{
+  padding-right: 10px;
+}
+
+.termlist > tbody > tr:nth-child(odd) {
+  background-color: rgba(240, 245, 251, .5);
+}
+
+.termlist > tbody > tr:nth-child(even) {
+  background-color: rgba(240, 245, 251, .9);
+}

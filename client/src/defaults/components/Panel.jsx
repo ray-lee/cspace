@@ -14,13 +14,15 @@ var Panel = React.createClass({
   propTypes: {
     header: React.PropTypes.node,
     collapsible: React.PropTypes.bool,
-    collapsed: React.PropTypes.bool
+    collapsed: React.PropTypes.bool,
+    resizable: React.PropTypes.bool
   },
   
   getDefaultProps: function() {
     return {
       collapsible: true,
-      collapsed: false
+      collapsed: false,
+      resizable: false
     };
   },
   

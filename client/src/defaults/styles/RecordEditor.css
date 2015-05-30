@@ -3,9 +3,19 @@
 }
 
 .recordeditor > .recordeditorbody {
-  width: 70%;
+  display: flex;
 }
 
-.recordeditor > .recordeditorbody form:not(:last-child) {
+.recordeditor > .recordeditorbody > .tabcontainer {
+  width: 70%;
+  z-index: 1;
+}
+
+.recordeditor > .recordeditorbody > .sidebarcontainer {
+  width: 30%;
+  z-index: 0;
+}
+
+.recordeditor > .recordeditorbody > .tabcontainer form:not(:last-child) {
   padding-bottom: 10px;
 }

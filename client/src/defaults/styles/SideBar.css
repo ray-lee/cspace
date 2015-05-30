@@ -1,0 +1,23 @@
+.sidebar {
+  padding-top: 65px;
+  width: 100%;
+}
+
+.sidebar > .panel > .panelheader {
+  border-radius: 0;
+  background-color: #739CD2;
+}
+
+.sidebar > .panel.collapsed > .panelheader {
+  border-radius: 0;
+}
+
+.sidebar > .panel.collapsiblepanel > .panelheader:hover {
+  background-color: #739CD2;
+}
+
+.sidebar > .panel > .panelbody {
+  resize: vertical;
+  overflow: hidden;
+  padding: 0;
+}
