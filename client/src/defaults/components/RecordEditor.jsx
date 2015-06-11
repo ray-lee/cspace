@@ -34,7 +34,13 @@ var Record = React.createClass({
         recordState: RecordStates.LOADING
       });
       
-      RecordStore.get(this.state.recordType, this.state.csid);
+      RecordStore.get(this.state.recordType, this.state.csid)
+        .then(function(data) {
+          this.handleDataUpdated(this.state.csid, data);
+        }.bind(this))
+        .then(null, function(error) {
+          console.error(error);
+        });
     }
   },
   
@@ -49,20 +55,21 @@ var Record = React.createClass({
     if (recordType !== this.state.recordType || csid !== this.state.csid) {
       var newState = {
         recordType: recordType,
-        csid: csid
+        csid: csid,
+        values: Immutable.Map(),
+        termsUsed: null
       };
       
       if (csid) {
-        var data = RecordStore.get(recordType, csid);
+        newState.recordState = RecordStates.LOADING;
         
-        if (data) {
-          newState.values = data.get('fields');
-          newState.recordState = RecordStates.DEFAULT;
-        }
-        else {
-          newState.values = Immutable.Map();
-          newState.recordState = RecordStates.LOADING;
-        }
+        RecordStore.get(recordType, csid)
+          .then(function(data) {
+            this.handleDataUpdated(csid, data);
+          }.bind(this))
+          .then(null, function(error) {
+            console.error(error);
+          })
       }
 
       this.setState(newState);
@@ -92,7 +99,13 @@ var Record = React.createClass({
 
     // Get sidebar data.
     
-    RecordStore.getTermsUsed(this.state.recordType, this.state.csid);
+    RecordStore.getTermsUsed(this.state.recordType, this.state.csid)
+      .then(function(data) {
+        this.handleTermsUsedUpdated(this.state.csid, data);
+      }.bind(this))
+      .then(null, function(error) {
+        console.error(error);
+      })
   },
 
   handleTermsUsedUpdated: function(csid, data) {

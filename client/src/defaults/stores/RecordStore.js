@@ -18,49 +18,47 @@ var RecordStore = assign({}, EventEmitter.prototype, {
   get: function(recordType, csid) {
     // TODO: Figure out when cached records should be flushed.
 
-    if (records.has(csid) && records.get(csid).has(DATA_KEY)) {
-      return records.get(csid).get(DATA_KEY);
-    }
-    else {
-      CollectionSpace.getRecord(recordType, csid)
-        .then(function(data) {
-          var data = processRecordData(data);
+    return new Promise(function(resolve, reject) {
+      if (records.has(csid) && records.get(csid).has(DATA_KEY)) {
+        resolve(records.get(csid).get(DATA_KEY));
+      }
+      else {
+        CollectionSpace.getRecord(recordType, csid)
+          .then(function(data) {
+            var data = processRecordData(data);
           
-          records = records.setIn([csid, DATA_KEY], data);
+            records = records.setIn([csid, DATA_KEY], data);
         
-          this.emitDataUpdated(csid, data);
-          //this.emitUpdated(csid, records.get(csid));
-        }.bind(this))
-        .then(null, function(error) {
-          console.error(error);
-        });
-        
-        return null;
-    }
+            resolve(data);
+          }.bind(this))
+          .then(null, function(error) {
+            reject(error);
+          });
+      }
+    });
   },
   
   getTermsUsed: function(recordType, csid) {
     // TODO: Figure out when cached records should be flushed.
-
-    if (records.has(csid) && records.get(csid).has(TERMS_USED_KEY)) {
-      return records.get(csid).get(TERMS_USED_KEY);
-    }
-    else {
-      CollectionSpace.findTermsUsed(recordType, csid)
-        .then(function(data) {
-          var data = processTermsUsedData(data);
+ 
+    return new Promise(function(resolve, reject) {
+      if (records.has(csid) && records.get(csid).has(TERMS_USED_KEY)) {
+        resolve(records.get(csid).get(TERMS_USED_KEY));
+      }
+      else {
+        CollectionSpace.findTermsUsed(recordType, csid)
+          .then(function(data) {
+            var data = processTermsUsedData(data);
           
-          records = records.setIn([csid, TERMS_USED_KEY], data);
+            records = records.setIn([csid, TERMS_USED_KEY], data);
         
-          this.emitTermsUsedUpdated(csid, data);
-          //this.emitUpdated(csid, records.get(csid));
-        }.bind(this))
-        .then(null, function(error) {
-          console.error(error);
-        });
-        
-        return null;
-    }
+            resolve(data);
+          }.bind(this))
+          .then(null, function(error) {
+            reject(error);
+          });
+      }
+    });
   },
   
   emitUpdated: function(csid, data) {
