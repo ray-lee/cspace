@@ -28,6 +28,7 @@ var RecordStore = assign({}, EventEmitter.prototype, {
             var data = processRecordData(data);
           
             records = records.setIn([csid, DATA_KEY], data);
+            records = records.deleteIn([csid, TERMS_USED_KEY]);
         
             resolve(data);
           }.bind(this))
@@ -119,6 +120,20 @@ var processTermsUsedData = function(data) {
   return Immutable.fromJS(data);
 };
 
+var handleSaveComplete = function(data) {
+  var data = processRecordData(data);
+  var csid = data.get('csid');
+
+  records = records.setIn([csid, DATA_KEY], data);
+  records = records.deleteIn([csid, TERMS_USED_KEY]);
+
+  RecordStore.emitDataUpdated(csid, data);
+};
+
+var handleSaveError = function(error) {
+  console.error(error);
+};
+
 RecordStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SAVE_RECORD:
@@ -130,33 +145,15 @@ RecordStore.dispatchToken = Dispatcher.register(function(action) {
         // The record to be saved has a CSID, so it's an update.
 
         CollectionSpace.updateRecord(action.recordType, action.csid, data)
-          .then(function(data) {
-            var data = processRecordData(data);
-            var csid = data.get('csid');
-
-            records = records.setIn([csid, DATA_KEY], data);
-
-            RecordStore.emitDataUpdated(csid, data);
-          })
-          .then(null, function(error) {
-            console.error(error);
-          });
+          .then(handleSaveComplete)
+          .then(null, handleSaveError);
       }
       else {
         // The record to be saved does not have a CSID, so it's a create.
         
         CollectionSpace.createRecord(action.recordType, data)
-          .then(function(data) {
-            var data = processRecordData(data);
-            var csid = data.get('csid');
-            
-            records = records.setIn([csid, DATA_KEY], data);
-
-            RecordStore.emitDataUpdated(csid, data);
-          })
-          .then(null, function(error) {
-            console.error(error);
-          });
+          .then(handleSaveComplete)
+          .then(null, handleSaveError);
       }
 
       break;
