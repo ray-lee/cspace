@@ -1,18 +1,21 @@
 var React = require('react/addons');
-var Panel = require('./Panel.jsx');
-var TermList = require('./TermList.jsx');
+var Immutable = require('immutable');
+var TermsUsedPanel = require('./TermsUsedPanel.jsx');
 
 require('../styles/SideBar.css');
 
 var SideBar = React.createClass({
   mixins: [React.addons.PureRenderMixin],
 
+  propTypes: {
+    recordType: React.PropTypes.string.isRequired,
+    termsUsed: React.PropTypes.instanceOf(Immutable.Map)
+  },
+  
   render: function() {
     return (
       <div className="sidebar">
-        <Panel header="Terms Used">
-          <TermList/>
-        </Panel>
+        <TermsUsedPanel recordType={this.props.recordType} termsUsed={this.props.termsUsed}/>
       </div>
     );
   }

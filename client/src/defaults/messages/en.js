@@ -51,6 +51,52 @@ module.exports = {
     collectionobject: 'Collection Object'
   },
   
+  authority: {
+    citation: 'Citation',
+    concept: 'Concept',
+    organization: 'Organization',
+    person: 'Person',
+    place: 'Place',
+    location: 'Storage Location',
+    work: 'Work'
+  },
+  
+  vocabulary: {
+    citation: {
+      citation: 'Local',
+      worldcat: 'WorldCat'
+    },
+    concept: {
+      concept: 'Concepts',
+      material_ca: 'Materials',
+      activity: 'Activities'
+    },
+    location: {
+      location: 'Local',
+      offsite_sla: 'Offsite'
+    },
+    organization: {
+      organization: 'Local',
+      ulan_oa: 'ULAN'
+    },
+    person: {
+      person: 'Local',
+      ulan_pa: 'ULAN'
+    },
+    place: {
+      place: 'Local',
+      tgn_place: 'TGN'
+    },
+    taxon: {
+      taxon: 'Local',
+      common_ta: 'Common'
+    },
+    work: {
+      work: 'Local',
+      cona_work: 'CONA'
+    }
+  },
+  
   recordEditor: {
     tabs: {
       primary: 'Primary Record'
@@ -92,13 +138,13 @@ module.exports = {
   
   controlledInput: {
     filteredCount: `{count, plural, 
-      =0 {No matches.}
-      =1 {1 match:}
+      zero {No matches.}
+      one {1 match:}
       other {# matches:}
     }`,
     totalCount: `{count, plural,
-      =0 {}
-      =1 {Show all options}
+      zero {}
+      one {Show all options}
       other {Show all # options}
     }`
   },
@@ -121,6 +167,11 @@ module.exports = {
     dateQualifier: 'Qualifier',
     dateQualifierValue: 'Value',
     dateQualifierUnit: 'Unit'
+  },
+  
+  termsUsedPanel: {
+    title: 'Terms Used',
+    titleWithCount: 'Terms Used ({count})'
   },
   
   form: {
@@ -209,6 +260,7 @@ module.exports = {
         contentLanguages: 'Language',
         contentActivities: 'Activity',
         contentConcepts: 'Concept',
+        contentConcept: 'Concept',
         contentDate: 'Date',
         contentPositions: 'Position',
         contentObjectGroup: 'Object',
@@ -216,9 +268,11 @@ module.exports = {
         contentObjectType: 'Type',
         contentPeoples: 'People',
         contentPersons: 'Person',
+        contentPerson: 'Person',
         contentPlaces: 'Place',
         contentScripts: 'Script',
         contentOrganizations: 'Organization',
+        contentOrganization: 'Organization',
         contentEventNameGroup: 'Event',
         contentEventName: 'Name',
         contentEventNameType: 'Type',
@@ -298,8 +352,10 @@ module.exports = {
         assocEventName: 'Event',
         assocEventNameType: 'Type',
         assocEventOrganizations: 'Associated event organization',
+        assocEventOrganization: 'Associated event organization',
         assocEventPeoples: 'Associated event people',
         assocEventPersons: 'Associated event person',
+        assocEventPerson: 'Associated event person',
         assocEventPlaces: 'Associated event place',
         assocEventNote: 'Associated event note',
         assocDateGroup: 'Associated date',
@@ -311,6 +367,7 @@ module.exports = {
         usage: 'Usage',
         usageNote: 'Usage note',
         owners: 'Owner',
+        owner: 'Owner',
         ownershipDateGroup: 'Ownership date',
         ownershipAccess: 'Ownership access',
         ownershipCategory: 'Ownership category',
@@ -338,7 +395,9 @@ module.exports = {
         fieldCollectionNumber: 'Field collection number',
         fieldCollectionPlace: 'Field collection place',
         fieldCollectionSources: 'Field collection source',
+        fieldCollectionSource: 'Field collection source',
         fieldCollectors: 'Field collection collector',
+        fieldCollector: 'Field collection collector',
         fieldColEventNames: 'Field collection event name',
         broaderContext: 'Broader object',
         broaderContextType: 'Type',

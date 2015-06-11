@@ -6,6 +6,11 @@ var Dispatcher = require('../dispatcher/Dispatcher.js');
 var ActionTypes = require('../constants/ActionTypes.js');
 
 var UPDATED_EVENT = 'updated';
+var DATA_UPDATED_EVENT = 'dataUpdated';
+var TERMS_USED_UPDATED_EVENT = 'termsUsedUpdated';
+
+var DATA_KEY = 'data';
+var TERMS_USED_KEY = 'termsUsed';
 
 var records = Immutable.Map();
 
@@ -13,16 +18,42 @@ var RecordStore = assign({}, EventEmitter.prototype, {
   get: function(recordType, csid) {
     // TODO: Figure out when cached records should be flushed.
 
-    if (records.has(csid)) {
-      return records.get(csid);
+    if (records.has(csid) && records.get(csid).has(DATA_KEY)) {
+      return records.get(csid).get(DATA_KEY);
     }
     else {
-      CollectionSpace.getRecord(recordType, csid) // '1a8dcb2b-522a-4d60-ae9f'
+      CollectionSpace.getRecord(recordType, csid)
         .then(function(data) {
           var data = processRecordData(data);
-          records = records.set(csid, data);
+          
+          records = records.setIn([csid, DATA_KEY], data);
         
-          this.emitUpdated(csid, data);
+          this.emitDataUpdated(csid, data);
+          //this.emitUpdated(csid, records.get(csid));
+        }.bind(this))
+        .then(null, function(error) {
+          console.error(error);
+        });
+        
+        return null;
+    }
+  },
+  
+  getTermsUsed: function(recordType, csid) {
+    // TODO: Figure out when cached records should be flushed.
+
+    if (records.has(csid) && records.get(csid).has(TERMS_USED_KEY)) {
+      return records.get(csid).get(TERMS_USED_KEY);
+    }
+    else {
+      CollectionSpace.findTermsUsed(recordType, csid)
+        .then(function(data) {
+          var data = processTermsUsedData(data);
+          
+          records = records.setIn([csid, TERMS_USED_KEY], data);
+        
+          this.emitTermsUsedUpdated(csid, data);
+          //this.emitUpdated(csid, records.get(csid));
         }.bind(this))
         .then(null, function(error) {
           console.error(error);
@@ -35,6 +66,14 @@ var RecordStore = assign({}, EventEmitter.prototype, {
   emitUpdated: function(csid, data) {
     this.emit(UPDATED_EVENT, csid, data);
   },
+  
+  emitDataUpdated: function(csid, data) {
+    this.emit(DATA_UPDATED_EVENT, csid, data);
+  },
+  
+  emitTermsUsedUpdated: function(csid, data) {
+    this.emit(TERMS_USED_UPDATED_EVENT, csid, data);
+  },
 
   addUpdatedListener: function(callback) {
     this.on(UPDATED_EVENT, callback);
@@ -43,6 +82,22 @@ var RecordStore = assign({}, EventEmitter.prototype, {
   removeUpdatedListener: function(callback) {
     this.removeListener(UPDATED_EVENT, callback);
   },
+  
+  addDataUpdatedListener: function(callback) {
+    this.on(DATA_UPDATED_EVENT, callback);
+  },
+
+  removeDataUpdatedListener: function(callback) {
+    this.removeListener(DATA_UPDATED_EVENT, callback);
+  },
+  
+  addTermsUsedUpdatedListener: function(callback) {
+    this.on(TERMS_USED_UPDATED_EVENT, callback);
+  },
+
+  removeTermsUsedUpdatedListener: function(callback) {
+    this.removeListener(TERMS_USED_UPDATED_EVENT, callback);
+  }
 });
 
 var processRecordData = function(data) {
@@ -62,6 +117,10 @@ var processRecordData = function(data) {
   });
 };
 
+var processTermsUsedData = function(data) {
+  return Immutable.fromJS(data);
+};
+
 RecordStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SAVE_RECORD:
@@ -77,9 +136,9 @@ RecordStore.dispatchToken = Dispatcher.register(function(action) {
             var data = processRecordData(data);
             var csid = data.get('csid');
 
-            records = records.set(csid, data);
+            records = records.setIn([csid, DATA_KEY], data);
 
-            RecordStore.emitUpdated(csid, data);
+            RecordStore.emitDataUpdated(csid, data);
           })
           .then(null, function(error) {
             console.error(error);
@@ -93,9 +152,9 @@ RecordStore.dispatchToken = Dispatcher.register(function(action) {
             var data = processRecordData(data);
             var csid = data.get('csid');
             
-            records = records.set(csid, data);
+            records = records.setIn([csid, DATA_KEY], data);
 
-            RecordStore.emitUpdated(csid, data);
+            RecordStore.emitDataUpdated(csid, data);
           })
           .then(null, function(error) {
             console.error(error);

@@ -51,14 +51,16 @@ var Form = React.createClass({
   
   getFieldLabel: function(fieldName) {
     var key = 'form.' + this.props.recordType + '.field.' + fieldName;
+    var label = '';
     
     try {
-      return this.getIntlMessage(key);
+      label = this.getIntlMessage(key);
     }
     catch(error) {
       //console.warn("Missing message for key " + key);
-      return '';
     }
+
+    return label;
   },
   
   getPanelHeader: function(panelName) {

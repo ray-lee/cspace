@@ -7,7 +7,7 @@ require('../styles/RepeatingInput.css');
 
 var RepeatingInput = React.createClass({
   mixins: [InputMixin, React.addons.PureRenderMixin],
-  
+
   propTypes: {
     label: React.PropTypes.node,
     description: React.PropTypes.node,

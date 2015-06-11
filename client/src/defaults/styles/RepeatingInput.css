@@ -45,6 +45,11 @@
   flex: 100%;
 }
 
+.repeatinginput > .instances > li.instance > .input > .input > label {
+  display: none;
+}
+
+
 .repeatinginput > .instances > .instance .removeButton {
   width: 21px;
   height: 22px;

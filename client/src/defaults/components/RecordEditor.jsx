@@ -26,7 +26,8 @@ var Record = React.createClass({
   },
   
   componentDidMount: function() {
-    RecordStore.addUpdatedListener(this.handleStoreUpdated);
+    RecordStore.addDataUpdatedListener(this.handleDataUpdated);
+    RecordStore.addTermsUsedUpdatedListener(this.handleTermsUsedUpdated);
 
     if (this.state.csid) {
       this.setState({
@@ -38,7 +39,7 @@ var Record = React.createClass({
   },
   
   componentWillUnmount: function() {
-    RecordStore.removeUpdatedListener(this.handleStoreUpdated);
+    RecordStore.removeDataUpdatedListener(this.handleDataUpdated);
   },
   
   componentWillReceiveProps: function(nextProps) {
@@ -68,7 +69,7 @@ var Record = React.createClass({
     }
   },
   
-  handleStoreUpdated: function(csid, data) {
+  handleDataUpdated: function(csid, data) {
     if (csid === this.state.csid) {
       this.setState({
         values: data.get('fields'),
@@ -87,6 +88,18 @@ var Record = React.createClass({
       // Put the new csid in the URL.
       
       history.replaceState(null, csid, window.location.href + '/' + csid);
+    }
+
+    // Get sidebar data.
+    
+    RecordStore.getTermsUsed(this.state.recordType, this.state.csid);
+  },
+
+  handleTermsUsedUpdated: function(csid, data) {
+    if (csid === this.state.csid) {
+      this.setState({
+        termsUsed: data.get('termsUsed')
+      });
     }
   },
   
@@ -147,7 +160,7 @@ var Record = React.createClass({
           </div>
           
           <div className="sidebarcontainer">
-            <SideBar/>
+            <SideBar recordType={this.state.recordType} termsUsed={this.state.termsUsed}/>
           </div>
         </div>
       </main>
