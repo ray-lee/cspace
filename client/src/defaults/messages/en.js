@@ -100,7 +100,8 @@ module.exports = {
   recordEditor: {
     tabs: {
       primary: 'Primary Record'
-    }
+    },
+    error: 'The record couldn\'t be retrieved.'
   },
   
   toolBar: {
@@ -121,6 +122,10 @@ module.exports = {
     aboutLink: 'http://www.collectionspace.org/',
     feedback: 'Leave feedback',
     feedbackLink: 'http://wiki.collectionspace.org/display/collectionspace/Release+4.0+Feedback'
+  },
+  
+  errorPage: {
+    title: 'There seems to be a problem.'
   },
   
   recordHistory: {

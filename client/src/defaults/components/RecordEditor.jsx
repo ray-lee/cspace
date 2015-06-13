@@ -7,6 +7,7 @@ var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
 var Panel = require('./Panel.jsx');
 var ToolBar = require('./ToolBar.jsx')
 var SideBar = require('./SideBar.jsx')
+var ErrorPage = require('./ErrorPage.jsx')
 var RecordStore = require('../stores/RecordStore.js');
 var RecordActions = require('../actions/RecordActions.js');
 var RecordStates = require('../constants/RecordStates.js');
@@ -45,8 +46,8 @@ var Record = React.createClass({
           this.handleDataUpdated(this.state.csid, data);
         }.bind(this))
         .then(null, function(error) {
-          console.error(error);
-        });
+          this.handleDataError(error);
+        }.bind(this));
     }
   },
   
@@ -75,12 +76,19 @@ var Record = React.createClass({
             this.handleDataUpdated(csid, data);
           }.bind(this))
           .then(null, function(error) {
-            console.error(error);
-          })
+            this.handleDataError(error);
+          }.bind(this));
       }
 
       this.setState(newState);
     }
+  },
+  
+  handleDataError: function(error) {
+    this.setState({
+      recordState: RecordStates.ERROR,
+      error: error
+    });
   },
   
   handleDataUpdated: function(csid, data) {
@@ -151,6 +159,10 @@ var Record = React.createClass({
   },
   
   render: function() {
+    if (this.state.recordState === RecordStates.ERROR) {
+      return this.renderError();
+    }
+    
     var recordType = this.state.recordType;
     var Form = require('./forms/' + recordType + '.jsx');
 
@@ -198,6 +210,12 @@ var Record = React.createClass({
           </div>
         </div>
       </main>
+    );
+  },
+  
+  renderError: function() {
+    return (
+      <ErrorPage description={this.getIntlMessage('recordEditor.error')} error={this.state.error}/>
     );
   }
 });

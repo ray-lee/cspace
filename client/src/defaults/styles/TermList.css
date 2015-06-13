@@ -39,10 +39,6 @@
   background-color: rgba(240, 245, 251, .9);
 }
 
-.termlist.LOADING > table > tbody {
-  background-color: red;
-}
-
 .termlist.LOADING > table > tbody > tr {
   visibility: hidden;
 }

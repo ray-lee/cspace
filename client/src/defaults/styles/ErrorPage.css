@@ -1,0 +1,15 @@
+.errorpage {
+  padding: 80px 10px 80px 10px;
+  text-align: center;
+}
+
+.errorpage > h1 {
+  font-size: 16pt;
+  font-weight: 300;
+}
+
+.errorpage .errormessage {
+  display: inline-block;
+  border: 1px solid #DDDDDD;
+  padding: 10px;
+}
