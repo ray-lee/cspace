@@ -17,8 +17,10 @@
 }
 
 .sidebar > .panel > .panelbody {
-  min-height: 100px;
-/*  resize: vertical;
-  overflow-y: scroll;*/
+/*  height: 150px;*/
+/*  min-height: 80px;*/
+/*  resize: vertical; */
+/*  overflow-y: scroll;*/
   padding: 0;
+  border-bottom: 1px solid #DDDDDD;
 }

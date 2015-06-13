@@ -12,9 +12,13 @@ var TERMS_USED_UPDATED_EVENT = 'termsUsedUpdated';
 var DATA_KEY = 'data';
 var TERMS_USED_KEY = 'termsUsed';
 
+var DEFAULT_PAGE_SIZE = 10;
+
 var records = Immutable.Map();
+var termsUsedPageSize = DEFAULT_PAGE_SIZE;
 
 var RecordStore = assign({}, EventEmitter.prototype, {
+  
   get: function(recordType, csid) {
     // TODO: Figure out when cached records should be flushed.
 
@@ -39,19 +43,30 @@ var RecordStore = assign({}, EventEmitter.prototype, {
     });
   },
   
-  getTermsUsed: function(recordType, csid) {
+  getTermsUsed: function(recordType, csid, pageNum) {
     // TODO: Figure out when cached records should be flushed.
- 
+    
+    if (typeof(pageNum) === 'undefined') {
+      pageNum = 0;
+    }
+    
     return new Promise(function(resolve, reject) {
-      if (records.has(csid) && records.get(csid).has(TERMS_USED_KEY)) {
-        resolve(records.get(csid).get(TERMS_USED_KEY));
+      var key = [csid, TERMS_USED_KEY, pageNum];
+      
+      if (records.hasIn(key)) {
+        resolve(records.getIn(key));
       }
       else {
-        CollectionSpace.findTermsUsed(recordType, csid)
+        var searchOptions = {
+          pageSize: termsUsedPageSize,
+          pageNum: pageNum
+        };
+        
+        CollectionSpace.findTermsUsed(recordType, csid, searchOptions)
           .then(function(data) {
             var data = processTermsUsedData(data);
           
-            records = records.setIn([csid, TERMS_USED_KEY], data);
+            records = records.setIn(key, data);
         
             resolve(data);
           }.bind(this))

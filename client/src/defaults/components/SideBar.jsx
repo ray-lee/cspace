@@ -9,13 +9,21 @@ var SideBar = React.createClass({
 
   propTypes: {
     recordType: React.PropTypes.string.isRequired,
-    termsUsed: React.PropTypes.instanceOf(Immutable.Map)
+    termsUsed: React.PropTypes.instanceOf(Immutable.Map),
+    termsUsedListState: React.PropTypes.string
+  },
+  
+  handleTermsUsedPageChange: function(pageNum) {
+    if (this.props.onTermsUsedPageChange) {
+      this.props.onTermsUsedPageChange(pageNum);
+    }
   },
   
   render: function() {
     return (
       <div className="sidebar">
-        <TermsUsedPanel recordType={this.props.recordType} termsUsed={this.props.termsUsed}/>
+        <TermsUsedPanel recordType={this.props.recordType} termsUsed={this.props.termsUsed} listState={this.props.termsUsedListState}
+          onPageChange={this.handleTermsUsedPageChange}/>
       </div>
     );
   }

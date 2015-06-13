@@ -174,6 +174,22 @@ module.exports = {
     titleWithCount: 'Terms Used ({count})'
   },
   
+  termList: {
+    noItems: 'None',
+    header: {
+      term: 'Term',
+      authority: 'Authority',
+      vocabulary: 'Vocabulary',
+      field: 'Field'
+    }
+  },
+  
+  pager: {
+    page: 'Page {pageNum} / {maxPageNum}',
+    previous: '< Previous',
+    next: 'Next >'
+  },
+  
   form: {
     collectionobject: {
       panel: {

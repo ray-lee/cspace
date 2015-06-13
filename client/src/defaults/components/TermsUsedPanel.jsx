@@ -5,14 +5,21 @@ var FormattedMessage = require('react-intl').FormattedMessage;
 var Panel = require('./Panel.jsx');
 var TermList = require('./TermList.jsx');
 
-//require('../styles/TermsUsedPanel.css');
+require('../styles/TermsUsedPanel.css');
 
 var TermsUsedPanel = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin],
 
   propTypes: {
     recordType: React.PropTypes.string.isRequired,
-    termsUsed: React.PropTypes.instanceOf(Immutable.Map)
+    termsUsed: React.PropTypes.instanceOf(Immutable.Map),
+    listState: React.PropTypes.string
+  },
+
+  handlePageChange: function(pageNum) {
+    if (this.props.onPageChange) {
+      this.props.onPageChange(pageNum);
+    }
   },
 
   render: function() {
@@ -31,7 +38,7 @@ var TermsUsedPanel = React.createClass({
     
     return (
       <Panel header={header}>
-        <TermList recordType={this.props.recordType} terms={this.props.termsUsed}/>
+        <TermList recordType={this.props.recordType} terms={this.props.termsUsed} listState={this.props.listState} onPageChange={this.handlePageChange}/>
       </Panel>
     );
   }

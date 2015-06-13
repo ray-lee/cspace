@@ -10,6 +10,7 @@ var SideBar = require('./SideBar.jsx')
 var RecordStore = require('../stores/RecordStore.js');
 var RecordActions = require('../actions/RecordActions.js');
 var RecordStates = require('../constants/RecordStates.js');
+var ListStates = require('../constants/ListStates.js');
 
 require('../styles/RecordEditor.css');
 
@@ -20,8 +21,12 @@ var Record = React.createClass({
     return {
       recordType: this.getParams().recordType,
       csid: this.getParams().csid,
+      
       values: Immutable.Map(),
-      recordState: RecordStates.DEFAULT
+      recordState: RecordStates.DEFAULT,
+      
+      termsUsed: null,
+      termsUsedListState: ListStates.DEFAULT
     }
   },
   
@@ -31,7 +36,8 @@ var Record = React.createClass({
 
     if (this.state.csid) {
       this.setState({
-        recordState: RecordStates.LOADING
+        recordState: RecordStates.LOADING,
+        termsUsedListState: ListStates.LOADING
       });
       
       RecordStore.get(this.state.recordType, this.state.csid)
@@ -62,6 +68,7 @@ var Record = React.createClass({
       
       if (csid) {
         newState.recordState = RecordStates.LOADING;
+        newState.termsUsedListState = ListStates.LOADING;
         
         RecordStore.get(recordType, csid)
           .then(function(data) {
@@ -97,21 +104,16 @@ var Record = React.createClass({
       history.replaceState(null, csid, window.location.href + '/' + csid);
     }
 
-    // Get sidebar data.
+    // Update the sidebar.
     
-    RecordStore.getTermsUsed(this.state.recordType, this.state.csid)
-      .then(function(data) {
-        this.handleTermsUsedUpdated(this.state.csid, data);
-      }.bind(this))
-      .then(null, function(error) {
-        console.error(error);
-      })
+    this.updateTermsUsed(0);
   },
 
   handleTermsUsedUpdated: function(csid, data) {
     if (csid === this.state.csid) {
       this.setState({
-        termsUsed: data.get('termsUsed')
+        termsUsed: data.get('termsUsed'),
+        termsUsedListState: ListStates.DEFAULT
       });
     }
   },
@@ -128,6 +130,24 @@ var Record = React.createClass({
     });
     
     RecordActions.save(this.state.recordType, this.state.csid, this.state.values);
+  },
+  
+  handleTermsUsedPageChange: function(pageNum) {
+    this.updateTermsUsed(pageNum);
+  },
+  
+  updateTermsUsed: function(pageNum) {
+    this.setState({
+      termsUsedListState: ListStates.LOADING
+    });
+    
+    RecordStore.getTermsUsed(this.state.recordType, this.state.csid, pageNum)
+      .then(function(data) {
+        this.handleTermsUsedUpdated(this.state.csid, data);
+      }.bind(this))
+      .then(null, function(error) {
+        console.error(error);
+      })
   },
   
   render: function() {
@@ -173,7 +193,8 @@ var Record = React.createClass({
           </div>
           
           <div className="sidebarcontainer">
-            <SideBar recordType={this.state.recordType} termsUsed={this.state.termsUsed}/>
+            <SideBar recordType={this.state.recordType} 
+              termsUsed={this.state.termsUsed} termsUsedListState={this.state.termsUsedListState} onTermsUsedPageChange={this.handleTermsUsedPageChange}/>
           </div>
         </div>
       </main>
