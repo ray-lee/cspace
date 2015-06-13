@@ -13,6 +13,8 @@
 }
 
 .toolbar .statemessage {
+  font-size: 8pt;
+  font-weight: 300;
   padding-left: 16px;
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
