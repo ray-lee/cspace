@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CollectionSpaceServlet extends HttpServlet {
 	private static final String STATIC_ASSET_DIR_PATH = "../../cspace/ui";
-	private static final String UI_ENTRY_FILE_NAME = "index.html";	
+	private static final String JS_BUNDLE_FILE_NAME = "bundle.js";
 	private static final int BUFFER_SIZE = 4096;
 	private static final int CACHE_TIME_SECS = 604800; // 1 week
 	
@@ -33,12 +33,12 @@ public class CollectionSpaceServlet extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 		String[] pathElements = pathInfo.split("/", 3);
 		
-		String tenant = (pathElements.length > 1) ? pathElements[1] : null;
+		String tenant = (pathElements.length > 1) ? pathElements[1] : "";
 		String assetPath = (pathElements.length > 2) ? pathElements[2] : "";
 		
 		// The request must be tenant-qualified.
 		
-		if (tenant == null) {
+		if (tenant == "") {
 			response.sendError(404);
 			return;
 		}
@@ -54,10 +54,9 @@ public class CollectionSpaceServlet extends HttpServlet {
 			transmitFile(staticFile, response);
 		}
 		else {
-			Path entryFilePath = tenantAssetPath.resolve(UI_ENTRY_FILE_NAME);
-			File entryFile = new File(entryFilePath.toString());
+			String bundleUrl = request.getContextPath() + "/" + tenant + "/" + JS_BUNDLE_FILE_NAME;
 			
-			transmitFile(entryFile, response);
+			transmitEntryFile(bundleUrl, response);
 		}
 	}
 
@@ -73,7 +72,7 @@ public class CollectionSpaceServlet extends HttpServlet {
 			response.setContentType(mimeType);
 			response.setContentLength((int) file.length());
 			
-			ServletOutputStream out = response.getOutputStream();	
+			ServletOutputStream out = response.getOutputStream();
 			DataInputStream in = new DataInputStream(new FileInputStream(file));
 	
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -89,5 +88,23 @@ public class CollectionSpaceServlet extends HttpServlet {
 		else {
 			response.sendError(404);
 		}
+	}
+	
+	protected void transmitEntryFile(String bundleUrl, HttpServletResponse response)
+			throws IOException {
+
+		ServletOutputStream out = response.getOutputStream();
+		
+		out.println("<html>");
+		out.println("  <head>");
+		out.println("    <meta charset='UTF-8'>");
+		out.println("    <title>CollectionSpace</title>");
+		out.println("  </head>");
+		out.println("  <body>");
+		out.println("    <script src='" + bundleUrl + "'></script>");
+		out.println("  </body>");
+		out.println("</html>");
+		
+		out.close();
 	}
 }

@@ -6,12 +6,12 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build:dev": "webpack --devtool eval",
-    "deploy:dev": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
-    "predeploy:dev": "cp src/defaults/index.html dist/core && cp -r src/defaults/images dist/core && npm run build:dev",
+    "deploy:dev": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/* $CSPACE_JEESERVER_HOME/cspace/ui",
+    "predeploy:dev": "npm run build:dev",
     "build:prod": "webpack -p",
-    "deploy:prod": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/core $CSPACE_JEESERVER_HOME/cspace/ui",
-    "predeploy:prod": "cp src/defaults/index.html dist/core && cp -r src/defaults/images dist/core && npm run build:prod",
-    "clean": "rm -r dist/core/*",
+    "deploy:prod": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/* $CSPACE_JEESERVER_HOME/cspace/ui",
+    "predeploy:prod": "npm run build:prod",
+    "clean": "rm -r dist/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ray Lee <rhlee@berkeley.edu>",
