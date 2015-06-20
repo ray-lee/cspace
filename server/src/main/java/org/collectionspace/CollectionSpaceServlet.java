@@ -47,6 +47,15 @@ public class CollectionSpaceServlet extends HttpServlet {
 		// Otherwise, return the UI entry file, which will route the path on the client side.
 
 		Path tenantAssetPath = servletPath.resolve(STATIC_ASSET_DIR_PATH).resolve(tenant);
+		File tenantDir = new File(tenantAssetPath.toString());
+		
+		if (! (tenantDir.canRead() && tenantDir.isDirectory())) {
+			// Not a known tenant.
+			
+			response.sendError(404);
+			return;
+		}
+		
 		Path staticAssetPath = tenantAssetPath.resolve(assetPath);
 		File staticFile = new File(staticAssetPath.toString());
 	
@@ -92,12 +101,13 @@ public class CollectionSpaceServlet extends HttpServlet {
 	
 	protected void transmitEntryFile(String bundleUrl, HttpServletResponse response)
 			throws IOException {
-
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
 		ServletOutputStream out = response.getOutputStream();
 		
 		out.println("<html>");
 		out.println("  <head>");
-		out.println("    <meta charset='UTF-8'>");
 		out.println("    <title>CollectionSpace</title>");
 		out.println("  </head>");
 		out.println("  <body>");

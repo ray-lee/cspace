@@ -1,13 +1,15 @@
 var React = require('react/addons');
+var Router = require('react-router');
+var Link = Router.Link;
 var IntlMixin = require('react-intl').IntlMixin;
-var SearchInput = require('./SearchInput.jsx');
-var User = require('./User.jsx');
+var SearchInput = require('./SearchInput');
+var User = require('./User');
 var logoUrl = require('../images/logo.png');
 
 require('../styles/Header.css');
 
 var AuthenticatedHeader = React.createClass({
-  mixins: [IntlMixin, React.addons.PureRenderMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin, Router.Navigation],
   
   render: function() {
     return (
@@ -23,10 +25,10 @@ var AuthenticatedHeader = React.createClass({
         </div>
         <nav className="nav">
           <ul>
-            <li><a href="/cspace/core/mycspace">{this.getIntlMessage('header.mycspace')}</a></li>
-            <li><a href="/cspace/core/create">{this.getIntlMessage('header.create')}</a></li>
-            <li><a href="/cspace/core/search">{this.getIntlMessage('header.search')}</a></li>
-            <li><a href="/cspace/core/admin">{this.getIntlMessage('header.admin')}</a></li>
+            <li><Link to="mycspace">{this.getIntlMessage('header.mycspace')}</Link></li>
+            <li><Link to="create">{this.getIntlMessage('header.create')}</Link></li>
+            <li><Link to="search">{this.getIntlMessage('header.search')}</Link></li>
+            <li><Link to="admin">{this.getIntlMessage('header.admin')}</Link></li>
           </ul>
         </nav>
       </header>

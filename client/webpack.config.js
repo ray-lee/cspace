@@ -17,12 +17,12 @@ FileResolverPlugin.prototype.apply = function(resolver) {
     if (request.skipDefaultFileResolverPlugin) {
       return callback();
     }
-    
+
     var file = this.join(request.path, request.request);
 
     if (file.match(TENANT_FILE_PATTERN)) {
       this.tenant = RegExp.$1;
-    
+
       var innerRequest = {
         request: file,
         query: request.query,
@@ -44,22 +44,28 @@ FileResolverPlugin.prototype.apply = function(resolver) {
           file: true,
           skipDefaultFileResolverPlugin: true
         };
-      
-        this.doResolve('file', defaultRequest, callback);
+
+        this.doResolve('file', defaultRequest, function(err, result) {
+          console.log("here");
+          console.log(result);
+          request.resolved = true;
+
+          return callback(err, request);
+        });
       }.bind(this));
     }
-    else if (file.indexOf(DEFAULT_PATH) !== -1 && this.tenant) {
-      var tenantFile = file.replace(DEFAULT_PATH, TENANT_PATH + this.tenant + '/');
-      console.log("TENANT: " + tenantFile);
-      
-      var tenantRequest = {
-        request: tenantFile,
-        query: request.query,
-        file: true
-      };
-      
-      this.doResolve('file', tenantRequest, callback);
-    }
+    // else if (file.indexOf(DEFAULT_PATH) !== -1 && this.tenant) {
+    //   var tenantFile = file.replace(DEFAULT_PATH, TENANT_PATH + this.tenant + '/');
+    //   console.log("TENANT: " + tenantFile);
+    //
+    //   var tenantRequest = {
+    //     request: tenantFile,
+    //     query: request.query,
+    //     file: true
+    //   };
+    //
+    //   this.doResolve('file', tenantRequest, callback);
+    // }
     else {
       return callback();
     }
@@ -68,8 +74,8 @@ FileResolverPlugin.prototype.apply = function(resolver) {
 
 module.exports = {
   entry: {
-    core: './src/tenants/core/main.jsx',
-    lifesci: './src/tenants/lifesci/main.jsx'
+    core: './src/tenants/core/main.jsx'//,
+//    lifesci: './src/tenants/lifesci/main.jsx'
   },
   output: {
     path: 'dist',
@@ -90,7 +96,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.jsx', '.js']
   },
-  plugins: [
-      new webpack.ResolverPlugin([new FileResolverPlugin()])
-  ]
+  // plugins: [
+  //     new webpack.ResolverPlugin([new FileResolverPlugin()])
+  // ]
 };

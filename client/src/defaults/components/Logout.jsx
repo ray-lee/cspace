@@ -1,11 +1,11 @@
 var React = require('react/addons');
 var Router = require('react-router');
-var Link = require('react-router').Link;
+var Link = Router.Link;
 var IntlMixin = require('react-intl').IntlMixin;
-var CollectionSpace = require('../utils/CollectionSpace.js');
-var About = require('./About.jsx');
-var Panel = require('./Panel.jsx');
-var LogoutStates = require('../constants/LogoutStates.js');
+var CollectionSpace = require('../utils/CollectionSpace');
+var About = require('./About');
+var Panel = require('./Panel');
+var LogoutStates = require('../constants/LogoutStates');
 
 require('../styles/Logout.css');
 

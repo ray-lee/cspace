@@ -3,6 +3,7 @@ var Immutable = require('immutable');
 var ControlledInput = require('./ControlledInput.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 var VocabularyStore = require('../stores/VocabularyStore.js');
+var TenantConfig = require('../config/TenantConfig');
 
 require('../styles/ControlledInput.css');
 
@@ -86,7 +87,7 @@ var getRefName = function(vocabularyShortID, term) {
   // Hardcoding part of it here.
   
   return (
-    'urn:cspace:core.collectionspace.org:vocabularies:name(' + vocabularyShortID + 
+    'urn:cspace:' + TenantConfig.refNameNamespace + ':vocabularies:name(' + vocabularyShortID + 
       '):item:name(' + term.get('shortIdentifier') + ")'" + term.get('displayName') + "'"
   );
 }
