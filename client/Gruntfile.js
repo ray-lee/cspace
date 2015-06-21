@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 var BUILD_DIR = './build';
 var DIST_DIR = './dist';
 var DEFAULTS_DIR = './src/defaults';
@@ -7,6 +9,7 @@ var WEBPACK_ENTRY_FILE = 'main.jsx';
 var WEBPACK_OUTPUT_FILE = 'bundle.js';
 
 module.exports = function(grunt) {
+  var isProd = grunt.option('prod');
   var tenantSpec = grunt.option('tenant');
   var tenants = tenantSpec ? tenantSpec.split(',') : grunt.file.expand({ cwd: TENANTS_DIR }, '*');
 
@@ -64,7 +67,8 @@ module.exports = function(grunt) {
         }, {}),
         output: {
           path: DIST_DIR,
-          filename: '[name]/' + WEBPACK_OUTPUT_FILE
+          filename: '[name]/' + WEBPACK_OUTPUT_FILE,
+          pathinfo: isProd ? false : true
         },
         module: {
           loaders: [{
@@ -80,7 +84,13 @@ module.exports = function(grunt) {
         },
         resolve: {
           extensions: ['', '.jsx', '.js']
-        }
+        },
+        debug: isProd ? false : true,
+        devtool: isProd ? null : 'source-map',
+        plugins: isProd ? [
+          new webpack.optimize.UglifyJsPlugin(),
+          new webpack.optimize.OccurenceOrderPlugin()
+        ] : null
       }
     }
   });
