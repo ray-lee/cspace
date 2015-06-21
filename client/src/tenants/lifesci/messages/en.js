@@ -23,6 +23,9 @@ module.exports = {
           <li><a href="https://docs.google.com/presentation/d/1d9tSxhXl9J5BaC8oQfQl_biBFU13eNTW75ffGSOQ4G0/edit?usp=sharing">Presentation to the CollectionSpace Tech Working Group</a>, 10 April 2015</li>
         </ul>
       </p>
+      <p>
+        → <a href="/cspace/core/login">Go to core tenant</a>
+      </p>
     `
   },
   
@@ -128,7 +131,7 @@ module.exports = {
   },
   
   errorPage: {
-    title: 'There seems to be a problem.'
+    title: 'Sorry, there seems to be a problem.'
   },
   
   recordHistory: {
