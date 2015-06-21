@@ -1,47 +1,11 @@
-.header .controls {
-  margin-top: 10px;
-  margin-bottom: 14px;
-  display: flex;
-}
-
-.header .controls > .logosearch {
-  display: flex;
-  flex: 1 1 70%;
+.header {
+  width: 902px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
 }
 
 .header .logo {
   height: 44px;
   flex: 0 0 auto;
-}
-
-.header .search {
-  text-align: right;
-  padding-top: 16px;
-  flex: 1 1 100%;
-}
-
-.header .user {
-  flex: 1 1 30%;
-  text-align: right;
-}
-
-.header ul {
-  display: flex;
-}
-
-.header li {
-  padding-right: 30px;
-  margin-right: 2px;
-  border-bottom: 2px solid #4D4D4D;
-  flex: none;
-}
-
-.header ul::after {
-  content: "";
-  border-bottom: 2px solid #4D4D4D;
-  flex: 100%;
-}
-
-.header .nav a {
-  text-decoration: none;
 }

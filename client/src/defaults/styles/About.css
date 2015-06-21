@@ -1,10 +1,6 @@
 .about {
-  width: calc(50% - 30px);
+  width: 50%;
   padding-right: 30px;
-}
-
-.about > .content {
-  float: right;
 }
 
 .about h1 {

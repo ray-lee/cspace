@@ -1,19 +1,26 @@
 .logout {
   display: flex;
-  padding: 60px 30px 60px 30px;
+  width: 900px;
   min-height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 60px 0 60px 0;
 }
 
-.logout .panelbody {
+.logout > .statuscontainer {
+  display: flex;
+  width: 50%;
+  align-items: baseline;
+}
+
+.logout > .statuscontainer > .panel {
+  width: 100%;
+}
+
+.logout > .statuscontainer > .panel > .panelbody {
   padding: 30px;
   border-radius: 3px;
-  min-width: 240px;
   min-height: 100px;
-}
-
-.logout .statuscontainer {
-  display: flex;
-  align-items: baseline;
 }
 
 .logout .in_progress .panelbody {

@@ -45,7 +45,7 @@ var Logout = React.createClass({
     }
     
     return (
-      <div className="logout">
+      <main className="logout">
         <About/>
         <div className={'statuscontainer ' + this.state.logoutState}>
           <Panel collapsible={false}>
@@ -53,7 +53,7 @@ var Logout = React.createClass({
             <p>{loginLink}</p>
           </Panel>
         </div>
-      </div>
+      </main>
     );
   }
 });

@@ -1,0 +1,52 @@
+.header.authenticatedheader {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.authenticatedheader .controls {
+  margin-top: 10px;
+  margin-bottom: 14px;
+  display: flex;
+}
+
+.authenticatedheader .controls > .logosearch {
+  display: flex;
+  flex: 1 1 70%;
+}
+
+.authenticatedheader .logo {
+  flex: 0 0 auto;
+}
+
+.authenticatedheader .search {
+  text-align: right;
+  padding-top: 16px;
+  flex: 1 1 100%;
+}
+
+.authenticatedheader .user {
+  flex: 1 1 30%;
+  text-align: right;
+}
+
+.authenticatedheader ul {
+  display: flex;
+}
+
+.authenticatedheader li {
+  padding-right: 30px;
+  margin-right: 2px;
+  border-bottom: 2px solid #4D4D4D;
+  flex: none;
+}
+
+.authenticatedheader ul::after {
+  content: "";
+  border-bottom: 2px solid #4D4D4D;
+  flex: 100%;
+}
+
+.authenticatedheader .nav a {
+  text-decoration: none;
+}

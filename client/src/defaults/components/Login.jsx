@@ -92,7 +92,7 @@ var Login = React.createClass({
     var stateMessage = this.getIntlMessage('login.stateMessage.' + this.state.loginState);
     
     return (
-      <div className="login">
+      <main className="login">
         <About/>
         <div className={'formcontainer ' + this.state.loginState}>
           <Panel collapsible={false}>
@@ -108,7 +108,7 @@ var Login = React.createClass({
             </form>
           </Panel>
         </div>
-      </div>
+      </main>
     );
   }
 });

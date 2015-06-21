@@ -14,6 +14,9 @@ module.exports = {
         This is a prototype of a new user interface for CollectionSpace.
       </p>
       <p>
+        To sign in, use the email "admin@core.collectionspace.org", and password "Administrator".
+      </p>
+      <p>
         For more information, see:
         <ul>
           <li><a href="https://docs.google.com/document/d/1cZE3t0JzO8ZEbZPl_7T7TdcoNFG6p4yoy0HOrK_1eLc/edit?usp=sharing">Proposal for a New CollectionSpace UI Architecture</a>, February 2015</li>

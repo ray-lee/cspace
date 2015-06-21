@@ -7,13 +7,14 @@ var User = require('./User');
 var logoUrl = require('../images/logo.png');
 
 require('../styles/Header.css');
+require('../styles/AuthenticatedHeader.css');
 
 var AuthenticatedHeader = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, Router.Navigation],
   
   render: function() {
     return (
-      <header className="header">
+      <header className="header authenticatedheader">
         <div className="controls">
           <div className="logosearch">
             <img className="logo" src={logoUrl} alt={this.getIntlMessage('header.logoalt')}/>
