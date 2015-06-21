@@ -21,9 +21,7 @@ var Logout = React.createClass({
   componentWillMount: function() {
     CollectionSpace.disconnect()
       .then(function() {
-        this.setState({
-          logoutState: LogoutStates.COMPLETE
-        });
+        this.replaceWith('login');
       }.bind(this))
       .then(null, function(error) {
         console.log(error);
