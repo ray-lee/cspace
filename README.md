@@ -16,19 +16,21 @@ mvn clean install
 
 # Client Installation
 
-[Node.js](http://nodejs.org/) and [npm](https://www.npmjs.com/) are required for building and deploying the client code. Client resources are installed to the `cspace/ui` directory, within the CollectionSpace server's tomcat directory. The cspace servlet serves these resources to a browser, which runs the application.
+[Node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) are required for building and deploying the client code. Client resources are installed to the `cspace/ui` directory, within the CollectionSpace server's tomcat directory. The cspace servlet serves these resources to a browser, which runs the application.
+
+For production:
+```
+cd client
+grunt --prod
+```
+
+For development:
 
 ```
 cd client
-npm run deploy:prod
-```
-
-Or, for development:
-
-```
-npm run deploy:dev
+grunt
 ```
 
 # Accessing the Application
 
-The prototype application consists of an editor for collectionobject records. Once installed, it may be accessed using Chrome or Firefox, at http://[hostname:port]/cspace/core/record/collectionobject. A live prototype is installed at http://qa.collectionspace.org:8180/cspace/core/record/collectionobject.
+The prototype application consists of an editor for collection object records. Once installed, it may be accessed using Chrome or Firefox, at http://[hostname:port]/cspace/core/record/collectionobject. A live prototype is installed at http://173.255.228.202:8180/cspace/core/record/collectionobject.

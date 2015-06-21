@@ -1,19 +1,8 @@
 {
   "name": "cspace",
   "version": "0.0.1",
-  "description": "",
+  "description": "CollectionSpace UI prototype",
   "main": "src/defaults/main.jsx",
-  "scripts": {
-    "start": "webpack-dev-server",
-    "build:dev": "webpack --devtool eval",
-    "deploy:dev": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/* $CSPACE_JEESERVER_HOME/cspace/ui",
-    "predeploy:dev": "npm run build:dev",
-    "build:prod": "webpack -p",
-    "deploy:prod": "mkdir -p $CSPACE_JEESERVER_HOME/cspace/ui; cp -r dist/* $CSPACE_JEESERVER_HOME/cspace/ui",
-    "predeploy:prod": "npm run build:prod",
-    "clean": "rm -r dist/*",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Ray Lee <rhlee@berkeley.edu>",
   "license": "ECL-2.0",
   "private": true,
