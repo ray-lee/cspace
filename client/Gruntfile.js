@@ -103,6 +103,21 @@ module.exports = function(grunt) {
 
   grunt.task.renameTask('clean', 'delete');
   
+  grunt.registerTask('verifyTenantDirs', 'Verify that tenant directories exist.', function() {
+    var allTenantDirsExist = true;
+    
+    tenants.forEach(function(tenant) {
+      var tenantDir = TENANTS_DIR + '/' + tenant;
+      
+      if (!grunt.file.isDir(tenantDir)) {
+        grunt.log.error('Tenant directory not found: ' + tenantDir);
+        allTenantDirsExist = false;
+      }
+    });
+    
+    return allTenantDirsExist;
+  });
+  
   grunt.registerTask('verifyEnv', 'Verify that required environment variables are set.', function(target) {
     if (target === 'deploy') {
       if (process.env.CSPACE_JEESERVER_HOME) {
@@ -131,7 +146,7 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('clean', ['delete:build', 'delete:dist']);
-  grunt.registerTask('build', ['clean', 'copy:expandDefaults', 'copy:mergeTenantOverlays', 'generateTenantConfigs', 'webpack:packTenants']);
+  grunt.registerTask('build', ['verifyTenantDirs', 'clean', 'copy:expandDefaults', 'copy:mergeTenantOverlays', 'generateTenantConfigs', 'webpack:packTenants']);
   grunt.registerTask('undeploy', ['verifyEnv:deploy', 'delete:deploy']);
   grunt.registerTask('deploy', ['verifyEnv:deploy', 'copy:deploy']);
   
