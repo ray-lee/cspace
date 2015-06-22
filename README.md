@@ -18,18 +18,30 @@ mvn clean install
 
 [Node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) are required for building and deploying the client code. Client resources are installed to the `cspace/ui` directory, within the CollectionSpace server's tomcat directory. The cspace servlet serves these resources to a browser, which runs the application.
 
-For production:
-```
-cd client
-grunt --prod
-```
-
-For development:
+To build and deploy in development:
 
 ```
 cd client
 grunt
 ```
+
+For production, use the prod flag:
+```
+grunt --prod
+```
+
+To build only, use the build target. 
+
+```
+grunt build
+```
+
+To build/deploy specific tenants only, use the tenant option:
+
+```
+grunt --tenant=core,lifesci
+```
+
 
 # Accessing the Application
 
