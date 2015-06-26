@@ -9,8 +9,6 @@ var Panel = React.createClass({
     isPanel: true
   },
   
-  mounted: false,
-  
   propTypes: {
     header: React.PropTypes.node,
     collapsible: React.PropTypes.bool,
@@ -27,20 +25,21 @@ var Panel = React.createClass({
   },
   
   getInitialState: function() {
+    var collapsed = this.props.collapsed;
+
     return {
-      collapsed: this.props.collapsed
+      collapsed: collapsed,
+      hasBeenOpened: !collapsed
     };
-  },
-  
-  componentDidMount: function() {
-    this.mounted = true;
   },
   
   handleHeaderClick: function(event) {
     var collapsed = this.state.collapsed;
-
+    var nowCollapsed = !collapsed;
+    
     this.setState({
-      collapsed: !collapsed
+      collapsed: nowCollapsed,
+      hasBeenOpened: this.state.hasBeenOpened || !nowCollapsed
     });
   },
   
@@ -64,11 +63,11 @@ var Panel = React.createClass({
       );
     }
     
-    // If the panel is initially collapsed, don't render the body DOM
+    // If the panel has never been opened, don't render the body DOM
     // (as opposed to rendering the DOM, but hiding it via CSS). This
     // saves memory when initially closed panels are never opened.
-
-    var renderCollapsedBody = this.mounted;
+    console.log("has been opened: " + this.state.hasBeenOpened);
+    var renderCollapsedBody = this.state.hasBeenOpened;
     var collapsed = this.props.collapsible && this.props.collapsed;
     var body = null;
     
