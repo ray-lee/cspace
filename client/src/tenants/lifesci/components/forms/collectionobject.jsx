@@ -15,6 +15,7 @@ var MappedInput = require('../MappedInput.jsx');
 var AuthorityControlledInput = require('../AuthorityControlledInput.jsx');
 var DateInput = require('../DateInput.jsx');
 var StructuredDateInput = require('../StructuredDateInput.jsx');
+var RefName = require('../../utils/RefName.js');
 
 module.exports = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin, OptionLoaderMixin],
@@ -22,7 +23,7 @@ module.exports = React.createClass({
   statics: {
     renderTitle: function(values) {
       var number = values.get('objectNumber');
-      var title = values.getIn(['titleGroup', 0, 'title']);
+      var taxon = RefName.getDisplayName(values.getIn(['taxonomicIdentGroup', 0, 'taxon']));
       
       var parts = [];
       
@@ -30,8 +31,8 @@ module.exports = React.createClass({
         parts.push(number);
       }
       
-      if (title) {
-        parts.push(title);
+      if (taxon) {
+        parts.push(taxon);
       }
       
       return (parts.join(' – '));

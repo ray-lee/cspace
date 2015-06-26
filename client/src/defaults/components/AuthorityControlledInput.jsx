@@ -5,6 +5,7 @@ var FormattedMessage = require('react-intl').FormattedMessage;
 var Input = require('./Input.jsx');
 var InputMixin = require('../mixins/InputMixin.jsx');
 var TermCompletionStore = require('../stores/TermCompletionStore.js');
+var RefName = require('../utils/RefName.js');
 
 require('../styles/ControlledInput.css');
 require('../styles/AuthorityControlledInput.css');
@@ -385,7 +386,7 @@ var AuthorityControlledInput = React.createClass({
         inputValue = selectedOptionLabel;
       }
       else {
-        inputValue = getDisplayName(value);
+        inputValue = RefName.getDisplayName(value);
       }
     }
     
@@ -424,16 +425,6 @@ var AuthorityControlledInput = React.createClass({
     );
   }
 });
-
-var getDisplayName = function(refName) {
-  var displayName = refName;
-
-  if (refName && refName.match(/'(.*)'$/)) {
-    displayName = RegExp.$1;
-  }
-  
-  return displayName;
-};
 
 var getOptions = function(terms) {
   var options = Immutable.List();

@@ -55,7 +55,7 @@ var VocabularyControlledInput = React.createClass({
         label: getDisplayName(value)
       })]);
     }
-    
+
     return (
       <ControlledInput {...(this.props)} value={value} options={options}/>
     );

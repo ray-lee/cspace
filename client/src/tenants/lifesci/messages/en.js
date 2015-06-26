@@ -64,7 +64,8 @@ module.exports = {
     person: 'Person',
     place: 'Place',
     location: 'Storage Location',
-    work: 'Work'
+    work: 'Work',
+    taxon: 'Taxonomy'
   },
   
   vocabulary: {

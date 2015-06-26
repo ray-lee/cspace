@@ -48,12 +48,11 @@ var CompoundInput = React.createClass({
   },
   
   handleCommit: function(name, value) {
-    var newValue = this.state.value.set(name, value);
+    var newValue = name ? this.state.value.set(name, value) : value;
 
     this.setState({
       value: newValue
     });
-
     if (this.props.onCommit) {
       this.props.onCommit(this.props.name, newValue);
     }
