@@ -82,6 +82,34 @@ module.exports = React.createClass({
           </ColumnGroup>
       
           <AuthorityControlledInput name="computedCurrentLocation" readOnly={true}/>
+          
+          <RepeatingInput name="taxonomicIdentGroup">
+            <CompoundInput>
+              <TabularCompoundInput>
+                <AuthorityControlledInput name="taxon" authority={[['cataloging', 'taxon']]}/>
+                <StaticControlledInput name="qualifier" controlledListName="taxonQualifiers"/>
+              </TabularCompoundInput>
+      
+              <TabularCompoundInput>
+                <AuthorityControlledInput name="identBy" authority={[['cataloging', 'identBy']]}/>
+                <Input name="identDate"/>
+                <AuthorityControlledInput name="institution" authority={[['cataloging', 'institution']]}/>
+              </TabularCompoundInput>
+              
+              <ColumnGroup>
+                <Column>
+                  <StaticControlledInput name="identKind" controlledListName="taxonIdentKinds"/>
+                  <TabularCompoundInput>
+                    <Input name="reference"/>
+                    <Input name="refPage"/>
+                  </TabularCompoundInput>
+                </Column>
+                <Column>
+                  <Input name="notes" multiline={true}/>
+                </Column>
+              </ColumnGroup>
+            </CompoundInput>
+          </RepeatingInput>
       
           <RepeatingInput name="titleGroup"> 
             <CompoundInput>

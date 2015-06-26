@@ -66,7 +66,6 @@ var Panel = React.createClass({
     // If the panel has never been opened, don't render the body DOM
     // (as opposed to rendering the DOM, but hiding it via CSS). This
     // saves memory when initially closed panels are never opened.
-    console.log("has been opened: " + this.state.hasBeenOpened);
     var renderCollapsedBody = this.state.hasBeenOpened;
     var collapsed = this.props.collapsible && this.props.collapsed;
     var body = null;

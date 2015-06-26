@@ -232,6 +232,16 @@ module.exports = {
         distinguishingFeatures: 'Distinguishing features',
         comments: 'Comments',
         computedCurrentLocation: 'Computed current location',
+        taxonomicIdentGroup: 'Determination history',
+        taxon: 'Name',
+        qualifier: 'Qualifier',
+        identBy: 'Indentified by',
+        identDate: 'Date',
+        institution: 'Institution',
+        identKind: 'Kind',
+        reference: 'Reference',
+        refPage: 'Page',
+        notes: 'Notes',
         titleGroup: 'Title',
         title: 'Title',
         titleLanguage: 'Title language',
@@ -690,6 +700,21 @@ module.exports = {
       '+/-': '+/-',
       '+': '+',
       '-': '-'
+    },
+    
+    taxonIdentKinds: {
+      'original_label_determination': 'original label determination',
+      'fide': 'fide',
+      'nomenclatural_change': 'nomenclatural change',
+      'taxonomic_change': 'taxonomic change'
+    },
+    
+    taxonQualifiers: {
+      'aff': 'aff.',
+      'cf': 'cf.',
+      'forsan': 'forsan',
+      'sensu_latu': 'sensu latu',
+      'questionable': 'questionable'
     }
   }
 };
