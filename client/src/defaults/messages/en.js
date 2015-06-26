@@ -121,7 +121,7 @@ module.exports = {
   },
   
   footer: {
-    copyright: 'Copyright © 2009 - 2015 CollectionSpace',
+    copyright: 'Copyright © 2009 - {year} CollectionSpace',
     release: 'Release N.0',
     releaseLink: 'http://www.collectionspace.org/current_release/',
     about: 'About CollectionSpace',

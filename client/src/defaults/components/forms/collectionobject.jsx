@@ -41,12 +41,6 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Form recordType="collectionobject" {...(this.props)}>
-        
-        {/*
-        <StaticControlledInput name="recordStatus" defaultValue="new" controlledListName="recordStatuses"/>
-        <AuthorityControlledInput name="contentPerson" authority={[['collectionobject', 'contentPerson']]}/>
-        */}
-          
         <Panel name="identification">
           <ColumnGroup>
             <Column>
@@ -227,7 +221,7 @@ module.exports = React.createClass({
             </CompoundInput>
           </RepeatingInput>
       
-          <Panel name="content">
+          <Panel name="content" collapsed={true}>
             <Input name="contentDescription" multiline={true}/>
             
             <ColumnGroup>
@@ -316,7 +310,7 @@ module.exports = React.createClass({
             <Input name="contentNote" multiline={true}/>
           </Panel>
       
-          <Panel name="textualInscription">
+          <Panel name="textualInscription" collapsed={true}>
             <RepeatingInput name="textualInscriptionGroup">
               <CompoundInput>
                 <Input name="inscriptionContent" multiline={true}/>
@@ -343,7 +337,7 @@ module.exports = React.createClass({
             </RepeatingInput>
           </Panel>
       
-          <Panel name="nontextualInscription">
+          <Panel name="nontextualInscription" collapsed={true}>
             <RepeatingInput name="nonTextualInscriptionGroup">
               <CompoundInput>
                 <Input name="inscriptionDescription" multiline={true}/>
@@ -367,7 +361,7 @@ module.exports = React.createClass({
           </Panel>
         </Panel>
       
-        <Panel name="production">
+        <Panel name="production" collapsed={true}>
           <ColumnGroup>
             <Column>
               <RepeatingInput name="objectProductionDateGroup">
@@ -422,8 +416,8 @@ module.exports = React.createClass({
           </ColumnGroup>
         </Panel>
       
-        <Panel name="history">
-          <Panel name="association">
+        <Panel name="history" collapsed={true}>
+          <Panel name="association" collapsed={true}>
             <ColumnGroup>
               <Column>
                 <RepeatingInput name="assocActivityGroup">
@@ -581,7 +575,7 @@ module.exports = React.createClass({
           </TabularCompoundInput>
         </Panel>
       
-        <Panel name="owner">
+        <Panel name="owner" collapsed={true}>
           <Input name="ownersPersonalExperience" multiline={true}/>
           <Input name="ownersPersonalResponse" multiline={true}/>
 
@@ -594,7 +588,7 @@ module.exports = React.createClass({
           <Input name="ownersContributionNote" multiline={true}/>
         </Panel>
       
-        <Panel name="viewer">
+        <Panel name="viewer" collapsed={true}>
           <Input name="viewersRole"/>
           <Input name="viewersPersonalExperience" multiline={true}/>
           <Input name="viewersPersonalResponse" multiline={true}/>
@@ -608,7 +602,7 @@ module.exports = React.createClass({
           <Input name="viewersContributionNote" multiline={true}/>
         </Panel>
       
-        <Panel name="reference">
+        <Panel name="reference" collapsed={true}>
           <RepeatingInput name="referenceGroup">
             <TabularCompoundInput>
               <AuthorityControlledInput name="reference" authority={[['collectionobject', 'reference']]}/>
@@ -617,7 +611,7 @@ module.exports = React.createClass({
           </RepeatingInput>
         </Panel>
       
-        <Panel name="collection">
+        <Panel name="collection" collapsed={true}>
           <ColumnGroup>
             <Column>
               <StructuredDateInput name="fieldCollectionDate"/>
