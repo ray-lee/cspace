@@ -1,4 +1,11 @@
-.user .username::after {
-  content: "•";
-  margin: 0 .5em 0 .5em;
+.user .popover {
+  float: right;
+  width: 200px;
+  text-align: right;
+}
+
+.user .userid {
+  font-size: 8pt;
+  font-weight: 300;
+  margin-bottom: 8px;
 }

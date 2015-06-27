@@ -1,0 +1,25 @@
+.popover {
+  position: relative;
+}
+
+.popover .compactview {
+  padding-right: 8px;
+  background: url(../images/dropdown.png) right center no-repeat;
+  background-size: 4px 4px;
+}
+
+.popover .fullview {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, .3);
+  background-color: #FFFFFF;
+  padding: 8px;
+  left: -16px;
+  top: -8px;
+  width: 100%;
+}
+
+.popover.open .fullview {
+  display: block;
+}

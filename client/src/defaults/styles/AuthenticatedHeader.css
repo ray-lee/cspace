@@ -27,26 +27,25 @@
 
 .authenticatedheader .user {
   flex: 1 1 30%;
-  text-align: right;
 }
 
-.authenticatedheader ul {
+.authenticatedheader > .nav > ul {
   display: flex;
 }
 
-.authenticatedheader li {
+.authenticatedheader > .nav > ul > li {
   padding-right: 30px;
   margin-right: 2px;
   border-bottom: 2px solid #4D4D4D;
   flex: none;
 }
 
-.authenticatedheader ul::after {
+.authenticatedheader > .nav > ul::after {
   content: "";
   border-bottom: 2px solid #4D4D4D;
   flex: 100%;
 }
 
-.authenticatedheader .nav a {
+.authenticatedheader > .nav a {
   text-decoration: none;
 }

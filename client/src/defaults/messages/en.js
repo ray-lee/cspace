@@ -49,6 +49,10 @@ module.exports = {
     }
   },
   
+  user: {
+    logout: 'Sign out →'
+  },
+  
   searchInput: {
     placeholder: 'Search by CSID'
   },
