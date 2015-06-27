@@ -2,10 +2,9 @@ var React = require('react/addons');
 var Immutable = require('immutable');
 var IntlMixin = require('react-intl').IntlMixin;
 var FormattedMessage = require('react-intl').FormattedMessage;
+var PopOver = require('./PopOver');
 
 require('../styles/RecordHistory.css');
-
-var SHOW_FULL_VIEW_DELAY = 500;
 
 var RecordHistory = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin],
@@ -14,56 +13,10 @@ var RecordHistory = React.createClass({
     values: React.PropTypes.instanceOf(Immutable.Map)
   },
   
-  showFullViewTimer: null,
-  
   getDefaultProps: function() {
     return {
       values: Immutable.Map()
     };
-  },
-  
-  getInitialState: function() {
-    return {
-      showFullView: false
-    };
-  },
-  
-  handlePanelClick: function(event) {
-    if (this.showFullViewTimer !== null) {
-      clearTimeout(this.showFullViewTimer);
-      this.showFullViewTimer = null;
-    }
-    
-    this.setState({
-      showFullView: true
-    });
-  },
-  
-  handlePanelMouseEnter: function(event) {
-    if (!this.state.showFullView && this.showFullViewTimer === null) {
-      this.showFullViewTimer = setTimeout(this.handleShowFullViewTimer, SHOW_FULL_VIEW_DELAY);
-    }
-  },
-  
-  handlePanelMouseLeave: function(event) {
-    if (this.showFullViewTimer !== null) {
-      clearTimeout(this.showFullViewTimer);
-      this.showFullViewTimer = null;
-    }
-  },
-  
-  handleShowFullViewTimer: function() {
-    this.showFullViewTimer = null;
-    
-    this.setState({
-      showFullView: true
-    });
-  },
-  
-  handleFullViewMouseLeave: function(event) {
-    this.setState({
-      showFullView: false
-    });
   },
   
   render: function() {
@@ -71,7 +24,7 @@ var RecordHistory = React.createClass({
     
     var createdAt = values.get('createdAt');
     var createdBy = values.get('createdBy');
-    var panel = null;
+    var popOver = null;
     
     if (createdAt || createdBy) {
       var updatedAt = values.get('updatedAt');
@@ -120,28 +73,17 @@ var RecordHistory = React.createClass({
           <FormattedMessage message={this.getIntlMessage('recordHistory.updated.byUser')} user={updatedBy}/>
         );
       }
-    
-      var panelClasses = React.addons.classSet({
-        'panel': true,
-        'full': this.state.showFullView
-      });
       
-      panel = (
-        <div className={panelClasses} onClick={this.handlePanelClick} onMouseEnter={this.handlePanelMouseEnter} onMouseLeave={this.handlePanelMouseLeave}>
-          <div className="compactview">
-            {updatedMessage}
-          </div>
-          <div className="fullview" onMouseLeave={this.handleFullViewMouseLeave}>
-            {updatedMessage}<br/>
-            {createdMessage}
-          </div>
-        </div>
+      popOver = (
+        <PopOver header={updatedMessage}>
+          {createdMessage}
+        </PopOver>
       );
     }
     
     return (
       <div className="recordhistory">
-        {panel}
+        {popOver}
       </div>
     );
   }

@@ -15,9 +15,9 @@
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, .3);
   background-color: #FFFFFF;
   padding: 8px;
-  left: -16px;
+  left: -8px;
   top: -8px;
-  width: 100%;
+  width: calc(100% - 8px);
 }
 
 .popover.open .fullview {
