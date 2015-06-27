@@ -3,7 +3,6 @@ var IntlMixin = require('react-intl').IntlMixin;
 var RouteHandler = require('react-router').RouteHandler;
 
 require('../styles/App.css');
-require('../styles/fonts.css');
 
 var favicon = require('../images/favicon.png');
 

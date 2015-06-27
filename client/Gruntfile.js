@@ -5,6 +5,7 @@ var DIST_DIR = './dist';
 var DEFAULTS_DIR = './src/defaults';
 var TENANTS_DIR = './src/tenants';
 var DEPLOY_DIR = process.env.CSPACE_JEESERVER_HOME + '/cspace/ui';
+var INDEX_FILE = 'index.html';
 var TENANT_CONFIG_FILE = 'config/TenantConfig.js';
 var WEBPACK_ENTRY_FILE = 'main.jsx';
 var WEBPACK_OUTPUT_FILE = 'bundle.js';
@@ -145,8 +146,23 @@ module.exports = function(grunt) {
     });
   });
   
+  grunt.registerTask('generateIndexFiles', 'Generate tenant index files.', function() {
+    tenants.forEach(function(tenant) {
+      var file = BUILD_DIR + '/' + tenant + '/' + INDEX_FILE;
+      var content = grunt.file.read(file);
+
+      content = grunt.template.process(content, {
+        data: {
+          tenantId: tenant
+        }
+      });
+
+      grunt.file.write(DIST_DIR + '/' + tenant + '/' + INDEX_FILE, content);
+    });
+  });
+  
   grunt.registerTask('clean', ['delete:build', 'delete:dist']);
-  grunt.registerTask('build', ['verifyTenantDirs', 'clean', 'copy:expandDefaults', 'copy:mergeTenantOverlays', 'generateTenantConfigs', 'webpack:packTenants']);
+  grunt.registerTask('build', ['verifyTenantDirs', 'clean', 'copy:expandDefaults', 'copy:mergeTenantOverlays', 'generateTenantConfigs', 'webpack:packTenants', 'generateIndexFiles']);
   grunt.registerTask('undeploy', ['verifyEnv:deploy', 'delete:deploy']);
   grunt.registerTask('deploy', ['verifyEnv:deploy', 'copy:deploy']);
   

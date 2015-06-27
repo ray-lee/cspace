@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CollectionSpaceServlet extends HttpServlet {
 	private static final String STATIC_ASSET_DIR_PATH = "../../cspace/ui";
-	private static final String JS_BUNDLE_FILE_NAME = "bundle.js";
+	private static final String UI_ENTRY_FILE_NAME = "index.html";
 	private static final int BUFFER_SIZE = 4096;
 	private static final int CACHE_TIME_SECS = 604800; // 1 week
 	
@@ -63,9 +63,10 @@ public class CollectionSpaceServlet extends HttpServlet {
 			transmitFile(staticFile, response);
 		}
 		else {
-			String bundleUrl = request.getContextPath() + "/" + tenant + "/" + JS_BUNDLE_FILE_NAME;
+			Path entryFilePath = tenantAssetPath.resolve(UI_ENTRY_FILE_NAME);
+			File entryFile = new File(entryFilePath.toString());
 			
-			transmitEntryFile(bundleUrl, response);
+			transmitFile(entryFile, response);
 		}
 	}
 
@@ -97,24 +98,5 @@ public class CollectionSpaceServlet extends HttpServlet {
 		else {
 			response.sendError(404);
 		}
-	}
-	
-	protected void transmitEntryFile(String bundleUrl, HttpServletResponse response)
-			throws IOException {
-		
-		response.setContentType("text/html; charset=UTF-8");
-		
-		ServletOutputStream out = response.getOutputStream();
-		
-		out.println("<html>");
-		out.println("  <head>");
-		out.println("    <title>CollectionSpace</title>");
-		out.println("  </head>");
-		out.println("  <body>");
-		out.println("    <script src='" + bundleUrl + "'></script>");
-		out.println("  </body>");
-		out.println("</html>");
-		
-		out.close();
 	}
 }
