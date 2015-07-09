@@ -17,5 +17,5 @@
 
 .footer li:not(:last-child)::after {
   content: "•";
-  margin: 0 .5em 0 .5em;
+  margin: 0 1em 0 1em;
 }
