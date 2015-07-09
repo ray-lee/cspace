@@ -21,9 +21,11 @@
   border-radius: 3px;
 }
 
+.login > .formcontainer input {
+  padding: 4px 6px 4px 6px;
+}
+
 .login form > div {
-  display: flex;
-  align-items: baseline;
   margin: 8px 0 8px 0;
 }
 
@@ -42,13 +44,8 @@
   margin-bottom: 16px;
 }
 
-.login label {
-  width: 20%;
-}
-
 .login input {
-  float: right;
-  width: 300px;
+  width: 100%;
 }
 
 .login button {
