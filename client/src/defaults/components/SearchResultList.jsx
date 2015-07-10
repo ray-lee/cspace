@@ -1,14 +1,16 @@
 var React = require('react/addons');
 var Immutable = require('immutable');
+var Router = require('react-router');
+var Link = Router.Link;
 var { IntlMixin, FormattedMessage } = require('react-intl');
-var Pager = require('./Pager.jsx');
-var ListStates = require('../constants/ListStates.js');
+var Pager = require('./Pager');
+var ListStates = require('../constants/ListStates');
 
 require('../styles/List.css');
 require('../styles/SearchResultList.css');
 
 var SearchResultList = React.createClass({
-  mixins: [IntlMixin, React.addons.PureRenderMixin],
+  mixins: [IntlMixin, React.addons.PureRenderMixin, Router.Navigation],
 
   propTypes: {
     recordType: React.PropTypes.string.isRequired,
@@ -22,6 +24,16 @@ var SearchResultList = React.createClass({
     }
   },
 
+  handleRowClick: function(recordType, csid, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.transitionTo('record', {
+      recordType: recordType,
+      csid: csid
+    });
+  },
+  
   render: function() {
     var recordType = this.props.recordType;
     var results = this.props.results;
@@ -51,6 +63,7 @@ var SearchResultList = React.createClass({
     
     var rows = items.map(function(item, index) {
       var summary = item.get('summarylist');
+      var csid = summary.get('csid');
       var updatedAt = Date.parse(summary.get('updatedAt'));
       
       var updatedTimestamp = (
@@ -64,8 +77,8 @@ var SearchResultList = React.createClass({
       }
       
       return (
-        <tr key={'r' + index}>
-          <td>{summary.get('objectNumber')}</td>
+        <tr key={'r' + index} onClick={this.handleRowClick.bind(this, recordType, csid)}>
+          <td><Link to="record" params={{recordType: recordType, csid: csid}}>{summary.get('objectNumber')}</Link></td>
           <td>{summary.get('title')}</td>
           <td>{responsibleDepartment}</td>
           <td>{updatedTimestamp}</td>

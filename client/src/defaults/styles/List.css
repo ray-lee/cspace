@@ -4,6 +4,10 @@
   background: white;
 }
 
+.list > table a {
+  text-decoration: none;
+}
+
 .list > table > thead > tr > th {
   background-color: #EFEFEF;
   color: #739CD2;
@@ -37,6 +41,11 @@
 
 .list > table > tbody > tr:nth-child(even) {
   background-color: rgba(240, 245, 251, .9);
+}
+
+.list > table > tbody > tr:hover {
+  background-color: rgb(195, 217, 233);
+  cursor: pointer;
 }
 
 .list.loading > table > tbody > tr {
