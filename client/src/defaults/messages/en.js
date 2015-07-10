@@ -50,15 +50,15 @@ module.exports = {
   },
   
   user: {
-    logout: 'Sign out →'
+    logout: 'Sign out'
   },
   
   searchInput: {
-    placeholder: 'Search by CSID'
+    placeholder: 'Search'
   },
 
   recordType: {
-    collectionobject: 'Collection Object'
+    collectionobject: 'Object'
   },
   
   authority: {
@@ -138,6 +138,16 @@ module.exports = {
     title: 'Sorry, there seems to be a problem.'
   },
   
+  search: {
+    title: 'Search',
+    searching: 'Searching...',
+    resultCount: `{count, plural,
+      =0 {No records}
+      one {1 record}
+      other {# records}
+    } found`
+  },
+  
   recordHistory: {
     created: {
       byUserAtTime: 'Created {datetime, date, medium} {datetime, time, long} by {user}',
@@ -151,14 +161,16 @@ module.exports = {
     }
   },
   
+  timestamp: '{datetime, date, medium} {datetime, time, long}',
+  
   controlledInput: {
     filteredCount: `{count, plural, 
-      zero {No matches.}
+      =0 {No matches.}
       one {1 match:}
       other {# matches:}
     }`,
     totalCount: `{count, plural,
-      zero {}
+      =0 {}
       one {Show all options}
       other {Show all # options}
     }`
@@ -434,7 +446,8 @@ module.exports = {
         broaderContextType: 'Type',
         narrowerContext: 'Object component',
         narrowerContextType: 'Type',
-        equivalentContexts: 'Equivalent component'
+        equivalentContexts: 'Equivalent component',
+        updatedAt: 'Last modified'
       }
     }
   },

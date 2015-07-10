@@ -167,8 +167,8 @@ var Record = React.createClass({
     var Form = require('./forms/' + recordType + '.jsx');
 
     return (
-      <main className="recordeditor">
-        <TitleBar recordState={this.state.recordState} title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
+      <main className={'recordeditor ' + this.state.recordState}>
+        <TitleBar title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <div className="tabcontainer">

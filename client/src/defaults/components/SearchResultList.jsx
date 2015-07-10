@@ -1,18 +1,18 @@
 var React = require('react/addons');
 var Immutable = require('immutable');
-var IntlMixin = require('react-intl').IntlMixin;
+var { IntlMixin, FormattedMessage } = require('react-intl');
 var Pager = require('./Pager.jsx');
 var ListStates = require('../constants/ListStates.js');
 
 require('../styles/List.css');
-require('../styles/TermList.css');
+require('../styles/SearchResultList.css');
 
-var TermList = React.createClass({
+var SearchResultList = React.createClass({
   mixins: [IntlMixin, React.addons.PureRenderMixin],
 
   propTypes: {
     recordType: React.PropTypes.string.isRequired,
-    terms: React.PropTypes.instanceOf(Immutable.Map),
+    results: React.PropTypes.instanceOf(Immutable.Map),
     listState: React.PropTypes.string
   },
   
@@ -24,7 +24,7 @@ var TermList = React.createClass({
 
   render: function() {
     var recordType = this.props.recordType;
-    var terms = this.props.terms;
+    var results = this.props.results;
 
     var items = null;
     var pagination = null;
@@ -33,11 +33,12 @@ var TermList = React.createClass({
     var totalItems = null;
     var maxPageNum = null;
     
-    if (terms) {
-      items = terms.get('results');
-      pagination = terms.get('pagination');
+    if (results) {
+      items = results.get('results');
+      pagination = results.get('pagination');
     }
-    else {
+    
+    if (!items) {
       items = Immutable.List();
     }
     
@@ -49,16 +50,25 @@ var TermList = React.createClass({
     }
     
     var rows = items.map(function(item, index) {
-      var authority = item.get('recordtype');
-      var vocabulary = item.get('namespace');
-      var fieldName = item.get('sourceFieldName');
+      var summary = item.get('summarylist');
+      var updatedAt = Date.parse(summary.get('updatedAt'));
+      
+      var updatedTimestamp = (
+         <FormattedMessage message={this.getIntlMessage('timestamp')} datetime={updatedAt}/>
+      );
+
+      var responsibleDepartment = summary.get('responsibleDepartment');
+
+      if (responsibleDepartment) {
+        responsibleDepartment = this.getIntlMessage('controlledList.departments.' + responsibleDepartment);
+      }
       
       return (
         <tr key={'r' + index}>
-          <td>{item.get('number')}</td>
-          <td>{this.getIntlMessage('authority.' + authority)}</td>
-          <td>{this.getIntlMessage('vocabulary.' + authority + '.' + vocabulary)}</td>
-          <td>{this.getIntlMessage('form.' + recordType + '.field.' + fieldName)}</td>
+          <td>{summary.get('objectNumber')}</td>
+          <td>{summary.get('title')}</td>
+          <td>{responsibleDepartment}</td>
+          <td>{updatedTimestamp}</td>
         </tr>
       );
     }.bind(this)).toArray();
@@ -72,14 +82,14 @@ var TermList = React.createClass({
     }
     
     return (
-      <div className={'list termlist ' + this.props.listState}>
+      <div className={'list searchresultlist ' + this.props.listState}>
         <table>
           <thead>
             <tr>
-              <th>{this.getIntlMessage('termList.header.term')}</th>
-              <th>{this.getIntlMessage('termList.header.authority')}</th>
-              <th>{this.getIntlMessage('termList.header.vocabulary')}</th>
-              <th>{this.getIntlMessage('termList.header.field')}</th>
+              <th>{this.getIntlMessage('form.' + recordType + '.field.objectNumber')}</th>
+              <th>{this.getIntlMessage('form.' + recordType + '.field.title')}</th>
+              <th>{this.getIntlMessage('form.' + recordType + '.field.responsibleDepartments')}</th>
+              <th>{this.getIntlMessage('form.' + recordType + '.field.updatedAt')}</th>
             </tr>
           </thead>
           <tbody>
@@ -92,4 +102,4 @@ var TermList = React.createClass({
   }
 });
 
-module.exports = TermList;
+module.exports = SearchResultList;

@@ -1,8 +1,9 @@
 .searchinput {
   width: 50%;
-  padding-right: 18px;
+  padding: 4px 22px 4px 6px;
+  padding-right: 24px;
   background-image: url(../images/input-search.png);
   background-repeat: no-repeat;
-  background-position: calc(100% - 2px) center;
+  background-position: calc(100% - 6px) center;
   background-size: 14px 14px;
 }

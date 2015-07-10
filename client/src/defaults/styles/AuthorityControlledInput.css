@@ -6,7 +6,7 @@
 }
 
 .authoritycontrolledinput.loading .autocompletejewel {
-  background-image: url(../images/spinner-jewel.svg);
+  background-image: url(../images/spinner-grey.svg);
 }
 
 .authoritycontrolledinput .optionlist .option.np { /* Non-preferred term */

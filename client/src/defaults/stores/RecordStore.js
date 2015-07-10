@@ -1,7 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 var Immutable = require('immutable');
 var assign = require('object-assign');
-var CollectionSpace = require('../utils/CollectionSpace.js');
+var cspace = require('../utils/CollectionSpace.js');
 var Dispatcher = require('../dispatcher/Dispatcher.js');
 var ActionTypes = require('../constants/ActionTypes.js');
 
@@ -27,7 +27,7 @@ var RecordStore = assign({}, EventEmitter.prototype, {
         resolve(records.get(csid).get(DATA_KEY));
       }
       else {
-        CollectionSpace.getRecord(recordType, csid)
+        cspace.getRecord(recordType, csid)
           .then(function(data) {
             var data = processRecordData(data);
           
@@ -62,7 +62,7 @@ var RecordStore = assign({}, EventEmitter.prototype, {
           pageNum: pageNum
         };
         
-        CollectionSpace.findTermsUsed(recordType, csid, searchOptions)
+        cspace.findTermsUsed(recordType, csid, searchOptions)
           .then(function(data) {
             var data = processTermsUsedData(data);
           
@@ -159,14 +159,14 @@ RecordStore.dispatchToken = Dispatcher.register(function(action) {
       if (action.csid) {
         // The record to be saved has a CSID, so it's an update.
 
-        CollectionSpace.updateRecord(action.recordType, action.csid, data)
+        cspace.updateRecord(action.recordType, action.csid, data)
           .then(handleSaveComplete)
           .then(null, handleSaveError);
       }
       else {
         // The record to be saved does not have a CSID, so it's a create.
         
-        CollectionSpace.createRecord(action.recordType, data)
+        cspace.createRecord(action.recordType, data)
           .then(handleSaveComplete)
           .then(null, handleSaveError);
       }

@@ -1,6 +1,5 @@
 var React = require('react/addons');
 var ScrollObserverMixin = require('../mixins/ScrollObserverMixin.jsx');
-var RecordStates = require('../constants/RecordStates.js');
 
 require('../styles/TitleBar.css');
 
@@ -10,16 +9,14 @@ var TitleBar = React.createClass({
   mixins: [ScrollObserverMixin, React.addons.PureRenderMixin],
 
   propTypes: {
-    title: React.PropTypes.string,
-    recordType: React.PropTypes.string,
-    recordState: React.PropTypes.string
+    title: React.PropTypes.node,
+    recordType: React.PropTypes.string
   },
   
   getDefaultProps: function() {
     return {
       title: '',
-      recordType: '',
-      recordState: RecordStates.DEFAULT
+      recordType: ''
     };
   },
   
@@ -53,8 +50,6 @@ var TitleBar = React.createClass({
       titlebar: true,
       docked: this.state.docked
     };
-
-    classes[this.props.recordState] = true;
 
     classes = React.addons.classSet(classes);
     

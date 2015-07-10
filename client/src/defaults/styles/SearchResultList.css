@@ -1,0 +1,11 @@
+.list.searchresultlist > table > thead > tr > th,
+.list.searchresultlist > table > tbody > tr > td
+{
+  font-size: 9pt;
+  font-weight: 400;
+}
+
+.list.searchresultlist > table > thead > tr > th:first-child,
+.list.searchresultlist > table > tbody > tr > td:first-child {
+  padding-left: 20px;
+}
