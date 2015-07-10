@@ -5,7 +5,7 @@ var cspace = require('../utils/CollectionSpace.js');
 
 var CHANGE_EVENT = 'change';
 
-var DEFAULT_PAGE_SIZE = 5; //40;
+var DEFAULT_PAGE_SIZE = 40;
 
 var results = Immutable.Map();
 var pageSize = DEFAULT_PAGE_SIZE;

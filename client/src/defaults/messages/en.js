@@ -141,7 +141,7 @@ module.exports = {
   search: {
     title: 'Search',
     searching: 'Searching...',
-    noResults: 'There aren\'t any records that match these criteria.',
+    noResults: 'There aren\'t any records matching these criteria.',
     resultCount: `{count, plural,
       =0 {No records}
       one {1 record}

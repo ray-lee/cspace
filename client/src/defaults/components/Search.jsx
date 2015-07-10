@@ -51,13 +51,10 @@ var Search = React.createClass({
   },
   
   handleSearchResultUpdated: function(data) {
-    setTimeout(function() {
-      this.setState({
-        results: data,
-        searchState: SearchStates.DEFAULT
-      });
-    }.bind(this), 1000);
-
+    this.setState({
+      results: data,
+      searchState: SearchStates.DEFAULT
+    });
   },
   
   handleSearchResultError: function(error) {
@@ -151,11 +148,11 @@ var Search = React.createClass({
   
   renderPosition: function(results) {
     var positionMessage = null;
-    
-    if (this.state.searchState === SearchStates.DEFAULT) {
+    var count = this.getCount(results);
+
+    if (this.state.searchState === SearchStates.DEFAULT && count > 0) {
       var pageSize = parseInt(results.getIn(['pagination', 'pageSize']));
       var pageNum = parseInt(results.getIn(['pagination', 'pageNum']));
-      var count = this.getCount(results);
       
       var startPosition = pageSize * pageNum + 1;
       var endPosition = Math.min(startPosition + pageSize - 1, count);
