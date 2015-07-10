@@ -135,17 +135,23 @@ module.exports = {
   },
   
   errorPage: {
-    title: 'Sorry, there seems to be a problem.'
+    title: 'There seems to be a problem.'
   },
   
   search: {
     title: 'Search',
     searching: 'Searching...',
+    noResults: 'There aren\'t any records that match these criteria.',
     resultCount: `{count, plural,
       =0 {No records}
       one {1 record}
       other {# records}
-    } found`
+    } found`,
+    resultPosition: 'showing {startPosition, number}-{endPosition, number}',
+    criteria: {
+      all: 'All {recordName} records',
+      keywords: '{recordName} records containing keywords:'
+    }
   },
   
   recordHistory: {
