@@ -1,39 +1,39 @@
-.search {
-  padding: 0 10px 10px 10px;
+main.search {
+  padding: 0 0 10px 10px;
   background: #FFFFFF;
 }
 
-.search > .searchtitle {
+main.search > .searchtitle {
   position: relative;
-  top: 12px;
+  top: 10px;
   color: #BBBBBB;
 }
 
-.search > .resultcontainer {
+main.search > .resultcontainer {
   width: 70%;
   background: rgba(212, 212, 212, .2);
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1);
   border-bottom: 1px solid #DDDDDD;
 }
 
-.search > .resultcontainer > .resultinfo {
+main.search > .resultcontainer > .resultinfo {
   display: flex;
   padding: 2px 10px 2px 10px;
   background-color: #739CD2;
   color: #FFFFFF;
 }
 
-.search > .resultcontainer > .resultinfo > .resultcount {
+main.search > .resultcontainer > .resultinfo > .resultcount {
   width: 50%;
   padding-right: 10px;
 }
 
-.search > .resultcontainer > .resultinfo > .resultposition {
+main.search > .resultcontainer > .resultinfo > .resultposition {
   width: 50%;
   text-align: right;
 }
 
-.search > .resultcontainer > .noresults {
+main.search > .resultcontainer > .noresults {
   padding: 20px 10px 120px 10px;
 }
 
@@ -41,20 +41,20 @@
  * This spinner should really go in the tbody of the list table,
  * but Chrome doesn't handle backgrounds on tbody elements properluy.
  */
-.search.searching > .resultcontainer {
+main.search.searching > .resultcontainer {
   background-image: url(../images/spinner-grey.svg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 20px 20px;
 }
 
-.search.paging > .resultcontainer > .resultinfo > .resultposition {
+main.search.paging > .resultcontainer > .resultinfo > .resultposition {
   background-image: url(../images/spinner-white.svg);
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 16px 16px;
 }
 
-.search.searching > .resultcontainer > .noresults > span {
+main.search.searching > .resultcontainer > .noresults > span {
   visibility: hidden;
 }

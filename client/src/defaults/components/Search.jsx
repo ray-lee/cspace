@@ -6,12 +6,13 @@ var TitleBar = require('./TitleBar');
 var SearchResultList = require('./SearchResultList');
 var SearchStates = require('../constants/SearchStates');
 var SearchResultStore = require('../stores/SearchResultStore');
+var RecordEditor = require('./RecordEditor');
 var ListStates = require('../constants/ListStates');
 
 require('../styles/Search.css');
 
 var Search = React.createClass({
-  mixins: [IntlMixin, Router.State, React.addons.PureRenderMixin],
+  mixins: [IntlMixin, Router.State, Router.Navigation, React.addons.PureRenderMixin],
 
   getInitialState: function() {
     return {
@@ -83,6 +84,36 @@ var Search = React.createClass({
   
   handlePageChange: function(pageNum) {
     this.updateResults(this.state.recordType, this.state.keywords, pageNum, SearchStates.PAGING);
+  },
+  
+  handleSearchResultClick: function(recordType, csid, event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    var searchContext = null;
+    
+    if (this.state.searchState != SearchStates.ERROR) {
+      var results = this.state.results;
+      
+      if (results) {
+        var pageNum = parseInt(results.getIn(['pagination', 'pageNum']));
+
+        if (!isNaN(pageNum)) {
+          searchContext = {
+            recordType: this.state.recordType,
+            keywords: this.state.keywords,
+            pageNum: pageNum
+          };
+        }
+      }
+    }
+    
+    RecordEditor.searchContext = searchContext;
+    
+    this.transitionTo('record', {
+      recordType: recordType,
+      csid: csid
+    });
   },
   
   updateResults: function(recordType, keywords, pageNum, searchState) {
@@ -179,7 +210,9 @@ var Search = React.createClass({
         var listState = (searchState === SearchStates.LOADING || searchState === SearchStates.PAGING) ? ListStates.LOADING : ListStates.DEFAULT;
         
         resultList = (
-          <SearchResultList recordType={this.state.recordType} listState={listState} results={results} onPageChange={this.handlePageChange}/>
+          <SearchResultList recordType={this.state.recordType} listState={listState} results={results}
+            onPageChange={this.handlePageChange}
+            onResultClick={this.handleSearchResultClick}/>
         );
       }
       else {

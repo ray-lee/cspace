@@ -10,7 +10,7 @@ require('../styles/List.css');
 require('../styles/SearchResultList.css');
 
 var SearchResultList = React.createClass({
-  mixins: [IntlMixin, React.addons.PureRenderMixin, Router.Navigation],
+  mixins: [IntlMixin, React.addons.PureRenderMixin],
 
   propTypes: {
     recordType: React.PropTypes.string.isRequired,
@@ -24,14 +24,10 @@ var SearchResultList = React.createClass({
     }
   },
 
-  handleRowClick: function(recordType, csid, event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    this.transitionTo('record', {
-      recordType: recordType,
-      csid: csid
-    });
+  handleResultClick: function(recordType, csid, event) {
+    if (this.props.onResultClick) {
+      this.props.onResultClick(recordType, csid, event);
+    }
   },
   
   render: function() {
@@ -77,7 +73,7 @@ var SearchResultList = React.createClass({
       }
       
       return (
-        <tr key={'r' + index} onClick={this.handleRowClick.bind(this, recordType, csid)}>
+        <tr key={'r' + index} onClick={this.handleResultClick.bind(this, recordType, csid)}>
           <td><Link to="record" params={{recordType: recordType, csid: csid}}>{summary.get('objectNumber')}</Link></td>
           <td>{summary.get('title')}</td>
           <td>{responsibleDepartment}</td>
