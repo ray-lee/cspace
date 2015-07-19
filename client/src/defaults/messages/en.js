@@ -154,6 +154,13 @@ module.exports = {
     }
   },
   
+  searchResultNavigator: {
+    count: 'Search result {position, number} of {count, number}',
+    return: 'return to results',
+    previous: 'previous',
+    next: 'next'
+  },
+  
   recordHistory: {
     created: {
       byUserAtTime: 'Created {datetime, date, medium} {datetime, time, long} by {user}',
@@ -218,9 +225,9 @@ module.exports = {
   },
   
   pager: {
-    page: 'Page {pageNum} / {maxPageNum}',
-    previous: '< Previous',
-    next: 'Next >'
+    page: 'page {pageNum, number} / {maxPageNum, number}',
+    previous: 'previous',
+    next: 'next'
   },
   
   form: {

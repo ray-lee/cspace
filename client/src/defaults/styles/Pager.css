@@ -44,3 +44,13 @@
 .pager button:disabled {
   color: #BBBBBB;
 }
+
+.pager > .previous > button:before {
+  display: inline;
+  content: '< ';
+}
+
+.pager > .next > button:after {
+  display: inline;
+  content: ' >';
+}

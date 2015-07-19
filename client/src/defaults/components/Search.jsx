@@ -91,26 +91,6 @@ var Search = React.createClass({
   handleSearchResultClick: function(recordType, csid, event) {
     event.preventDefault();
     event.stopPropagation();
-
-    var searchContext = null;
-    
-    if (this.state.searchState != SearchStates.ERROR) {
-      var results = this.state.results;
-      
-      if (results) {
-        var pageNum = parseInt(results.getIn(['pagination', 'pageNum']));
-
-        if (!isNaN(pageNum)) {
-          searchContext = Immutable.Map({
-            recordType: this.state.recordType,
-            keywords: this.state.keywords,
-            pageNum: pageNum
-          });
-        }
-      }
-    }
-    
-    RecordEditor.searchContext = searchContext;
     
     this.transitionTo('record', {
       recordType: recordType,

@@ -55,6 +55,31 @@ var SearchResultStore = assign({}, EventEmitter.prototype, {
     });
   },
 
+  getSearchContext: function() {
+    var searchContext = null;
+    
+    if (currentSearch) {
+      var recordType = currentSearch.recordType;
+      
+      if (recordType) {
+        var keywords = currentSearch.keywords;
+        var pageNum = currentPageNumbers.getIn([recordType, keywords]);
+      
+        if (!pageNum) {
+          pageNum = 0;
+        }
+      
+        searchContext = Immutable.Map({
+          recordType: recordType,
+          keywords: keywords,
+          pageNum: pageNum
+        });
+      }
+    }
+  
+    return searchContext;
+  },
+  
   setCurrentPage: function(recordType, keywords, currentPageNum) {
     currentPageNumbers = currentPageNumbers.setIn([recordType, keywords], currentPageNum);
   },

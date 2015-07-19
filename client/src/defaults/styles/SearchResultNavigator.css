@@ -39,3 +39,18 @@
 .searchresultnavigator > .buttons > .button:disabled {
   color: #DDDDDD;
 }
+
+.searchresultnavigator > .buttons > .returnButton::before {
+  display: 'inline';
+  content: '≣ ';
+}
+
+.searchresultnavigator > .buttons > .previousButton::before {
+  display: 'inline';
+  content: '∧ ';
+}
+
+.searchresultnavigator > .buttons > .nextButton::after {
+  display: 'inline';
+  content: ' ∨';
+}

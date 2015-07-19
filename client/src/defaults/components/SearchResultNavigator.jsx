@@ -1,13 +1,14 @@
 var React = require('react/addons');
 var Router = require('react-router');
 var Link = Router.Link;
-var RecordEditor = require('./RecordEditor');
+var IntlMixin = require('react-intl').IntlMixin;
+var FormattedMessage = require('react-intl').FormattedMessage;
 var SearchResultStore = require('../stores/SearchResultStore');
 
 require('../styles/SearchResultNavigator.css');
 
 var SearchResultNavigator = React.createClass({
-  mixins: [React.addons.PureRenderMixin, Router.Navigation],
+  mixins: [React.addons.PureRenderMixin, Router.Navigation, IntlMixin],
 
   propTypes: {
     recordType: React.PropTypes.string.isRequired,
@@ -200,19 +201,19 @@ var SearchResultNavigator = React.createClass({
   
   renderReturnButton: function() {
     return(
-      <button className="button" onClick={this.handleReturnButtonClick}>≣ return to results</button>
+      <button className="button returnButton" onClick={this.handleReturnButtonClick}>{this.getIntlMessage('searchResultNavigator.return')}</button>
     );
   },
   
   renderPreviousButton: function() {
     return (
-      <button className="button" disabled={!this.state.previousResult} onClick={this.handlePreviousButtonClick}>∧ previous</button>
+      <button className="button previousButton" disabled={!this.state.previousResult} onClick={this.handlePreviousButtonClick}>{this.getIntlMessage('searchResultNavigator.previous')}</button>
     );
   },
 
   renderNextButton: function() {
     return (
-      <button className="button" disabled={!this.state.nextResult} onClick={this.handleNextButtonClick}>next ∨</button>
+      <button className="button nextButton" disabled={!this.state.nextResult} onClick={this.handleNextButtonClick}>{this.getIntlMessage('searchResultNavigator.next')}</button>
     );
   },
   
@@ -224,7 +225,7 @@ var SearchResultNavigator = React.createClass({
     if (resultPosition !== null) {
       navigator = (
         <div className="searchresultnavigator">
-          <div className="count">Search result {resultPosition + 1} of {resultCount}</div>
+          <div className="count"><FormattedMessage message={this.getIntlMessage('searchResultNavigator.count')} position={resultPosition+1} count={resultCount}/></div>
           <div className="buttons">{this.renderReturnButton()}{this.renderPreviousButton()}{this.renderNextButton()}</div>
         </div>
       );

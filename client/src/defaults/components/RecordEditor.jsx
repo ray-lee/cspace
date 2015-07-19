@@ -10,6 +10,7 @@ var ToolBar = require('./ToolBar');
 var SideBar = require('./SideBar');
 var ErrorPage = require('./ErrorPage');
 var RecordStore = require('../stores/RecordStore');
+var SearchResultStore = require('../stores/SearchResultStore');
 var RecordActions = require('../actions/RecordActions');
 var RecordStates = require('../constants/RecordStates');
 var ListStates = require('../constants/ListStates');
@@ -19,14 +20,9 @@ require('../styles/RecordEditor.css');
 var RecordEditor = React.createClass({
   mixins: [IntlMixin, Router.State, Router.Navigation, React.addons.PureRenderMixin],
   
-  statics: {
-    searchContext: null
-  },
-  
   getInitialState: function() {
-    var searchContext = RecordEditor.searchContext;
-    RecordEditor.searchContext = null;
-    
+    var searchContext = SearchResultStore.getSearchContext();
+
     return {
       recordType: this.getParams().recordType,
       csid: this.getParams().csid,
