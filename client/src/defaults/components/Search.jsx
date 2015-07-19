@@ -92,6 +92,13 @@ var Search = React.createClass({
     event.preventDefault();
     event.stopPropagation();
     
+    // if (event.getModifierState("Meta")) {
+    //   window.open(this.makeHref('record', {
+    //     recordType: recordType,
+    //     csid: csid
+    //   }));
+    // }
+
     this.transitionTo('record', {
       recordType: recordType,
       csid: csid
