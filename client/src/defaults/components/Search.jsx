@@ -26,7 +26,7 @@ var Search = React.createClass({
   
   componentDidMount: function() {
     if (this.state.keywords !== null) {
-      this.updateResults(this.state.recordType, this.state.keywords, 0, SearchStates.SEARCHING);
+      this.updateResults(SearchStates.SEARCHING, this.state.recordType, this.state.keywords);
     }
   },
   
@@ -47,18 +47,20 @@ var Search = React.createClass({
         results: Immutable.Map()
       });
       
-      this.updateResults(recordType, keywords, 0, SearchStates.SEARCHING);
+      this.updateResults(SearchStates.SEARCHING, recordType, keywords);
     }
   },
   
-  handleSearchResultUpdated: function(data) {
+  handleSearchResultUpdated: function(recordType, keywords, pageNum, data) {
+    SearchResultStore.setCurrentPage(recordType, keywords, parseInt(data.getIn(['pagination', 'pageNum'])));
+    
     this.setState({
       results: data,
       searchState: SearchStates.DEFAULT
     });
   },
   
-  handleSearchResultError: function(error) {
+  handleSearchResultError: function(recordType, keywords, pageNum, error) {
     console.error(error);
     
     this.setState({
@@ -83,7 +85,7 @@ var Search = React.createClass({
   },
   
   handlePageChange: function(pageNum) {
-    this.updateResults(this.state.recordType, this.state.keywords, pageNum, SearchStates.PAGING);
+    this.updateResults(SearchStates.PAGING, this.state.recordType, this.state.keywords, pageNum);
   },
   
   handleSearchResultClick: function(recordType, csid, event) {
@@ -99,11 +101,11 @@ var Search = React.createClass({
         var pageNum = parseInt(results.getIn(['pagination', 'pageNum']));
 
         if (!isNaN(pageNum)) {
-          searchContext = {
+          searchContext = Immutable.Map({
             recordType: this.state.recordType,
             keywords: this.state.keywords,
             pageNum: pageNum
-          };
+          });
         }
       }
     }
@@ -116,17 +118,17 @@ var Search = React.createClass({
     });
   },
   
-  updateResults: function(recordType, keywords, pageNum, searchState) {
+  updateResults: function(searchState, recordType, keywords, pageNum) {
     this.setState({
       searchState: searchState
     });
     
     SearchResultStore.get(recordType, keywords, pageNum)
       .then(function(data) {
-        this.handleSearchResultUpdated(data);
+        this.handleSearchResultUpdated(recordType, keywords, pageNum, data);
       }.bind(this))
       .then(null, function(error) {
-        this.handleSearchResultError(error);
+        this.handleSearchResultError(recordType, keywords, pageNum, error);
       }.bind(this));
   },
   

@@ -21,9 +21,8 @@
   padding-bottom: 10px;
 }
 
-
 .recordeditor.loading > .titlebar > .content > h1 {
-  padding-left: 30px;
+  padding-left: 28px;
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
   background-position: left center;

@@ -2,4 +2,40 @@
   position: relative;
   top: 10px;
   color: #BBBBBB;
+  display: flex;
+  width: 70%;
+}
+
+.searchresultnavigator .count {
+  width: 50%;
+}
+
+.searchresultnavigator .buttons {
+  width: 50%;
+  text-align: right; 
+}
+
+.searchresultnavigator > .buttons > .button {
+  padding: 0 4px 0 4px;
+  font-size: 8pt;
+  background: white;
+  border-color: #DDDDDD;
+  color: #4D4D4D;
+  border-radius: 0;
+  margin-left: 1px;
+}
+
+.searchresultnavigator > .buttons > .button:enabled:hover,
+.searchresultnavigator > .buttons > .button:focus {
+  outline: 1px solid #32561B;
+  outline-offset: -1px;
+}
+
+.searchresultnavigator > .buttons > .button:enabled:hover {
+  background-color: #4A7F28;
+  color: #FFFFFF;
+}
+
+.searchresultnavigator > .buttons > .button:disabled {
+  color: #DDDDDD;
 }

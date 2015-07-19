@@ -6,9 +6,9 @@ var SearchResultNavigator = require('./SearchResultNavigator');
 var TitleBar = require('./TitleBar');
 var TabbedPanelGroup = require('./TabbedPanelGroup');
 var Panel = require('./Panel');
-var ToolBar = require('./ToolBar')
-var SideBar = require('./SideBar')
-var ErrorPage = require('./ErrorPage')
+var ToolBar = require('./ToolBar');
+var SideBar = require('./SideBar');
+var ErrorPage = require('./ErrorPage');
 var RecordStore = require('../stores/RecordStore');
 var RecordActions = require('../actions/RecordActions');
 var RecordStates = require('../constants/RecordStates');
@@ -25,7 +25,6 @@ var RecordEditor = React.createClass({
   
   getInitialState: function() {
     var searchContext = RecordEditor.searchContext;
-    
     RecordEditor.searchContext = null;
     
     return {
@@ -151,6 +150,29 @@ var RecordEditor = React.createClass({
     RecordActions.save(this.state.recordType, this.state.csid, this.state.values);
   },
   
+  handleSearchResultNavigate: function(recordType, csid, pageNum) {
+    var searchContext = this.state.searchContext;
+
+    searchContext = searchContext.set('pageNum', pageNum);
+    
+    this.setState({
+      searchContext: searchContext
+    });
+    
+    this.transitionTo('record', {
+      recordType: this.state.recordType,
+      csid: csid
+    });
+  },
+  
+  handleReturnToSearchResults: function(recordType, keywords, pageNum) {
+    this.transitionTo('searchRecordType', {
+      recordType: recordType
+    }, {
+      keywords: keywords
+    });
+  },
+  
   handleTermsUsedPageChange: function(pageNum) {
     this.updateTermsUsed(pageNum);
   },
@@ -179,9 +201,12 @@ var RecordEditor = React.createClass({
     
     if (searchContext) {
       searchResultNavigator = (
-        <SearchResultNavigator recordType={searchContext.recordType} keywords={searchContext.keywords} pageNum={searchContext.pageNum} csid={this.state.csid}/>
+        <SearchResultNavigator recordType={searchContext.get('recordType')} keywords={searchContext.get('keywords')} pageNum={searchContext.get('pageNum')} csid={this.state.csid}
+          onNavigate={this.handleSearchResultNavigate}
+          onReturnToResults={this.handleReturnToSearchResults}/>
       );
     }
+    
     var recordType = this.state.recordType;
     
     var Form = require('./forms/' + recordType + '.jsx');

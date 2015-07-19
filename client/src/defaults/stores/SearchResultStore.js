@@ -5,14 +5,26 @@ var cspace = require('../utils/CollectionSpace.js');
 
 var CHANGE_EVENT = 'change';
 
-var DEFAULT_PAGE_SIZE = 40;
+var DEFAULT_PAGE_SIZE = 3;
 
 var results = Immutable.Map();
+var currentPageNumbers = Immutable.Map();
+var currentSearch = {};
+
 var pageSize = DEFAULT_PAGE_SIZE;
 
 var SearchResultStore = assign({}, EventEmitter.prototype, {
   get: function(recordType, keywords, pageNum) {
-    if (typeof(pageNum) === 'undefined') {
+    if (isNewSearch(recordType, keywords)) {
+      clearCurrentPageNumbers();
+      setCurrentSearch(recordType, keywords);
+    }
+    
+    if (typeof(pageNum) === 'undefined' || pageNum === null) {
+      pageNum = currentPageNumbers.getIn([recordType, keywords]);
+    }
+
+    if (typeof(pageNum) === 'undefined' || pageNum === null) {
       pageNum = 0;
     }
     
@@ -43,6 +55,10 @@ var SearchResultStore = assign({}, EventEmitter.prototype, {
     });
   },
 
+  setCurrentPage: function(recordType, keywords, currentPageNum) {
+    currentPageNumbers = currentPageNumbers.setIn([recordType, keywords], currentPageNum);
+  },
+  
   emitChange: function(data) {
     this.emit(CHANGE_EVENT, data);
   },
@@ -55,6 +71,19 @@ var SearchResultStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 });
+
+var clearCurrentPageNumbers = function() {
+  currentPageNumbers = Immutable.Map();
+};
+
+var isNewSearch = function(recordType, keywords) {
+  return (currentSearch.recordType !== recordType || currentSearch.keywords !== keywords);
+};
+
+var setCurrentSearch  = function(recordType, keywords) {
+  currentSearch.recordType = recordType;
+  currentSearch.keywords = keywords;
+};
 
 var processSearchData = function(data) {
   return Immutable.fromJS(data);
