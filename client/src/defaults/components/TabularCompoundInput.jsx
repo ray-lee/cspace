@@ -122,14 +122,16 @@ var TabularCompoundInput = React.createClass({
     }
   },
   
-  valueToRow: function(value, index) {
+  valueToRow: function(value, index, list) {
     var cells = [];
     
     if (this.props.repeating) {
       cells.push(
-        <td key="tab" className="tab"><button className="moveTopButton" type="button" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></td>
+        <td key="tab" className="tab"><button className="moveTopButton" type="button" disabled={index == 0} onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></td>
       );
     }
+    
+    var size = list ? list.size : 1;
     
     React.Children.forEach(this.props.children, function(child) {
       var name = child.props.name;
@@ -157,7 +159,7 @@ var TabularCompoundInput = React.createClass({
     if (this.props.repeating) {
       cells.push(
         <td key="remove" className="removeButtonCell">
-          <button className="removeButton" type="button" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+          <button className="removeButton" type="button" disabled={size < 2} onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
         </td>
       );
     }
