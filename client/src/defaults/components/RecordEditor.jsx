@@ -2,26 +2,31 @@ var React = require('react/addons');
 var IntlMixin = require('react-intl').IntlMixin;
 var Router = require('react-router');
 var Immutable = require('immutable');
-var TitleBar = require('./TitleBar.jsx');
-var TabbedPanelGroup = require('./TabbedPanelGroup.jsx');
-var Panel = require('./Panel.jsx');
-var ToolBar = require('./ToolBar.jsx')
-var SideBar = require('./SideBar.jsx')
-var ErrorPage = require('./ErrorPage.jsx')
-var RecordStore = require('../stores/RecordStore.js');
-var RecordActions = require('../actions/RecordActions.js');
-var RecordStates = require('../constants/RecordStates.js');
-var ListStates = require('../constants/ListStates.js');
+var SearchResultNavigator = require('./SearchResultNavigator');
+var TitleBar = require('./TitleBar');
+var TabbedPanelGroup = require('./TabbedPanelGroup');
+var Panel = require('./Panel');
+var ToolBar = require('./ToolBar');
+var SideBar = require('./SideBar');
+var ErrorPage = require('./ErrorPage');
+var RecordStore = require('../stores/RecordStore');
+var SearchResultStore = require('../stores/SearchResultStore');
+var RecordActions = require('../actions/RecordActions');
+var RecordStates = require('../constants/RecordStates');
+var ListStates = require('../constants/ListStates');
 
 require('../styles/RecordEditor.css');
 
-var Record = React.createClass({
+var RecordEditor = React.createClass({
   mixins: [IntlMixin, Router.State, Router.Navigation, React.addons.PureRenderMixin],
   
   getInitialState: function() {
+    var searchContext = SearchResultStore.getSearchContext();
+
     return {
       recordType: this.getParams().recordType,
       csid: this.getParams().csid,
+      searchContext: searchContext,
       
       values: Immutable.Map(),
       recordState: RecordStates.DEFAULT,
@@ -53,6 +58,7 @@ var Record = React.createClass({
   
   componentWillUnmount: function() {
     RecordStore.removeDataUpdatedListener(this.handleDataUpdated);
+    RecordStore.removeTermsUsedUpdatedListener(this.handleTermsUsedUpdated);
   },
   
   componentWillReceiveProps: function(nextProps) {
@@ -140,6 +146,29 @@ var Record = React.createClass({
     RecordActions.save(this.state.recordType, this.state.csid, this.state.values);
   },
   
+  handleSearchResultNavigate: function(recordType, csid, pageNum) {
+    var searchContext = this.state.searchContext;
+
+    searchContext = searchContext.set('pageNum', pageNum);
+    
+    this.setState({
+      searchContext: searchContext
+    });
+    
+    this.transitionTo('record', {
+      recordType: this.state.recordType,
+      csid: csid
+    });
+  },
+  
+  handleReturnToSearchResults: function(recordType, keywords, pageNum) {
+    this.transitionTo('searchRecordType', {
+      recordType: recordType
+    }, {
+      keywords: keywords
+    });
+  },
+  
   handleTermsUsedPageChange: function(pageNum) {
     this.updateTermsUsed(pageNum);
   },
@@ -163,12 +192,25 @@ var Record = React.createClass({
       return this.renderError();
     }
     
+    var searchResultNavigator = null;
+    var searchContext = this.state.searchContext;
+    
+    if (searchContext) {
+      searchResultNavigator = (
+        <SearchResultNavigator recordType={searchContext.get('recordType')} keywords={searchContext.get('keywords')} pageNum={searchContext.get('pageNum')} csid={this.state.csid}
+          onNavigate={this.handleSearchResultNavigate}
+          onReturnToResults={this.handleReturnToSearchResults}/>
+      );
+    }
+    
     var recordType = this.state.recordType;
+    
     var Form = require('./forms/' + recordType + '.jsx');
-
+    
     return (
-      <main className="recordeditor">
-        <TitleBar recordState={this.state.recordState} title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
+      <main className={'recordeditor ' + this.state.recordState}>
+        {searchResultNavigator}
+        <TitleBar title={Form.renderTitle(this.state.values)} recordType={this.getIntlMessage('recordType.' + recordType)}/>
         
         <div className="recordeditorbody">
           <div className="tabcontainer">
@@ -220,4 +262,4 @@ var Record = React.createClass({
   }
 });
 
-module.exports = Record;
+module.exports = RecordEditor;

@@ -50,15 +50,15 @@ module.exports = {
   },
   
   user: {
-    logout: 'Sign out →'
+    logout: 'Sign out'
   },
     
   searchInput: {
-    placeholder: 'Search by CSID'
+    placeholder: 'Search'
   },
 
   recordType: {
-    collectionobject: 'Collection Object'
+    collectionobject: 'Object'
   },
   
   authority: {
@@ -136,7 +136,30 @@ module.exports = {
   },
   
   errorPage: {
-    title: 'Sorry, there seems to be a problem.'
+    title: 'There seems to be a problem.'
+  },
+  
+  search: {
+    title: 'Search',
+    searching: 'Searching...',
+    noResults: 'There aren\'t any records matching these criteria.',
+    resultCount: `{count, plural,
+      =0 {No records}
+      one {1 record}
+      other {# records}
+    } found`,
+    resultPosition: 'showing {startPosition, number}-{endPosition, number}',
+    criteria: {
+      all: 'All {recordName} records',
+      keywords: '{recordName} records containing keywords:'
+    }
+  },
+     
+  searchResultNavigator: {
+    count: 'Search result {position, number} of {count, number}',
+    return: 'return to results',
+    previous: 'previous',
+    next: 'next'
   },
   
   recordHistory: {
@@ -152,14 +175,16 @@ module.exports = {
     }
   },
   
+  timestamp: '{datetime, date, medium} {datetime, time, long}',
+  
   controlledInput: {
     filteredCount: `{count, plural, 
-      zero {No matches.}
+      =0 {No matches.}
       one {1 match:}
       other {# matches:}
     }`,
     totalCount: `{count, plural,
-      zero {}
+      =0 {}
       one {Show all options}
       other {Show all # options}
     }`
@@ -201,9 +226,9 @@ module.exports = {
   },
   
   pager: {
-    page: 'Page {pageNum} / {maxPageNum}',
-    previous: '< Previous',
-    next: 'Next >'
+    page: 'page {pageNum} / {maxPageNum}',
+    previous: 'previous',
+    next: 'next'
   },
   
   form: {
@@ -445,7 +470,8 @@ module.exports = {
         broaderContextType: 'Type',
         narrowerContext: 'Object component',
         narrowerContextType: 'Type',
-        equivalentContexts: 'Equivalent component'
+        equivalentContexts: 'Equivalent component',
+        updatedAt: 'Last modified'
       }
     }
   },

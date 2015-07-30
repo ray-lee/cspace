@@ -4,6 +4,8 @@ var Navigation = require('react-router').Navigation;
 
 require('../styles/SearchInput.css');
 
+var csidPattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}(-[0-9a-fA-F]{12})?$/;
+
 var SearchInput = React.createClass({
   mixins: [IntlMixin, Navigation, React.addons.PureRenderMixin],
 
@@ -31,16 +33,29 @@ var SearchInput = React.createClass({
   
   handleKeyDown: function(event) {
     if (event.key === 'Enter') {
-      var csid = event.target.value.trim();
-      
-      if (csid) {
-        this.setState({
-          value: ''
-        });
-        
+      this.initiateSearch(event.target.value);
+    }
+  },
+  
+  initiateSearch: function(searchString) {
+    searchString = searchString.trim();
+    
+    if (searchString) {
+      this.setState({
+        value: ''
+      });
+
+      if (csidPattern.test(searchString)) {
         this.transitionTo('record', {
           recordType: 'collectionobject',
-          csid: csid
+          csid: searchString
+        });
+      }
+      else {
+        this.transitionTo('searchRecordType', {
+          recordType: 'collectionobject',
+        }, {
+          keywords: searchString
         });
       }
     }

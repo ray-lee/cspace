@@ -5,7 +5,6 @@
 
 .titlebar > .content {
   padding-top: 10px;
-  padding-right: 10px;
   display: flex;
 }
 
@@ -15,22 +14,17 @@
 }
 
 .titlebar > .content > h1 {
-  flex: 100%;
-  margin-right: 10px;
-}
-
-.titlebar.loading > .content > h1 {
-  padding-left: 30px;
-  background-image: url(../images/spinner.svg);
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 28px 28px;
+  box-sizing: border-box;
+  width: 70%;
 }
 
 .titlebar > .content > h2 {
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  width: 30%;
   text-align: right;
   color: #739CD2;
-  flex: none;
 }
 
 .titlebar.docked > .content {
@@ -45,10 +39,6 @@
 }
 
 .titlebar.docked > .content > h1 {
-  margin-left: 15px;
-  margin-right: 20px;
-}
-
-.titlebar.docked > .content > h2 {
-  margin-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }

@@ -4,6 +4,7 @@ var IntlMixin = require('react-intl').IntlMixin;
 var Pager = require('./Pager.jsx');
 var ListStates = require('../constants/ListStates.js');
 
+require('../styles/List.css');
 require('../styles/TermList.css');
 
 var TermList = React.createClass({
@@ -71,7 +72,7 @@ var TermList = React.createClass({
     }
     
     return (
-      <div className={'termlist ' + this.props.listState}>
+      <div className={'list termlist ' + this.props.listState}>
         <table>
           <thead>
             <tr>

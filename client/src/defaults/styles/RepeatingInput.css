@@ -63,6 +63,10 @@
   position: relative;
 }
 
+.repeatinginput > .instances > .instance .removeButton:disabled {
+  color: #DDDDDD;
+}
+
 .repeatinginput > .addButton {
   width: 22px;
   height: 16px;
@@ -77,8 +81,8 @@
   line-height: 12px;
 }
 
-.repeatinginput > .instances > .instance .tab > .moveTopButton:hover,
-.repeatinginput > .instances > .instance .tab > .moveTopButton:focus {
+.repeatinginput > .instances > .instance .tab > .moveTopButton:enabled:hover,
+.repeatinginput > .instances > .instance .tab > .moveTopButton:enabled:focus {
   left: -1px;
   top: -1px;
   border: 1px solid #DDDDDD;
@@ -91,33 +95,33 @@
   background-position: center center;
 }
 
-.repeatinginput > .instances > .instance .tab > .moveTopButton:focus {
+.repeatinginput > .instances > .instance .tab > .moveTopButton:enabled:focus {
   background-image: url(../images/move-top-black.png);
 }
 
-.repeatinginput > .instances > .instance .tab > .moveTopButton:hover {
+.repeatinginput > .instances > .instance .tab > .moveTopButton:enabled:hover {
   background-image: url(../images/move-top-white.png);
   background-color: #4A7F28;
 }
 
-.repeatinginput > .instances > .instance .tab > .moveTopButton:hover,
-.repeatinginput > .instances > .instance .tab > .moveTopButton:focus,
+.repeatinginput > .instances > .instance .tab > .moveTopButton:enabled:hover,
+.repeatinginput > .instances > .instance .tab > .moveTopButton:enabled:focus,
 .repeatinginput > .addButton:hover,
 .repeatinginput > .addButton:focus,
-.repeatinginput > .instances > .instance .removeButton:hover,
-.repeatinginput > .instances > .instance .removeButton:focus {
+.repeatinginput > .instances > .instance .removeButton:enabled:hover,
+.repeatinginput > .instances > .instance .removeButton:enabled:focus {
   outline: 1px solid #32561B;
   outline-offset: -1px;
 }
 
-.repeatinginput > .instances > .instance .removeButton:hover,
-.repeatinginput > .instances > .instance .removeButton:focus {
+.repeatinginput > .instances > .instance .removeButton:enabled:hover,
+.repeatinginput > .instances > .instance .removeButton:enabled:focus {
   left: -1px;
   border-left: 1px solid #DDDDDD;
 }
 
 .repeatinginput > .addButton:hover,
-.repeatinginput > .instances > .instance .removeButton:hover {
+.repeatinginput > .instances > .instance .removeButton:enabled:hover {
   background-color: #4A7F28;
   color: #FFFFFF;
 }

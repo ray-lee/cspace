@@ -143,7 +143,7 @@ var RepeatingInput = React.createClass({
         );
       }
 
-      var instances = this.state.value.map(function(value, index) {
+      var instances = this.state.value.map(function(value, index, list) {
         var inputInstance = React.addons.cloneWithProps(inputTemplate, {
           name: index,
           label: null,
@@ -156,9 +156,9 @@ var RepeatingInput = React.createClass({
       
         return (
           <li key={index} className="instance">
-            <div className="tab"><button className="moveTopButton" type="button" onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
+            <div className="tab"><button className="moveTopButton" type="button" disabled={index == 0} onClick={this.handleMoveTopButtonClick} data-repeatinginputindex={index}>{index + 1}</button></div>
             {inputInstance}
-            <button className="removeButton" type="button" onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
+            <button className="removeButton" type="button" disabled={list.size < 2} onClick={this.handleRemoveButtonClick} data-repeatinginputindex={index}>−</button>
           </li>
         );
       }, this).toArray();

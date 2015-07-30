@@ -8,6 +8,7 @@ var Home = require('./components/Home');
 var Login = require('./components/Login');
 var Logout = require('./components/Logout');
 var RecordEditor = require('./components/RecordEditor');
+var Search = require('./components/Search');
 var Blank = require('./components/Blank');
 
 var {
@@ -30,10 +31,13 @@ var routes = (
   
       <Route name="mycspace" path="mycspace" handler={Blank} />
       <Route name="create" path="create" handler={Blank} />
-      <Route name="search" path="search" handler={Blank} />
+
+      <Route name="search" path="search" handler={Search} />
+      <Route name="searchRecordType" path="search/:recordType" handler={Search} />
+
       <Route name="admin" path="admin" handler={Blank} />
 
-      <Route name="newrecord" path="record/:recordType" handler={RecordEditor} />
+      <Route name="newRecord" path="record/:recordType" handler={RecordEditor} />
       <Route name="record" path="record/:recordType/:csid" handler={RecordEditor} />
     </Route>
   </Route>

@@ -72,7 +72,7 @@ var Login = React.createClass({
           transition.retry();
         }
         else {
-          this.replaceWith('newrecord', {
+          this.replaceWith('newRecord', {
             recordType: 'collectionobject'
           });
         }
@@ -99,10 +99,10 @@ var Login = React.createClass({
             <div className="statemessage">{stateMessage}</div>
             <form onSubmit={this.handleFormSubmit}>
               <div>
-                <label>{this.getIntlMessage('login.username')}</label><input ref="username" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder=" "/>
+                <input ref="username" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder={this.getIntlMessage('login.username')}/>
               </div>
               <div>
-                <label>{this.getIntlMessage('login.password')}</label><input ref="password" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder=" "/>
+                <input ref="password" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder={this.getIntlMessage('login.password')}/>
               </div>
               <button>{this.getIntlMessage('login.login')}</button>
             </form>

@@ -1,0 +1,53 @@
+.list > table {
+  width: 100%;
+  border: none;
+  background: white;
+}
+
+.list > table a {
+  text-decoration: none;
+}
+
+.list > table > thead > tr > th {
+  background-color: #EFEFEF;
+  color: #739CD2;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.list > table > thead > tr > th,
+.list > table > tbody > tr > td
+{
+  padding: 3px;
+  text-align: left;
+  font-size: 8pt;
+  font-weight: 300;
+}
+
+.list > table > thead > tr > th:first-child,
+.list > table > tbody > tr > td:first-child
+{
+  padding-left: 10px;
+}
+
+.list > table > thead > tr > th:last-child,
+.list > table > tbody > tr > td:last-child
+{
+  padding-right: 10px;
+}
+
+.list > table > tbody > tr:nth-child(odd) {
+  background-color: rgba(240, 245, 251, .5);
+}
+
+.list > table > tbody > tr:nth-child(even) {
+  background-color: rgba(240, 245, 251, .9);
+}
+
+.list > table > tbody > tr:hover {
+  background-color: rgb(195, 217, 233);
+  cursor: pointer;
+}
+
+.list.loading > table > tbody > tr {
+  visibility: hidden;
+}

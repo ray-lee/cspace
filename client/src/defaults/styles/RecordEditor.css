@@ -1,5 +1,6 @@
 .recordeditor {
   background-color: #F0F5FB;
+  padding: 0 0 10px 10px;
 }
 
 .recordeditor > .recordeditorbody {
@@ -18,4 +19,12 @@
 
 .recordeditor > .recordeditorbody > .tabcontainer form:not(:last-child) {
   padding-bottom: 10px;
+}
+
+.recordeditor.loading > .titlebar > .content > h1 {
+  padding-left: 28px;
+  background-image: url(../images/spinner.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 28px 28px;
 }
