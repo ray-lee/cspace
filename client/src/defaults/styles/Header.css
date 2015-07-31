@@ -1,9 +1,8 @@
 .header {
-  width: 902px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 20px;
-  padding-left: 10px;
+  padding: 20px 10px 0 10px;
 }
 
 .header .logo {
