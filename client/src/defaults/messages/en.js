@@ -24,7 +24,7 @@ module.exports = {
         </ul>
       </p>
       <p>
-        → <a href="/cspace/lifesci/login">Go to lifesci tenant</a>
+        <a href="/cspace/lifesci/login">Go to lifesci tenant</a>
       </p>
     `
   },
