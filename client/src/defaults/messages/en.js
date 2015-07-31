@@ -149,8 +149,14 @@ module.exports = {
     } found`,
     resultPosition: 'showing {startPosition, number}-{endPosition, number}',
     criteria: {
-      all: 'All {recordName} records',
-      keywords: '{recordName} records containing keywords:'
+      all: `All {recordType, select,
+        collectionobject {object}
+        other {}
+      } records`,
+      keywords: `{recordType, select,
+        collectionobject {Object}
+        other {Other}
+      } records containing keywords:`
     }
   },
   
@@ -228,6 +234,20 @@ module.exports = {
     page: 'page {pageNum, number} / {maxPageNum, number}',
     previous: 'previous',
     next: 'next'
+  },
+  
+  notification: {
+    record: {
+      saving: `Saving {recordType, select,
+        collectionobject {object}
+        other {record}
+      } {recordTitle} ...`,
+      saveComplete: 'Saved!',
+      saveError: `Error saving {recordType, select,
+        collectionobject {object}
+        other {record}
+      } {recordTitle}: {errorMessage}`
+    }
   },
   
   form: {

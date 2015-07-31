@@ -135,16 +135,15 @@ var Search = React.createClass({
   
   renderTitle: function(recordType, keywords) {
     var title = null;
-    var recordName = this.getIntlMessage('recordType.' + recordType);
     
     if (keywords === '' || keywords === '*') {
       title = (
-        <span><FormattedMessage message={this.getIntlMessage('search.criteria.all')} recordName={recordName}/></span>
+        <span><FormattedMessage message={this.getIntlMessage('search.criteria.all')} recordType={recordType}/></span>
       );
     }
     else {
       title = (
-        <span><FormattedMessage message={this.getIntlMessage('search.criteria.keywords')} recordName={recordName}/> <i>{this.state.keywords}</i></span>
+        <span><FormattedMessage message={this.getIntlMessage('search.criteria.keywords')} recordType={recordType}/> <i>{this.state.keywords}</i></span>
       );  
     }
     

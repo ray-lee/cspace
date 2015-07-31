@@ -1,9 +1,9 @@
 var EventEmitter = require('events').EventEmitter;
 var Immutable = require('immutable');
 var assign = require('object-assign');
-var cspace = require('../utils/CollectionSpace.js');
-var Dispatcher = require('../dispatcher/Dispatcher.js');
-var ActionTypes = require('../constants/ActionTypes.js');
+var cspace = require('../utils/CollectionSpace');
+var Dispatcher = require('../dispatcher/Dispatcher');
+var ActionTypes = require('../constants/ActionTypes');
 
 var UPDATED_EVENT = 'updated';
 var DATA_UPDATED_EVENT = 'dataUpdated';
@@ -135,8 +135,8 @@ var processTermsUsedData = function(data) {
   return Immutable.fromJS(data);
 };
 
-var handleSaveComplete = function(data) {
-  var data = processRecordData(data);
+var handleSaveComplete = function(result, context) {
+  var data = processRecordData(result);
   var csid = data.get('csid');
 
   records = records.setIn([csid, DATA_KEY], data);
@@ -145,34 +145,20 @@ var handleSaveComplete = function(data) {
   RecordStore.emitDataUpdated(csid, data);
 };
 
-var handleSaveError = function(error) {
+var handleSaveError = function(error, context) {
   console.error(error);
 };
 
 RecordStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
-    case ActionTypes.SAVE_RECORD:
-      var data = {
-        fields: action.data.toJS()
-      }
-
-      if (action.csid) {
-        // The record to be saved has a CSID, so it's an update.
-
-        cspace.updateRecord(action.recordType, action.csid, data)
-          .then(handleSaveComplete)
-          .then(null, handleSaveError);
-      }
-      else {
-        // The record to be saved does not have a CSID, so it's a create.
-        
-        cspace.createRecord(action.recordType, data)
-          .then(handleSaveComplete)
-          .then(null, handleSaveError);
-      }
-
+    case ActionTypes.record.HANDLE_SAVE_COMPLETE:
+      handleSaveComplete(action.result, action.context);
       break;
 
+    case ActionTypes.record.HANDLE_SAVE_ERROR:
+      handleSaveError(action.error, action.context);
+      break;
+      
     default:
       // do nothing
   }

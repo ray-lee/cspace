@@ -143,7 +143,10 @@ var RecordEditor = React.createClass({
       recordState: RecordStates.SAVING
     });
     
-    RecordActions.save(this.state.recordType, this.state.csid, this.state.values);
+    var Form = require('./forms/' + this.state.recordType + '.jsx');
+    var title = Form.renderTitle(this.state.values);
+    
+    RecordActions.save(this.state.recordType, title, this.state.csid, this.state.values);
   },
   
   handleSearchResultNavigate: function(recordType, csid, pageNum) {

@@ -1,6 +1,7 @@
 var React = require('react');
 var IntlMixin = require('react-intl').IntlMixin;
 var RouteHandler = require('react-router').RouteHandler;
+var Notifier = require('./Notifier');
 
 require('../styles/App.css');
 
@@ -32,6 +33,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="app">
+        <Notifier/>
         <RouteHandler/>
       </div>
     );
