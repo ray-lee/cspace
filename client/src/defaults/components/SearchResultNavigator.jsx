@@ -207,13 +207,13 @@ var SearchResultNavigator = React.createClass({
   
   renderPreviousButton: function() {
     return (
-      <button className="button previousButton" disabled={!this.state.previousResult} onClick={this.handlePreviousButtonClick}>{this.getIntlMessage('searchResultNavigator.previous')}</button>
+      <button className="button previousButton" accessKey="p" disabled={!this.state.previousResult} onClick={this.handlePreviousButtonClick}>{this.getIntlMessage('searchResultNavigator.previous')}</button>
     );
   },
 
   renderNextButton: function() {
     return (
-      <button className="button nextButton" disabled={!this.state.nextResult} onClick={this.handleNextButtonClick}>{this.getIntlMessage('searchResultNavigator.next')}</button>
+      <button className="button nextButton" accessKey="n" disabled={!this.state.nextResult} onClick={this.handleNextButtonClick}>{this.getIntlMessage('searchResultNavigator.next')}</button>
     );
   },
   

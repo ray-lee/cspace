@@ -33,7 +33,7 @@ var ToolBar = React.createClass({
           <button type="button">{this.getIntlMessage('toolBar.clone')}</button>
           <button type="button">{this.getIntlMessage('toolBar.revert')}</button>
           <button type="button">{this.getIntlMessage('toolBar.delete')}</button>
-          <button type="button" onClick={this.handleSaveButtonClick}>{this.getIntlMessage('toolBar.save')}</button>
+          <button type="button" accessKey="s" onClick={this.handleSaveButtonClick}>{this.getIntlMessage('toolBar.save')}</button>
         </div>
         <RecordHistory values={this.props.values}/>
       </div>
