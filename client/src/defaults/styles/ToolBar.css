@@ -11,13 +11,3 @@
   margin: 2px 4px 2px 0;
   padding: 1px 9px 1px 9px;
 }
-
-.toolbar .statemessage {
-  font-size: 8pt;
-  font-weight: 300;
-  padding-left: 16px;
-  background-image: url(../images/spinner.svg);
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 16px 16px;
-}

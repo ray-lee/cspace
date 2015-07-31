@@ -27,14 +27,6 @@ var ToolBar = React.createClass({
   },
   
   render: function() {
-    var stateMessage = null;
-    
-    if (this.props.recordState === RecordStates.SAVING) {
-      stateMessage = (
-        <div className={'statemessage ' + this.props.recordState}>{this.getIntlMessage('toolBar.stateMessage.' + this.props.recordState)}</div>
-      );
-    }
-    
     return (
       <div className="toolbar">
         <div className="buttonbar">
@@ -43,7 +35,6 @@ var ToolBar = React.createClass({
           <button type="button">{this.getIntlMessage('toolBar.delete')}</button>
           <button type="button" onClick={this.handleSaveButtonClick}>{this.getIntlMessage('toolBar.save')}</button>
         </div>
-        {stateMessage}
         <RecordHistory values={this.props.values}/>
       </div>
     );
