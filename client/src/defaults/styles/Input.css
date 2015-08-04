@@ -13,11 +13,11 @@
   margin-bottom: 2px;
 }
 
-.input.required > label {
+.input.required:not(.readonly) > label {
   color: red;
 }
 
-.input.required > label::after {
+.input.required:not(.readonly) > label::after {
   content: '*';
 }
 

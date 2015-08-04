@@ -151,7 +151,7 @@ var Input = React.createClass({
     
     if (this.props.readOnly) {
       control = (
-        <div className="control readonly">{value}</div>
+        <div className="control">{value}</div>
       );
     }
     else {
@@ -190,6 +190,7 @@ var Input = React.createClass({
     var classes = React.addons.classSet({
       input: true,
       required: this.props.required,
+      readonly: this.props.readOnly,
       jeweled: !!jewel
     });
     
