@@ -22,7 +22,7 @@ module.exports = React.createClass({
   statics: {
     renderTitle: function(values) {
       var number = values.get('objectNumber');
-      var title = values.getIn(['titleGroup', 0, 'title']);
+      var title = values.get('nametitle');
       
       var parts = [];
       

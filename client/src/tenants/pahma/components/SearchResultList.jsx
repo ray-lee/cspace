@@ -75,7 +75,7 @@ var SearchResultList = React.createClass({
       return (
         <tr key={'r' + index} onClick={this.handleResultClick.bind(this, recordType, csid)}>
           <td><Link to="record" params={{recordType: recordType, csid: csid}}>{summary.get('objectNumber')}</Link></td>
-          <td>{summary.get('title')}</td>
+          <td>{summary.get('nametitle')}</td>
           <td>{responsibleDepartment}</td>
           <td>{updatedTimestamp}</td>
         </tr>
@@ -96,7 +96,7 @@ var SearchResultList = React.createClass({
           <thead>
             <tr>
               <th>{this.getIntlMessage('form.' + recordType + '.field.objectNumber')}</th>
-              <th>{this.getIntlMessage('form.' + recordType + '.field.title')}</th>
+              <th>{this.getIntlMessage('form.' + recordType + '.field.nametitle')}</th>
               <th>{this.getIntlMessage('form.' + recordType + '.field.responsibleDepartments')}</th>
               <th>{this.getIntlMessage('form.' + recordType + '.field.updatedAt')}</th>
             </tr>

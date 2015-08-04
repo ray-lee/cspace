@@ -316,6 +316,7 @@ module.exports = {
         objectNameType: 'Type',
         objectNameLanguage: 'Language',
         objectNameNote: 'Note',
+        nametitle: 'Name/Title',
         portfolioSeries: 'R. Keeling audio series',
         pahmaCollectionList: 'Collection',
         pahmaTms2003DataSource: 'TMS primary data source',
