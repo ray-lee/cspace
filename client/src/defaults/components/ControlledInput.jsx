@@ -111,11 +111,18 @@ var ControlledInput = React.createClass({
     
     // Convert the list into an ordered map, keyed by value.
     // This makes it fast to look up the label from a value.
+    // If an option does not have a label, set it to the value.
     
     var tuples = [];
     
     options.forEach(function(option) {
-      tuples.push([option.get('value'), option]);
+      var value = option.get('value');
+      
+      if (!option.get('label')) {
+        option = option.set('label', value);
+      }
+      
+      tuples.push([value, option]);
     });
     
     options = Immutable.OrderedMap(tuples);
