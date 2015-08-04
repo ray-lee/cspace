@@ -6,7 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var Immutable = require('immutable');
 var assign = require('object-assign');
 
-var MAX_LISTENERS = 64;
+var MAX_LISTENERS = 128;
 var CHANGE_EVENT = 'change';
 
 var controlledLists = Immutable.Map();

@@ -3,7 +3,7 @@ var Immutable = require('immutable');
 var assign = require('object-assign');
 var cspace = require('../utils/CollectionSpace.js');
 
-var MAX_LISTENERS = 64;
+var MAX_LISTENERS = 128;
 var CHANGE_EVENT = 'change';
 
 var queryResults = Immutable.Map();
