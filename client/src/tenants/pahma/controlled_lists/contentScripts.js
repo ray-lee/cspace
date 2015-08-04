@@ -1,0 +1,23 @@
+module.exports = [
+  'beneventanScript',
+  'blackletter',
+  'carolingianMiniscule',
+  'chanceryHand',
+  'courtHand',
+  'germanicMiniscule',
+  'gothicScript',
+  'unspecifiedHandwriting',
+  'humanistMiniscule',
+  'insularScript',
+  'libraryHand',
+  'merovingianScript',
+  'palmerMethod',
+  'romanCursive',
+  'roundHand',
+  'uncialScript',
+  'secretaryHand',
+  'rusticCapitals',
+  'spencerianMethod',
+  'squareCapitals',
+  'visigothicScript'
+];

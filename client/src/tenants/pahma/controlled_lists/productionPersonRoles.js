@@ -1,0 +1,22 @@
+module.exports = [
+  'accompanist',
+  'artist',
+  'blesser',
+  'carver',
+  'demonstrator',
+  'designer',
+  'documenter',
+  'illustrator',
+  'maker',
+  'materialSupplier',
+  'narrator',
+  'painter',
+  'performer',
+  'photographer',
+  'recorder',
+  'ruler',
+  'scribe',
+  'singer',
+  'translator',
+  'writer'
+];
