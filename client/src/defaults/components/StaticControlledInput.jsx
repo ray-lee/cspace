@@ -39,9 +39,17 @@ var StaticControlledInput = React.createClass({
   getOptions: function() {
     var controlledListName = this.props.controlledListName;
     var controlledList = this.state.controlledList;
+    var hasLabelTranslations = true;
+    
+    try {
+      this.getIntlMessage('controlledList.' + controlledListName);
+    }
+    catch(error) {
+      hasLabelTranslations = false;
+    }
     
     return controlledList.map(function(option) {
-      if (!option.has('label')) {
+      if (hasLabelTranslations && !option.has('label')) {
         option = option.set('label', this.getIntlMessage('controlledList.' + controlledListName + '.' + option.get('value')));
       }
     
