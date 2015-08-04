@@ -21,6 +21,7 @@
 
 .tabularcompoundinput > tbody > tr > td {
   border: 1px solid #DDDDDD;
+  background: white;
 }
 
 .tabularcompoundinput > tbody > tr > td > .input > .wrapper > .control,
@@ -28,6 +29,12 @@
 {
   border: none;
   height: 20px;
+}
+
+.tabularcompoundinput > tbody > tr > td > .input > .wrapper > textarea.control,
+.tabularcompoundinput > tbody > tr > td > .input > .input > .wrapper > textarea.control
+{
+  height: 80px;
 }
 
 .tabularcompoundinput > tbody > tr > td textarea.control {
