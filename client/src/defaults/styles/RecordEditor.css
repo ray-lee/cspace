@@ -25,6 +25,6 @@
   padding-left: 28px;
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: 10px center;
   background-size: 28px 28px;
 }
