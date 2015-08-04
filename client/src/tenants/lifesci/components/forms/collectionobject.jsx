@@ -445,7 +445,7 @@ module.exports = React.createClass({
           </ColumnGroup>
         </Panel>
       
-        <Panel name="history" collapsed={true}>
+        <Panel name="historyAssociation" collapsed={true}>
           <Panel name="association" collapsed={true}>
             <ColumnGroup>
               <Column>

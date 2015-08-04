@@ -259,7 +259,7 @@ module.exports = {
         textualInscription: 'Textual Inscription',
         nontextualInscription : 'Non-Textual Inscription',
         production: 'Object Production Information',
-        history: 'Object History and Association Information',
+        historyAssociation: 'Object History and Association Information',
         association: 'Associations',
         owner: 'Object Owner\'s Contribution Information',
         viewer: 'Object Viewer\'s Contribution Information',
