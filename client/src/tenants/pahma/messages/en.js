@@ -288,6 +288,7 @@ module.exports = {
         pahmaAltNumNote: 'Note',
         computedCurrentLocation: 'Computed current location',
         computedCrate: 'Current box or container',
+        homeLocation: 'Home location',
         responsibleDepartments: 'Responsible collection manager',
         collection: 'Object type',
         pahmaEthnographicFileCodeList: 'Ethnographic file code',
