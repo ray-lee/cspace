@@ -289,6 +289,7 @@ module.exports = {
         computedCurrentLocation: 'Computed current location',
         computedCrate: 'Current box or container',
         homeLocation: 'Home location',
+        homeCrate: 'Home crate',
         responsibleDepartments: 'Responsible collection manager',
         collection: 'Object type',
         pahmaEthnographicFileCodeList: 'Ethnographic file code',
