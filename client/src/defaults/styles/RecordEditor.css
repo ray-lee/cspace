@@ -25,6 +25,10 @@
   padding-left: 28px;
   background-image: url(../images/spinner.svg);
   background-repeat: no-repeat;
-  background-position: 10px center;
+  background-position: left center;
   background-size: 28px 28px;
+}
+
+.recordeditor.loading > .titlebar.docked > .content > h1 {
+  background-position: 10px center;
 }
